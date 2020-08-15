@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/tilesets/walls.tres" type="TileSet" id=1]
+[ext_resource path="res://assets/sprites/girl.png" type="Texture" id=2]
+[ext_resource path="res://assets/scripts/actor.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 7, 7 )
+
+[node name="Game" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 48.6311, 49.5096 )
+current = true
+zoom = Vector2( 0.2, 0.2 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 14, 14 )
+cell_quadrant_size = 4
+cell_custom_transform = Transform2D( 14, 0, 0, 14, 0, 0 )
+format = 1
+tile_data = PoolIntArray( 0, 0, 0, 1, 1, 0, 2, 1, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 6, 2, 0, 65536, 3, 0, 65542, 4, 0, 131072, 3, 0, 131078, 4, 0, 196608, 3, 0, 196614, 4, 0, 262144, 3, 0, 262150, 4, 0, 327680, 3, 0, 327686, 4, 0, 393216, 5, 0, 393217, 6, 0, 393218, 6, 0, 393219, 6, 0, 393220, 6, 0, 393221, 6, 0, 393222, 7, 0 )
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+position = Vector2( 49, 49 )
+script = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="KinematicBody2D"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+shape = SubResource( 1 )
