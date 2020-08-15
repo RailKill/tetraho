@@ -18,10 +18,16 @@ _global_script_classes=[ {
 "class": "GitAPI",
 "language": "NativeScript",
 "path": "res://git_api.gdns"
+}, {
+"base": "Actor",
+"class": "Player",
+"language": "GDScript",
+"path": "res://assets/scripts/player.gd"
 } ]
 _global_script_class_icons={
 "Actor": "",
-"GitAPI": ""
+"GitAPI": "",
+"Player": ""
 }
 
 [application]

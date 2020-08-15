@@ -5,6 +5,8 @@ extends KinematicBody2D
 
 # Hit points.
 var hp = 100
+# Speed in which the actor can move.
+var move_speed = 1
 
 
 # Checks if actor is dead.
