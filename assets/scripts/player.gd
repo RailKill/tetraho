@@ -12,11 +12,11 @@ var direction = {
 }
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	var move_vector = Vector2.ZERO
 	
 	for vector in direction:
 		if Input.is_action_pressed(vector):
 			move_vector += direction[vector]
 		
-	move_and_collide(move_vector * move_speed)
+	var _collision = move_and_collide(move_vector * move_speed)

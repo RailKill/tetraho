@@ -26,7 +26,7 @@ func _ready():
 	targets = reticle.get_children()
 
 
-func _process(delta):
+func _process(_delta):
 	if is_controlled:
 		# Summon tetromino.
 		if Input.is_action_just_pressed("action_primary"):
@@ -61,7 +61,9 @@ func rotate_piece():
 
 # Function to calculate grid snapping based on mouse position.
 func snap_to_grid(position):
+# warning-ignore:integer_division
 	var snap = GRID_SNAP * (int(position) / GRID_SNAP)
+# warning-ignore:integer_division
 	if int(position) % GRID_SNAP > GRID_SNAP / 2:
 		snap += GRID_SNAP
 	return snap
