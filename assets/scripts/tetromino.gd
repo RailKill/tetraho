@@ -5,17 +5,19 @@ extends Node2D
 # Number of pixels for grid snapping.
 const GRID_SNAP = 14
 
+var origin: Node2D
 var reticle : Node2D
 var solid : Node2D
 var blocks = []
 var targets = []
-var is_controlled = true
+export var is_controlled = false
 
 
 func _ready():
 	# Ensure solid blocks are not visible.
-	reticle = $Reticle
-	solid = $Solid
+	origin = $Origin
+	reticle = $Origin/Reticle
+	solid = $Origin/Solid
 	solid.set_visible(false)
 
 	# Disable collision of solid blocks.
@@ -56,7 +58,7 @@ func is_valid_placement():
 
 # Rotates the tetromino clockwise by 90 degrees.
 func rotate_piece():
-	rotation_degrees += 90
+	origin.rotation_degrees += 90
 
 
 # Function to calculate grid snapping based on mouse position.
@@ -72,6 +74,7 @@ func snap_to_grid(position):
 # Summons the tetromino into play.
 func summon_piece():
 	if is_valid_placement():
+		reticle.set_visible(false)
 		solid.set_visible(true)
 		for block in blocks:
 			block.enable_collision()

@@ -7,31 +7,34 @@
 [node name="IBlock" type="Node2D"]
 script = ExtResource( 2 )
 
-[node name="Reticle" type="Node2D" parent="."]
+[node name="Origin" type="Node2D" parent="."]
 
-[node name="TetrominoTarget" parent="Reticle" instance=ExtResource( 3 )]
+[node name="Reticle" type="Node2D" parent="Origin"]
+
+[node name="TetrominoTarget" parent="Origin/Reticle" instance=ExtResource( 3 )]
 position = Vector2( -28, -14 )
 
-[node name="TetrominoTarget2" parent="Reticle" instance=ExtResource( 3 )]
+[node name="TetrominoTarget2" parent="Origin/Reticle" instance=ExtResource( 3 )]
 position = Vector2( -14, -14 )
 
-[node name="TetrominoTarget3" parent="Reticle" instance=ExtResource( 3 )]
+[node name="TetrominoTarget3" parent="Origin/Reticle" instance=ExtResource( 3 )]
 position = Vector2( 0, -14 )
 
-[node name="TetrominoTarget4" parent="Reticle" instance=ExtResource( 3 )]
+[node name="TetrominoTarget4" parent="Origin/Reticle" instance=ExtResource( 3 )]
 position = Vector2( 14, -14 )
 
-[node name="Solid" type="Node2D" parent="."]
+[node name="Solid" type="Node2D" parent="Origin"]
 visible = false
+modulate = Color( 0.0352941, 0.835294, 0.894118, 1 )
 
-[node name="TetrominoBlock" parent="Solid" instance=ExtResource( 1 )]
+[node name="TetrominoBlock" parent="Origin/Solid" instance=ExtResource( 1 )]
 position = Vector2( -28, -14 )
 
-[node name="TetrominoBlock2" parent="Solid" instance=ExtResource( 1 )]
+[node name="TetrominoBlock2" parent="Origin/Solid" instance=ExtResource( 1 )]
 position = Vector2( -14, -14 )
 
-[node name="TetrominoBlock3" parent="Solid" instance=ExtResource( 1 )]
+[node name="TetrominoBlock3" parent="Origin/Solid" instance=ExtResource( 1 )]
 position = Vector2( 0, -14 )
 
-[node name="TetrominoBlock4" parent="Solid" instance=ExtResource( 1 )]
+[node name="TetrominoBlock4" parent="Origin/Solid" instance=ExtResource( 1 )]
 position = Vector2( 14, -14 )

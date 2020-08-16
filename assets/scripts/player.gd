@@ -3,6 +3,12 @@ extends Actor
 # Controllable player character.
 
 
+# List of tetrominos available for random generation.
+const tetrominos = []
+# Current tetromino being controlled.
+var current : Tetromino
+# The player can hold a tetromino for later use.
+var hold : Tetromino
 # Input map to vector directionals.
 var direction = {
 	"ui_up": Vector2.UP,
@@ -10,6 +16,11 @@ var direction = {
 	"ui_left": Vector2.LEFT,
 	"ui_right": Vector2.RIGHT
 }
+
+
+func _process(_delta):
+	if Input.is_action_just_pressed("action_special"):
+		pass
 
 
 func _physics_process(_delta):
