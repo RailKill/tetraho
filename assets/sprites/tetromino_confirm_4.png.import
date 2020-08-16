@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tetromino_confirmed.png-06a01c894744ca198b0a37b05bdd6708.stex"
+path="res://.import/tetromino_confirm_4.png-33adeba22e1fb83fb4f6e21b11671d17.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/tetromino_confirmed.png"
-dest_files=[ "res://.import/tetromino_confirmed.png-06a01c894744ca198b0a37b05bdd6708.stex" ]
+source_file="res://assets/sprites/tetromino_confirm_4.png"
+dest_files=[ "res://.import/tetromino_confirm_4.png-33adeba22e1fb83fb4f6e21b11671d17.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

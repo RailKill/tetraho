@@ -16,8 +16,12 @@ var blocks = []
 var targets = []
 # The PlayerCharacter who summons this tetromino.
 var summoner
-# The time in seconds for this tetromino to disappear after being summoned.
+# Time in seconds for this tetromino to disappear after being summoned.
 var decay_time = 3
+# Time in seconds for this tetromino to appear after being summoned.
+var summon_time = 1
+var is_summoning = false
+var is_decaying = false
 
 
 func _ready():
@@ -30,7 +34,7 @@ func _ready():
 	# Disable collision of solid blocks.
 	blocks = solid.get_children()
 	for block in blocks:
-		block.disable_collision()
+		block.collision_shape.disabled = true
 
 	targets = reticle.get_children()
 	snap_to_mouse()
@@ -47,12 +51,31 @@ func _process(_delta):
 
 
 func _physics_process(delta):
+	# If the tetromino is summoning, start countdown.
+	if is_summoning:
+		summon_time -= delta
+		if summon_time <= 0:
+			reticle.set_visible(false)
+			solid.set_visible(true)
+			for block in blocks:
+				block.enable()
+			is_summoning = false
+	
 	# If the solid blocks are visible, that means they are active.
-	# Start decaying and be removed from the game.
+	# Start decaying to be removed from the game.
 	if solid.visible:
 		decay_time -= delta
 		if decay_time <= 0:
-			queue_free()
+			if not is_decaying:
+				is_decaying = true
+				for block in blocks:
+					block.disable()
+			
+			var null_count = 0
+			for block in blocks:
+				null_count += int(block == null)
+			if null_count == blocks.size():
+				queue_free()
 
 
 func _input(event):
@@ -102,10 +125,10 @@ func snap_to_mouse():
 # Summons the tetromino into play.
 func summon_piece():
 	if is_valid_placement():
-		reticle.set_visible(false)
-		solid.set_visible(true)
-		for block in blocks:
-			block.enable_collision()
+		is_summoning = true
+		# Play summoning animation on all target reticles.
+		for target in targets:
+			target.animate()
 		summoner.next_tetromino()
 	else:
 		# Show an error feedback to the player. Invalid placement.
