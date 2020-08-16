@@ -10,7 +10,7 @@ var reticle : Node2D
 var solid : Node2D
 var blocks = []
 var targets = []
-export var is_controlled = false
+var summoner
 
 
 func _ready():
@@ -26,10 +26,11 @@ func _ready():
 		block.disable_collision()
 
 	targets = reticle.get_children()
+	snap_to_mouse()
 
 
 func _process(_delta):
-	if is_controlled:
+	if summoner.is_current(self):
 		# Summon tetromino.
 		if Input.is_action_just_pressed("action_primary"):
 			summon_piece()
@@ -39,13 +40,8 @@ func _process(_delta):
 
 
 func _input(event):
-	if event is InputEventMouseMotion and is_controlled:
-		# Get mouse position relative to the canvas.
-		var mouse_position = get_global_mouse_position()
-		
-		# Only move tetromino in increments of GRID_SNAP.
-		position.x = snap_to_grid(mouse_position.x)
-		position.y = snap_to_grid(mouse_position.y)
+	if event is InputEventMouseMotion:
+		snap_to_mouse()
 
 
 # Checks if the target placement is valid or not.
@@ -71,6 +67,17 @@ func snap_to_grid(position):
 	return snap
 
 
+# Snap tetromino to mouse.
+func snap_to_mouse():
+	if summoner.is_current(self):
+		# Get mouse position relative to the canvas.
+		var mouse_position = get_global_mouse_position()
+		
+		# Only move tetromino in increments of GRID_SNAP.
+		position.x = snap_to_grid(mouse_position.x)
+		position.y = snap_to_grid(mouse_position.y)
+
+
 # Summons the tetromino into play.
 func summon_piece():
 	if is_valid_placement():
@@ -78,7 +85,7 @@ func summon_piece():
 		solid.set_visible(true)
 		for block in blocks:
 			block.enable_collision()
-		is_controlled = false
+		summoner.next_tetromino()
 	else:
 		# Show an error feedback to the player. Invalid placement.
 		pass
