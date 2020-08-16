@@ -4,13 +4,20 @@ extends Node2D
 
 # Number of pixels for grid snapping.
 const GRID_SNAP = 14
-
+# Reference to the rotation origin node.
 var origin: Node2D
+# Reference to the node containing target reticles.
 var reticle : Node2D
+# Reference to the node containing solid blocks of the tetromino.
 var solid : Node2D
+# List of solid blocks.
 var blocks = []
+# List of target reticles.
 var targets = []
+# The PlayerCharacter who summons this tetromino.
 var summoner
+# The time in seconds for this tetromino to disappear after being summoned.
+var decay_time = 3
 
 
 func _ready():
@@ -37,6 +44,15 @@ func _process(_delta):
 		# Rotate tetromino.
 		if Input.is_action_just_pressed("action_secondary"):
 			rotate_piece()
+
+
+func _physics_process(delta):
+	# If the solid blocks are visible, that means they are active.
+	# Start decaying and be removed from the game.
+	if solid.visible:
+		decay_time -= delta
+		if decay_time <= 0:
+			queue_free()
 
 
 func _input(event):
