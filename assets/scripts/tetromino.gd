@@ -20,7 +20,9 @@ var summoner
 var decay_time = 3
 # Time in seconds for this tetromino to appear after being summoned.
 var summon_time = 1
+# If the tetromino is in the process of being summoned, this will be true.
 var is_summoning = false
+# If the tetromino already passed decay_time and is dying, this will be true.
 var is_decaying = false
 
 
