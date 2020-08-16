@@ -24,7 +24,6 @@ func _init():
 
 # Returns the next tetromino in queue.
 func fetch():
-	print(index)
 	var tetromino = queue[index]
 	index += 1
 	
