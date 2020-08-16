@@ -92,6 +92,11 @@ func snap_to_mouse():
 		# Only move tetromino in increments of GRID_SNAP.
 		position.x = snap_to_grid(mouse_position.x)
 		position.y = snap_to_grid(mouse_position.y)
+		
+		if is_valid_placement():
+			reticle.set_modulate(Color.white)
+		else:
+			reticle.set_modulate(Color(0.8, 0.1, 0.1, 1))
 
 
 # Summons the tetromino into play.
