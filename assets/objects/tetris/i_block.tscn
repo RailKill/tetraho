@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/objects/tetris/tetromino_block.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/scripts/tetromino.gd" type="Script" id=2]
+[ext_resource path="res://assets/objects/tetris/tetromino_target.tscn" type="PackedScene" id=3]
+
+[node name="IBlock" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Reticle" type="Node2D" parent="."]
+
+[node name="TetrominoTarget" parent="Reticle" instance=ExtResource( 3 )]
+position = Vector2( -28, -14 )
+
+[node name="TetrominoTarget2" parent="Reticle" instance=ExtResource( 3 )]
+position = Vector2( -14, -14 )
+
+[node name="TetrominoTarget3" parent="Reticle" instance=ExtResource( 3 )]
+position = Vector2( 0, -14 )
+
+[node name="TetrominoTarget4" parent="Reticle" instance=ExtResource( 3 )]
+position = Vector2( 14, -14 )
+
+[node name="Solid" type="Node2D" parent="."]
+visible = false
+
+[node name="TetrominoBlock" parent="Solid" instance=ExtResource( 1 )]
+position = Vector2( -28, -14 )
+
+[node name="TetrominoBlock2" parent="Solid" instance=ExtResource( 1 )]
+position = Vector2( -14, -14 )
+
+[node name="TetrominoBlock3" parent="Solid" instance=ExtResource( 1 )]
+position = Vector2( 0, -14 )
+
+[node name="TetrominoBlock4" parent="Solid" instance=ExtResource( 1 )]
+position = Vector2( 14, -14 )

@@ -1,11 +1,9 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/tilesets/walls.tres" type="TileSet" id=1]
-[ext_resource path="res://assets/sprites/girl.png" type="Texture" id=2]
-[ext_resource path="res://assets/scripts/player.gd" type="Script" id=3]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 7, 7 )
+[ext_resource path="res://assets/objects/player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/objects/tetris/i_block.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/tilesets/ground.tres" type="TileSet" id=5]
 
 [node name="Game" type="Node2D"]
 
@@ -14,20 +12,28 @@ position = Vector2( 48.6311, 49.5096 )
 current = true
 zoom = Vector2( 0.2, 0.2 )
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="GroundMap" type="TileMap" parent="."]
+modulate = Color( 1, 1, 1, 0.0392157 )
+tile_set = ExtResource( 5 )
+cell_size = Vector2( 14, 14 )
+cell_quadrant_size = 4
+cell_custom_transform = Transform2D( 14, 0, 0, 14, 0, 0 )
+collision_layer = 0
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( 65537, 0, 0, 65538, 0, 0, 65539, 0, 0, 65540, 0, 0, 65541, 0, 0, 131073, 0, 0, 131074, 0, 0, 131075, 0, 0, 131076, 0, 0, 131077, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 0, 0, 262149, 0, 0, 327681, 0, 0, 327682, 0, 0, 327683, 0, 0, 327684, 0, 0, 327685, 0, 0 )
+
+[node name="WallMap" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 14, 14 )
 cell_quadrant_size = 4
 cell_custom_transform = Transform2D( 14, 0, 0, 14, 0, 0 )
 format = 1
-tile_data = PoolIntArray( 0, 0, 0, 1, 1, 0, 2, 1, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 6, 2, 0, 65536, 3, 0, 65542, 4, 0, 131072, 3, 0, 131078, 4, 0, 196608, 3, 0, 196614, 4, 0, 262144, 3, 0, 262150, 4, 0, 327680, 3, 0, 327686, 4, 0, 393216, 5, 0, 393217, 6, 0, 393218, 6, 0, 393219, 6, 0, 393220, 6, 0, 393221, 6, 0, 393222, 7, 0 )
+tile_data = PoolIntArray( 0, 0, 0, 1, 1, 0, 2, 1, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 6, 1, 0, 7, 1, 0, 8, 1, 0, 9, 1, 0, 10, 1, 0, 11, 2, 0, 65536, 3, 0, 65547, 4, 0, 131072, 3, 0, 131083, 4, 0, 196608, 3, 0, 196619, 4, 0, 262144, 3, 0, 262155, 4, 0, 327680, 3, 0, 327691, 4, 0, 393216, 3, 0, 393227, 4, 0, 458752, 3, 0, 458763, 4, 0, 524288, 5, 0, 524289, 6, 0, 524290, 6, 0, 524291, 6, 0, 524292, 6, 0, 524293, 6, 0, 524294, 6, 0, 524295, 6, 0, 524296, 6, 0, 524297, 6, 0, 524298, 6, 0, 524299, 7, 0 )
 
-[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
-position = Vector2( 49, 49 )
-script = ExtResource( 3 )
+[node name="Player" parent="." instance=ExtResource( 2 )]
+collision_layer = 4
+collision_mask = 5
 
-[node name="Sprite" type="Sprite" parent="KinematicBody2D"]
-texture = ExtResource( 2 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
-shape = SubResource( 1 )
+[node name="IBlock" parent="." instance=ExtResource( 4 )]
+position = Vector2( 42, 42 )

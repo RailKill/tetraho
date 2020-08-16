@@ -23,11 +23,29 @@ _global_script_classes=[ {
 "class": "Player",
 "language": "GDScript",
 "path": "res://assets/scripts/player.gd"
+}, {
+"base": "Node2D",
+"class": "Tetromino",
+"language": "GDScript",
+"path": "res://assets/scripts/tetromino.gd"
+}, {
+"base": "Actor",
+"class": "TetrominoBlock",
+"language": "GDScript",
+"path": "res://assets/scripts/tetromino_block.gd"
+}, {
+"base": "Area2D",
+"class": "TetrominoTarget",
+"language": "GDScript",
+"path": "res://assets/scripts/tetromino_target.gd"
 } ]
 _global_script_class_icons={
 "Actor": "",
 "GitAPI": "",
-"Player": ""
+"Player": "",
+"Tetromino": "",
+"TetrominoBlock": "",
+"TetrominoTarget": ""
 }
 
 [application]
@@ -86,6 +104,22 @@ action_dash={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
  ]
 }
+action_primary={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+action_secondary={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+
+[layer_names]
+
+2d_physics/layer_1="environment"
+2d_physics/layer_2="floor"
+2d_physics/layer_3="actor"
 
 [rendering]
 
