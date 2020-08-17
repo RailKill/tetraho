@@ -18,8 +18,22 @@ var hold : Tetromino
 # Queue to generate tetrominos.
 var queue = TetrominoQueue.new()
 
+# Cooldown of dash in seconds.
+var dash_cooldown : float
+# Duration of dash in seconds.
+var dash_duration : float
+# Direction of dash.
+var dash_direction : Vector2
+# Speed of dash.
+var dash_speed = 200
+# Checks if player is dashing.
+var is_dashing = false
+# Checks if dash is on cooldown.
+var is_on_cooldown = false
+
 
 func _ready():
+	reset_dash()
 	next_tetromino()
 
 
@@ -28,14 +42,37 @@ func _process(_delta):
 		pass
 
 
-func _physics_process(_delta):
+func _physics_process(delta):	
 	var move_vector = Vector2.ZERO
 	
 	for vector in DIRECTIONS:
 		if Input.is_action_pressed(vector):
 			move_vector += DIRECTIONS[vector]
+	
+	# Trigger dash if a direction is held, and the dash button is pressed.
+	if Input.is_action_just_pressed("action_dash") and move_vector:
+		if not is_on_cooldown:
+			is_dashing = true
+			dash_direction = move_vector
+	
+	if not is_dashing:
+		# If not dashing, move normally.
+		var _collision = move_and_collide(move_vector * move_speed)
 		
-	var _collision = move_and_collide(move_vector * move_speed)
+		# Handle dash cooldown.
+		if is_on_cooldown:
+			dash_cooldown -= delta
+			if dash_cooldown <= 0:
+				is_on_cooldown = false
+				reset_dash()
+	else:
+		# Otherwise, move towards dash direction until dash duration is gone.
+		dash_duration -= delta
+		if dash_duration > 0:
+			var _collision = move_and_slide(dash_direction * dash_speed)
+		else:
+			is_dashing = false
+			is_on_cooldown = true
 
 
 # Checks if the player is currently controlling the given tetromino.
@@ -48,3 +85,9 @@ func next_tetromino():
 	current = queue.fetch()
 	current.summoner = self
 	get_parent().call_deferred("add_child", current)
+
+
+func reset_dash():
+	dash_cooldown = 3
+	dash_duration = 0.3
+	dash_direction = Vector2.ZERO
