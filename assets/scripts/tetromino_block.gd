@@ -10,20 +10,21 @@ onready var collision_shape = $CollisionShape2D
 onready var summon = $Summon
 # Reference to the animated sprite for unsummon animation.
 onready var unsummon = $Unsummon
+# Reference to the game world.
 onready var game_world : GameWorld = get_tree().get_root().get_child(0)
+# Check if block is marked for solving.
 var marked = false;
 
 
-# Disables collision.
+# Queue the block for destruction.
 func disable():
 	collision_shape.disabled = true
 	summon.set_visible(false)
 	unsummon.set_visible(true)
 	unsummon.play()
-	
 
 
-# Enables collision.
+# Summons the block into game existence.
 func enable():
 	collision_shape.disabled = false
 	unsummon.set_visible(false)
@@ -37,9 +38,11 @@ func get_global_vector():
 	return Vector2(int(round(vector.x)), int(round(vector.y)))
 
 
+# Solves this block and destroy it if marked for solving.
 func solve():
 	if marked:
 		disable()
+
 
 func _on_Unsummon_animation_finished():
 	game_world.remove_block(self)

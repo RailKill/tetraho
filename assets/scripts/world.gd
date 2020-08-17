@@ -1,13 +1,20 @@
 class_name GameWorld
 extends Node2D
+# Root node of the level. Every level must have a GameWorld as the root node.
 
 
 # Array of all TetrominoBlocks global position present in the game world.
 var blocks = []
-
+# List of vector offsets to check for horizontal 2x3 blocks.
 var solver_horizontal = [
 	Vector2(14, 0), Vector2(28, 0),
 	Vector2(0, 14), Vector2(14, 14), Vector2(28, 14)
+]
+# List of vector offsets to check for vertical 2x3 blocks.
+var solver_vertical = [
+	Vector2(14, 0),
+	Vector2(0, 14), Vector2(14, 14),
+	Vector2(0, 28), Vector2(14, 28)
 ]
 
 
@@ -21,15 +28,17 @@ func remove_block(block):
 	blocks.erase(block)
 
 
-# Also, whenever a Tetromino is summoned, attempt to solve.
+# Whenever a Tetromino is summoned, attempt to solve.
 func solve():
 	for block in blocks:
 		print(search(block, solver_horizontal))
-	
+		print(search(block, solver_vertical))
 	for block in blocks:
 		block.solve()
 
 
+# Search for block combinations in a given solver (area to search) and mark
+# all satisfied blocks for destruction.
 func search(anchor, solver):
 	var satisfied = [anchor]
 	for vector in solver:
@@ -42,6 +51,3 @@ func search(anchor, solver):
 			solved.marked = true
 		return true
 	return false
-	
-	#print($Area2D.get_overlapping_bodies())
-#	print(blocks)
