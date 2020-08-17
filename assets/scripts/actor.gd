@@ -5,6 +5,8 @@ extends KinematicBody2D
 
 # Hit points.
 var hp = 100
+# Maximum hit points.
+var max_hp = 100
 # Speed in which the actor can move.
 var move_speed = 1
 # Invulnerable actor.
@@ -15,6 +17,14 @@ var is_invulnerable = false
 func is_dead():
 	return hp <= 0
 
+
+# Get the current hit points of this actor.
+func get_hp():
+	return hp
+
+# Get the maximum hit points for this actor.
+func get_maximum_hp():
+	return max_hp
 
 # Damage the actor.
 func oof(damage):

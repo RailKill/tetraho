@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ui_hold.png-a9bdedaac4476451da396b803699de60.stex"
+path="res://.import/heart_empty.png-d15b99ca49a6818d1391f044d0827f30.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/ui_hold.png"
-dest_files=[ "res://.import/ui_hold.png-a9bdedaac4476451da396b803699de60.stex" ]
+source_file="res://assets/sprites/heart_empty.png"
+dest_files=[ "res://.import/heart_empty.png-d15b99ca49a6818d1391f044d0827f30.stex" ]
 
 [params]
 

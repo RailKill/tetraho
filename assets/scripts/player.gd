@@ -18,8 +18,10 @@ var hold : Tetromino
 # Queue to generate tetrominos.
 var queue = TetrominoQueue.new()
 
-# Cooldown of dash in seconds.
-var dash_cooldown : float
+# Cooldown of dash ability.
+var dash_cooldown = 3
+# Delay before dash can be used again in seconds.
+var dash_delay : float
 # Duration of dash in seconds.
 var dash_duration : float
 # Direction of dash.
@@ -31,8 +33,12 @@ var is_dashing = false
 # Checks if dash is on cooldown.
 var is_on_cooldown = false
 
+# Node path to the Player's HUD.
+export (NodePath) var hud_path
+onready var hud : PlayerHUD
 
 func _ready():
+	hud = get_node(hud_path)
 	reset_dash()
 	next_tetromino()
 
@@ -61,10 +67,11 @@ func _physics_process(delta):
 		
 		# Handle dash cooldown.
 		if is_on_cooldown:
-			dash_cooldown -= delta
-			if dash_cooldown <= 0:
+			dash_delay -= delta
+			if dash_delay <= 0:
 				is_on_cooldown = false
 				reset_dash()
+				hud.update_dash(self)
 	else:
 		# Otherwise, move towards dash direction until dash duration is gone.
 		dash_duration -= delta
@@ -73,6 +80,7 @@ func _physics_process(delta):
 		else:
 			is_dashing = false
 			is_on_cooldown = true
+			hud.update_dash(self)
 
 
 # Checks if the player is currently controlling the given tetromino.
@@ -87,7 +95,11 @@ func next_tetromino():
 	get_parent().call_deferred("add_child", current)
 
 
+func oof(damage):
+	.oof(damage)
+	hud.update_hp(self)
+
 func reset_dash():
-	dash_cooldown = 3
+	dash_delay = dash_cooldown
 	dash_duration = 0.3
 	dash_direction = Vector2.ZERO

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ui_hold.png-a9bdedaac4476451da396b803699de60.stex"
+path="res://.import/girl_face.png-464d4af73ed6dfeaecacbcd8611a551d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/ui_hold.png"
-dest_files=[ "res://.import/ui_hold.png-a9bdedaac4476451da396b803699de60.stex" ]
+source_file="res://assets/sprites/girl_face.png"
+dest_files=[ "res://.import/girl_face.png-464d4af73ed6dfeaecacbcd8611a551d.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ui_hold.png-a9bdedaac4476451da396b803699de60.stex"
+path="res://.import/g.png-568f4a253e3faf5e640a5eee12599213.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/ui_hold.png"
-dest_files=[ "res://.import/ui_hold.png-a9bdedaac4476451da396b803699de60.stex" ]
+source_file="res://assets/sprites/fonts/g.png"
+dest_files=[ "res://.import/g.png-568f4a253e3faf5e640a5eee12599213.stex" ]
 
 [params]
 
