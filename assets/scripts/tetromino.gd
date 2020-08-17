@@ -4,6 +4,8 @@ extends Node2D
 
 # Number of pixels for grid snapping.
 const GRID_SNAP = 14
+# Reference to the game world that stores all tetromino blocks for solving.
+onready var game_world : GameWorld = get_parent()
 # Reference to the rotation origin node.
 var origin: Node2D
 # Reference to the node containing target reticles.
@@ -24,6 +26,7 @@ var summon_time = 1
 var is_summoning = false
 # If the tetromino already passed decay_time and is dying, this will be true.
 var is_decaying = false
+
 
 
 func _ready():
@@ -57,10 +60,13 @@ func _physics_process(delta):
 	if is_summoning:
 		summon_time -= delta
 		if summon_time <= 0:
-			reticle.set_visible(false)
+			reticle.queue_free()
 			solid.set_visible(true)
 			for block in blocks:
 				block.enable()
+				game_world.add_block(block)
+			
+			game_world.solve()
 			is_summoning = false
 	
 	# If the solid blocks are visible, that means they are active.
@@ -71,7 +77,9 @@ func _physics_process(delta):
 			if not is_decaying:
 				is_decaying = true
 				for block in blocks:
-					block.disable()
+					if block != null:
+						block.disable()
+					game_world.remove_block(block)
 			
 			var null_count = 0
 			for block in blocks:

@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/tilesets/walls.tres" type="TileSet" id=1]
 [ext_resource path="res://assets/objects/player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/scripts/world.gd" type="Script" id=3]
 
-[node name="Game" type="Node2D"]
+[node name="World" type="Node2D"]
+script = ExtResource( 3 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 48.6311, 49.5096 )

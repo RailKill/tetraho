@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/scripts/actor.gd"
 }, {
+"base": "Node2D",
+"class": "GameWorld",
+"language": "GDScript",
+"path": "res://assets/scripts/world.gd"
+}, {
 "base": "",
 "class": "GitAPI",
 "language": "NativeScript",
@@ -23,6 +28,11 @@ _global_script_classes=[ {
 "class": "PlayerCharacter",
 "language": "GDScript",
 "path": "res://assets/scripts/player.gd"
+}, {
+"base": "Area2D",
+"class": "SolverHorizontal",
+"language": "GDScript",
+"path": "res://assets/scripts/solver_horizontal.gd"
 }, {
 "base": "Node2D",
 "class": "Tetromino",
@@ -46,8 +56,10 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Actor": "",
+"GameWorld": "",
 "GitAPI": "",
 "PlayerCharacter": "",
+"SolverHorizontal": "",
 "Tetromino": "",
 "TetrominoBlock": "",
 "TetrominoQueue": "",
@@ -131,6 +143,7 @@ action_special={
 2d_physics/layer_1="environment"
 2d_physics/layer_2="floor"
 2d_physics/layer_3="actor"
+2d_physics/layer_4="block"
 
 [rendering]
 
