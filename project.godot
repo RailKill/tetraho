@@ -14,6 +14,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/scripts/actor.gd"
 }, {
+"base": "Area2D",
+"class": "AreaDamage",
+"language": "GDScript",
+"path": "res://assets/scripts/area_damage.gd"
+}, {
+"base": "Actor",
+"class": "Duck",
+"language": "GDScript",
+"path": "res://assets/scripts/duck.gd"
+}, {
 "base": "Node2D",
 "class": "GameWorld",
 "language": "GDScript",
@@ -61,6 +71,8 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Actor": "",
+"AreaDamage": "",
+"Duck": "",
 "GameWorld": "",
 "GitAPI": "",
 "LockBlock": "",

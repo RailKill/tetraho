@@ -20,3 +20,4 @@ func is_dead():
 func oof(damage):
 	if not is_invulnerable:
 		hp -= damage
+		print(name, " took ", damage, " damage!")
