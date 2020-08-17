@@ -30,6 +30,7 @@ func enable():
 	unsummon.set_visible(false)
 	summon.set_visible(true)
 	summon.play()
+	game_world.add_block(self)
 
 
 # Gets the rounded global position of the center of the block.

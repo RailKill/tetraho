@@ -64,7 +64,6 @@ func _physics_process(delta):
 			solid.set_visible(true)
 			for block in blocks:
 				block.enable()
-				game_world.add_block(block)
 			
 			game_world.solve()
 			is_summoning = false

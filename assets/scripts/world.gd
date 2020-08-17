@@ -31,8 +31,8 @@ func remove_block(block):
 # Whenever a Tetromino is summoned, attempt to solve.
 func solve():
 	for block in blocks:
-		print(search(block, solver_horizontal))
-		print(search(block, solver_vertical))
+		search(block, solver_horizontal)
+		search(block, solver_vertical)
 	for block in blocks:
 		block.solve()
 

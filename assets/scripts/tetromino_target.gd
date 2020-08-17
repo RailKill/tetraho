@@ -24,7 +24,6 @@ func is_valid():
 	
 	var overlap = get_overlapping_bodies()
 	for body in overlap:
-		print(body.collision_layer)
 		if body.collision_layer == collision_mask:
 			return false
 	return true

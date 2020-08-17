@@ -7,6 +7,8 @@ extends KinematicBody2D
 var hp = 100
 # Speed in which the actor can move.
 var move_speed = 1
+# Invulnerable actor.
+var is_invulnerable = false
 
 
 # Checks if actor is dead.
@@ -16,4 +18,5 @@ func is_dead():
 
 # Damage the actor.
 func oof(damage):
-	hp -= damage
+	if not is_invulnerable:
+		hp -= damage
