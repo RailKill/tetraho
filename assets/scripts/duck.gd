@@ -78,6 +78,7 @@ func commence_attack(direction : Vector2):
 	scratch.animation.play()
 
 
+# Resets the attack.
 func reset_attack():
 	attack_delay_cooldown = 2
 	attack_delay_startup = 0.5
@@ -85,6 +86,7 @@ func reset_attack():
 	is_on_cooldown = false
 
 
+# Resets the pathing and issue a new move command towards the player.
 func reset_pathing():
 	paths = navigation.get_simple_path(get_position(), player.get_position())
 	path_index = 0

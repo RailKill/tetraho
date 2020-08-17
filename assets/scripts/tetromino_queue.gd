@@ -14,7 +14,9 @@ var generator = [
 	preload("res://assets/objects/tetris/t_block.tscn")
 ]
 
+# List of tetrominos in the current queue.
 var queue : Array
+# Current index of the queue.
 var index : int
 
 

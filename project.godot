@@ -49,11 +49,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/scripts/player_hud.gd"
 }, {
-"base": "Area2D",
-"class": "SolverHorizontal",
-"language": "GDScript",
-"path": "res://assets/scripts/solver_horizontal.gd"
-}, {
 "base": "Node2D",
 "class": "Tetromino",
 "language": "GDScript",
@@ -83,7 +78,6 @@ _global_script_class_icons={
 "LockBlock": "",
 "PlayerCharacter": "",
 "PlayerHUD": "",
-"SolverHorizontal": "",
 "Tetromino": "",
 "TetrominoBlock": "",
 "TetrominoQueue": "",

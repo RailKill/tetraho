@@ -30,4 +30,4 @@ func get_maximum_hp():
 func oof(damage):
 	if not is_invulnerable:
 		hp -= damage
-		print(name, " took ", damage, " damage!")
+		print("%s took %d damage." % [name, damage])

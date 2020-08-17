@@ -17,6 +17,10 @@ var current : Tetromino
 var hold : Tetromino
 # Queue to generate tetrominos.
 var queue = TetrominoQueue.new()
+# Node path to the Player's HUD.
+export (NodePath) var hud_path
+# PlayerHUD node to update.
+onready var hud : PlayerHUD
 
 # Cooldown of dash ability.
 var dash_cooldown = 3
@@ -33,9 +37,6 @@ var is_dashing = false
 # Checks if dash is on cooldown.
 var is_on_cooldown = false
 
-# Node path to the Player's HUD.
-export (NodePath) var hud_path
-onready var hud : PlayerHUD
 
 func _ready():
 	hud = get_node(hud_path)
@@ -50,7 +51,6 @@ func _process(_delta):
 
 func _physics_process(delta):	
 	var move_vector = Vector2.ZERO
-	
 	for vector in DIRECTIONS:
 		if Input.is_action_pressed(vector):
 			move_vector += DIRECTIONS[vector]
@@ -95,10 +95,13 @@ func next_tetromino():
 	get_parent().call_deferred("add_child", current)
 
 
+# In addition to taking damage, update the PlayerHUD.
 func oof(damage):
 	.oof(damage)
 	hud.update_hp(self)
 
+
+# Reset the dash cooldown.
 func reset_dash():
 	dash_delay = dash_cooldown
 	dash_duration = 0.3

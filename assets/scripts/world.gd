@@ -46,7 +46,7 @@ func search(anchor, solver):
 			if search.get_global_vector() == anchor.get_global_vector() + vector:
 				satisfied.append(search)
 	
-	if satisfied.size() == 6:
+	if satisfied.size() == solver.size() + 1:
 		for solved in satisfied:
 			solved.marked = true
 		return true
