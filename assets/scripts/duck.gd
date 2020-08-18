@@ -18,6 +18,8 @@ var path_index = 0
 var attack_delay_startup : float
 # Delay in seconds before another attack can be attempted again.
 var attack_delay_cooldown : float
+# Check if duck is aggro-ed. If aggro-ed, it will chase the player.
+var is_aggro = false
 # Checks if duck is attacking.
 var is_attacking : bool
 # Checks if duck attack is on cooldown.
@@ -37,7 +39,7 @@ func _ready():
 
 # Behavior of duck is to chase the player. Attacks when close.
 func _physics_process(delta):
-	if player and not is_locked():
+	if player and is_aggro and not is_locked():
 		var difference = player.get_position() - get_position()
 	
 		pathing_cooldown -= delta
