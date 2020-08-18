@@ -13,7 +13,7 @@ var max_hp = Constants.PLAYER_HP
 # Speed in which the actor can move.
 var move_speed = Constants.PLAYER_MOVE_SPEED
 # Invulnerable actor.
-var is_invulnerable = false
+export var is_invulnerable = false
 # Checks if this actor is being locked by a TetrominoBlock.
 var locked_by = []
 

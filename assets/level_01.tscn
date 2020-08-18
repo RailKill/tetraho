@@ -46,6 +46,7 @@ tile_data = PoolIntArray( 0, 0, 0, 1, 1, 0, 2, 1, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 48, 48 )
+is_invulnerable = true
 hud_path = NodePath("../CanvasLayer/PlayerHUD")
 
 [node name="Duck" parent="." instance=ExtResource( 6 )]
