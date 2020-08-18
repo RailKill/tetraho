@@ -50,7 +50,7 @@ func _physics_process(delta):
 			# If duck is not attacking, move towards player.	
 			if path_index < paths.size():
 				var to_path = (paths[path_index] - get_position())
-				if to_path.length() < Constants.GRID_SIZE / 2:
+				if to_path.length() < Constants.GRID_HALF:
 					path_index += 1
 	
 				# Turn duck to face path.
@@ -59,7 +59,7 @@ func _physics_process(delta):
 					move_speed * to_path.normalized())
 	
 			# If player is close enough, perform an attack!
-			if difference.length() < Constants.GRID_SIZE * 2 \
+			if difference.length() < Constants.GRID_ONE_HALF \
 				and not is_on_cooldown:
 					is_attacking = true
 		else:
@@ -80,7 +80,7 @@ func commence_attack(direction : Vector2):
 	is_attacking = false
 	is_on_cooldown = true
 	var scratch = area_damage.instance()
-	scratch.translate(direction * 14)
+	scratch.translate(direction * 16)
 	add_child(scratch)
 	scratch.animation.play()
 

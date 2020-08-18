@@ -7,8 +7,6 @@ extends Node2D
 # checks if the placement is valid, and also for the lock mechanic.
 
 
-# Number of pixels for grid snapping.
-const GRID_SNAP = 14
 # Reference to the game world that stores all tetromino blocks for solving.
 onready var game_world : GameWorld = get_parent()
 # Reference to the rotation origin node.
@@ -67,7 +65,6 @@ func _physics_process(delta):
 		if summon_time <= 0:			
 			# For each target reticle, get the actors who are in there.
 			for i in range(0, targets.size()):
-				var actors = []
 				var bodies = targets[i].get_overlapping_bodies()
 				for body in bodies:
 					# Perform a lock for actors in that target to its block.
@@ -121,10 +118,10 @@ func rotate_piece():
 # Function to calculate grid snapping based on mouse position.
 func snap_to_grid(position):
 # warning-ignore:integer_division
-	var snap = GRID_SNAP * (int(position) / GRID_SNAP)
+	var snap = Constants.GRID_SIZE * (int(position) / Constants.GRID_SIZE)
 # warning-ignore:integer_division
-	if int(position) % GRID_SNAP > GRID_SNAP / 2:
-		snap += GRID_SNAP
+	if int(position) % Constants.GRID_SIZE > Constants.GRID_HALF:
+		snap += Constants.GRID_SIZE
 	return snap
 
 
