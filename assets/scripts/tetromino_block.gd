@@ -56,7 +56,9 @@ func trap(actor):
 # Untrap all actors in this block.
 func untrap():
 	for actor in trapped:
-		actor.locked_by.erase(self)
+		# If actor is dead, they will no longer exist, so do a null check.
+		if actor != null:
+			actor.locked_by.erase(self)
 
 
 func _on_Unsummon_animation_finished():

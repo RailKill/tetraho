@@ -51,7 +51,7 @@ func _ready():
 
 
 func _process(_delta):
-	if summoner.is_current(self):
+	if summoner and summoner.is_current(self):
 		# Summon tetromino.
 		if Input.is_action_just_pressed("action_primary"):
 			summon_piece()
@@ -130,7 +130,7 @@ func snap_to_grid(position):
 
 # Snap tetromino to mouse.
 func snap_to_mouse():
-	if summoner.is_current(self):
+	if summoner and summoner.is_current(self):
 		# Get mouse position relative to the canvas.
 		var mouse_position = get_global_mouse_position()
 		

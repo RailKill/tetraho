@@ -12,6 +12,10 @@ onready var mana_flask = $Status/Offset/Mana/Flask
 onready var dash_ready = $Status/Offset/Mana/DashReady
 onready var recharging = $Status/Offset/Mana/Recharging
 
+# Face nodes.
+onready var face = $Status/Offset/Head/Face
+onready var hat = $Status/Offset/Head/Hat
+onready var crown = $Status/Offset/Head/Crown
 
 
 # Updates the HUD based on the given player's HP.
@@ -35,6 +39,13 @@ func update_hp(player):
 		else:
 			hearts[count].set_frame(2)
 		count += 1
+	
+	# If player is dead, show skeleton head.
+	if player.is_dead():
+		face.set_frame(1)
+		face.move_local_y(-5)
+		hat.set_visible(false)
+		crown.set_visible(false)
 
 
 # Updates the HUD of the given player's dash cooldown.

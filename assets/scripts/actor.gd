@@ -42,3 +42,6 @@ func oof(damage, bypass_lock=false):
 	if not is_invulnerable and (bypass_lock or not is_locked()):
 		hp -= damage
 		print("%s took %d damage." % [name, damage])
+		
+		if is_dead():
+			queue_free()

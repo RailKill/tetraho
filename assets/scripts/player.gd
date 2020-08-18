@@ -21,6 +21,8 @@ var queue = TetrominoQueue.new()
 export (NodePath) var hud_path
 # PlayerHUD node to update.
 onready var hud : PlayerHUD
+# Reference to this player's camera.
+onready var camera = $Camera2D
 
 # Cooldown of dash ability.
 var dash_cooldown = 3
@@ -100,6 +102,12 @@ func next_tetromino():
 func oof(damage, bypass_lock=false):
 	.oof(damage, bypass_lock)
 	hud.update_hp(self)
+	
+	if is_dead():
+		current.queue_free()
+		remove_child(camera)
+		get_parent().add_child(camera)
+		camera.set_global_position(get_global_position())
 
 
 # Reset the dash cooldown.
