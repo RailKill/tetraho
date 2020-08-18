@@ -97,8 +97,8 @@ func next_tetromino():
 
 
 # In addition to taking damage, update the PlayerHUD.
-func oof(damage):
-	.oof(damage)
+func oof(damage, bypass_lock=false):
+	.oof(damage, bypass_lock)
 	hud.update_hp(self)
 
 

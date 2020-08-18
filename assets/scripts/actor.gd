@@ -38,7 +38,7 @@ func is_locked():
 
 
 # Damage the actor.
-func oof(damage):
-	if not is_invulnerable and not is_locked():
+func oof(damage, bypass_lock=false):
+	if not is_invulnerable and (bypass_lock or not is_locked()):
 		hp -= damage
 		print("%s took %d damage." % [name, damage])

@@ -45,7 +45,7 @@ func solve():
 	
 	# All solved actors take damage.
 	for actor in actors:
-		actor.oof(100)
+		actor.oof(100, true)
 
 
 # Search for block combinations in a given solver (area to search) and mark
