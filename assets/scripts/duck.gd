@@ -23,49 +23,53 @@ var is_attacking : bool
 # Checks if duck attack is on cooldown.
 var is_on_cooldown : bool
 # Issue a new move command after every X seconds.
-var pathing_cooldown = 0.25
+var pathing_cooldown : float
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	move_speed = 0.5
+	move_speed = Constants.DUCK_MOVE_SPEED
+	max_hp = Constants.DUCK_HP
+	hp = Constants.DUCK_HP
 	reset_attack()
 	reset_pathing()
 
 
 # Behavior of duck is to chase the player. Attacks when close.
 func _physics_process(delta):
-	var difference = player.get_position() - get_position()
+	if not is_locked():
+		var difference = player.get_position() - get_position()
 	
-	pathing_cooldown -= delta
-	if pathing_cooldown <= 0:
-		reset_pathing()
+		pathing_cooldown -= delta
+		if pathing_cooldown <= 0:
+			reset_pathing()
 	
-	if not is_attacking:
-		# If duck is not attacking, move towards player.	
-		if path_index < paths.size():
-			var to_path = (paths[path_index] - get_position())
-			if to_path.length() < 7:
-				path_index += 1
-			
-			# Turn duck to face path.
-			sprite.flip_h = int(difference.normalized().x <= 0)
-			var _collision = move_and_collide(move_speed * to_path.normalized())
-		
-		# If player is close enough, perform an attack!
-		if difference.length() < 21 and not is_on_cooldown:
-			is_attacking = true
-	else:
-		attack_delay_startup -= delta
-		if attack_delay_startup <= 0:
-			commence_attack(difference.normalized())
+		if not is_attacking:
+			# If duck is not attacking, move towards player.	
+			if path_index < paths.size():
+				var to_path = (paths[path_index] - get_position())
+				if to_path.length() < 7:
+					path_index += 1
 	
-	# Handle cooldown.
-	if is_on_cooldown:
-		attack_delay_cooldown -= delta
-		if attack_delay_cooldown < 0:
-			is_on_cooldown = false
-			reset_attack()
+				# Turn duck to face path.
+				sprite.flip_h = int(difference.normalized().x <= 0)
+				var _collision = move_and_collide(
+					move_speed * to_path.normalized())
+	
+			# If player is close enough, perform an attack!
+			if difference.length() < 21 and not is_on_cooldown:
+				is_attacking = true
+		else:
+			attack_delay_startup -= delta
+			if attack_delay_startup <= 0:
+				commence_attack(difference.normalized())
+	
+		# Handle cooldown.
+		if is_on_cooldown:
+			attack_delay_cooldown -= delta
+			if attack_delay_cooldown < 0:
+				is_on_cooldown = false
+				reset_attack()
 
 
 # After attack_delay Spawns an AreaDamage at the direction.
@@ -90,4 +94,4 @@ func reset_attack():
 func reset_pathing():
 	paths = navigation.get_simple_path(get_position(), player.get_position())
 	path_index = 0
-	pathing_cooldown = 0.25
+	pathing_cooldown = Constants.AI_PATHING_COOLDOWN

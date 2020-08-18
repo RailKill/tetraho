@@ -3,14 +3,19 @@ extends KinematicBody2D
 # An actor that can perform actions in the game.
 
 
+# Reference to the collision shape of the actor.
+onready var collision_shape = $CollisionShape2D
+
 # Hit points.
-var hp = 100
+var hp = Constants.PLAYER_HP
 # Maximum hit points.
-var max_hp = 100
+var max_hp = Constants.PLAYER_HP
 # Speed in which the actor can move.
-var move_speed = 1
+var move_speed = Constants.PLAYER_MOVE_SPEED
 # Invulnerable actor.
 var is_invulnerable = false
+# Checks if this actor is being locked by a TetrominoBlock.
+var locked_by = []
 
 
 # Checks if actor is dead.
@@ -26,8 +31,14 @@ func get_hp():
 func get_maximum_hp():
 	return max_hp
 
+
+# Checks if actor is being locked.
+func is_locked():
+	return locked_by.size() > 0
+
+
 # Damage the actor.
 func oof(damage):
-	if not is_invulnerable:
+	if not is_invulnerable and not is_locked():
 		hp -= damage
 		print("%s took %d damage." % [name, damage])

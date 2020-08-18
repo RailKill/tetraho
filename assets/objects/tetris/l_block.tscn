@@ -9,7 +9,6 @@ script = ExtResource( 3 )
 
 [node name="Origin" type="Node2D" parent="."]
 position = Vector2( -7, 7 )
-rotation = 1.5708
 
 [node name="Reticle" type="Node2D" parent="Origin"]
 position = Vector2( -7, -7 )

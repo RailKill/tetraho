@@ -33,8 +33,19 @@ func solve():
 	for block in blocks:
 		search(block, solver_horizontal)
 		search(block, solver_vertical)
+	
+	var actors = []
 	for block in blocks:
-		block.solve()
+		# Solve all marked blocks.
+		if block.marked:
+			for actor in block.trapped:
+				if not actors.has(actor):
+					actors.append(actor)
+			block.disable()
+	
+	# All solved actors take damage.
+	for actor in actors:
+		actor.oof(100)
 
 
 # Search for block combinations in a given solver (area to search) and mark

@@ -1,5 +1,10 @@
 class_name Tetromino
 extends Node2D
+# Tetromino block containing a group of target reticles with their
+# corresponding blocks. By Tetris definition, each Tetromino will have
+# 4 blocks, and in each of those block's position, it must have a target
+# reticle for the player to see. The target reticle is important because it
+# checks if the placement is valid, and also for the lock mechanic.
 
 
 # Number of pixels for grid snapping.
@@ -12,9 +17,9 @@ var origin: Node2D
 var reticle : Node2D
 # Reference to the node containing solid blocks of the tetromino.
 var solid : Node2D
-# List of solid blocks.
+# List of solid blocks. Size of this array must be the same as targets.
 var blocks = []
-# List of target reticles.
+# List of target reticles. Size of this array must be the same as blocks.
 var targets = []
 # The PlayerCharacter who summons this tetromino.
 var summoner
@@ -59,14 +64,22 @@ func _physics_process(delta):
 	# If the tetromino is summoning, start countdown.
 	if is_summoning:
 		summon_time -= delta
-		if summon_time <= 0:
+		if summon_time <= 0:			
+			# For each target reticle, get the actors who are in there.
+			for i in range(0, targets.size()):
+				var actors = []
+				var bodies = targets[i].get_overlapping_bodies()
+				for body in bodies:
+					# Perform a lock for actors in that target to its block.
+					if body is Actor:
+						blocks[i].trap(body)
+				
+				blocks[i].enable()
+			
+			is_summoning = false
 			reticle.queue_free()
 			solid.set_visible(true)
-			for block in blocks:
-				block.enable()
-			
 			game_world.solve()
-			is_summoning = false
 	
 	# If the solid blocks are visible, that means they are active.
 	# Start decaying to be removed from the game.
