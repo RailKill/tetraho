@@ -3,6 +3,7 @@ extends Node
 # Contains global game constants.
 
 
+const GRID_SIZE = 14
 const PLAYER_HP = 100
 const PLAYER_MOVE_SPEED = 1
 const DUCK_HP = 20

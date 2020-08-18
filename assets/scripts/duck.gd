@@ -50,7 +50,7 @@ func _physics_process(delta):
 			# If duck is not attacking, move towards player.	
 			if path_index < paths.size():
 				var to_path = (paths[path_index] - get_position())
-				if to_path.length() < 7:
+				if to_path.length() < Constants.GRID_SIZE / 2:
 					path_index += 1
 	
 				# Turn duck to face path.
@@ -59,8 +59,9 @@ func _physics_process(delta):
 					move_speed * to_path.normalized())
 	
 			# If player is close enough, perform an attack!
-			if difference.length() < 21 and not is_on_cooldown:
-				is_attacking = true
+			if difference.length() < Constants.GRID_SIZE * 2 \
+				and not is_on_cooldown:
+					is_attacking = true
 		else:
 			attack_delay_startup -= delta
 			if attack_delay_startup <= 0:
@@ -79,7 +80,7 @@ func commence_attack(direction : Vector2):
 	is_attacking = false
 	is_on_cooldown = true
 	var scratch = area_damage.instance()
-	scratch.translate(direction * 16)
+	scratch.translate(direction * 14)
 	add_child(scratch)
 	scratch.animation.play()
 
@@ -94,6 +95,8 @@ func reset_attack():
 
 # Resets the pathing and issue a new move command towards the player.
 func reset_pathing():
-	paths = navigation.get_simple_path(get_position(), player.get_position())
+	var to_player = player.get_position() + (get_position() - \
+		player.get_position()).normalized() * Constants.GRID_SIZE
+	paths = navigation.get_simple_path(get_position(), to_player)
 	path_index = 0
 	pathing_cooldown = Constants.AI_PATHING_COOLDOWN

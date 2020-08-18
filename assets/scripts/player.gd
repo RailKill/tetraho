@@ -66,7 +66,13 @@ func _physics_process(delta):
 		
 		if not is_dashing:
 			# If not dashing, move normally.
-			var _collision = move_and_collide(move_vector * move_speed)
+			var move = move_vector * move_speed
+			var collision = move_and_collide(move)
+			# Push other actors to prevent getting stuck.
+			if collision:
+				var body = collision.get_collider()
+				if body.is_in_group("enemy") and not body.is_locked():
+					var _push = body.move_and_collide(move)
 			
 			# Handle dash cooldown.
 			if is_on_cooldown:
