@@ -23,26 +23,12 @@ export (NodePath) var hud_path
 onready var hud : PlayerHUD
 # Reference to this player's camera.
 onready var camera = $Camera2D
-
-# Cooldown of dash ability.
-var dash_cooldown = 3
-# Delay before dash can be used again in seconds.
-var dash_delay : float
-# Duration of dash in seconds.
-var dash_duration : float
-# Direction of dash.
-var dash_direction : Vector2
-# Speed of dash.
-var dash_speed = 200
-# Checks if player is dashing.
-var is_dashing = false
-# Checks if dash is on cooldown.
-var is_on_cooldown = false
+# Dash ability.
+onready var dash = $Dash
 
 
 func _ready():
 	hud = get_node(hud_path)
-	reset_dash()
 	next_tetromino()
 
 
@@ -51,7 +37,7 @@ func _process(_delta):
 		pass
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if not is_locked():
 		var move_vector = Vector2.ZERO
 		for vector in DIRECTIONS:
@@ -60,11 +46,10 @@ func _physics_process(delta):
 		
 		# Trigger dash if a direction is held, and the dash button is pressed.
 		if Input.is_action_just_pressed("action_dash") and move_vector:
-			if not is_on_cooldown:
-				is_dashing = true
-				dash_direction = move_vector
+			dash.direction = move_vector
+			dash.cast()
 		
-		if not is_dashing:
+		if not dash.is_active:
 			# If not dashing, move normally.
 			var move = move_vector * move_speed
 			var collision = move_and_collide(move)
@@ -73,23 +58,6 @@ func _physics_process(delta):
 				var body = collision.get_collider()
 				if body.is_in_group("enemy") and not body.is_locked():
 					var _push = body.move_and_collide(move)
-			
-			# Handle dash cooldown.
-			if is_on_cooldown:
-				dash_delay -= delta
-				if dash_delay <= 0:
-					is_on_cooldown = false
-					reset_dash()
-					hud.update_dash(self)
-		else:
-			# Else, move towards dash direction until dash duration is gone.
-			dash_duration -= delta
-			if dash_duration > 0:
-				var _collision = move_and_slide(dash_direction * dash_speed)
-			else:
-				is_dashing = false
-				is_on_cooldown = true
-				hud.update_dash(self)
 
 
 # Checks if the player is currently controlling the given tetromino.
@@ -114,10 +82,3 @@ func oof(damage, bypass_lock=false):
 		remove_child(camera)
 		get_parent().add_child(camera)
 		camera.set_global_position(get_global_position())
-
-
-# Reset the dash cooldown.
-func reset_dash():
-	dash_delay = dash_cooldown
-	dash_duration = 0.3
-	dash_direction = Vector2.ZERO

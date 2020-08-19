@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "Ability",
+"language": "GDScript",
+"path": "res://assets/scripts/abilities/ability.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Actor",
 "language": "GDScript",
@@ -29,6 +34,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/scripts/constants.gd"
 }, {
+"base": "Ability",
+"class": "Dash",
+"language": "GDScript",
+"path": "res://assets/scripts/abilities/dash.gd"
+}, {
 "base": "Actor",
 "class": "Duck",
 "language": "GDScript",
@@ -43,6 +53,11 @@ _global_script_classes=[ {
 "class": "GitAPI",
 "language": "NativeScript",
 "path": "res://git_api.gdns"
+}, {
+"base": "Ability",
+"class": "Knockback",
+"language": "GDScript",
+"path": "res://assets/scripts/abilities/knockback.gd"
 }, {
 "base": "TetrominoBlock",
 "class": "LockBlock",
@@ -80,13 +95,16 @@ _global_script_classes=[ {
 "path": "res://assets/scripts/tetromino_target.gd"
 } ]
 _global_script_class_icons={
+"Ability": "",
 "Actor": "",
 "AreaAggro": "",
 "AreaDamage": "",
 "Constants": "",
+"Dash": "",
 "Duck": "",
 "GameWorld": "",
 "GitAPI": "",
+"Knockback": "",
 "LockBlock": "",
 "PlayerCharacter": "",
 "PlayerHUD": "",

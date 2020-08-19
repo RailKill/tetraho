@@ -49,8 +49,8 @@ func update_hp(player):
 
 
 # Updates the HUD of the given player's dash cooldown.
-func update_dash(player):
-	var not_ready = player.is_on_cooldown
+func update_dash(dash : Dash):
+	var not_ready = dash.is_on_cooldown
 	mana_flask.set_frame(int(not_ready))
 	dash_ready.set_visible(!not_ready)
 	recharging.set_visible(not_ready)
