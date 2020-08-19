@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/tilesets/walls.tres" type="TileSet" id=1]
 [ext_resource path="res://assets/objects/player.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://assets/objects/gunner.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/objects/duck_house.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/objects/gate.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/objects/ui/ingame_menu.tscn" type="PackedScene" id=11]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( 20, 148, 20, 20, 148, 20, 148, 77, 230, 77, 230, 20, 358, 20, 358, 148, 230, 148, 230, 92, 148, 92, 148, 148 )
@@ -24,6 +25,9 @@ layer = 2
 
 [node name="PlayerHUD" parent="CanvasLayer" instance=ExtResource( 7 )]
 light_mask = 2
+
+[node name="IngameMenu" parent="CanvasLayer" instance=ExtResource( 11 )]
+visible = false
 
 [node name="Navigation2D" type="Navigation2D" parent="."]
 
