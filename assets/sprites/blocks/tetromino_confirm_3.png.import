@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tetromino_flash.png-7908705a5c635d69494aa8f69822b360.stex"
+path="res://.import/tetromino_confirm_3.png-3e99aa4a82bad4ba6c26f366167e71d7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/tetromino_flash.png"
-dest_files=[ "res://.import/tetromino_flash.png-7908705a5c635d69494aa8f69822b360.stex" ]
+source_file="res://assets/sprites/blocks/tetromino_confirm_3.png"
+dest_files=[ "res://.import/tetromino_confirm_3.png-3e99aa4a82bad4ba6c26f366167e71d7.stex" ]
 
 [params]
 

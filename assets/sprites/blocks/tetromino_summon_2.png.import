@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/wall_mini_1.png-ddb1f8afa068d04600c2bfef889aa5b6.stex"
+path="res://.import/tetromino_summon_2.png-1d57c80041aa51d8c04f0d0082b33d5a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/wall_mini_1.png"
-dest_files=[ "res://.import/wall_mini_1.png-ddb1f8afa068d04600c2bfef889aa5b6.stex" ]
+source_file="res://assets/sprites/blocks/tetromino_summon_2.png"
+dest_files=[ "res://.import/tetromino_summon_2.png-1d57c80041aa51d8c04f0d0082b33d5a.stex" ]
 
 [params]
 

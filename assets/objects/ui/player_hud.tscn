@@ -10,9 +10,10 @@
 [ext_resource path="res://assets/sprites/flask_empty.png" type="Texture" id=8]
 [ext_resource path="res://assets/tilesets/font.tres" type="TileSet" id=9]
 [ext_resource path="res://assets/sprites/ui_hold.png" type="Texture" id=10]
-[ext_resource path="res://assets/sprites/tetromino_flash.png" type="Texture" id=11]
+[ext_resource path="res://assets/sprites/blocks/tetromino_flash.png" type="Texture" id=11]
 [ext_resource path="res://assets/sprites/skull.png" type="Texture" id=12]
 [ext_resource path="res://assets/scripts/player_hud.gd" type="Script" id=13]
+
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
