@@ -5,11 +5,10 @@
 [ext_resource path="res://assets/sprites/blocks/block_lock_raised.png" type="Texture" id=3]
 [ext_resource path="res://assets/sprites/blocks/block_locked.png" type="Texture" id=4]
 
-
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 7 )
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ],
 "loop": false,
@@ -17,7 +16,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="SpriteFrames" id=2]
+[sub_resource type="SpriteFrames" id=3]
 animations = [ {
 "frames": [ ExtResource( 4 ), ExtResource( 3 ), ExtResource( 2 ) ],
 "loop": false,
@@ -29,13 +28,14 @@ animations = [ {
 "block",
 ]]
 script = ExtResource( 1 )
+is_invulnerable = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 7, 7 )
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="Summon" type="AnimatedSprite" parent="."]
-frames = SubResource( 1 )
+frames = SubResource( 2 )
 frame = 2
 speed_scale = 2.0
 playing = true
@@ -44,7 +44,7 @@ offset = Vector2( -1, -1 )
 
 [node name="Unsummon" type="AnimatedSprite" parent="."]
 visible = false
-frames = SubResource( 2 )
+frames = SubResource( 3 )
 speed_scale = 2.0
 centered = false
 offset = Vector2( -1, -1 )

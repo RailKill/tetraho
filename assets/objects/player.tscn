@@ -24,6 +24,7 @@ current = true
 zoom = Vector2( 0.3, 0.3 )
 
 [node name="AreaAggro" parent="." instance=ExtResource( 3 )]
+visible = false
 
 [node name="Dash" type="Node" parent="."]
 script = ExtResource( 4 )

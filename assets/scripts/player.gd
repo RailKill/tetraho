@@ -57,7 +57,8 @@ func _physics_process(_delta):
 			if collision:
 				var body = collision.get_collider()
 				if body.is_in_group("enemy") and not body.is_locked():
-					var _push = body.move_and_collide(move)
+					var push = body.move_and_collide(move)
+					body.check_collision(push)
 
 
 # Checks if the player is currently controlling the given tetromino.

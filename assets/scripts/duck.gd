@@ -81,6 +81,16 @@ func commence_attack(direction : Vector2):
 	scratch.animation.play()
 
 
+# If the given collider is a DuckHouse, kill both.
+func check_collision(collision : KinematicCollision2D):
+	if collision:
+		var collider = collision.get_collider()
+		if collider is DuckHouse:
+			collider.is_invulnerable = false
+			collider.oof(collider.max_hp)
+			oof(max_hp)
+
+
 # Resets the attack.
 func reset_attack():
 	attack_delay_cooldown = 2

@@ -4,7 +4,7 @@ extends Ability
 
 
 # The bullet resource to shoot.
-var bullet = preload("res://assets/objects/bullet.tscn")
+export var bullet : PackedScene = preload("res://assets/objects/bullet.tscn")
 # Direction of aim.
 var aim : Vector2
 # Position to spawn the bullet from.

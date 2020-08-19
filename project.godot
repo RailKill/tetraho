@@ -49,6 +49,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/scripts/duck.gd"
 }, {
+"base": "Enemy",
+"class": "DuckHouse",
+"language": "GDScript",
+"path": "res://assets/scripts/duck_house.gd"
+}, {
 "base": "Actor",
 "class": "Enemy",
 "language": "GDScript",
@@ -94,6 +99,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/scripts/abilities/shoot.gd"
 }, {
+"base": "Ability",
+"class": "Spawn",
+"language": "GDScript",
+"path": "res://assets/scripts/abilities/spawn.gd"
+}, {
 "base": "Node2D",
 "class": "Tetromino",
 "language": "GDScript",
@@ -128,6 +138,7 @@ _global_script_class_icons={
 "Constants": "",
 "Dash": "",
 "Duck": "",
+"DuckHouse": "",
 "Enemy": "",
 "GameWorld": "",
 "GitAPI": "",
@@ -137,6 +148,7 @@ _global_script_class_icons={
 "PlayerCharacter": "",
 "PlayerHUD": "",
 "Shoot": "",
+"Spawn": "",
 "Tetromino": "",
 "TetrominoBlock": "",
 "TetrominoQueue": "",

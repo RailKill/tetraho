@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/gate_2.png-e999adb020f172589644b08f14c06004.stex"
+path="res://.import/gate.png-a0d7fdee8dad2cf4c92779dc2ab32fef.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/gate_2.png"
-dest_files=[ "res://.import/gate_2.png-e999adb020f172589644b08f14c06004.stex" ]
+source_file="res://assets/sprites/gate.png"
+dest_files=[ "res://.import/gate.png-a0d7fdee8dad2cf4c92779dc2ab32fef.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

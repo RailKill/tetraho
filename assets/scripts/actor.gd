@@ -18,6 +18,11 @@ export var is_invulnerable = false
 var locked_by = []
 
 
+# Checks a given collision and react accordingly. By default, nothing happens.
+func check_collision(collision : KinematicCollision2D):
+	pass
+
+
 # Checks if actor is dead.
 func is_dead():
 	return hp <= 0
