@@ -26,14 +26,15 @@ func _physics_process(_delta):
 	if player and ready:
 		var space_state = get_world_2d().direct_space_state
 		var result = space_state.intersect_ray(
-			muzzle.get_global_position(), player.get_global_position())
+			muzzle.get_global_position(), player.get_global_position(), 
+			[], Constants.Layer.ENVIRONMENT + Constants.Layer.ACTOR)
 		
 		# Fire weapon if there's an actor, don't care who, trigger happy dudes.
 		if result and result.collider is Actor:
 			shoot.aim = to_player_vector().normalized()
 			shoot.point = muzzle.get_global_position()
 			shoot.cast()
-			
+		
 		# Point gun at player.
 		gun_sprite.flip_v = int(to_player_vector().normalized().x <= 0)
 		gun.look_at(player.get_global_position())

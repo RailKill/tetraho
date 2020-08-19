@@ -4,7 +4,7 @@ extends Area2D
 
 
 # Allow units to be de-aggroed if they leave this area.
-export var can_deaggro = false
+export var can_deaggro = true
 
 
 func _on_AggroArea_body_entered(body):
