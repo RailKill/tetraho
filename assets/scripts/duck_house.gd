@@ -17,7 +17,7 @@ func _ready():
 		to_player_vector().normalized() * Constants.GRID_SIZE
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if player and is_aggro:
 		spawner.cast()
 

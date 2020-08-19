@@ -19,7 +19,7 @@ var locked_by = []
 
 
 # Checks a given collision and react accordingly. By default, nothing happens.
-func check_collision(collision : KinematicCollision2D):
+func check_collision(_collision : KinematicCollision2D):
 	pass
 
 
