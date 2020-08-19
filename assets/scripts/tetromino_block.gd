@@ -4,14 +4,13 @@ extends Actor
 # moved, or have their own abilities, so it is considered an Actor.
 
 
-# The collision shape node associated with this block.
-#onready var collision_shape = $CollisionShape2D
+# Reference to the game world.
+onready var game_world : GameWorld = get_tree().get_root().get_child(0)
 # Reference to the animated sprite for summon animation.
 onready var summon = $Summon
 # Reference to the animated sprite for unsummon animation.
 onready var unsummon = $Unsummon
-# Reference to the game world.
-onready var game_world : GameWorld = get_tree().get_root().get_child(0)
+
 # Check if block is marked for solving.
 var marked = false
 # Actors which are trapped in this block.
@@ -21,6 +20,7 @@ var trapped = []
 func _ready():
 	max_hp = Constants.BLOCK_HP
 	hp = Constants.BLOCK_HP
+	collision_shape.disabled = true
 
 
 # Queue the block for destruction.

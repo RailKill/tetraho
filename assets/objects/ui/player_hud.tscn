@@ -14,8 +14,7 @@
 [ext_resource path="res://assets/sprites/skull.png" type="Texture" id=12]
 [ext_resource path="res://assets/scripts/player_hud.gd" type="Script" id=13]
 
-
-[sub_resource type="SpriteFrames" id=3]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 1 ), ExtResource( 12 ) ],
 "loop": true,
@@ -23,7 +22,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
 "loop": true,
@@ -31,7 +30,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="SpriteFrames" id=2]
+[sub_resource type="SpriteFrames" id=3]
 animations = [ {
 "frames": [ ExtResource( 7 ), ExtResource( 8 ) ],
 "loop": true,
@@ -79,7 +78,7 @@ __meta__ = {
 
 [node name="Face" type="AnimatedSprite" parent="Status/Offset/Head"]
 scale = Vector2( 5, 5 )
-frames = SubResource( 3 )
+frames = SubResource( 1 )
 
 [node name="Hat" type="Sprite" parent="Status/Offset/Head"]
 visible = false
@@ -105,27 +104,27 @@ __meta__ = {
 
 [node name="Heart" type="AnimatedSprite" parent="Status/Offset/Health"]
 scale = Vector2( 2, 2 )
-frames = SubResource( 1 )
+frames = SubResource( 2 )
 
 [node name="Heart2" type="AnimatedSprite" parent="Status/Offset/Health"]
 position = Vector2( 32, 0 )
 scale = Vector2( 2, 2 )
-frames = SubResource( 1 )
+frames = SubResource( 2 )
 
 [node name="Heart3" type="AnimatedSprite" parent="Status/Offset/Health"]
 position = Vector2( 64, 0 )
 scale = Vector2( 2, 2 )
-frames = SubResource( 1 )
+frames = SubResource( 2 )
 
 [node name="Heart4" type="AnimatedSprite" parent="Status/Offset/Health"]
 position = Vector2( 96, 0 )
 scale = Vector2( 2, 2 )
-frames = SubResource( 1 )
+frames = SubResource( 2 )
 
 [node name="Heart5" type="AnimatedSprite" parent="Status/Offset/Health"]
 position = Vector2( 128, 0 )
 scale = Vector2( 2, 2 )
-frames = SubResource( 1 )
+frames = SubResource( 2 )
 
 [node name="Mana" type="Control" parent="Status/Offset"]
 margin_left = -14.5236
@@ -140,7 +139,7 @@ __meta__ = {
 position = Vector2( 0, 1 )
 rotation = 0.645284
 scale = Vector2( 1.5, 1.5 )
-frames = SubResource( 2 )
+frames = SubResource( 3 )
 
 [node name="DashReady" type="TileMap" parent="Status/Offset/Mana"]
 modulate = Color( 0.282353, 0.796078, 1, 1 )
@@ -171,7 +170,7 @@ __meta__ = {
 scale = Vector2( 5, 5 )
 texture = ExtResource( 10 )
 
-[node name="Hold" type="TileMap" parent="Status/Offset/Hold"]
+[node name="Title" type="TileMap" parent="Status/Offset/Hold"]
 position = Vector2( -24.0903, -51.5479 )
 scale = Vector2( 1.25, 1.25 )
 tile_set = ExtResource( 9 )
@@ -193,7 +192,7 @@ __meta__ = {
 scale = Vector2( 5, 5 )
 texture = ExtResource( 10 )
 
-[node name="Hold" type="TileMap" parent="Status/Offset/Next"]
+[node name="Title" type="TileMap" parent="Status/Offset/Next"]
 position = Vector2( -24.0903, -51.5479 )
 scale = Vector2( 1.25, 1.25 )
 tile_set = ExtResource( 9 )

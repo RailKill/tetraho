@@ -34,7 +34,16 @@ func _ready():
 
 func _process(_delta):
 	if Input.is_action_just_pressed("action_special"):
-		pass
+		print("Hold kjeft!")
+		if not hold:
+			hold = current
+			next_tetromino()
+		else:
+			# The sacred three-way swap.
+			var swap = hold
+			hold = current
+			current = swap
+			hud.update_tetromino(self)
 
 
 func _physics_process(_delta):
@@ -71,6 +80,8 @@ func next_tetromino():
 	current = queue.fetch()
 	current.summoner = self
 	get_parent().call_deferred("add_child", current)
+	yield(current, "ready")
+	hud.update_tetromino(self)
 
 
 # In addition to taking damage, update the PlayerHUD.

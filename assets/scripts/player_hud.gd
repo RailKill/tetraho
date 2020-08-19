@@ -4,6 +4,7 @@ extends Control
 
 
 # Health node.
+onready var status = $Status/Offset
 onready var health = $Status/Offset/Health
 onready var hearts = health.get_children()
 
@@ -16,6 +17,15 @@ onready var recharging = $Status/Offset/Mana/Recharging
 onready var face = $Status/Offset/Head/Face
 onready var hat = $Status/Offset/Head/Hat
 onready var crown = $Status/Offset/Head/Crown
+
+# Tetromino nodes.
+onready var hold = $Status/Offset/Hold
+onready var next = $Status/Offset/Next
+
+
+# Helper function to center the tetromino's position in the HUD.
+func center_tetromino(tetromino : Tetromino):
+	tetromino.set_position(Vector2.ZERO - tetromino.origin.get_position())
 
 
 # Updates the HUD based on the given player's HP.
@@ -54,4 +64,28 @@ func update_dash(dash : Dash):
 	mana_flask.set_frame(int(not_ready))
 	dash_ready.set_visible(!not_ready)
 	recharging.set_visible(not_ready)
+
+
+func update_tetromino(player):
+	var hetromino = player.hold
+	if hetromino:
+		player.current.toggle_blocks(false)
+		hold.remove_child(player.current)
+		player.get_parent().add_child(player.current)
+		player.current.snap_to_mouse()
+		
+		hetromino.get_parent().remove_child(hetromino)
+		hold.add_child(hetromino)
+		center_tetromino(hetromino)
+		hetromino.toggle_blocks(true)
+	
+	# Destroy the old next tetromino to refresh the next UI.
+	for extra in range(2, next.get_child_count()):
+		next.get_child(extra).queue_free()
+	
+	var netromino = player.queue.peek().duplicate()
+	next.add_child(netromino)
+	center_tetromino(netromino)
+	netromino.toggle_blocks(true)
+	
 	

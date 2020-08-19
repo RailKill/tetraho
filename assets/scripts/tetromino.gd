@@ -8,7 +8,7 @@ extends Node2D
 
 
 # Reference to the game world that stores all tetromino blocks for solving.
-onready var game_world : GameWorld = get_parent()
+onready var game_world : GameWorld = get_tree().get_root().get_child(0)
 # Reference to the rotation origin node.
 var origin: Node2D
 # Reference to the node containing target reticles.
@@ -27,6 +27,8 @@ var decay_time = 3
 var summon_time = 1
 # If the tetromino is in the process of being summoned, this will be true.
 var is_summoning = false
+# If the tetromino is summoned and visible, this will be true.
+var is_summoned = false
 # If the tetromino already passed decay_time and is dying, this will be true.
 var is_decaying = false
 
@@ -37,13 +39,8 @@ func _ready():
 	origin = $Origin
 	reticle = $Origin/Reticle
 	solid = $Origin/Solid
-	solid.set_visible(false)
-
-	# Disable collision of solid blocks.
-	blocks = solid.get_children()
-	for block in blocks:
-		block.collision_shape.disabled = true
-
+	
+	toggle_blocks(false)
 	targets = reticle.get_children()
 	snap_to_mouse()
 
@@ -74,13 +71,14 @@ func _physics_process(delta):
 				blocks[i].enable()
 			
 			is_summoning = false
+			is_summoned = true
 			reticle.queue_free()
 			solid.set_visible(true)
 			game_world.solve()
 	
 	# If the solid blocks are visible, that means they are active.
 	# Start decaying to be removed from the game.
-	if solid.visible:
+	if is_summoned:
 		decay_time -= delta
 		if decay_time <= 0:
 			if not is_decaying:
@@ -152,3 +150,15 @@ func summon_piece():
 	else:
 		# Show an error feedback to the player. Invalid placement.
 		pass
+
+
+# Show or hide blocks without activating them.
+func toggle_blocks(toggle : bool):
+	reticle.set_visible(!toggle)
+	solid.set_visible(toggle)
+	
+	# Toggle collision of solid blocks and their completed animation frames.
+	blocks = solid.get_children()
+	for block in blocks:
+		block.summon.set_frame(
+			block.summon.frames.get_frame_count("default") * int(toggle))

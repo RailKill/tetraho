@@ -24,7 +24,7 @@ func _init():
 	refresh()
 
 
-# Returns the next tetromino in queue.
+# Serve and return the next tetromino in queue.
 func fetch():
 	var tetromino = queue[index]
 	index += 1
@@ -33,6 +33,11 @@ func fetch():
 		refresh()
 	
 	return tetromino
+
+
+# Returns the most current tetromino in queue.
+func peek():
+	return queue[index]
 
 
 # Re-generate the queue with a new set of tetrominos in a randomized order.
