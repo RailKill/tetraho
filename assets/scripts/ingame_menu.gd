@@ -31,7 +31,7 @@ func _on_ButtonQuit_pressed():
 
 func _on_ButtonRestart_pressed():
 	_on_ButtonResume_pressed()
-	get_tree().reload_current_scene()
+	var _ignore = get_tree().reload_current_scene()
 
 
 func _on_IngameMenu_visibility_changed():
