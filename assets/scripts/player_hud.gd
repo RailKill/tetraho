@@ -69,10 +69,13 @@ func update_dash(dash : Dash):
 func update_tetromino(player):
 	var hetromino = player.hold
 	if hetromino:
-		player.current.toggle_blocks(false)
-		hold.remove_child(player.current)
-		player.get_parent().add_child(player.current)
-		player.current.snap_to_mouse()
+		if hold.get_child_count() > 2:
+			var holding = hold.get_child(2)
+			if holding == player.current:
+				player.current.toggle_blocks(false)
+				hold.remove_child(player.current)
+				player.get_parent().add_child(player.current)
+				player.current.snap_to_mouse()
 		
 		hetromino.get_parent().remove_child(hetromino)
 		hold.add_child(hetromino)
