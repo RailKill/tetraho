@@ -1,11 +1,9 @@
 class_name Duck
-extends Actor
+extends Enemy
 
 
 # Get navigation.
 onready var navigation = get_parent().get_node("Navigation2D")
-# Get player to chase.
-onready var player = get_parent().get_node("Player")
 # Reference to the area damage resource.
 onready var area_damage = preload("res://assets/objects/area_damage.tscn")
 # Duck sprite.
@@ -18,8 +16,6 @@ var path_index = 0
 var attack_delay_startup : float
 # Delay in seconds before another attack can be attempted again.
 var attack_delay_cooldown : float
-# Check if duck is aggro-ed. If aggro-ed, it will chase the player.
-var is_aggro = false
 # Checks if duck is attacking.
 var is_attacking : bool
 # Checks if duck attack is on cooldown.

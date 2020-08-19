@@ -8,10 +8,10 @@ export var can_deaggro = false
 
 
 func _on_AggroArea_body_entered(body):
-	if body is Duck:
+	if body is Enemy:
 		body.is_aggro = true
 
 
 func _on_AggroArea_body_exited(body):
-	if can_deaggro and body is Duck:
+	if can_deaggro and body is Enemy:
 		body.is_aggro = false

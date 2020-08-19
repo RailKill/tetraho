@@ -18,6 +18,11 @@ var marked = false
 var trapped = []
 
 
+func _ready():
+	max_hp = Constants.BLOCK_HP
+	hp = Constants.BLOCK_HP
+
+
 # Queue the block for destruction.
 func disable():
 	collision_shape.disabled = true
@@ -50,7 +55,6 @@ func get_global_vector():
 func trap(actor):
 	trapped.append(actor)
 	actor.locked_by.append(self)
-	print("trapped: ", actor.name)
 
 
 # Untrap all actors in this block.

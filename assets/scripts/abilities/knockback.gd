@@ -1,11 +1,6 @@
 class_name Knockback
-extends Ability
+extends Trajectory
 # One-off effect.
-
-
-# Direction of the knockback.
-var direction : Vector2
-var speed = 4
 
 
 func _physics_process(delta):

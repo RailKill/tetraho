@@ -1,6 +1,6 @@
 class_name Ability
 extends Node
-# Reusable ability.
+# Reusable generic ability. Abstract class, does not do anything.
 
 
 # Cooldown of this ability.
