@@ -29,10 +29,10 @@ func _physics_process(_delta):
 		spawner.cast()
 
 
-func play_casting_animation(ability):
+func play_casting_animation(_ability):
 	sprite.play()
 
 
-func play_casted_animation(ability):
+func play_casted_animation(_ability):
 	sprite.stop()
 	sprite.set_frame(0)
