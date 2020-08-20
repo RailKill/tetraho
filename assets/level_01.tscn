@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://assets/tilesets/walls.tres" type="TileSet" id=1]
 [ext_resource path="res://assets/objects/player.tscn" type="PackedScene" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://assets/scripts/levels/level_01.gd" type="Script" id=13]
 [ext_resource path="res://assets/objects/tetris/single_block.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/objects/loot/heart.tscn" type="PackedScene" id=15]
+[ext_resource path="res://assets/objects/flamethrower.tscn" type="PackedScene" id=16]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 28, 42 )
@@ -123,7 +124,7 @@ position = Vector2( 42, 42 )
 hud_path = NodePath("../CanvasLayer/PlayerHUD")
 
 [node name="Duck" parent="." instance=ExtResource( 6 )]
-position = Vector2( 294, 42 )
+position = Vector2( 140, 140 )
 
 [node name="Duck2" parent="." instance=ExtResource( 6 )]
 position = Vector2( 252, 84 )
@@ -151,6 +152,9 @@ linked = [ NodePath("../Gate"), NodePath("../Gate2") ]
 
 [node name="Heart" parent="." instance=ExtResource( 15 )]
 position = Vector2( 56, 112 )
+
+[node name="Flamethrower" parent="." instance=ExtResource( 16 )]
+position = Vector2( 70, 140 )
 [connection signal="body_entered" from="Events/DialogLock" to="Events" method="_on_DialogLock_body_entered"]
 [connection signal="body_entered" from="Events/DialogDuck" to="Events" method="_on_DialogDuck_body_entered"]
 [connection signal="tree_exiting" from="DuckHouse" to="DuckHouse" method="_on_DuckHouse_tree_exiting"]
