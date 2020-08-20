@@ -16,7 +16,7 @@ onready var particles = $Particles2D
 var length = full_length
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	var space_state = get_world_2d().direct_space_state
 	var point = origin.get_global_position()
 	var result = space_state.intersect_ray(point, point - Vector2(0, length))
