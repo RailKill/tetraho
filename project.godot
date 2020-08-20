@@ -115,6 +115,11 @@ _global_script_classes=[ {
 "path": "res://assets/scripts/lock_block.gd"
 }, {
 "base": "Area2D",
+"class": "PickupCosmetic",
+"language": "GDScript",
+"path": "res://assets/scripts/pickup_cosmetic.gd"
+}, {
+"base": "Area2D",
 "class": "PickupHeart",
 "language": "GDScript",
 "path": "res://assets/scripts/pickup_heart.gd"
@@ -191,6 +196,7 @@ _global_script_class_icons={
 "IngameMenu": "",
 "Knockback": "",
 "LockBlock": "",
+"PickupCosmetic": "",
 "PickupHeart": "",
 "PlayerCharacter": "",
 "PlayerHUD": "",

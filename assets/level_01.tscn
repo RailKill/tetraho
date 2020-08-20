@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://assets/tilesets/walls.tres" type="TileSet" id=1]
 [ext_resource path="res://assets/objects/player.tscn" type="PackedScene" id=2]
@@ -16,14 +16,16 @@
 [ext_resource path="res://assets/objects/tetris/single_block.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/objects/loot/heart.tscn" type="PackedScene" id=15]
 [ext_resource path="res://assets/objects/flamethrower.tscn" type="PackedScene" id=16]
+[ext_resource path="res://assets/objects/loot/hat.tscn" type="PackedScene" id=17]
+[ext_resource path="res://assets/objects/loot/crown.tscn" type="PackedScene" id=18]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 28, 42 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 14, 14 )
 
-[sub_resource type="NavigationPolygon" id=1]
+[sub_resource type="NavigationPolygon" id=3]
 vertices = PoolVector2Array( 20, 148, 20, 20, 148, 20, 148, 77, 230, 77, 230, 20, 358, 20, 358, 148, 230, 148, 230, 92, 148, 92, 148, 148 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 5, 6, 7 ), PoolIntArray( 7, 8, 9 ), PoolIntArray( 4, 7, 9 ), PoolIntArray( 3, 4, 9, 10 ), PoolIntArray( 0, 3, 10 ), PoolIntArray( 0, 10, 11 ) ]
 outlines = [ PoolVector2Array( 20, 20, 148, 20, 148, 77, 230, 77, 230, 20, 358, 20, 358, 148, 230, 148, 230, 92, 148, 92, 148, 148, 20, 148 ) ]
@@ -42,7 +44,7 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Events/DialogLock"]
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="DialogDuck" type="Area2D" parent="Events"]
 position = Vector2( 196, 84 )
@@ -50,7 +52,7 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Events/DialogDuck"]
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 2
@@ -64,7 +66,7 @@ visible = false
 [node name="Navigation2D" type="Navigation2D" parent="."]
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Navigation2D"]
-navpoly = SubResource( 1 )
+navpoly = SubResource( 3 )
 
 [node name="LockBlock" parent="." instance=ExtResource( 5 )]
 position = Vector2( 154, 70 )
@@ -154,7 +156,13 @@ linked = [ NodePath("../Gate"), NodePath("../Gate2") ]
 position = Vector2( 56, 112 )
 
 [node name="Flamethrower" parent="." instance=ExtResource( 16 )]
-position = Vector2( 70, 140 )
+position = Vector2( 308, 126 )
+
+[node name="Hat" parent="." instance=ExtResource( 17 )]
+position = Vector2( 70, 42 )
+
+[node name="Crown" parent="." instance=ExtResource( 18 )]
+position = Vector2( 70, 70 )
 [connection signal="body_entered" from="Events/DialogLock" to="Events" method="_on_DialogLock_body_entered"]
 [connection signal="body_entered" from="Events/DialogDuck" to="Events" method="_on_DialogDuck_body_entered"]
 [connection signal="tree_exiting" from="DuckHouse" to="DuckHouse" method="_on_DuckHouse_tree_exiting"]
