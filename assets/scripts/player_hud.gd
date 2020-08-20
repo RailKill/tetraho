@@ -14,6 +14,7 @@ onready var dash_ready = $Status/Offset/Mana/DashReady
 onready var recharging = $Status/Offset/Mana/Recharging
 
 # Face nodes.
+onready var head = $Status/Offset/Head
 onready var face = $Status/Offset/Head/Face
 onready var hat = $Status/Offset/Head/Hat
 onready var crown = $Status/Offset/Head/Crown
@@ -22,10 +23,25 @@ onready var crown = $Status/Offset/Head/Crown
 onready var hold = $Status/Offset/Hold
 onready var next = $Status/Offset/Next
 
+# Speech resource.
+onready var talk = preload("res://assets/objects/ui/speech_bubble.tscn")
+# Speech bubble instance.
+var bubble : SpeechBubble
 
 # Helper function to center the tetromino's position in the HUD.
 func center_tetromino(tetromino : Tetromino):
 	tetromino.set_position(Vector2.ZERO - tetromino.origin.get_position())
+
+
+# Make the HUD say something.
+func say(speech : PoolStringArray):
+	if not bubble:
+		bubble = talk.instance()
+		bubble.speech += speech
+		head.add_child(bubble)
+		bubble.position.y = -120
+	else:
+		bubble.speech += speech
 
 
 # Updates the HUD based on the given player's HP.
