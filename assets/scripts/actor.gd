@@ -37,6 +37,11 @@ func get_maximum_hp():
 	return max_hp
 
 
+# Heals the actor by the given amount.
+func heal(amount):
+	hp = clamp(get_hp() + amount, 0, get_maximum_hp())
+
+
 # Checks if actor is being locked.
 func is_locked():
 	return locked_by.size() > 0

@@ -70,6 +70,11 @@ func _physics_process(_delta):
 					body.check_collision(push)
 
 
+func heal(amount):
+	.heal(amount)
+	hud.update_hp(self)
+
+
 # Checks if the player is currently controlling the given tetromino.
 func is_current(tetromino : Tetromino):
 	return current == tetromino

@@ -34,6 +34,9 @@ enum Layer {
 const PLAYER_HP = 100
 const PLAYER_MOVE_SPEED = 1
 
+# Loot settings.
+const HEART_HEAL = 20
+
 # AI settings.
 const AI_PATHING_COOLDOWN = 0.25
 const BLOCKMANCER_HP = 10
