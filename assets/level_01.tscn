@@ -156,7 +156,7 @@ linked = [ NodePath("../Gate"), NodePath("../Gate2") ]
 position = Vector2( 56, 112 )
 
 [node name="Flamethrower" parent="." instance=ExtResource( 16 )]
-position = Vector2( 308, 126 )
+position = Vector2( 70, 126 )
 
 [node name="Hat" parent="." instance=ExtResource( 17 )]
 position = Vector2( 70, 42 )

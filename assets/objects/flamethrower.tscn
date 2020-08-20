@@ -21,7 +21,6 @@ script = ExtResource( 2 )
 [node name="Particles2D" type="Particles2D" parent="."]
 position = Vector2( 7, -7 )
 amount = 12
-visibility_rect = Rect2( -100, -100, 200, 200 )
 process_material = SubResource( 1 )
 texture = ExtResource( 1 )
 

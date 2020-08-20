@@ -19,7 +19,9 @@ var length = full_length
 func _physics_process(_delta):
 	var space_state = get_world_2d().direct_space_state
 	var point = origin.get_global_position()
-	var result = space_state.intersect_ray(point, point - Vector2(0, length))
+	var towards = (particles.get_global_position() - point).normalized()
+	
+	var result = space_state.intersect_ray(point, point + towards * length)
 	
 	if result:
 		var body = result.collider
