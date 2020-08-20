@@ -25,7 +25,7 @@ func _on_DialogLock_body_entered(body):
 			"Mouse to aim, right-click to rotate, left-click to summon.",
 			"I can hold pieces using the Shift key. Might come in handy."
 		])
-	$DialogLock.queue_free()
+		$DialogLock.queue_free()
 
 
 func _on_DialogDuck_body_entered(body):
@@ -34,4 +34,4 @@ func _on_DialogDuck_body_entered(body):
 			"These ducks will peck me if they get close enough.",
 			"I can kill them by trapping and solving them with my blocks."
 		])
-	$DialogDuck.queue_free()
+		$DialogDuck.queue_free()
