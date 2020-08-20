@@ -23,6 +23,8 @@ const PLAYER_MOVE_SPEED = 1
 
 # AI settings.
 const AI_PATHING_COOLDOWN = 0.25
+const BLOCKMANCER_HP = 10
+const BLOCKMANCER_MOVE_SPEED = 2
 const DUCK_HP = 20
 const DUCK_MOVE_SPEED = 0.5
 const GUNNER_HP = 20

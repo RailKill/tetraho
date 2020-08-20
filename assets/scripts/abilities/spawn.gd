@@ -12,19 +12,39 @@ export var angle = 0
 export var maximum_spawnable = 3
 # List of objects spawned by this ability.
 var spawned = []
+var checker = preload("res://assets/objects/area_checker.tscn")
 
 
 func cast():
 	update()
-	if not is_on_cooldown and spawned.size() < maximum_spawnable:
+	if spawned.size() < maximum_spawnable:
+		.cast()
+
+
+func complete():
+	.complete()
+	var world = get_tree().get_root().get_child(0)
+	
+	var target = checker.instance()
+	world.add_child(target)
+	
+	target.set_global_position(Vector2(
+		stepify(point.x, Constants.GRID_SIZE), 
+		stepify(point.y, Constants.GRID_SIZE)))
+
+	yield(get_tree().create_timer(0.1), "timeout")
+	if not target.collided:
 		var spawn = resource.instance()
-		var world = get_tree().get_root().get_child(0)
 		world.add_child(spawn)
 		world.move_child(spawn, 0)
 		spawn.set_global_position(point)
 		spawn.set_rotation_degrees(angle)
 		spawned.append(spawn)
-		complete()
+	else:
+		caster.play_fail_animation(self)
+		reset()
+	
+	target.queue_free()
 
 
 # Clear null spawned objects that no longer exist.

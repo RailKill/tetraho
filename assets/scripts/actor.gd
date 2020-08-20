@@ -49,4 +49,24 @@ func oof(damage, bypass_lock=false):
 		print("%s took %d damage." % [name, damage])
 		
 		if is_dead():
-			queue_free()
+			play_death_animation()
+
+
+# Animate the actor channeling the given ability.
+func play_casting_animation(_ability):
+	pass
+
+
+# Animate the actor to finish casting based on the given ability.
+func play_casted_animation(_ability):
+	pass
+
+
+# Animate the actor dying.
+func play_death_animation():
+	queue_free()
+
+
+# Animate the actor failing to cast the given ability.
+func play_fail_animation(_ability):
+	pass

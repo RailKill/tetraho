@@ -31,6 +31,8 @@ var is_summoning = false
 var is_summoned = false
 # If the tetromino already passed decay_time and is dying, this will be true.
 var is_decaying = false
+# If this is false, the block will stay in the world forever until solved.
+export var can_decay = true
 
 
 
@@ -78,7 +80,7 @@ func _physics_process(delta):
 	
 	# If the solid blocks are visible, that means they are active.
 	# Start decaying to be removed from the game.
-	if is_summoned:
+	if can_decay and is_summoned:
 		decay_time -= delta
 		if decay_time <= 0:
 			if not is_decaying:
@@ -146,7 +148,8 @@ func summon_piece():
 		# Play summoning animation on all target reticles.
 		for target in targets:
 			target.animate()
-		summoner.next_tetromino()
+		if summoner:
+			summoner.next_tetromino()
 	else:
 		# Show an error feedback to the player. Invalid placement.
 		pass
