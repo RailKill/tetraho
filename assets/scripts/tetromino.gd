@@ -33,6 +33,8 @@ var is_summoned = false
 var is_decaying = false
 # If this is false, the block will stay in the world forever until solved.
 export var can_decay = true
+# If this is true, automatically summon it when ready.
+export var is_auto = false
 
 
 
@@ -45,6 +47,9 @@ func _ready():
 	toggle_blocks(false)
 	targets = reticle.get_children()
 	snap_to_mouse()
+	
+	if is_auto:
+		summon_piece()
 
 
 func _process(_delta):

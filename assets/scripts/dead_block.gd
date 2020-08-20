@@ -1,9 +1,8 @@
 class_name DeadBlock
-extends Tetromino
-# Dead blocks are a kind of tetromino that once summoned, will stay in the game
-# forever unless solved.
+extends TetrominoBlock
+# Dead blocks do not trap actors, they push them away.
 
 
-func _ready():
-	can_decay = false
-	summon_piece()
+func trap(actor):
+	actor.unstuck()
+	actor.oof(Constants.DEAD_BLOCK_DAMAGE)

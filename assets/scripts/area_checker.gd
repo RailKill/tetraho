@@ -8,5 +8,19 @@ extends Area2D
 var collided
 
 
+func reposition(point : Vector2, snap):
+	if snap:
+		set_global_position(Vector2(
+			stepify(point.x, Constants.GRID_SIZE), 
+			stepify(point.y, Constants.GRID_SIZE)
+		))
+	else:
+		set_global_position(point)
+
+
+func _on_AreaChecker_area_entered(area):
+	collided = area
+
+
 func _on_AreaChecker_body_entered(body):
 	collided = body

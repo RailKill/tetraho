@@ -10,9 +10,13 @@ export var point : Vector2
 export var angle = 0
 # Maximum objects spawnable.
 export var maximum_spawnable = 3
+# Checker to use when determining whether the spawn point is clear or not.
+export var checker = preload("res://assets/objects/area_checker.tscn")
+# If true, spawn point checker will be snapped to the grid.
+export var is_snapped = true
+
 # List of objects spawned by this ability.
 var spawned = []
-var checker = preload("res://assets/objects/area_checker.tscn")
 
 
 func cast():
@@ -27,11 +31,8 @@ func complete():
 	
 	var target = checker.instance()
 	world.add_child(target)
+	target.reposition(point, is_snapped)
 	
-	target.set_global_position(Vector2(
-		stepify(point.x, Constants.GRID_SIZE), 
-		stepify(point.y, Constants.GRID_SIZE)))
-
 	yield(get_tree().create_timer(0.1), "timeout")
 	if not target.collided:
 		var spawn = resource.instance()

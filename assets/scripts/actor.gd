@@ -70,3 +70,26 @@ func play_death_animation():
 # Animate the actor failing to cast the given ability.
 func play_fail_animation(_ability):
 	pass
+
+
+# Unstuck this actor by checking for an empty space in adjacent grid cells.
+func unstuck():
+	var checker = preload("res://assets/objects/area_checker.tscn").instance()
+	get_parent().add_child(checker)
+	
+	var still_stuck = true
+	var directions = Constants.DIRECTIONALS.duplicate()
+	
+	while still_stuck:
+		for i in range(0, directions.size()):
+			var point = get_global_position() + directions[i]
+			checker.snap_to_grid(point)
+			yield(get_tree().create_timer(0.01), "timeout")
+			if not checker.collided:
+				still_stuck = false
+				set_global_position(point)
+				break
+			directions[i] *= 2
+	
+	checker.queue_free()
+

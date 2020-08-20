@@ -22,3 +22,4 @@ shape = SubResource( 1 )
 script = ExtResource( 3 )
 cooldown = 5.0
 resource = ExtResource( 4 )
+is_snapped = false

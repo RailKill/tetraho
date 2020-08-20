@@ -102,7 +102,7 @@ position = Vector2( 203.315, 259.039 )
 position = Vector2( 385.065, 385.289 )
 
 [node name="Blockmancer" parent="." instance=ExtResource( 12 )]
-position = Vector2( 112, 126 )
+position = Vector2( 350, 140 )
 
 [node name="Gate" parent="." instance=ExtResource( 10 )]
 position = Vector2( 280, 154 )

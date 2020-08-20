@@ -68,4 +68,4 @@ func untrap():
 func _on_Unsummon_animation_finished():
 	game_world.remove_block(self)
 	untrap()
-	queue_free()
+	call_deferred("free")

@@ -51,14 +51,16 @@ func solve():
 # Search for block combinations in a given solver (area to search) and mark
 # all satisfied blocks for destruction.
 func search(anchor, solver):
-	var satisfied = [anchor]
-	for vector in solver:
-		for search in blocks:
-			if search.get_global_vector() == anchor.get_global_vector() + vector:
-				satisfied.append(search)
-	
-	if satisfied.size() == solver.size() + 1:
-		for solved in satisfied:
-			solved.marked = true
-		return true
-	return false
+	if anchor:
+		var satisfied = [anchor]
+		for vector in solver:
+			for search in blocks:
+				if search and search.get_global_vector() == \
+					anchor.get_global_vector() + vector:
+						satisfied.append(search)
+		
+		if satisfied.size() == solver.size() + 1:
+			for solved in satisfied:
+				solved.marked = true
+			return true
+		return false
