@@ -33,13 +33,13 @@ func center_tetromino(tetromino : Tetromino):
 	tetromino.set_position(Vector2.ZERO - tetromino.origin.get_position())
 
 
-# Make the HUD say something.
-func say(speech : PoolStringArray):
+# Make the HUD say something with the speech bubble at a given canvas position.
+func say(speech : PoolStringArray, position=Vector2(0, -120)):
 	if not bubble:
 		bubble = talk.instance()
 		bubble.speech += speech
 		head.add_child(bubble)
-		bubble.position.y = -120
+		bubble.set_position(position)
 	else:
 		bubble.speech += speech
 
