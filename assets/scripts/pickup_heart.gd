@@ -4,6 +4,6 @@ extends Area2D
 
 
 func _on_Heart_body_entered(body):
-	if body is Actor:
+	if body is Actor and not body is Enemy:
 		body.heal(Constants.HEART_HEAL)
 		queue_free()

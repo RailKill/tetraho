@@ -4,8 +4,11 @@ extends Enemy
 # TODO: Running out of time for #mizjam1, refactor next time.
 
 
+onready var crown = preload("res://assets/objects/loot/crown.tscn")
 onready var teleport_animation = $AnimatedSprite
+var teleport_points : Array
 var is_gunner_time = false
+var is_casting = false
 
 # ===============
 # DUCK VARIABLES
@@ -43,6 +46,10 @@ func _ready():
 func _physics_process(delta):
 	if is_locked():
 		gun.set_visible(false)
+	
+	if is_casting:
+		gun.set_visible(false)
+		return
 	
 	if player and is_aggro and not is_locked():
 		if to_player_vector().length() < 96:
@@ -132,6 +139,19 @@ func is_half_hp():
 	return hp <= max_hp / 2
 
 
+func oof(damage, bypass_lock=false):
+	.oof(damage, bypass_lock)	
+	
+	if is_dead():
+		var loot = crown.instance()
+		get_parent().add_child(loot)
+		loot.set_global_position(get_global_position())
+	else:
+		teleport()
+	
+	print(hp)
+
+
 # Resets the attack.
 func reset_attack():
 	attack_delay_cooldown = 0.5
@@ -147,3 +167,17 @@ func reset_pathing():
 	paths = navigation.get_simple_path(get_position(), to_player)
 	path_index = 0
 	pathing_cooldown = Constants.AI_PATHING_COOLDOWN
+
+
+func teleport(index=-1):
+	if teleport_points:
+		var selected
+		if index != -1:
+			selected = index
+		else:
+			randomize()
+			selected = randi() % teleport_points.size()
+			
+		set_global_position(teleport_points[selected])
+		teleport_animation.play()
+		
