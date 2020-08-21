@@ -34,7 +34,6 @@ func _ready():
 
 func _process(_delta):
 	if Input.is_action_just_pressed("action_special"):
-		print("Hold kjeft!")
 		if not hold:
 			hold = current
 			next_tetromino()

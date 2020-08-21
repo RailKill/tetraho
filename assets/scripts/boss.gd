@@ -140,7 +140,7 @@ func is_half_hp():
 
 
 func oof(damage, bypass_lock=false):
-	.oof(damage, bypass_lock)	
+	.oof(damage, bypass_lock)
 	
 	if is_dead():
 		var loot = crown.instance()
@@ -148,8 +148,6 @@ func oof(damage, bypass_lock=false):
 		loot.set_global_position(get_global_position())
 	else:
 		teleport()
-	
-	print(hp)
 
 
 # Resets the attack.

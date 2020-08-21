@@ -7,7 +7,7 @@
 [ext_resource path="res://assets/scripts/abilities/shoot.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 6, 7 )
+extents = Vector2( 5, 6 )
 
 [node name="Gunner" type="KinematicBody2D" groups=[
 "enemy",

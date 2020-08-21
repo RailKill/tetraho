@@ -106,4 +106,3 @@ func reset_pathing():
 	paths = navigation.get_simple_path(get_global_position(), to_player)
 	path_index = 0
 	pathing_cooldown = Constants.AI_PATHING_COOLDOWN
-	print(paths)

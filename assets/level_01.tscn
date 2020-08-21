@@ -24,19 +24,19 @@ extents = Vector2( 28, 42 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 14, 14 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 15.7333, 22.2265 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 43.1707, 26.9288 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 41.6925, 37.0605 )
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 40.6792, 36.2867 )
 
-[sub_resource type="NavigationPolygon" id=3]
+[sub_resource type="NavigationPolygon" id=7]
 vertices = PoolVector2Array( 20, 148, 20, 20, 148, 20, 148, 77, 230, 77, 230, 20, 358, 20, 358, 148, 230, 148, 230, 92, 148, 92, 148, 148 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 5, 6, 7 ), PoolIntArray( 7, 8, 9 ), PoolIntArray( 4, 7, 9 ), PoolIntArray( 3, 4, 9, 10 ), PoolIntArray( 0, 3, 10 ), PoolIntArray( 0, 10, 11 ) ]
 outlines = [ PoolVector2Array( 20, 20, 148, 20, 148, 77, 230, 77, 230, 20, 358, 20, 358, 148, 230, 148, 230, 92, 148, 92, 148, 148, 20, 148 ) ]
@@ -89,7 +89,7 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Events/DialogGunner"]
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="DialogFlamethrower" type="Area2D" parent="Events"]
 position = Vector2( 294.406, 492.901 )
@@ -97,7 +97,7 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Events/DialogFlamethrower"]
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 
 [node name="DialogBlockmancer" type="Area2D" parent="Events"]
 position = Vector2( 377.544, 594.793 )
@@ -105,7 +105,7 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Events/DialogBlockmancer"]
-shape = SubResource( 6 )
+shape = SubResource( 5 )
 
 [node name="DialogHouse" type="Area2D" parent="Events"]
 position = Vector2( 576.821, 594.787 )
@@ -113,7 +113,7 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Events/DialogHouse"]
-shape = SubResource( 7 )
+shape = SubResource( 6 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 2
@@ -127,7 +127,7 @@ visible = false
 [node name="Navigation2D" type="Navigation2D" parent="."]
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Navigation2D"]
-navpoly = SubResource( 3 )
+navpoly = SubResource( 7 )
 
 [node name="NavigationPolygonInstance2" type="NavigationPolygonInstance" parent="Navigation2D"]
 navpoly = SubResource( 8 )
