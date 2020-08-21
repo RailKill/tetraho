@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://assets/tilesets/walls.tres" type="TileSet" id=1]
 [ext_resource path="res://assets/objects/player.tscn" type="PackedScene" id=2]
@@ -16,8 +16,7 @@
 [ext_resource path="res://assets/objects/tetris/single_block.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/objects/loot/heart.tscn" type="PackedScene" id=15]
 [ext_resource path="res://assets/objects/flamethrower.tscn" type="PackedScene" id=16]
-[ext_resource path="res://assets/objects/loot/hat.tscn" type="PackedScene" id=17]
-[ext_resource path="res://assets/objects/loot/crown.tscn" type="PackedScene" id=18]
+[ext_resource path="res://assets/objects/exit.tscn" type="PackedScene" id=17]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 28, 42 )
@@ -25,10 +24,37 @@ extents = Vector2( 28, 42 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 14, 14 )
 
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 15.7333, 22.2265 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 43.1707, 26.9288 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 41.6925, 37.0605 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 40.6792, 36.2867 )
+
 [sub_resource type="NavigationPolygon" id=3]
 vertices = PoolVector2Array( 20, 148, 20, 20, 148, 20, 148, 77, 230, 77, 230, 20, 358, 20, 358, 148, 230, 148, 230, 92, 148, 92, 148, 148 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 5, 6, 7 ), PoolIntArray( 7, 8, 9 ), PoolIntArray( 4, 7, 9 ), PoolIntArray( 3, 4, 9, 10 ), PoolIntArray( 0, 3, 10 ), PoolIntArray( 0, 10, 11 ) ]
 outlines = [ PoolVector2Array( 20, 20, 148, 20, 148, 77, 230, 77, 230, 20, 358, 20, 358, 148, 230, 148, 230, 92, 148, 92, 148, 148, 20, 148 ) ]
+
+[sub_resource type="NavigationPolygon" id=8]
+vertices = PoolVector2Array( 286, 148, 302, 148, 302, 230, 286, 230, 414, 230, 414, 414, 174, 414, 174, 230 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 2, 4, 5, 6 ), PoolIntArray( 3, 2, 6 ), PoolIntArray( 3, 6, 7 ) ]
+outlines = [ PoolVector2Array( 286, 148, 286, 230, 174, 230, 174, 414, 414, 414, 414, 230, 302, 230, 302, 148 ) ]
+
+[sub_resource type="NavigationPolygon" id=9]
+vertices = PoolVector2Array( 258, 414, 330, 414, 330, 566, 258, 624, 610, 624, 552, 566, 610, 526, 552, 526, 510, 526, 510, 426, 652, 426, 652, 526 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 3, 2, 5 ), PoolIntArray( 6, 4, 5, 7 ), PoolIntArray( 7, 8, 9, 10 ), PoolIntArray( 6, 7, 10 ), PoolIntArray( 6, 10, 11 ) ]
+outlines = [ PoolVector2Array( 258, 414, 258, 624, 610, 624, 610, 526, 652, 526, 652, 426, 510, 426, 510, 526, 552, 526, 552, 566, 330, 566, 330, 414 ) ]
+
+[sub_resource type="NavigationPolygon" id=10]
+vertices = PoolVector2Array( 596, 426, 566, 426, 566, 328, 596, 358, 638, 328, 638, 358 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 3, 2, 4, 5 ) ]
+outlines = [ PoolVector2Array( 566, 426, 566, 328, 638, 328, 638, 358, 596, 358, 596, 426 ) ]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 3 )
@@ -47,12 +73,47 @@ collision_mask = 4
 shape = SubResource( 1 )
 
 [node name="DialogDuck" type="Area2D" parent="Events"]
-position = Vector2( 196, 84 )
+position = Vector2( 168, 84 )
 collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Events/DialogDuck"]
 shape = SubResource( 2 )
+
+[node name="Exit" parent="Events" instance=ExtResource( 17 )]
+position = Vector2( 624.278, 341.753 )
+
+[node name="DialogGunner" type="Area2D" parent="Events"]
+position = Vector2( 293.893, 189.648 )
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Events/DialogGunner"]
+shape = SubResource( 4 )
+
+[node name="DialogFlamethrower" type="Area2D" parent="Events"]
+position = Vector2( 294.406, 492.901 )
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Events/DialogFlamethrower"]
+shape = SubResource( 5 )
+
+[node name="DialogBlockmancer" type="Area2D" parent="Events"]
+position = Vector2( 377.544, 594.793 )
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Events/DialogBlockmancer"]
+shape = SubResource( 6 )
+
+[node name="DialogHouse" type="Area2D" parent="Events"]
+position = Vector2( 576.821, 594.787 )
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Events/DialogHouse"]
+shape = SubResource( 7 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 2
@@ -67,6 +128,15 @@ visible = false
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Navigation2D"]
 navpoly = SubResource( 3 )
+
+[node name="NavigationPolygonInstance2" type="NavigationPolygonInstance" parent="Navigation2D"]
+navpoly = SubResource( 8 )
+
+[node name="NavigationPolygonInstance3" type="NavigationPolygonInstance" parent="Navigation2D"]
+navpoly = SubResource( 9 )
+
+[node name="NavigationPolygonInstance4" type="NavigationPolygonInstance" parent="Navigation2D"]
+navpoly = SubResource( 10 )
 
 [node name="LockBlock" parent="." instance=ExtResource( 5 )]
 position = Vector2( 154, 70 )
@@ -86,12 +156,6 @@ position = Vector2( 210, 70 )
 [node name="LockBlock4" parent="." instance=ExtResource( 5 )]
 position = Vector2( 210, 84 )
 
-[node name="LockBlock5" parent="." instance=ExtResource( 5 )]
-position = Vector2( 280, 182 )
-
-[node name="LockBlock6" parent="." instance=ExtResource( 5 )]
-position = Vector2( 294, 182 )
-
 [node name="LockBlock7" parent="." instance=ExtResource( 5 )]
 position = Vector2( 280, 210 )
 
@@ -107,7 +171,7 @@ compatibility_mode = true
 collision_layer = 2
 collision_mask = 6
 format = 1
-tile_data = PoolIntArray( 1048593, 6, 0, 1048600, 6, 0, 1114129, 3, 0, 1114136, 3, 0, 1179665, 3, 0, 1179672, 3, 0, 1245201, 3, 0, 1245208, 3, 0, 1310737, 3, 0, 1310744, 3, 0, 1376273, 3, 0, 1376280, 3, 0, 1441809, 3, 0, 1441816, 3, 0, 1507345, 3, 0, 1507352, 3, 0, 1572881, 3, 0, 1572888, 3, 0, 1638417, 3, 0, 1638424, 3, 0, 1703953, 3, 0, 1703960, 3, 0, 1769489, 3, 0, 1769496, 3, 0, 1835025, 3, 0, 1835032, 3, 0, 1900561, 1610612742, 0, 1900568, 1610612742, 0 )
+tile_data = PoolIntArray( 1048593, 6, 0, 1048600, 6, 0, 1114129, 3, 0, 1114136, 3, 0, 1179665, 3, 0, 1179672, 3, 0, 1245201, 3, 0, 1245208, 3, 0, 1310737, 3, 0, 1310744, 3, 0, 1376273, 3, 0, 1376280, 3, 0, 1441809, 3, 0, 1441816, 3, 0, 1507345, 3, 0, 1507352, 3, 0, 1572881, 3, 0, 1572888, 3, 0, 1638417, 3, 0, 1638424, 3, 0, 1703953, 3, 0, 1703960, 3, 0, 1769489, 3, 0, 1769496, 3, 0, 1835025, 3, 0, 1835032, 3, 0, 1900561, 1610612742, 0, 1900568, 1610612742, 0, 2490385, 3, 0 )
 
 [node name="WallMap" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
@@ -116,17 +180,53 @@ cell_quadrant_size = 4
 cell_custom_transform = Transform2D( 14, 0, 0, 14, 0, 0 )
 collision_mask = 5
 format = 1
-tile_data = PoolIntArray( 0, 0, 0, 1, 1, 0, 2, 1, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 6, 1, 0, 7, 1, 0, 8, 1, 0, 9, 1, 0, 10, 1, 0, 11, 2, 0, 15, 0, 0, 16, 1, 0, 17, 1, 0, 18, 1, 0, 19, 1, 0, 20, 1, 0, 21, 1, 0, 22, 1, 0, 23, 1, 0, 24, 1, 0, 25, 1, 0, 26, 2, 0, 65536, 3, 0, 65547, 4, 0, 65551, 3, 0, 65562, 4, 0, 131072, 3, 0, 131083, 4, 0, 131087, 3, 0, 131098, 4, 0, 196608, 3, 0, 196619, 4, 0, 196623, 3, 0, 196634, 4, 0, 262144, 3, 0, 262155, 10, 0, 262156, 1, 0, 262157, 1, 0, 262158, 1, 0, 262159, 11, 0, 262170, 4, 0, 327680, 3, 0, 327706, 4, 0, 393216, 3, 0, 393242, 4, 0, 458752, 3, 0, 458763, 12, 0, 458764, 6, 0, 458765, 6, 0, 458766, 6, 0, 458767, 13, 0, 458778, 4, 0, 524288, 3, 0, 524299, 4, 0, 524303, 3, 0, 524314, 4, 0, 589824, 3, 0, 589835, 4, 0, 589839, 3, 0, 589850, 4, 0, 655360, 3, 0, 655371, 4, 0, 655375, 3, 0, 655386, 4, 0, 720896, 5, 0, 720897, 6, 0, 720898, 6, 0, 720899, 6, 0, 720900, 6, 0, 720901, 6, 0, 720902, 6, 0, 720903, 6, 0, 720904, 6, 0, 720905, 6, 0, 720906, 6, 0, 720907, 7, 0, 720911, 5, 0, 720912, 6, 0, 720913, 6, 0, 720914, 6, 0, 720915, 13, 0, 720918, 12, 0, 720919, 6, 0, 720920, 6, 0, 720921, 6, 0, 720922, 7, 0, 786451, 3, 0, 786454, 4, 0, 851987, 3, 0, 851990, 4, 0, 917523, 3, 0, 917526, 4, 0, 983051, 0, 0, 983052, 1, 0, 983053, 1, 0, 983054, 1, 0, 983055, 1, 0, 983056, 1, 0, 983057, 8, 0, 983058, 1, 0, 983059, 11, 0, 983062, 10, 0, 983063, 1, 0, 983064, 8, 0, 983065, 1, 0, 983066, 1, 0, 983067, 1, 0, 983068, 1, 0, 983069, 1, 0, 983070, 2, 0, 1048587, 3, 0, 1048606, 4, 0, 1114123, 3, 0, 1114126, 9, 0, 1114142, 4, 0, 1179659, 3, 0, 1179678, 4, 0, 1245195, 3, 0, 1245198, 9, 0, 1245214, 4, 0, 1310731, 3, 0, 1310750, 4, 0, 1376267, 3, 0, 1376286, 4, 0, 1441803, 3, 0, 1441822, 4, 0, 1507339, 3, 0, 1507358, 4, 0, 1572875, 3, 0, 1572894, 4, 0, 1638411, 3, 0, 1638430, 4, 0, 1703947, 3, 0, 1703963, 9, 0, 1703966, 4, 0, 1769483, 3, 0, 1769502, 4, 0, 1835019, 3, 0, 1835035, 9, 0, 1835038, 4, 0, 1900555, 3, 0, 1900574, 4, 0, 1966091, 5, 0, 1966092, 6, 0, 1966093, 6, 0, 1966094, 6, 0, 1966095, 6, 0, 1966096, 6, 0, 1966097, 8, 0, 1966098, 6, 0, 1966099, 13, 0, 1966102, 12, 0, 1966103, 6, 0, 1966104, 8, 0, 1966105, 6, 0, 1966106, 6, 0, 1966107, 6, 0, 1966108, 6, 0, 1966109, 6, 0, 1966110, 7, 0, 2031635, 3, 0, 2031638, 4, 0 )
+tile_data = PoolIntArray( 0, 0, 0, 1, 1, 0, 2, 1, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 6, 1, 0, 7, 1, 0, 8, 1, 0, 9, 1, 0, 10, 1, 0, 11, 2, 0, 15, 0, 0, 16, 1, 0, 17, 1, 0, 18, 1, 0, 19, 1, 0, 20, 1, 0, 21, 1, 0, 22, 1, 0, 23, 1, 0, 24, 1, 0, 25, 1, 0, 26, 2, 0, 65536, 3, 0, 65547, 4, 0, 65551, 3, 0, 65562, 4, 0, 131072, 3, 0, 131083, 4, 0, 131087, 3, 0, 131098, 4, 0, 196608, 3, 0, 196619, 4, 0, 196623, 3, 0, 196634, 4, 0, 262144, 3, 0, 262155, 10, 0, 262156, 1, 0, 262157, 1, 0, 262158, 1, 0, 262159, 11, 0, 262170, 4, 0, 327680, 3, 0, 327706, 4, 0, 393216, 3, 0, 393242, 4, 0, 458752, 3, 0, 458763, 12, 0, 458764, 6, 0, 458765, 6, 0, 458766, 6, 0, 458767, 13, 0, 458778, 4, 0, 524288, 3, 0, 524299, 4, 0, 524303, 3, 0, 524314, 4, 0, 589824, 3, 0, 589835, 4, 0, 589839, 3, 0, 589850, 4, 0, 655360, 3, 0, 655371, 4, 0, 655375, 3, 0, 655386, 4, 0, 720896, 5, 0, 720897, 6, 0, 720898, 6, 0, 720899, 6, 0, 720900, 6, 0, 720901, 6, 0, 720902, 6, 0, 720903, 6, 0, 720904, 6, 0, 720905, 6, 0, 720906, 6, 0, 720907, 7, 0, 720911, 5, 0, 720912, 6, 0, 720913, 6, 0, 720914, 6, 0, 720915, 13, 0, 720918, 12, 0, 720919, 6, 0, 720920, 6, 0, 720921, 6, 0, 720922, 7, 0, 786451, 3, 0, 786454, 4, 0, 851987, 3, 0, 851990, 4, 0, 917523, 3, 0, 917526, 4, 0, 983051, 0, 0, 983052, 1, 0, 983053, 1, 0, 983054, 1, 0, 983055, 1, 0, 983056, 1, 0, 983057, 8, 0, 983058, 1, 0, 983059, 11, 0, 983062, 10, 0, 983063, 1, 0, 983064, 8, 0, 983065, 1, 0, 983066, 1, 0, 983067, 1, 0, 983068, 1, 0, 983069, 1, 0, 983070, 2, 0, 1048587, 3, 0, 1048606, 4, 0, 1114123, 3, 0, 1114126, 9, 0, 1114142, 4, 0, 1179659, 3, 0, 1179678, 4, 0, 1245195, 3, 0, 1245198, 9, 0, 1245214, 4, 0, 1310731, 3, 0, 1310750, 4, 0, 1376267, 3, 0, 1376286, 4, 0, 1441803, 3, 0, 1441822, 4, 0, 1441831, 0, 0, 1441832, 1, 0, 1441833, 1, 0, 1441834, 1, 0, 1441835, 1, 0, 1441836, 1, 0, 1441837, 1, 0, 1441838, 2, 0, 1507339, 3, 0, 1507358, 4, 0, 1507367, 3, 0, 1507374, 4, 0, 1572875, 3, 0, 1572894, 4, 0, 1572903, 3, 0, 1572910, 4, 0, 1638411, 3, 0, 1638430, 4, 0, 1638439, 3, 0, 1638446, 4, 0, 1703947, 3, 0, 1703963, 9, 0, 1703966, 4, 0, 1703975, 3, 0, 1703979, 12, 0, 1703980, 6, 0, 1703981, 6, 0, 1703982, 7, 0, 1769483, 3, 0, 1769502, 4, 0, 1769511, 3, 0, 1769515, 4, 0, 1835019, 3, 0, 1835035, 9, 0, 1835038, 4, 0, 1835047, 3, 0, 1835051, 4, 0, 1900555, 3, 0, 1900574, 4, 0, 1900579, 0, 0, 1900580, 1, 0, 1900581, 1, 0, 1900582, 1, 0, 1900583, 11, 0, 1900587, 10, 0, 1900588, 1, 0, 1900589, 1, 0, 1900590, 1, 0, 1900591, 2, 0, 1966091, 5, 0, 1966092, 6, 0, 1966093, 6, 0, 1966094, 6, 0, 1966095, 6, 0, 1966096, 6, 0, 1966097, 13, 0, 1966104, 12, 0, 1966105, 6, 0, 1966106, 6, 0, 1966107, 6, 0, 1966108, 6, 0, 1966109, 6, 0, 1966110, 7, 0, 1966115, 3, 0, 1966127, 4, 0, 2031633, 3, 0, 2031640, 4, 0, 2031651, 3, 0, 2031663, 4, 0, 2097169, 3, 0, 2097176, 4, 0, 2097187, 3, 0, 2097199, 4, 0, 2162705, 3, 0, 2162712, 4, 0, 2162723, 3, 0, 2162735, 4, 0, 2228241, 3, 0, 2228248, 4, 0, 2228259, 3, 0, 2228271, 4, 0, 2293777, 3, 0, 2293784, 4, 0, 2293795, 3, 0, 2293807, 4, 0, 2359313, 3, 0, 2359320, 4, 0, 2359331, 3, 0, 2359343, 4, 0, 2424847, 0, 0, 2424848, 1, 0, 2424849, 11, 0, 2424856, 4, 0, 2424867, 3, 0, 2424879, 4, 0, 2490383, 3, 0, 2490392, 4, 0, 2490403, 5, 0, 2490404, 6, 0, 2490405, 6, 0, 2490406, 13, 0, 2490412, 12, 0, 2490413, 6, 0, 2490414, 6, 0, 2490415, 7, 0, 2555919, 5, 0, 2555920, 6, 0, 2555921, 13, 0, 2555928, 10, 0, 2555929, 1, 0, 2555930, 1, 0, 2555931, 1, 0, 2555932, 1, 0, 2555933, 1, 0, 2555934, 1, 0, 2555935, 1, 0, 2555936, 1, 0, 2555937, 1, 0, 2555938, 1, 0, 2555939, 1, 0, 2555940, 1, 0, 2555941, 1, 0, 2555942, 11, 0, 2555948, 4, 0, 2621457, 3, 0, 2621484, 4, 0, 2686993, 3, 0, 2687020, 4, 0, 2752529, 3, 0, 2752556, 4, 0, 2818065, 3, 0, 2818092, 4, 0, 2883601, 3, 0, 2883628, 4, 0, 2949137, 5, 0, 2949138, 6, 0, 2949139, 6, 0, 2949140, 6, 0, 2949141, 6, 0, 2949142, 6, 0, 2949143, 6, 0, 2949144, 6, 0, 2949145, 6, 0, 2949146, 6, 0, 2949147, 6, 0, 2949148, 6, 0, 2949149, 6, 0, 2949150, 6, 0, 2949151, 6, 0, 2949152, 6, 0, 2949153, 6, 0, 2949154, 6, 0, 2949155, 6, 0, 2949156, 6, 0, 2949157, 6, 0, 2949158, 6, 0, 2949159, 6, 0, 2949160, 6, 0, 2949161, 6, 0, 2949162, 6, 0, 2949163, 6, 0, 2949164, 7, 0 )
 
 [node name="SingleBlock" parent="." instance=ExtResource( 14 )]
 position = Vector2( 182, 70 )
 
+[node name="SingleBlock2" parent="." instance=ExtResource( 14 )]
+position = Vector2( 420, 560 )
+
+[node name="SingleBlock3" parent="." instance=ExtResource( 14 )]
+position = Vector2( 420, 574 )
+
+[node name="SingleBlock4" parent="." instance=ExtResource( 14 )]
+position = Vector2( 420, 588 )
+
+[node name="SingleBlock5" parent="." instance=ExtResource( 14 )]
+position = Vector2( 420, 602 )
+
+[node name="SingleBlock6" parent="." instance=ExtResource( 14 )]
+position = Vector2( 420, 616 )
+
+[node name="SingleBlock7" parent="." instance=ExtResource( 14 )]
+position = Vector2( 546, 546 )
+
+[node name="SingleBlock8" parent="." instance=ExtResource( 14 )]
+position = Vector2( 560, 546 )
+
+[node name="SingleBlock9" parent="." instance=ExtResource( 14 )]
+position = Vector2( 574, 546 )
+
+[node name="SingleBlock10" parent="." instance=ExtResource( 14 )]
+position = Vector2( 588, 546 )
+
+[node name="SingleBlock11" parent="." instance=ExtResource( 14 )]
+position = Vector2( 602, 546 )
+
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 42, 42 )
+position = Vector2( 32, 83 )
 hud_path = NodePath("../CanvasLayer/PlayerHUD")
 
 [node name="Duck" parent="." instance=ExtResource( 6 )]
-position = Vector2( 140, 140 )
+position = Vector2( 284.623, 52.4745 )
+
+[node name="Duck3" parent="." instance=ExtResource( 6 )]
+position = Vector2( 350.848, 67.3471 )
+
+[node name="Duck4" parent="." instance=ExtResource( 6 )]
+position = Vector2( 349.664, 141.19 )
 
 [node name="Duck2" parent="." instance=ExtResource( 6 )]
 position = Vector2( 252, 84 )
@@ -137,32 +237,42 @@ position = Vector2( 203.315, 259.039 )
 [node name="Gunner2" parent="." instance=ExtResource( 8 )]
 position = Vector2( 385.065, 385.289 )
 
+[node name="Gunner3" parent="." instance=ExtResource( 8 )]
+position = Vector2( 476.944, 594.449 )
+
 [node name="Blockmancer" parent="." instance=ExtResource( 12 )]
-position = Vector2( 350, 140 )
+position = Vector2( 576.908, 594.039 )
 
 [node name="Gate" parent="." instance=ExtResource( 10 )]
-position = Vector2( 280, 154 )
+position = Vector2( 560, 406 )
 
 [node name="Gate2" parent="." instance=ExtResource( 10 )]
-position = Vector2( 294, 154 )
+position = Vector2( 574, 406 )
+
+[node name="Gate3" parent="." instance=ExtResource( 10 )]
+position = Vector2( 588, 406 )
 
 [node name="DuckHouse" parent="." instance=ExtResource( 9 )]
-position = Vector2( 350, 28 )
+position = Vector2( 581.136, 476.764 )
 collision_layer = 5
 collision_mask = 5
-linked = [ NodePath("../Gate"), NodePath("../Gate2") ]
+linked = [ NodePath("../Gate"), NodePath("../Gate2"), NodePath("../Gate3") ]
 
 [node name="Heart" parent="." instance=ExtResource( 15 )]
-position = Vector2( 56, 112 )
+position = Vector2( 280, 476 )
+
+[node name="Heart2" parent="." instance=ExtResource( 15 )]
+position = Vector2( 308, 476 )
 
 [node name="Flamethrower" parent="." instance=ExtResource( 16 )]
-position = Vector2( 70, 126 )
-
-[node name="Hat" parent="." instance=ExtResource( 17 )]
-position = Vector2( 70, 42 )
-
-[node name="Crown" parent="." instance=ExtResource( 18 )]
-position = Vector2( 70, 70 )
+position = Vector2( 226.081, 532 )
+rotation = 1.5708
+full_length = 126
 [connection signal="body_entered" from="Events/DialogLock" to="Events" method="_on_DialogLock_body_entered"]
 [connection signal="body_entered" from="Events/DialogDuck" to="Events" method="_on_DialogDuck_body_entered"]
+[connection signal="body_entered" from="Events/Exit" to="Events" method="_on_Exit_body_entered"]
+[connection signal="body_entered" from="Events/DialogGunner" to="Events" method="_on_DialogGunner_body_entered"]
+[connection signal="body_entered" from="Events/DialogFlamethrower" to="Events" method="_on_DialogFlamethrower_body_entered"]
+[connection signal="body_entered" from="Events/DialogBlockmancer" to="Events" method="_on_DialogBlockmancer_body_entered"]
+[connection signal="body_entered" from="Events/DialogHouse" to="Events" method="_on_DialogHouse_body_entered"]
 [connection signal="tree_exiting" from="DuckHouse" to="DuckHouse" method="_on_DuckHouse_tree_exiting"]

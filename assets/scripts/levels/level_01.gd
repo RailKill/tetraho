@@ -1,6 +1,7 @@
 extends Node
 # This is where scripting events in Level 01 will happen.
-
+# TODO: I had to rush for #mizjam1. The dialog areas can be made into a scene.
+# This is full of copy-and-paste bullshit, but it will have to do for now.
 
 export (NodePath) var world_path
 export (NodePath) var player_path
@@ -35,3 +36,46 @@ func _on_DialogDuck_body_entered(body):
 			"I can kill them by trapping and solving them with my blocks."
 		])
 		$DialogDuck.queue_free()
+
+
+func _on_Exit_body_entered(body):
+	if body == player:
+		get_tree().change_scene("res://assets/level_03.tscn")
+
+
+func _on_DialogGunner_body_entered(body):
+	if body == player:
+		player.hud.say([
+			"Gunners. I can use my blocks for cover but it's ineffective.",
+			"When moving, I can dash with 'Space' to evade their bullets."
+		])
+		$DialogGunner.queue_free()
+
+
+func _on_DialogFlamethrower_body_entered(body):
+	if body == player:
+		player.hud.say([
+			"Flames will kill me almost immediately.",
+			"Luckily, my blocks are fire-resistant."
+		])
+		$DialogFlamethrower.queue_free()
+
+
+func _on_DialogBlockmancer_body_entered(body):
+	if body == player:
+		player.hud.say([
+			"These dead blocks are summoned by Blockmancers, my rivals.",
+			"Unlike mine, they don't trap but they deal heavy damage.",
+			"Also, they last forever until solved."
+		])
+		$DialogBlockmancer.queue_free()
+
+
+func _on_DialogHouse_body_entered(body):
+	if body == player:
+		player.hud.say([
+			"That coop keeps producing ducks! I can't destroy it normally.",
+			"If I return a duck to its coop, it will be destroyed.",
+			"I can push ducks by moving or dashing into them."
+		])
+		$DialogHouse.queue_free()

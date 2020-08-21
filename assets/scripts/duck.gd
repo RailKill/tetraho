@@ -36,7 +36,7 @@ func _ready():
 # Behavior of duck is to chase the player. Attacks when close.
 func _physics_process(delta):
 	if player and is_aggro and not is_locked():
-		var difference = player.get_position() - get_position()
+		var difference = to_player_vector()
 	
 		pathing_cooldown -= delta
 		if pathing_cooldown <= 0:
@@ -45,7 +45,7 @@ func _physics_process(delta):
 		if not is_attacking:
 			# If duck is not attacking, move towards player.	
 			if path_index < paths.size():
-				var to_path = (paths[path_index] - get_position())
+				var to_path = (paths[path_index] - get_global_position())
 				if to_path.length() < Constants.GRID_HALF:
 					path_index += 1
 	
@@ -101,8 +101,9 @@ func reset_attack():
 
 # Resets the pathing and issue a new move command towards the player.
 func reset_pathing():
-	var to_player = player.get_position() + (get_position() - \
-		player.get_position()).normalized() * Constants.GRID_SIZE
-	paths = navigation.get_simple_path(get_position(), to_player)
+	var to_player = player.get_global_position() + \
+		to_self_vector().normalized() * Constants.GRID_SIZE
+	paths = navigation.get_simple_path(get_global_position(), to_player)
 	path_index = 0
 	pathing_cooldown = Constants.AI_PATHING_COOLDOWN
+	print(paths)

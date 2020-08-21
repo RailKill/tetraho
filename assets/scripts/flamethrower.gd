@@ -31,21 +31,20 @@ func _physics_process(delta):
 	var point = origin.get_global_position()
 	var towards = (particles.get_global_position() - point).normalized()
 	
-	var result = space_state.intersect_ray(point, point + towards * length)
+	var result = space_state.intersect_ray(point, point + towards * length, [], 
+		Constants.Layer.ENVIRONMENT + Constants.Layer.ACTOR +
+		Constants.Layer.BLOCK)
 	
 	if result:
 		var body = result.collider
-		print(result.position)
-		if body is TetrominoBlock:
-			length = (body.get_global_position() - point).length() - \
-				Constants.GRID_SIZE
-			update_particles()
-			return
-		elif body is Actor and !(body is Boss):
+		if body is Actor and not body is TetrominoBlock and not body is Boss:
 			body.oof(Constants.FLAMETHROWER_DAMAGE)
 			return
-
-	length = full_length
+		
+		length = (result.position - point).length()
+	else:
+		length = full_length
+	
 	update_particles()
 
 

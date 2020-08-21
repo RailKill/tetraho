@@ -88,8 +88,8 @@ func unstuck():
 	while still_stuck:
 		for i in range(0, directions.size()):
 			var point = get_global_position() + directions[i]
-			checker.snap_to_grid(point)
-			yield(get_tree().create_timer(0.01), "timeout")
+			checker.reposition(point, true)
+			yield(get_tree().create_timer(0.05), "timeout")
 			if not checker.collided:
 				still_stuck = false
 				set_global_position(point)

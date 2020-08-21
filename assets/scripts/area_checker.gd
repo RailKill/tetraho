@@ -8,7 +8,7 @@ extends Area2D
 var collided
 
 
-func reposition(point : Vector2, snap):
+func reposition(point : Vector2, snap=false):
 	if snap:
 		set_global_position(Vector2(
 			stepify(point.x, Constants.GRID_SIZE), 
