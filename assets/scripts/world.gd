@@ -37,7 +37,7 @@ func solve():
 	var actors = []
 	for block in blocks:
 		# Solve all marked blocks.
-		if block.marked:
+		if block and block.marked:
 			for actor in block.trapped:
 				if not actors.has(actor):
 					actors.append(actor)

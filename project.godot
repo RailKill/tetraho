@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/scripts/blockmancer.gd"
 }, {
+"base": "Enemy",
+"class": "Boss",
+"language": "GDScript",
+"path": "res://assets/scripts/boss.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Bullet",
 "language": "GDScript",
@@ -181,6 +186,7 @@ _global_script_class_icons={
 "AreaChecker": "",
 "AreaDamage": "",
 "Blockmancer": "",
+"Boss": "",
 "Bullet": "",
 "Constants": "",
 "Dash": "",

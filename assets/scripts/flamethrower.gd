@@ -7,6 +7,10 @@ extends Node2D
 
 # Full length of this flamethrower.
 export var full_length = 70
+# If true, this flamethrower will destroy itself after a set duration.
+export var one_off = false
+# Duration in seconds this flames will last if one_off is true.
+export var duration = 3
 # Reference node to the origin of the flames.
 onready var origin = $Origin
 # Reference node to the particle emitter of the flames.
@@ -16,7 +20,13 @@ onready var particles = $Particles2D
 var length = full_length
 
 
-func _physics_process(_delta):
+func _physics_process(delta):
+	# Destroy if flamethrower is one_off and past its duration.
+	if one_off:
+		duration -= delta
+		if duration <= 0:
+			queue_free()
+	
 	var space_state = get_world_2d().direct_space_state
 	var point = origin.get_global_position()
 	var towards = (particles.get_global_position() - point).normalized()
@@ -31,7 +41,7 @@ func _physics_process(_delta):
 				Constants.GRID_SIZE
 			update_particles()
 			return
-		elif body is Actor:
+		elif body is Actor and !(body is Boss):
 			body.oof(Constants.FLAMETHROWER_DAMAGE)
 			return
 
