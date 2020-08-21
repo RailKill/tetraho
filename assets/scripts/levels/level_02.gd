@@ -39,3 +39,13 @@ func _on_Exit_body_entered(body):
 			player.hud.say(["I need to find my hat first."])
 		else:
 			var _win = get_tree().change_scene("res://assets/level_03.tscn")
+
+
+func _on_NarrowHelper_body_entered(body):
+	if body == player:
+		player.collision_shape.get_shape().set_extents(Vector2(2, 3))
+
+
+func _on_NarrowHelper_body_exited(body):
+	if body == player:
+		player.collision_shape.get_shape().set_extents(Vector2(4, 6))

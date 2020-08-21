@@ -20,6 +20,10 @@ onready var particles = $Particles2D
 var length = full_length
 
 
+func _ready():
+	particles.set_process_material(particles.get_process_material().duplicate())
+
+
 func _physics_process(delta):
 	# Destroy if flamethrower is one_off and past its duration.
 	if one_off:

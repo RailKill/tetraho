@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://assets/tilesets/walls.tres" type="TileSet" id=1]
 [ext_resource path="res://assets/objects/player.tscn" type="PackedScene" id=2]
@@ -37,24 +37,9 @@ extents = Vector2( 41.6925, 37.0605 )
 extents = Vector2( 40.6792, 36.2867 )
 
 [sub_resource type="NavigationPolygon" id=7]
-vertices = PoolVector2Array( 20, 148, 20, 20, 148, 20, 148, 77, 230, 77, 230, 20, 358, 20, 358, 148, 230, 148, 230, 92, 148, 92, 148, 148 )
-polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 5, 6, 7 ), PoolIntArray( 7, 8, 9 ), PoolIntArray( 4, 7, 9 ), PoolIntArray( 3, 4, 9, 10 ), PoolIntArray( 0, 3, 10 ), PoolIntArray( 0, 10, 11 ) ]
-outlines = [ PoolVector2Array( 20, 20, 148, 20, 148, 77, 230, 77, 230, 20, 358, 20, 358, 148, 230, 148, 230, 92, 148, 92, 148, 148, 20, 148 ) ]
-
-[sub_resource type="NavigationPolygon" id=8]
-vertices = PoolVector2Array( 286, 148, 302, 148, 302, 230, 286, 230, 414, 230, 414, 414, 174, 414, 174, 230 )
-polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 2, 4, 5, 6 ), PoolIntArray( 3, 2, 6 ), PoolIntArray( 3, 6, 7 ) ]
-outlines = [ PoolVector2Array( 286, 148, 286, 230, 174, 230, 174, 414, 414, 414, 414, 230, 302, 230, 302, 148 ) ]
-
-[sub_resource type="NavigationPolygon" id=9]
-vertices = PoolVector2Array( 258, 414, 330, 414, 330, 566, 258, 624, 610, 624, 552, 566, 610, 526, 552, 526, 510, 526, 510, 426, 652, 426, 652, 526 )
-polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 3, 2, 5 ), PoolIntArray( 6, 4, 5, 7 ), PoolIntArray( 7, 8, 9, 10 ), PoolIntArray( 6, 7, 10 ), PoolIntArray( 6, 10, 11 ) ]
-outlines = [ PoolVector2Array( 258, 414, 258, 624, 610, 624, 610, 526, 652, 526, 652, 426, 510, 426, 510, 526, 552, 526, 552, 566, 330, 566, 330, 414 ) ]
-
-[sub_resource type="NavigationPolygon" id=10]
-vertices = PoolVector2Array( 596, 426, 566, 426, 566, 328, 596, 358, 638, 328, 638, 358 )
-polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 3, 2, 4, 5 ) ]
-outlines = [ PoolVector2Array( 566, 426, 566, 328, 638, 328, 638, 358, 596, 358, 596, 426 ) ]
+vertices = PoolVector2Array( 414, 230, 414, 414, 330, 414, 302, 230, 510, 526, 510, 426, 566, 426, 552, 527, 566, 328, 638, 328, 638, 358, 596, 358, 596, 426, 652, 426, 652, 526, 610, 526, 258, 414, 174, 414, 174, 230, 286, 230, 286, 148, 230, 148, 230, 92, 148, 92, 148, 148, 20, 148, 20, 20, 148, 20, 148, 76, 230, 76, 230, 20, 358, 20, 358, 148, 302, 148, 610, 624, 552, 566, 258, 624, 330, 566 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 5, 6, 7 ), PoolIntArray( 8, 9, 10, 11 ), PoolIntArray( 6, 8, 11, 12 ), PoolIntArray( 12, 13, 14, 15 ), PoolIntArray( 16, 17, 18, 19 ), PoolIntArray( 20, 21, 22 ), PoolIntArray( 23, 24, 25, 26 ), PoolIntArray( 26, 27, 28 ), PoolIntArray( 23, 26, 28 ), PoolIntArray( 22, 23, 28, 29 ), PoolIntArray( 29, 30, 31, 32, 33 ), PoolIntArray( 22, 29, 33, 20 ), PoolIntArray( 19, 20, 33, 3 ), PoolIntArray( 7, 6, 12, 15, 34, 35 ), PoolIntArray( 35, 34, 36, 37 ), PoolIntArray( 3, 2, 37, 36, 16, 19 ) ]
+outlines = [ PoolVector2Array( 414, 414, 330, 414, 330, 566, 552, 566, 552, 527, 510, 526, 510, 426, 566, 426, 566, 328, 638, 328, 638, 358, 596, 358, 596, 426, 652, 426, 652, 526, 610, 526, 610, 624, 258, 624, 258, 414, 174, 414, 174, 230, 286, 230, 286, 148, 230, 148, 230, 92, 148, 92, 148, 148, 20, 148, 20, 20, 148, 20, 148, 76, 230, 76, 230, 20, 358, 20, 358, 148, 302, 148, 302, 230, 414, 230 ) ]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 3 )
@@ -128,15 +113,6 @@ visible = false
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Navigation2D"]
 navpoly = SubResource( 7 )
-
-[node name="NavigationPolygonInstance2" type="NavigationPolygonInstance" parent="Navigation2D"]
-navpoly = SubResource( 8 )
-
-[node name="NavigationPolygonInstance3" type="NavigationPolygonInstance" parent="Navigation2D"]
-navpoly = SubResource( 9 )
-
-[node name="NavigationPolygonInstance4" type="NavigationPolygonInstance" parent="Navigation2D"]
-navpoly = SubResource( 10 )
 
 [node name="LockBlock" parent="." instance=ExtResource( 5 )]
 position = Vector2( 154, 70 )
@@ -216,7 +192,7 @@ position = Vector2( 588, 546 )
 position = Vector2( 602, 546 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 32, 83 )
+position = Vector2( 30, 84 )
 hud_path = NodePath("../CanvasLayer/PlayerHUD")
 
 [node name="Duck" parent="." instance=ExtResource( 6 )]
@@ -254,8 +230,6 @@ position = Vector2( 588, 406 )
 
 [node name="DuckHouse" parent="." instance=ExtResource( 9 )]
 position = Vector2( 581.136, 476.764 )
-collision_layer = 5
-collision_mask = 5
 linked = [ NodePath("../Gate"), NodePath("../Gate2"), NodePath("../Gate3") ]
 
 [node name="Heart" parent="." instance=ExtResource( 15 )]

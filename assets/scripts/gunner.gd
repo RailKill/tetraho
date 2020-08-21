@@ -24,6 +24,10 @@ func _physics_process(_delta):
 	gun.set_visible(ready)
 	
 	if player and ready:
+		# Point gun at player.
+		gun_sprite.flip_v = int(to_player_vector().normalized().x <= 0)
+		gun.look_at(player.get_global_position())
+		
 		var space_state = get_world_2d().direct_space_state
 		var result = space_state.intersect_ray(
 			muzzle.get_global_position(), player.get_global_position(), 
@@ -35,6 +39,4 @@ func _physics_process(_delta):
 			shoot.point = muzzle.get_global_position()
 			shoot.cast()
 		
-		# Point gun at player.
-		gun_sprite.flip_v = int(to_player_vector().normalized().x <= 0)
-		gun.look_at(player.get_global_position())
+		

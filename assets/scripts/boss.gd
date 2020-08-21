@@ -118,6 +118,9 @@ func do_duck_logic(delta):
 
 func do_gunner_logic():
 	gun.set_visible(true)
+	# Point gun at player.
+	gun_sprite.flip_v = int(to_player_vector().normalized().x <= 0)
+	gun.look_at(player.get_global_position())
 	
 	var space_state = get_world_2d().direct_space_state
 	var result = space_state.intersect_ray(
@@ -129,10 +132,6 @@ func do_gunner_logic():
 		shoot.aim = to_player_vector().normalized()
 		shoot.point = muzzle.get_global_position()
 		shoot.cast()
-	
-	# Point gun at player.
-	gun_sprite.flip_v = int(to_player_vector().normalized().x <= 0)
-	gun.look_at(player.get_global_position())
 
 
 func is_half_hp():

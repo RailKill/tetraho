@@ -9,6 +9,8 @@
 extents = Vector2( 7, 7 )
 
 [node name="DuckHouse" type="KinematicBody2D"]
+collision_layer = 5
+collision_mask = 5
 script = ExtResource( 2 )
 is_invulnerable = true
 
