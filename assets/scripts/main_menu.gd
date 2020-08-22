@@ -21,3 +21,7 @@ func _on_ButtonThird_pressed():
 
 func _on_ButtonQuit_pressed():
 	get_tree().quit()
+
+
+func _on_ButtonFullscreen_pressed():
+	OS.window_fullscreen = !OS.window_fullscreen

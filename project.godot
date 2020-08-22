@@ -226,7 +226,7 @@ _global_script_class_icons={
 
 config/name="Tetraho"
 run/main_scene="res://assets/objects/ui/main_menu.tscn"
-config/icon="res://icon.png"
+config/icon="res://assets/sprites/blocks/tetromino_block.png"
 
 [display]
 
