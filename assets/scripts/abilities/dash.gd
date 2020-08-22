@@ -5,6 +5,8 @@ extends Trajectory
 
 # Cooldown bonus if an enemy is hit by the dash.
 export var cooldown_bonus : float
+# TODO: Temporary, bad practice, please remove in future.
+onready var sound_knockback = get_parent().get_node("SoundKnockback")
 
 
 func _physics_process(_delta):
@@ -22,6 +24,7 @@ func _physics_process(_delta):
 				knockback.duration = duration
 				body.add_child(knockback)
 				knockback.cast()
+				sound_knockback.play()
 				complete()
 				delay -= cooldown_bonus
 

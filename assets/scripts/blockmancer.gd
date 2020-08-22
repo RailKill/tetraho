@@ -8,6 +8,7 @@ extends Enemy
 onready var spawner = $Spawn
 # Sprite for animation.
 onready var sprite = $AnimatedSprite
+onready var sound_summon = $SoundSummon
 
 
 # Called when the node enters the scene tree for the first time.
@@ -36,3 +37,4 @@ func play_casting_animation(_ability):
 func play_casted_animation(_ability):
 	sprite.stop()
 	sprite.set_frame(0)
+	sound_summon.play()

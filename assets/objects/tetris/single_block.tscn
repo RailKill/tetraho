@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/objects/tetris/tetromino_target.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/objects/tetris/tetromino_block.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/scripts/tetromino.gd" type="Script" id=3]
 [ext_resource path="res://assets/scripts/dead_block.gd" type="Script" id=4]
+[ext_resource path="res://assets/sounds/dash_collide.wav" type="AudioStream" id=5]
 
 [node name="SingleBlock" type="Node2D"]
 script = ExtResource( 3 )
@@ -21,3 +22,16 @@ is_auto = true
 [node name="TetrominoBlock" parent="Origin/Solid" instance=ExtResource( 2 )]
 script = ExtResource( 4 )
 is_invulnerable = true
+
+[node name="SoundInvalid" type="AudioStreamPlayer2D" parent="."]
+bus = "SFX"
+
+[node name="SoundConfirm" type="AudioStreamPlayer2D" parent="."]
+bus = "SFX"
+
+[node name="SoundSnap" type="AudioStreamPlayer2D" parent="."]
+bus = "SFX"
+
+[node name="SoundTrap" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+bus = "SFX"

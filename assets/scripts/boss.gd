@@ -6,6 +6,7 @@ extends Enemy
 
 onready var crown = preload("res://assets/objects/loot/crown.tscn")
 onready var teleport_animation = $AnimatedSprite
+onready var sound_teleport = $SoundTeleport
 var teleport_points : Array
 var is_gunner_time = false
 var is_casting = false
@@ -31,6 +32,7 @@ onready var gun = $Gun
 onready var gun_sprite = gun.get_node("Sprite")
 onready var muzzle = gun.get_node("Muzzle")
 onready var shoot = $Shoot
+onready var sound_shoot = $SoundShoot
 
 
 # Called when the node enters the scene tree for the first time.
@@ -44,6 +46,9 @@ func _ready():
 
 
 func _physics_process(delta):
+	if is_dead():
+		return
+	
 	if is_locked():
 		gun.set_visible(false)
 	
@@ -177,4 +182,9 @@ func teleport(index=-1):
 			
 		set_global_position(teleport_points[selected])
 		teleport_animation.play()
+		sound_teleport.play()
 		
+
+func play_casted_animation(ability):
+	if ability is Shoot:
+		sound_shoot.play()

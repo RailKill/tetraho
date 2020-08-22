@@ -11,7 +11,7 @@ var game_world
 var player
 var boss
 var ingame_menu
-
+onready var sound_incoming = $SoundIncoming
 
 # Cutscene event.
 var walking_time = 2
@@ -92,6 +92,7 @@ func _physics_process(delta):
 			get_tree().set_pause(false)
 			ingame_menu.pause_mode = PAUSE_MODE_PROCESS
 			$AnimationCutscene.play_backwards("Border")
+			$MusicPlayer.play()
 			
 			# Raise gates.
 			toggle_gates(true)
@@ -116,6 +117,13 @@ func _physics_process(delta):
 				boss.teleport(8)
 				$FlameIncoming.set_visible(true)
 				is_flame_starting = true
+				
+				# TODO: please change this, I have no time so I had to do this
+				sound_incoming.play()
+				yield(sound_incoming, "finished")
+				sound_incoming.play()
+				yield(sound_incoming, "finished")
+				sound_incoming.play()
 			else:
 				flame_countdown -= delta
 				if flame_countdown <= 0:
@@ -172,4 +180,5 @@ func _on_Exit_body_entered(body):
 			player.hud.say(["I don't feel like winning without my crown."])
 		else:
 			# win game
-			player.hud.say(["This is the end. I won!"])
+			var _win = get_tree().change_scene(
+				"res://assets/objects/ui/end_menu.tscn")

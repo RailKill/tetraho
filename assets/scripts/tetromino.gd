@@ -9,6 +9,10 @@ extends Node2D
 
 # Reference to the game world that stores all tetromino blocks for solving.
 onready var game_world : GameWorld = get_tree().get_root().get_child(0)
+onready var sound_invalid = $SoundInvalid
+onready var sound_confirm = $SoundConfirm
+onready var sound_trap = $SoundTrap
+
 # Reference to the rotation origin node.
 var origin: Node2D
 # Reference to the node containing target reticles.
@@ -66,7 +70,7 @@ func _physics_process(delta):
 	# If the tetromino is summoning, start countdown.
 	if is_summoning:
 		summon_time -= delta
-		if summon_time <= 0:			
+		if summon_time <= 0:
 			# For each target reticle, get the actors who are in there.
 			for i in range(0, targets.size()):
 				var bodies = targets[i].get_overlapping_bodies()
@@ -74,6 +78,7 @@ func _physics_process(delta):
 					# Perform a lock for actors in that target to its block.
 					if body is Actor:
 						blocks[i].trap(body)
+						sound_trap.play()
 				
 				blocks[i].enable()
 			
@@ -155,9 +160,11 @@ func summon_piece():
 			target.animate()
 		if summoner:
 			summoner.next_tetromino()
+		
+		sound_confirm.play()
 	else:
 		# Show an error feedback to the player. Invalid placement.
-		pass
+		sound_invalid.play()
 
 
 # Show or hide blocks without activating them.

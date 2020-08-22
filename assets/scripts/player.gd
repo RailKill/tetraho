@@ -19,16 +19,22 @@ var hold : Tetromino
 var queue = TetrominoQueue.new()
 # Node path to the Player's HUD.
 export (NodePath) var hud_path
+export (NodePath) var ingame_menu_path
+var ingame_menu
 # PlayerHUD node to update.
 onready var hud : PlayerHUD
 # Reference to this player's camera.
 onready var camera = $Camera2D
 # Dash ability.
 onready var dash = $Dash
+onready var sound_dash = $SoundDash
+onready var sound_knockback = $SoundKnockback
+onready var sound_low_hp = $SoundLowHP
 
 
 func _ready():
 	hud = get_node(hud_path)
+	ingame_menu = get_node(ingame_menu_path)
 	next_tetromino()
 
 
@@ -45,8 +51,8 @@ func _process(_delta):
 			hud.update_tetromino(self)
 
 
-func _physics_process(_delta):
-	if not is_locked():
+func _physics_process(_delta):	
+	if not is_dead() and not is_locked():
 		var move_vector = Vector2.ZERO
 		for vector in DIRECTIONS:
 			if Input.is_action_pressed(vector):
@@ -88,13 +94,28 @@ func next_tetromino():
 	hud.update_tetromino(self)
 
 
+func play_casting_animation(ability):
+	if ability is Dash:
+		sound_dash.play()
+
+
+func play_death_animation():
+	.play_death_animation()
+	yield(self, "tree_exited")
+	ingame_menu.button_resume.set_disabled(true)
+	ingame_menu.title.set_text("You Died")
+	ingame_menu.cannot_close = true
+	ingame_menu.show()
+
+
 # In addition to taking damage, update the PlayerHUD.
 func oof(damage, bypass_lock=false):
 	.oof(damage, bypass_lock)
 	hud.update_hp(self)
 	
-	if is_dead():
-		current.queue_free()
+	if is_dead() and camera.get_parent() == self:
 		remove_child(camera)
 		get_parent().add_child(camera)
 		camera.set_global_position(get_global_position())
+	elif get_hp() <= 0.2 * get_maximum_hp():
+		sound_low_hp.play()

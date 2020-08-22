@@ -7,6 +7,7 @@ extends Node2D
 onready var animation = $AnimationPlayer
 # Reference to the Label node showing the text.
 onready var label = $Label
+onready var sound_pop = $SoundPop
 # List of strings to say.
 export var speech : PoolStringArray = []
 # Current index of the speech to deliver.
@@ -54,8 +55,9 @@ func skip():
 # Start speech bubble animation.
 func start():
 	label.set_text(speech[index])
-	animation.set_speed_scale(1)
+	animation.set_speed_scale(2)
 	animation.play("Dialog")
+	sound_pop.play()
 
 
 # End speech bubble animation.

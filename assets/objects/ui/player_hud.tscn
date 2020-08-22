@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/sprites/girl_face.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/hat.png" type="Texture" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://assets/sprites/blocks/tetromino_flash.png" type="Texture" id=11]
 [ext_resource path="res://assets/sprites/skull.png" type="Texture" id=12]
 [ext_resource path="res://assets/scripts/player_hud.gd" type="Script" id=13]
+[ext_resource path="res://assets/sounds/dash_ready.wav" type="AudioStream" id=14]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -200,3 +201,7 @@ cell_size = Vector2( 10, 12 )
 cell_quadrant_size = 4
 format = 1
 tile_data = PoolIntArray( 0, 10, 0, 1, 2, 0, 2, 14, 0, 3, 13, 0 )
+
+[node name="SoundReady" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
+bus = "SFX"

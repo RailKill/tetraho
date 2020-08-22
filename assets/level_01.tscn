@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://assets/tilesets/walls.tres" type="TileSet" id=1]
 [ext_resource path="res://assets/objects/player.tscn" type="PackedScene" id=2]
@@ -17,6 +17,8 @@
 [ext_resource path="res://assets/objects/loot/heart.tscn" type="PackedScene" id=15]
 [ext_resource path="res://assets/objects/flamethrower.tscn" type="PackedScene" id=16]
 [ext_resource path="res://assets/objects/exit.tscn" type="PackedScene" id=17]
+[ext_resource path="res://assets/sounds/block_solved.wav" type="AudioStream" id=18]
+[ext_resource path="res://assets/sounds/level_01.ogg" type="AudioStream" id=19]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 28, 42 )
@@ -44,10 +46,19 @@ outlines = [ PoolVector2Array( 414, 414, 330, 414, 330, 566, 552, 566, 552, 527,
 [node name="World" type="Node2D"]
 script = ExtResource( 3 )
 
+[node name="SoundSolve" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 18 )
+bus = "SFX"
+
 [node name="Events" type="Node" parent="."]
 script = ExtResource( 13 )
 world_path = NodePath("..")
 player_path = NodePath("../Player")
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="Events"]
+stream = ExtResource( 19 )
+autoplay = true
+bus = "Music"
 
 [node name="DialogLock" type="Area2D" parent="Events"]
 position = Vector2( 126, 84 )
@@ -194,6 +205,7 @@ position = Vector2( 602, 546 )
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 30, 84 )
 hud_path = NodePath("../CanvasLayer/PlayerHUD")
+ingame_menu_path = NodePath("../CanvasLayer/IngameMenu")
 
 [node name="Duck" parent="." instance=ExtResource( 6 )]
 position = Vector2( 284.623, 52.4745 )

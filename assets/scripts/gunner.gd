@@ -10,6 +10,7 @@ onready var gun_sprite = gun.get_node("Sprite")
 onready var muzzle = gun.get_node("Muzzle")
 # Ability of the gunner to shoot.
 onready var shoot = $Shoot
+onready var sound_shoot = $SoundShoot
 
 
 # Called when the node enters the scene tree for the first time.
@@ -20,7 +21,7 @@ func _ready():
 
 
 func _physics_process(_delta):
-	var ready = is_aggro and not is_locked()
+	var ready = not is_dead() and is_aggro and not is_locked()
 	gun.set_visible(ready)
 	
 	if player and ready:
@@ -38,5 +39,9 @@ func _physics_process(_delta):
 			shoot.aim = to_player_vector().normalized()
 			shoot.point = muzzle.get_global_position()
 			shoot.cast()
-		
-		
+
+
+func play_casted_animation(ability):
+	if ability is Shoot:
+		sound_shoot.play()
+

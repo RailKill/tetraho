@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/speech_pop.wav-5a1e0b9a77fabf75ecfd59185cde15df.sample"
+
+[deps]
+
+source_file="res://assets/sounds/speech_pop.wav"
+dest_files=[ "res://.import/speech_pop.wav-5a1e0b9a77fabf75ecfd59185cde15df.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

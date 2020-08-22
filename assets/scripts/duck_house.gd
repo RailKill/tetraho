@@ -16,7 +16,7 @@ func _ready():
 
 
 func _physics_process(_delta):
-	if player and is_aggro:
+	if not is_dead() and player and is_aggro:
 		spawner.point = get_global_position() + \
 			to_player_vector().normalized() * (Constants.GRID_ONE_HALF)
 		spawner.cast()

@@ -30,6 +30,8 @@ func _ready():
 	selected = goals[randi() % goals.size()]
 	$Hat.set_global_position(selected.get_global_position())
 	selected.queue_free()
+	
+	$MusicPlayer.play()
 
 
 func _on_Exit_body_entered(body):

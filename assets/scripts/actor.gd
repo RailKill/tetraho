@@ -5,6 +5,8 @@ extends KinematicBody2D
 
 # Reference to the collision shape of the actor.
 onready var collision_shape = $CollisionShape2D
+onready var sound_hit = $SoundHit
+onready var sound_death = $SoundDeath
 
 # Hit points.
 var hp = Constants.PLAYER_HP
@@ -55,6 +57,10 @@ func oof(damage, bypass_lock=false):
 		
 		if is_dead():
 			play_death_animation()
+			set_visible(false)
+			collision_shape.call_deferred("set_disabled", true)
+		else:
+			sound_hit.play()
 
 
 # Animate the actor channeling the given ability.
@@ -69,7 +75,10 @@ func play_casted_animation(_ability):
 
 # Animate the actor dying.
 func play_death_animation():
-	queue_free()
+	if not sound_death.is_playing():
+		sound_death.play()
+		yield(sound_death, "finished")
+		queue_free()
 
 
 # Animate the actor failing to cast the given ability.

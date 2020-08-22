@@ -82,6 +82,8 @@ margin_right = 93.0
 margin_bottom = -46.472
 custom_fonts/font = SubResource( 1 )
 text = "Game Paused"
+align = 1
+valign = 1
 uppercase = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -93,9 +95,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -52.0
-margin_top = -16.8558
+margin_top = -35.7546
 margin_right = 52.0
-margin_bottom = 84.1442
+margin_bottom = 100.245
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -107,13 +109,20 @@ focus_path = NodePath("../../Focus")
 [node name="ButtonRestart" parent="VBoxContainer" instance=ExtResource( 6 )]
 margin_top = 35.0
 margin_bottom = 66.0
-focus_next = NodePath("../ButtonQuit")
+focus_next = NodePath("../ButtonMainMenu")
 text = "Restart"
 focus_path = NodePath("../../Focus")
 
-[node name="ButtonQuit" parent="VBoxContainer" instance=ExtResource( 6 )]
+[node name="ButtonMainMenu" parent="VBoxContainer" instance=ExtResource( 6 )]
 margin_top = 70.0
 margin_bottom = 101.0
+focus_next = NodePath("../ButtonQuit")
+text = "Main Menu"
+focus_path = NodePath("../../Focus")
+
+[node name="ButtonQuit" parent="VBoxContainer" instance=ExtResource( 6 )]
+margin_top = 105.0
+margin_bottom = 136.0
 text = "Quit Game"
 focus_path = NodePath("../../Focus")
 
@@ -140,4 +149,5 @@ texture = ExtResource( 5 )
 [connection signal="visibility_changed" from="." to="." method="_on_IngameMenu_visibility_changed"]
 [connection signal="pressed" from="VBoxContainer/ButtonResume" to="." method="_on_ButtonResume_pressed"]
 [connection signal="pressed" from="VBoxContainer/ButtonRestart" to="." method="_on_ButtonRestart_pressed"]
+[connection signal="pressed" from="VBoxContainer/ButtonMainMenu" to="." method="_on_ButtonMainMenu_pressed"]
 [connection signal="pressed" from="VBoxContainer/ButtonQuit" to="." method="_on_ButtonQuit_pressed"]

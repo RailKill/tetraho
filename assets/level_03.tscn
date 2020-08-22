@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://assets/scripts/world.gd" type="Script" id=1]
 [ext_resource path="res://assets/scripts/levels/level_03.gd" type="Script" id=2]
@@ -16,6 +16,9 @@
 [ext_resource path="res://assets/objects/gate.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/objects/exit.tscn" type="PackedScene" id=15]
 [ext_resource path="res://assets/objects/loot/hat.tscn" type="PackedScene" id=16]
+[ext_resource path="res://assets/sounds/block_solved.wav" type="AudioStream" id=17]
+[ext_resource path="res://assets/sounds/level_03.ogg" type="AudioStream" id=18]
+[ext_resource path="res://assets/sounds/warning.wav" type="AudioStream" id=19]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 22.1486, 18.1283 )
@@ -66,6 +69,10 @@ outlines = [ PoolVector2Array( 14, 14, 112, 14, 112, 112, 84, 112, 84, 420, 336,
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
 
+[node name="SoundSolve" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 17 )
+bus = "SFX"
+
 [node name="Events" type="Node" parent="."]
 pause_mode = 2
 script = ExtResource( 2 )
@@ -73,6 +80,14 @@ world_path = NodePath("..")
 player_path = NodePath("../Player")
 boss_path = NodePath("../Boss")
 ingame_menu_path = NodePath("../CanvasLayer/IngameMenu")
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="Events"]
+stream = ExtResource( 18 )
+bus = "Music"
+
+[node name="SoundIncoming" type="AudioStreamPlayer" parent="Events"]
+stream = ExtResource( 19 )
+bus = "SFX"
 
 [node name="DialogHallway" type="Area2D" parent="Events"]
 position = Vector2( 63, 217 )
@@ -825,6 +840,7 @@ position = Vector2( 126, 525 )
 [node name="Player" parent="." instance=ExtResource( 5 )]
 position = Vector2( 63, 147 )
 hud_path = NodePath("../CanvasLayer/PlayerHUD")
+ingame_menu_path = NodePath("../CanvasLayer/IngameMenu")
 
 [node name="Camera2D" parent="Player" index="2"]
 pause_mode = 2

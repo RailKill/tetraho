@@ -6,10 +6,11 @@ extends Control
 onready var title = $Label
 # Resume button, a.k.a the first button to grab focus when menu is visible.
 onready var button_resume = $VBoxContainer/ButtonResume
+var cannot_close = false
 
 
 func _input(_event):
-	if Input.is_action_just_pressed("ui_cancel"):
+	if Input.is_action_just_pressed("ui_cancel") and not cannot_close:
 		if visible:
 			_on_ButtonResume_pressed()
 		else:
@@ -35,4 +36,10 @@ func _on_ButtonRestart_pressed():
 
 
 func _on_IngameMenu_visibility_changed():
-	get_tree().paused = visible
+	get_tree().set_pause(visible)
+
+
+func _on_ButtonMainMenu_pressed():
+	get_tree().set_pause(false)
+	var _ignore = get_tree().change_scene(
+		"res://assets/objects/ui/main_menu.tscn")

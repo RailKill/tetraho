@@ -12,6 +12,7 @@ onready var hearts = health.get_children()
 onready var mana_flask = $Status/Offset/Mana/Flask
 onready var dash_ready = $Status/Offset/Mana/DashReady
 onready var recharging = $Status/Offset/Mana/Recharging
+onready var sound_ready = $SoundReady
 
 # Face nodes.
 onready var head = $Status/Offset/Head
@@ -27,6 +28,7 @@ onready var next = $Status/Offset/Next
 onready var talk = preload("res://assets/objects/ui/speech_bubble.tscn")
 # Speech bubble instance.
 var bubble : SpeechBubble
+
 
 # Helper function to center the tetromino's position in the HUD.
 func center_tetromino(tetromino : Tetromino):
@@ -70,7 +72,7 @@ func update_hp(player):
 	# If player is dead, show skeleton head.
 	if player.is_dead():
 		face.set_frame(1)
-		face.move_local_y(-5)
+		face.position.y = -5
 		hat.set_visible(false)
 		crown.set_visible(false)
 
@@ -81,6 +83,9 @@ func update_dash(dash : Dash):
 	mana_flask.set_frame(int(not_ready))
 	dash_ready.set_visible(!not_ready)
 	recharging.set_visible(not_ready)
+	
+	if not not_ready:
+		sound_ready.play()
 
 
 func update_tetromino(player):

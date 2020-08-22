@@ -3,6 +3,8 @@ extends Node2D
 # Root node of the level. Every level must have a GameWorld as the root node.
 
 
+onready var sound_solve = $SoundSolve
+
 # Array of all TetrominoBlocks global position present in the game world.
 var blocks = []
 # List of vector offsets to check for horizontal 2x3 blocks.
@@ -34,6 +36,7 @@ func solve():
 		search(block, solver_horizontal)
 		search(block, solver_vertical)
 	
+	var has_marked = false
 	var actors = []
 	for block in blocks:
 		# Solve all marked blocks.
@@ -42,7 +45,11 @@ func solve():
 				if not actors.has(actor):
 					actors.append(actor)
 			block.disable()
+			has_marked = true
 	
+	if has_marked:
+		sound_solve.play()
+		
 	# All solved actors take damage.
 	for actor in actors:
 		actor.oof(100, true)

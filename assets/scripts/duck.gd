@@ -8,6 +8,8 @@ onready var navigation = get_parent().get_node("Navigation2D")
 onready var area_damage = preload("res://assets/objects/area_damage.tscn")
 # Duck sprite.
 onready var sprite = $Sprite
+onready var sound_warning = $SoundWarning
+onready var animation = $AnimationPlayer
 # Paths to navigate to the player.
 var paths : PoolVector2Array = []
 # Current path index.
@@ -35,7 +37,7 @@ func _ready():
 
 # Behavior of duck is to chase the player. Attacks when close.
 func _physics_process(delta):
-	if player and is_aggro and not is_locked():
+	if not is_dead() and player and is_aggro and not is_locked():
 		var difference = to_player_vector()
 	
 		pathing_cooldown -= delta
@@ -58,6 +60,8 @@ func _physics_process(delta):
 			if difference.length() < Constants.GRID_ONE_HALF \
 				and not is_on_cooldown:
 					is_attacking = true
+					sound_warning.play()
+					animation.play("Attack")
 		else:
 			attack_delay_startup -= delta
 			if attack_delay_startup <= 0:
@@ -79,6 +83,7 @@ func commence_attack(direction : Vector2):
 	scratch.translate(direction * 16)
 	add_child(scratch)
 	scratch.animation.play()
+	$exclamation_popup.set_visible(false)
 
 
 # If the given collider is a DuckHouse, kill both.

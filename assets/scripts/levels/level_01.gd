@@ -17,6 +17,8 @@ func _ready():
 	player.hud.say([
 		"Hello! Use the WASD keys to move. Press 'E' to advance this dialog.",
 	])
+	
+	$MusicPlayer.play()
 
 
 func _on_DialogLock_body_entered(body):
