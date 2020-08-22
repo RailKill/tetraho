@@ -14,7 +14,7 @@ func _ready():
 	player = get_node(player_path)
 	yield(player, "ready")
 	player.hud.say([
-		"I know my hat is in this level. I need to find it.",
+		"I'm looking for my hat. It must be around here somewhere.",
 	])
 	
 	# Randomize goals.

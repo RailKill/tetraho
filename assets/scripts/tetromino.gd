@@ -96,7 +96,7 @@ func _physics_process(delta):
 			if not is_decaying:
 				is_decaying = true
 				for block in blocks:
-					if block != null:
+					if is_instance_valid(block):
 						block.disable()
 					game_world.remove_block(block)
 			

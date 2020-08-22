@@ -54,7 +54,7 @@ func _ready():
 
 
 func _physics_process(delta):
-	if boss:
+	if is_instance_valid(boss):
 		# TODO: Create a signal for Boss when damaged so don't have to poll
 		is_spawn_time = boss.get_hp() <= 0.6 * boss.get_maximum_hp()
 		is_boss_hp_low = boss.get_hp() <= 0.4 * boss.get_maximum_hp()
@@ -71,14 +71,14 @@ func _physics_process(delta):
 					"What is this, you want to be the queen of this house?"
 				], boss.get_global_transform_with_canvas().origin + Vector2(0, -90))
 		
-		elif is_cutscene_talking1 and not player.hud.bubble:
+		elif is_cutscene_talking1 and not is_instance_valid(player.hud.bubble):
 			is_cutscene_talking1 = false
 			is_cutscene_talking2 = true
 			player.hud.say([
 				"You're wearing my crown. I just want it back."
 			])
 		
-		elif is_cutscene_talking2 and not player.hud.bubble:
+		elif is_cutscene_talking2 and not is_instance_valid(player.hud.bubble):
 			is_cutscene_talking2 = false
 			is_cutscene_talking3 = true
 			player.hud.say([
@@ -87,7 +87,7 @@ func _physics_process(delta):
 				"Your insolence ends here!"
 			], boss.get_global_transform_with_canvas().origin + Vector2(0, -90))
 		
-		elif is_cutscene_talking3 and not player.hud.bubble:
+		elif is_cutscene_talking3 and not is_instance_valid(player.hud.bubble):
 			is_cutscene_talking3 = false
 			get_tree().set_pause(false)
 			ingame_menu.pause_mode = PAUSE_MODE_PROCESS
@@ -151,7 +151,7 @@ func toggle_gates(boolean : bool):
 func _on_DialogHallway_body_entered(body):
 	if body == player:
 		player.hud.say([
-			"Who designed this long hallway? Feels like a boss is ahead.",
+			"A quiet hallway? Smells like a boss fight.",
 		])
 		$DialogHallway.queue_free()
 

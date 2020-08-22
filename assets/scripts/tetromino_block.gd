@@ -61,7 +61,7 @@ func trap(actor):
 func untrap():
 	for actor in trapped:
 		# If actor is dead, they will no longer exist, so do a null check.
-		if actor != null:
+		if is_instance_valid(actor):
 			actor.locked_by.erase(self)
 
 

@@ -24,7 +24,7 @@ func _physics_process(_delta):
 	var ready = not is_dead() and is_aggro and not is_locked()
 	gun.set_visible(ready)
 	
-	if player and ready:
+	if is_instance_valid(player) and ready:
 		# Point gun at player.
 		gun_sprite.flip_v = int(to_player_vector().normalized().x <= 0)
 		gun.look_at(player.get_global_position())

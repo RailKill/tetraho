@@ -45,7 +45,7 @@ func next():
 # Skip to the end of the dialog animation.
 func skip():
 	if not is_closing:
-		var length = animation.get_current_animation_length()
+		var length = animation.get_animation("Dialog").length
 		if animation.get_current_animation_position() != length:
 			animation.seek(length)
 		else:

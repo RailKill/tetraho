@@ -38,13 +38,13 @@ func center_tetromino(tetromino : Tetromino):
 # Make the HUD say something with the speech bubble at a given canvas position.
 func say(speech : PoolStringArray, 
 	position=head.get_global_position() + Vector2(0, -120)):
-		if not bubble:
+#		if not is_instance_valid(bubble):
 			bubble = talk.instance()
 			bubble.speech += speech
 			head.add_child(bubble)
 			bubble.set_global_position(position)
-		else:
-			bubble.speech += speech
+#		else:
+#			bubble.speech += speech
 
 
 # Updates the HUD based on the given player's HP.

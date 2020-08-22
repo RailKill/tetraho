@@ -37,7 +37,7 @@ func _ready():
 
 # Behavior of duck is to chase the player. Attacks when close.
 func _physics_process(delta):
-	if not is_dead() and player and is_aggro and not is_locked():
+	if not is_dead() and is_instance_valid(player) and is_aggro and not is_locked():
 		var difference = to_player_vector()
 	
 		pathing_cooldown -= delta

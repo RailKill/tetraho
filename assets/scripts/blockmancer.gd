@@ -20,7 +20,7 @@ func _ready():
 
 func _physics_process(_delta):
 	# Blockmancer behavior is to summon blocks.
-	if player and is_aggro and not is_locked():
+	if is_instance_valid(player) and is_aggro and not is_locked():
 		# Behavior #1: Summon block on player's position.
 		var pos = player.get_global_position()
 		var snap = Vector2(stepify(pos.x, Constants.GRID_SIZE), 

@@ -51,5 +51,5 @@ func complete():
 # Clear null spawned objects that no longer exist.
 func update():
 	for entity in spawned:
-		if not entity:
+		if not entity or not is_instance_valid(entity):
 			spawned.erase(entity)

@@ -40,7 +40,7 @@ func solve():
 	var actors = []
 	for block in blocks:
 		# Solve all marked blocks.
-		if block and block.marked:
+		if is_instance_valid(block) and block.marked:
 			for actor in block.trapped:
 				if not actors.has(actor):
 					actors.append(actor)
@@ -58,11 +58,11 @@ func solve():
 # Search for block combinations in a given solver (area to search) and mark
 # all satisfied blocks for destruction.
 func search(anchor, solver):
-	if anchor:
+	if is_instance_valid(anchor):
 		var satisfied = [anchor]
 		for vector in solver:
 			for search in blocks:
-				if search and search.get_global_vector() == \
+				if is_instance_valid(search) and search.get_global_vector() == \
 					anchor.get_global_vector() + vector:
 						satisfied.append(search)
 		

@@ -56,7 +56,7 @@ func _physics_process(delta):
 		gun.set_visible(false)
 		return
 	
-	if player and is_aggro and not is_locked():
+	if is_instance_valid(player) and is_aggro and not is_locked():
 		if to_player_vector().length() < 96:
 			do_duck_logic(delta)
 		else:
