@@ -28,6 +28,9 @@ func _on_ButtonResume_pressed():
 
 func _on_ButtonQuit_pressed():
 	get_tree().quit()
+	
+	if OS.has_feature('JavaScript'):
+		JavaScript.eval("window.close()")
 
 
 func _on_ButtonRestart_pressed():
