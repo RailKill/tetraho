@@ -73,14 +73,15 @@ func _physics_process(delta):
 		if summon_time <= 0:
 			# For each target reticle, get the actors who are in there.
 			for i in range(0, targets.size()):
-				var bodies = targets[i].get_overlapping_bodies()
-				for body in bodies:
-					# Perform a lock for actors in that target to its block.
-					if body is Actor:
-						blocks[i].trap(body)
-						sound_trap.play()
-				
-				blocks[i].enable()
+				if is_instance_valid(blocks[i]):
+					var bodies = targets[i].get_overlapping_bodies()
+					for body in bodies:
+						# Perform a lock for actors in that target to its block.
+						if body is Actor and is_instance_valid(body):
+							blocks[i].trap(body)
+							sound_trap.play()
+					
+					blocks[i].enable()
 			
 			is_summoning = false
 			is_summoned = true
@@ -102,7 +103,7 @@ func _physics_process(delta):
 			
 			var null_count = 0
 			for block in blocks:
-				null_count += int(block == null)
+				null_count += int(not is_instance_valid(block))
 			if null_count == blocks.size():
 				queue_free()
 
