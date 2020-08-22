@@ -9,6 +9,11 @@ onready var button_resume = $VBoxContainer/ButtonResume
 var cannot_close = false
 
 
+func _ready():
+	if OS.get_name() == "HTML5":
+		$VBoxContainer/ButtonQuit.set_disabled(true)
+
+
 func _input(_event):
 	if Input.is_action_just_pressed("ui_cancel") and not cannot_close:
 		if visible:
@@ -28,9 +33,6 @@ func _on_ButtonResume_pressed():
 
 func _on_ButtonQuit_pressed():
 	get_tree().quit()
-	
-	if OS.has_feature('JavaScript'):
-		JavaScript.eval("window.close()")
 
 
 func _on_ButtonRestart_pressed():

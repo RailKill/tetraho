@@ -5,6 +5,8 @@ extends Control
 
 func _ready():
 	$VBoxContainer/ButtonStart.grab_focus()
+	if OS.get_name() == "HTML5":
+		$VBoxContainer/ButtonQuit.set_disabled(true)
 
 
 func _on_ButtonStart_pressed():
@@ -21,9 +23,6 @@ func _on_ButtonThird_pressed():
 
 func _on_ButtonQuit_pressed():
 	get_tree().quit()
-	
-	if OS.has_feature('JavaScript'):
-		JavaScript.eval("window.close()")
 
 
 func _on_ButtonFullscreen_pressed():
