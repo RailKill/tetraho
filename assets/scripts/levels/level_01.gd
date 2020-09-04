@@ -3,16 +3,12 @@ extends Node
 # TODO: I had to rush for #mizjam1. The dialog areas can be made into a scene.
 # This is full of copy-and-paste bullshit, but it will have to do for now.
 
-export (NodePath) var world_path
-export (NodePath) var player_path
-var game_world
-var player
+
+onready var player = get_parent().get_node("Player")
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	game_world = get_node(world_path)
-	player = get_node(player_path)
 	yield(player, "ready")
 	player.hud.say([
 		"Hello! Use the WASD keys to move. Press 'E' to continue.",

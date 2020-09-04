@@ -2,16 +2,11 @@ extends Node
 # TODO: Shit code, full of duplicates. Rushed for #mizjam1, refactor after!
 
 
-export (NodePath) var world_path
-export (NodePath) var player_path
-var game_world
-var player
+onready var player = get_parent().get_node("Player")
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	game_world = get_node(world_path)
-	player = get_node(player_path)
 	yield(player, "ready")
 	player.hud.say([
 		"I'm looking for my hat. It must be around here somewhere.",

@@ -2,9 +2,9 @@
 
 [ext_resource path="res://assets/tilesets/ui_brick.tres" type="TileSet" id=1]
 [ext_resource path="res://assets/tetra_theme.tres" type="Theme" id=2]
-[ext_resource path="res://assets/scripts/ingame_menu.gd" type="Script" id=3]
-[ext_resource path="res://assets/sprites/arrow_left.png" type="Texture" id=4]
-[ext_resource path="res://assets/sprites/arrow_right.png" type="Texture" id=5]
+[ext_resource path="res://assets/scripts/ui/ingame_menu.gd" type="Script" id=3]
+[ext_resource path="res://assets/sprites/ui/menu/arrow_left.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/ui/menu/arrow_right.png" type="Texture" id=5]
 [ext_resource path="res://assets/objects/ui/focus_button.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/minimal5x7.ttf" type="DynamicFontData" id=7]
 

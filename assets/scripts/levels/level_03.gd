@@ -3,14 +3,9 @@ extends Node
 # TODO: Rushed for #mizjam1, please refactor in future. It's ugly.
 
 
-export (NodePath) var world_path
-export (NodePath) var player_path
-export (NodePath) var boss_path
-export (NodePath) var ingame_menu_path
-var game_world
-var player
-var boss
-var ingame_menu
+onready var level = get_node("/root/Level")
+onready var boss = level.get_node("Boss")
+onready var player = level.get_node("Player")
 onready var sound_incoming = $SoundIncoming
 
 # Cutscene event.
@@ -21,7 +16,7 @@ var is_cutscene_talking2 = false
 var is_cutscene_talking3 = false
 
 # Gunner spawn event.
-onready var gunner = preload("res://assets/objects/gunner.tscn")
+onready var gunner = preload("res://assets/objects/actors/gunner.tscn")
 var spawn_points = []
 var is_spawn_time = false
 var has_spawned = false
@@ -37,20 +32,11 @@ var is_boss_hp_low = false
 
 
 func _ready():
-	game_world = get_node(world_path)
-	player = get_node(player_path)
-	boss = get_node(boss_path)
-	ingame_menu = get_node(ingame_menu_path)
-	
 	for node in $SpawnPoints.get_children():
 		spawn_points.append(node.get_global_position())
 	boss.teleport_points = spawn_points + [$MidPoint.get_global_position()]
 
 	toggle_gates(false)
-	
-	# testing
-#	yield(boss, "ready")
-#	boss.hp = 200
 
 
 func _physics_process(delta):
@@ -90,7 +76,7 @@ func _physics_process(delta):
 		elif is_cutscene_talking3 and not is_instance_valid(player.hud.bubble):
 			is_cutscene_talking3 = false
 			get_tree().set_pause(false)
-			ingame_menu.pause_mode = PAUSE_MODE_PROCESS
+			player.hud.pause_mode = PAUSE_MODE_INHERIT
 			$AnimationCutscene.play_backwards("Border")
 			$MusicPlayer.play()
 			
@@ -102,7 +88,7 @@ func _physics_process(delta):
 			for _i in range(0, 4):
 				randomize()
 				var gunman = gunner.instance()
-				game_world.add_child(gunman)
+				level.add_child(gunman)
 				gunman.set_global_position(
 					spawn_points[randi() % spawn_points.size()])
 				gunman.is_aggro = true
@@ -132,7 +118,7 @@ func _physics_process(delta):
 					boss.is_invulnerable = false
 					boss.get_node("AnimationPlayer").stop()
 					var flames = flame_wheel.instance()
-					game_world.add_child(flames)
+					level.add_child(flames)
 					flames.set_global_position($MidPoint.get_global_position())
 					$FlameIncoming.set_visible(false)
 					is_flame_starting = false
@@ -161,7 +147,7 @@ func _on_DialogCutscene_body_entered(body):
 		if player.hud.bubble:
 			player.hud.bubble.queue_free()
 		
-		for node in game_world.get_children():
+		for node in level.get_children():
 			if node is Tetromino:
 				if node.can_decay and node.is_summoned:
 					node.pause_mode = PAUSE_MODE_PROCESS
@@ -169,7 +155,7 @@ func _on_DialogCutscene_body_entered(body):
 		get_tree().set_pause(true)
 		is_cutscene_walking = true
 		$AnimationCutscene.play("Border")
-		ingame_menu.pause_mode = PAUSE_MODE_STOP
+		player.hud.pause_mode = PAUSE_MODE_PROCESS
 		$DialogCutscene.queue_free()
 
 

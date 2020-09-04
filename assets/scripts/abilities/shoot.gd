@@ -20,6 +20,6 @@ func cast():
 		var shot = bullet.instance()
 		shot.trajectory = trajectory
 		
-		get_tree().get_root().get_child(0).add_child(shot)
+		get_node("/root/Level").add_child(shot)
 		shot.set_global_position(point)
 		complete()

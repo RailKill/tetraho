@@ -17,32 +17,32 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "Actor",
 "language": "GDScript",
-"path": "res://assets/scripts/actor.gd"
+"path": "res://assets/scripts/actors/actor.gd"
 }, {
 "base": "Area2D",
 "class": "AreaAggro",
 "language": "GDScript",
-"path": "res://assets/scripts/area_aggro.gd"
+"path": "res://assets/scripts/areas/area_aggro.gd"
 }, {
 "base": "Area2D",
 "class": "AreaChecker",
 "language": "GDScript",
-"path": "res://assets/scripts/area_checker.gd"
+"path": "res://assets/scripts/areas/area_checker.gd"
 }, {
 "base": "Area2D",
 "class": "AreaDamage",
 "language": "GDScript",
-"path": "res://assets/scripts/area_damage.gd"
+"path": "res://assets/scripts/areas/area_damage.gd"
 }, {
 "base": "Enemy",
 "class": "Blockmancer",
 "language": "GDScript",
-"path": "res://assets/scripts/blockmancer.gd"
+"path": "res://assets/scripts/actors/blockmancer.gd"
 }, {
 "base": "Enemy",
 "class": "Boss",
 "language": "GDScript",
-"path": "res://assets/scripts/boss.gd"
+"path": "res://assets/scripts/actors/boss.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Bullet",
@@ -62,22 +62,22 @@ _global_script_classes=[ {
 "base": "TetrominoBlock",
 "class": "DeadBlock",
 "language": "GDScript",
-"path": "res://assets/scripts/dead_block.gd"
+"path": "res://assets/scripts/actors/dead_block.gd"
 }, {
 "base": "Enemy",
 "class": "Duck",
 "language": "GDScript",
-"path": "res://assets/scripts/duck.gd"
+"path": "res://assets/scripts/actors/duck.gd"
 }, {
 "base": "Enemy",
 "class": "DuckHouse",
 "language": "GDScript",
-"path": "res://assets/scripts/duck_house.gd"
+"path": "res://assets/scripts/actors/duck_house.gd"
 }, {
 "base": "Actor",
 "class": "Enemy",
 "language": "GDScript",
-"path": "res://assets/scripts/enemy.gd"
+"path": "res://assets/scripts/actors/enemy.gd"
 }, {
 "base": "Node2D",
 "class": "Flamethrower",
@@ -87,12 +87,7 @@ _global_script_classes=[ {
 "base": "Button",
 "class": "FocusButton",
 "language": "GDScript",
-"path": "res://assets/scripts/focus_button.gd"
-}, {
-"base": "Node2D",
-"class": "GameWorld",
-"language": "GDScript",
-"path": "res://assets/scripts/world.gd"
+"path": "res://assets/scripts/ui/focus_button.gd"
 }, {
 "base": "",
 "class": "GitAPI",
@@ -102,12 +97,12 @@ _global_script_classes=[ {
 "base": "Enemy",
 "class": "Gunner",
 "language": "GDScript",
-"path": "res://assets/scripts/gunner.gd"
+"path": "res://assets/scripts/actors/gunner.gd"
 }, {
 "base": "Control",
 "class": "IngameMenu",
 "language": "GDScript",
-"path": "res://assets/scripts/ingame_menu.gd"
+"path": "res://assets/scripts/ui/ingame_menu.gd"
 }, {
 "base": "Trajectory",
 "class": "Knockback",
@@ -117,32 +112,32 @@ _global_script_classes=[ {
 "base": "TetrominoBlock",
 "class": "LockBlock",
 "language": "GDScript",
-"path": "res://assets/scripts/lock_block.gd"
+"path": "res://assets/scripts/actors/lock_block.gd"
 }, {
 "base": "Control",
 "class": "MainMenu",
 "language": "GDScript",
-"path": "res://assets/scripts/main_menu.gd"
+"path": "res://assets/scripts/ui/main_menu.gd"
 }, {
 "base": "Area2D",
 "class": "PickupCosmetic",
 "language": "GDScript",
-"path": "res://assets/scripts/pickup_cosmetic.gd"
+"path": "res://assets/scripts/loot/pickup_cosmetic.gd"
 }, {
 "base": "Area2D",
 "class": "PickupHeart",
 "language": "GDScript",
-"path": "res://assets/scripts/pickup_heart.gd"
+"path": "res://assets/scripts/loot/pickup_heart.gd"
 }, {
 "base": "Actor",
 "class": "PlayerCharacter",
 "language": "GDScript",
-"path": "res://assets/scripts/player.gd"
+"path": "res://assets/scripts/actors/player.gd"
 }, {
 "base": "Control",
 "class": "PlayerHUD",
 "language": "GDScript",
-"path": "res://assets/scripts/player_hud.gd"
+"path": "res://assets/scripts/ui/player_hud.gd"
 }, {
 "base": "Ability",
 "class": "Shoot",
@@ -157,7 +152,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "SpeechBubble",
 "language": "GDScript",
-"path": "res://assets/scripts/speech_bubble.gd"
+"path": "res://assets/scripts/ui/speech_bubble.gd"
 }, {
 "base": "Node2D",
 "class": "Tetromino",
@@ -167,7 +162,7 @@ _global_script_classes=[ {
 "base": "Actor",
 "class": "TetrominoBlock",
 "language": "GDScript",
-"path": "res://assets/scripts/tetromino_block.gd"
+"path": "res://assets/scripts/actors/tetromino_block.gd"
 }, {
 "base": "Node",
 "class": "TetrominoQueue",
@@ -183,6 +178,16 @@ _global_script_classes=[ {
 "class": "Trajectory",
 "language": "GDScript",
 "path": "res://assets/scripts/abilities/trajectory.gd"
+}, {
+"base": "Reference",
+"class": "WAT",
+"language": "GDScript",
+"path": "res://addons/WAT/namespace.gd"
+}, {
+"base": "",
+"class": "WATTest",
+"language": "GDScript",
+"path": "res://addons/WAT/core/test/test.gd"
 } ]
 _global_script_class_icons={
 "Ability": "",
@@ -201,7 +206,6 @@ _global_script_class_icons={
 "Enemy": "",
 "Flamethrower": "",
 "FocusButton": "",
-"GameWorld": "",
 "GitAPI": "",
 "Gunner": "",
 "IngameMenu": "",
@@ -219,8 +223,21 @@ _global_script_class_icons={
 "TetrominoBlock": "",
 "TetrominoQueue": "",
 "TetrominoTarget": "",
-"Trajectory": ""
+"Trajectory": "",
+"WAT": "",
+"WATTest": ""
 }
+
+[WAT]
+
+Test_Directory="res://tests"
+Results_Directory="res://tests/results/WAT"
+Minimize_Window_When_Running_Tests=false
+TestStrategy={
+
+}
+Tags=PoolStringArray(  )
+Display=8
 
 [application]
 
@@ -228,17 +245,21 @@ config/name="Tetraho"
 run/main_scene="res://assets/objects/ui/main_menu.tscn"
 config/icon="res://assets/sprites/blocks/tetromino_block.png"
 
+[autoload]
+
+GameWorld="*res://assets/objects/world.tscn"
+
 [display]
 
 window/size/width=1280
 window/size/height=720
-mouse_cursor/custom_image="res://assets/sprites/cursor.png"
+mouse_cursor/custom_image="res://assets/sprites/ui/menu/cursor.png"
 window/stretch/mode="2d"
 window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PoolStringArray(  )
+enabled=PoolStringArray( "WAT" )
 
 [gdnative]
 

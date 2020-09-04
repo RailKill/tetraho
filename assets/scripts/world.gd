@@ -1,6 +1,5 @@
-class_name GameWorld
-extends Node2D
-# Root node of the level. Every level must have a GameWorld as the root node.
+extends Node
+# Global world of the game. Auto-loaded on every level.
 
 
 onready var sound_solve = $SoundSolve

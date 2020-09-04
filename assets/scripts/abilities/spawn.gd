@@ -11,7 +11,7 @@ export var angle = 0
 # Maximum objects spawnable.
 export var maximum_spawnable = 3
 # Checker to use when determining whether the spawn point is clear or not.
-export var checker = preload("res://assets/objects/area_checker.tscn")
+export var checker = preload("res://assets/objects/areas/area_checker.tscn")
 # If true, spawn point checker will be snapped to the grid.
 export var is_snapped = true
 
@@ -27,17 +27,17 @@ func cast():
 
 func complete():
 	.complete()
-	var world = get_tree().get_root().get_child(0)
+	var level = get_node("/root/Level")
 	
 	var target = checker.instance()
-	world.add_child(target)
+	level.add_child(target)
 	target.reposition(point, is_snapped)
 	
 	yield(get_tree().create_timer(0.1), "timeout")
 	if not target.collided:
 		var spawn = resource.instance()
-		world.add_child(spawn)
-		world.move_child(spawn, 0)
+		level.add_child(spawn)
+		level.move_child(spawn, 0)
 		spawn.set_global_position(point)
 		spawn.set_rotation_degrees(angle)
 		spawned.append(spawn)

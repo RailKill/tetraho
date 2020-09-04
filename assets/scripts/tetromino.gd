@@ -8,7 +8,6 @@ extends Node2D
 
 
 # Reference to the game world that stores all tetromino blocks for solving.
-onready var game_world : GameWorld = get_tree().get_root().get_child(0)
 onready var sound_invalid = $SoundInvalid
 onready var sound_confirm = $SoundConfirm
 onready var sound_trap = $SoundTrap
@@ -87,7 +86,7 @@ func _physics_process(delta):
 			is_summoned = true
 			reticle.queue_free()
 			solid.set_visible(true)
-			game_world.solve()
+			GameWorld.solve()
 	
 	# If the solid blocks are visible, that means they are active.
 	# Start decaying to be removed from the game.
@@ -99,7 +98,7 @@ func _physics_process(delta):
 				for block in blocks:
 					if is_instance_valid(block):
 						block.disable()
-					game_world.remove_block(block)
+					GameWorld.remove_block(block)
 			
 			var null_count = 0
 			for block in blocks:

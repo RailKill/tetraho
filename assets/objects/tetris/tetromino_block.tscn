@@ -1,10 +1,11 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/sprites/blocks/tetromino_block.png" type="Texture" id=1]
-[ext_resource path="res://assets/scripts/tetromino_block.gd" type="Script" id=2]
+[ext_resource path="res://assets/scripts/actors/tetromino_block.gd" type="Script" id=2]
 [ext_resource path="res://assets/sprites/blocks/tetromino_summon_1.png" type="Texture" id=3]
 [ext_resource path="res://assets/sprites/blocks/tetromino_summon_2.png" type="Texture" id=4]
 [ext_resource path="res://assets/sounds/hit.wav" type="AudioStream" id=5]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 7 )
