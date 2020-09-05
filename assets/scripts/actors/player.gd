@@ -21,9 +21,7 @@ var queue = TetrominoQueue.new()
 onready var canvas = $CanvasLayer
 onready var hud = $CanvasLayer/PlayerHUD
 onready var menu = $CanvasLayer/IngameMenu
-# Reference to this player's camera.
 onready var camera = $Camera2D
-# Dash ability.
 onready var dash = $Dash
 onready var sound_dash = $SoundDash
 onready var sound_knockback = $SoundKnockback
@@ -36,18 +34,19 @@ func _ready():
 
 func _process(_delta):
 	if Input.is_action_just_pressed("action_special"):
+		# If hold is empty, store current and call next tetromino.
 		if not hold:
 			hold = current
 			next_tetromino()
+		# Otherwise, swap hold with current.
 		else:
-			# The sacred three-way swap.
 			var swap = hold
 			hold = current
 			current = swap
 			hud.update_tetromino(self)
 
 
-func _physics_process(_delta):	
+func _physics_process(_delta):
 	if not is_dead() and not is_locked():
 		var move_vector = Vector2.ZERO
 		for vector in DIRECTIONS:
@@ -81,7 +80,7 @@ func is_current(tetromino : Tetromino):
 	return current == tetromino
 
 
-# Generates a random tetromino into 
+# Sets the next tetromino in the queue to current.
 func next_tetromino():
 	current = queue.fetch()
 	current.summoner = self

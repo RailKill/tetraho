@@ -8,8 +8,6 @@
 [ext_resource path="res://assets/sprites/map/pipes/pipe_hollow_end.png" type="Texture" id=6]
 [ext_resource path="res://assets/sprites/map/pipes/pipe_hollow_tee.png" type="Texture" id=7]
 
-
-
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 14, 14, 0, 14, 0, 0, 14, 0 )
 
