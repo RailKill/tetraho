@@ -143,8 +143,8 @@ func is_half_hp():
 	return hp <= max_hp / 2
 
 
-func oof(damage, bypass_lock=false):
-	.oof(damage, bypass_lock)
+func oof(damage, bypass_lock=false, attacker=null, message=""):
+	.oof(damage, bypass_lock, attacker, message)
 	
 	if is_dead():
 		var loot = crown.instance()

@@ -104,8 +104,8 @@ func play_death_animation():
 
 
 # In addition to taking damage, update the PlayerHUD.
-func oof(damage, bypass_lock=false):
-	.oof(damage, bypass_lock)
+func oof(damage, bypass_lock=false, attacker=null, message=""):
+	.oof(damage, bypass_lock, attacker, message)
 	hud.update_hp(self)
 	
 	if is_dead() and camera.get_parent() == self:

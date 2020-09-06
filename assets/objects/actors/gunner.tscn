@@ -9,8 +9,6 @@
 [ext_resource path="res://assets/sounds/gunner_death.wav" type="AudioStream" id=7]
 [ext_resource path="res://assets/scripts/abilities/shoot.gd" type="Script" id=8]
 
-
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5, 6 )
 

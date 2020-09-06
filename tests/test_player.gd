@@ -14,11 +14,11 @@ var player
 # index: the index of the Vector2 to check (0 for x, 1 for y)
 # assert_func: assert function to be called to check player's position
 func move(action, index, assert_func):
-	var original = player.get_global_position()[index]
+	var original = player.global_position[index]
 	Utility.simulate_action(action)
-	yield(until_timeout(0.01), YIELD)
+	yield(until_timeout(0.1), YIELD)
 	Utility.simulate_action(action, false)
-	asserts.call(assert_func, original, player.get_global_position()[index])
+	asserts.call(assert_func, original, player.global_position[index])
 
 
 func pre():
@@ -26,20 +26,58 @@ func pre():
 	add_child(player)
 
 
+func test_damage_updates_hud():
+	var hearts = player.hud.hearts
+	var half_heart_damage = player.max_hp / hearts.size() / 2
+	
+	# Half heart sprite is frame #1.
+	player.oof(half_heart_damage)
+	asserts.is_equal(hearts[hearts.size() - 1].frame, 1, 
+		"half heart damage shown correctly")
+	
+	# Full empty heart sprite is frame #2.
+	player.oof(half_heart_damage)
+	asserts.is_equal(hearts[hearts.size() - 1].frame, 2, 
+		"full heart damage shown correctly")
+	
+	yield(until_timeout(0.01), YIELD)
+
+
+func test_dash():
+	# Dash cooldown should be READY and visible in HUD.
+	asserts.is_true(player.hud.dash_ready.visible and not \
+		player.hud.recharging.visible, "cooldown ready in HUD")
+	
+	Utility.simulate_action("ui_right")
+	Utility.simulate_action("action_dash")
+	var time = 0.5
+	yield(until_timeout(time), YIELD)
+	Utility.simulate_action("ui_right", false)
+	Utility.simulate_action("action_dash", false)
+	asserts.is_greater_than(player.global_position.x, 
+		player.move_speed * time * 100, "moved a significant distance")
+	
+	# After dash, HUD should show that dash is on cooldown and recharging.
+	asserts.is_true(player.hud.recharging.visible and not \
+		player.hud.dash_ready.visible, "cooldown updated in HUD")
+
+
 func test_death_handled_correctly():
 	pause_mode = PAUSE_MODE_PROCESS
-	var canvas = player.canvas
 	var camera = player.camera
+	var canvas = player.canvas
 	var menu = player.menu
-	player.oof(player.get_maximum_hp())
+	player.oof(player.max_hp)
 	yield(until_signal(player, "tree_exited", 0.5), YIELD)
 	yield(until_timeout(0.01), YIELD)
 	
 	asserts.is_true(menu.visible)
 	asserts.is_equal(menu.title.get_text().to_lower(), "you died")
 	asserts.is_true(menu.cannot_close)
-	asserts.is_true(is_instance_valid(canvas))
 	asserts.is_true(is_instance_valid(camera))
+	asserts.is_true(is_instance_valid(canvas))
+	camera.queue_free()
+	canvas.queue_free()
 
 
 func test_hold_tetromino_when_empty():
@@ -88,5 +126,6 @@ func test_movement_right():
 
 
 func post():
-	if player:
+	# Player may have died and removed from the game in one of the tests.
+	if is_instance_valid(player):
 		player.queue_free()

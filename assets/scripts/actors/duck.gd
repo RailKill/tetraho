@@ -80,6 +80,7 @@ func commence_attack(direction : Vector2):
 	is_attacking = false
 	is_on_cooldown = true
 	var scratch = area_damage.instance()
+	scratch.creator = self
 	scratch.translate(direction * 16)
 	add_child(scratch)
 	scratch.animation.play()

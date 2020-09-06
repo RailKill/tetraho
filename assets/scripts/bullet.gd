@@ -18,7 +18,7 @@ func _physics_process(delta):
 	if collision:
 		var body = collision.get_collider()
 		if body is Actor:
-			body.oof(Constants.BULLET_DAMAGE)
+			body.oof(Constants.BULLET_DAMAGE, false, trajectory.caster, "shot")
 		queue_free()
 	
 	# If bullet has gone on past its lifetime, destroy self.

@@ -3,21 +3,31 @@ extends KinematicBody2D
 # An actor that can perform actions in the game.
 
 
+# Emitted when the actor takes damage.
+signal damage_taken(attacker, verb, victim, amount)
+
+
+# Invulnerable actor.
+export var is_invulnerable = false
+export(Constants.Team) var team = Constants.Team.MOBS
+
+# Hit points.
+var hp = Constants.PLAYER_HP setget ,get_hp
+# Maximum hit points.
+var max_hp = Constants.PLAYER_HP setget ,get_maximum_hp
+# Speed in which the actor can move.
+var move_speed = Constants.PLAYER_MOVE_SPEED
+# Checks if this actor is being locked by a TetrominoBlock.
+var locked_by = []
+
 # Reference to the collision shape of the actor.
 onready var collision_shape = $CollisionShape2D
 onready var sound_hit = $SoundHit
 onready var sound_death = $SoundDeath
 
-# Hit points.
-var hp = Constants.PLAYER_HP
-# Maximum hit points.
-var max_hp = Constants.PLAYER_HP
-# Speed in which the actor can move.
-var move_speed = Constants.PLAYER_MOVE_SPEED
-# Invulnerable actor.
-export var is_invulnerable = false
-# Checks if this actor is being locked by a TetrominoBlock.
-var locked_by = []
+
+func _to_string():
+	return name
 
 
 # Checks a given collision and react accordingly. By default, nothing happens.
@@ -50,10 +60,11 @@ func is_locked():
 
 
 # Damage the actor.
-func oof(damage, bypass_lock=false):
+func oof(damage, bypass_lock=false, attacker=null, message=""):
 	if not is_invulnerable and (bypass_lock or not is_locked()):
 		hp -= damage
 		print("%s took %d damage." % [name, damage])
+		emit_signal("damage_taken", attacker, message, self, damage)
 		
 		if is_dead():
 			play_death_animation()

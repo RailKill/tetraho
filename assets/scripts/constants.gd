@@ -3,6 +3,17 @@ extends Node
 # Contains global game constants.
 
 
+# Collision layer bit values.
+enum Layer {
+	ENVIRONMENT = 1,
+	FLOOR = 2,
+	ACTOR = 4,
+	BLOCK = 8,
+}
+
+enum Team { ORIGINAL, SUITS, MOBS }
+
+
 # Grid settings.
 const GRID_SIZE = 14
 const GRID_DOUBLE = GRID_SIZE * 2
@@ -19,16 +30,8 @@ const DIRECTIONALS = [
 	Vector2.LEFT * GRID_SIZE,
 	(Vector2.LEFT + Vector2.UP) * GRID_SIZE,
 	Vector2.UP * GRID_SIZE,
-	(Vector2.UP + Vector2.RIGHT) * GRID_SIZE
+	(Vector2.UP + Vector2.RIGHT) * GRID_SIZE,
 ]
-
-# Collision layer bit values.
-enum Layer {
-	ENVIRONMENT = 1,
-	FLOOR = 2,
-	ACTOR = 4,
-	BLOCK = 8
-}
 
 # Player settings.
 const PLAYER_HP = 100

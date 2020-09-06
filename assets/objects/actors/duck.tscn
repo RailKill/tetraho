@@ -7,8 +7,6 @@
 [ext_resource path="res://assets/sounds/warning.wav" type="AudioStream" id=5]
 [ext_resource path="res://assets/sprites/actors/duck/exclamation_popup.png" type="Texture" id=6]
 
-
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6.50298, 6 )
 

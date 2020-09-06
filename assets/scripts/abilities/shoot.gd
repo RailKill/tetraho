@@ -14,12 +14,13 @@ var point : Vector2
 func cast():
 	if not is_on_cooldown:
 		var trajectory = Trajectory.new()
+		trajectory.caster = caster
 		trajectory.direction = aim
 		trajectory.speed = Constants.BULLET_SPEED
 		
 		var shot = bullet.instance()
 		shot.trajectory = trajectory
 		
-		get_node("/root/Level").add_child(shot)
+		caster.get_parent().add_child(shot)
 		shot.set_global_position(point)
 		complete()
