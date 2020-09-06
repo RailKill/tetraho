@@ -5,7 +5,7 @@ extends WAT.Test
 # Resource path of the player object.
 var resource = preload("res://assets/objects/actors/player.tscn")
 # Reference to Player node.
-var player
+var player: PlayerCharacter
 
 
 # Triggers the actions and checks if the player's position is expected. 
@@ -33,12 +33,12 @@ func test_damage_updates_hud():
 	# Half heart sprite is frame #1.
 	player.oof(half_heart_damage)
 	asserts.is_equal(hearts[hearts.size() - 1].frame, 1, 
-		"half heart damage shown correctly")
+			"half heart damage shown correctly")
 	
 	# Full empty heart sprite is frame #2.
 	player.oof(half_heart_damage)
 	asserts.is_equal(hearts[hearts.size() - 1].frame, 2, 
-		"full heart damage shown correctly")
+			"full heart damage shown correctly")
 	
 	yield(until_timeout(0.01), YIELD)
 
@@ -46,8 +46,9 @@ func test_damage_updates_hud():
 func test_dash():
 	# Dash cooldown should be READY and visible in HUD.
 	asserts.is_true(player.hud.dash_ready.visible and not \
-		player.hud.recharging.visible, "cooldown ready in HUD")
+			player.hud.recharging.visible, "cooldown ready in HUD")
 	
+	yield(until_timeout(0.01), YIELD)
 	Utility.simulate_action("ui_right")
 	Utility.simulate_action("action_dash")
 	var time = 0.5
@@ -55,11 +56,11 @@ func test_dash():
 	Utility.simulate_action("ui_right", false)
 	Utility.simulate_action("action_dash", false)
 	asserts.is_greater_than(player.global_position.x, 
-		player.move_speed * time * 100, "moved a significant distance")
+			player.move_speed * time * 100, "moved a significant distance")
 	
 	# After dash, HUD should show that dash is on cooldown and recharging.
 	asserts.is_true(player.hud.recharging.visible and not \
-		player.hud.dash_ready.visible, "cooldown updated in HUD")
+			player.hud.dash_ready.visible, "cooldown updated in HUD")
 
 
 func test_death_handled_correctly():
@@ -71,11 +72,14 @@ func test_death_handled_correctly():
 	yield(until_signal(player, "tree_exited", 0.5), YIELD)
 	yield(until_timeout(0.01), YIELD)
 	
-	asserts.is_true(menu.visible)
-	asserts.is_equal(menu.title.get_text().to_lower(), "you died")
-	asserts.is_true(menu.cannot_close)
-	asserts.is_true(is_instance_valid(camera))
-	asserts.is_true(is_instance_valid(canvas))
+	asserts.is_true(menu.visible, "menu visible")
+	asserts.is_equal(menu.title.text.to_lower(), "you died", 
+			"death message shown")
+	asserts.is_true(menu.cannot_close, "menu cannot be closed")
+	asserts.is_true(is_instance_valid(camera), 
+			"camera transferred to parent node")
+	asserts.is_true(is_instance_valid(canvas), 
+			"canvas transferred to parent node")
 	camera.queue_free()
 	canvas.queue_free()
 
@@ -91,6 +95,7 @@ func test_hold_tetromino_when_empty():
 	yield(until_timeout(0.01), YIELD)
 	
 	asserts.is_equal(player.hold, current)
+	player.hold.queue_free()
 
 
 func test_hold_tetromino_swapped_correctly():
@@ -107,6 +112,7 @@ func test_hold_tetromino_swapped_correctly():
 	
 	asserts.is_equal(player.current, fake)
 	asserts.is_equal(player.hold, current)
+	player.hold.queue_free()
 
 
 func test_movement_up():
@@ -128,4 +134,5 @@ func test_movement_right():
 func post():
 	# Player may have died and removed from the game in one of the tests.
 	if is_instance_valid(player):
+		player.current.queue_free()
 		player.queue_free()

@@ -31,8 +31,6 @@ func start():
 	
 	add_child(navigation)
 	navigation.add_child(navmesh)
-	navmesh.enabled = false
-	navmesh.enabled = true
 
 
 func pre():
@@ -47,12 +45,12 @@ func test_duck():
 	add_child(duck)
 	
 	yield(until_timeout(0.5), YIELD)
-	asserts.is_greater_than(duck.get_global_position(), 
-			Vector2.ZERO, "chased player")
+	asserts.is_greater_than(duck.global_position, Vector2.ZERO, "chased player")
 	var args = yield(until_signal(player, "damage_taken", 3), YIELD)
 	asserts.is_true(player.hp != player.max_hp, 
 			"%s %s for %d damage" % args.slice(1, 3) if args[0] else 
 			"attack the player")
+	
 	duck.queue_free()
 
 
@@ -83,6 +81,7 @@ func test_gunner():
 
 
 func post():
+	player.current.queue_free()
 	player.queue_free()
 	yield(until_signal(player, "tree_exited", 0.5), YIELD)
 

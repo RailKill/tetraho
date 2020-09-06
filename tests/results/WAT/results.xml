@@ -1,29 +1,29 @@
 <?xml version="1.0" ?>
-<testsuites failures="0" name="TestXML" tests="2" time="0.87">
-<testsuite failures="0" name="Enemy" tests="2" time="0.002">
-<testcase name=" gunner" time="1.906">
+<testsuites failures="0" name="TestXML" tests="2" time="0.887">
+<testsuite failures="0" name="Enemy" tests="2" time="0.001">
+<testcase name=" gunner" time="1.907">
 </testcase>
 <testcase name=" duck" time="0.666">
 </testcase>
 </testsuite>
-<testsuite failures="0" name="Player" tests="9" time="0.003">
-<testcase name=" hold tetromino swapped correctly" time="0.012">
+<testsuite failures="0" name="Player" tests="9" time="0.002">
+<testcase name=" movement down" time="0.077">
 </testcase>
-<testcase name=" movement right" time="0.099">
-</testcase>
-<testcase name=" movement up" time="0.1">
-</testcase>
-<testcase name=" damage updates hud" time="0.016">
+<testcase name=" movement right" time="0.1">
 </testcase>
 <testcase name=" movement left" time="0.1">
 </testcase>
-<testcase name=" movement down" time="0.1">
+<testcase name=" death handled correctly" time="0.15">
+</testcase>
+<testcase name=" dash" time="0.5">
+</testcase>
+<testcase name=" movement up" time="0.1">
+</testcase>
+<testcase name=" damage updates hud" time="0.017">
+</testcase>
+<testcase name=" hold tetromino swapped correctly" time="0.033">
 </testcase>
 <testcase name=" hold tetromino when empty" time="0.033">
-</testcase>
-<testcase name=" death handled correctly" time="0.151">
-</testcase>
-<testcase name=" dash" time="0.483">
 </testcase>
 </testsuite>
 </testsuites>
