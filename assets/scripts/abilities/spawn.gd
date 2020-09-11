@@ -27,7 +27,7 @@ func cast():
 
 func complete():
 	.complete()
-	var level = get_node("/root/Level")
+	var level = caster.get_parent()
 	
 	var target = checker.instance()
 	level.add_child(target)

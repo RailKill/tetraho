@@ -6,7 +6,9 @@ extends WAT.Test
 const NC = Constants.GRID_SIZE * 5
 
 var block_resource = preload("res://assets/objects/tetris/tetromino_block.tscn")
+var bmancer_resource = preload("res://assets/objects/actors/blockmancer.tscn")
 var duck_resource = preload("res://assets/objects/actors/duck.tscn")
+var house_resource = preload("res://assets/objects/actors/duck_house.tscn")
 var gunner_resource = preload("res://assets/objects/actors/gunner.tscn")
 var player_resource = preload("res://assets/objects/actors/player.tscn")
 var player: PlayerCharacter
@@ -36,10 +38,21 @@ func start():
 func pre():
 	player = player_resource.instance()
 	add_child(player)
-	player.global_position = Vector2(NC / 2.0, 0)
+	player.global_position = Vector2(NC, 0)
+
+
+func test_blockmancer_capable_of_damaging_player():
+	var bmancer = bmancer_resource.instance()
+	bmancer.is_aggro = true
+	add_child(bmancer)
+	yield(until_signal(player, "damage_taken", 3), YIELD)
+	asserts.is_true(player.hp != player.max_hp)
+	bmancer.queue_free()
+	$SingleBlock.queue_free()
 
 
 func test_duck():
+	player.global_position = Vector2(NC / 2.0, 0)
 	var duck = duck_resource.instance()
 	duck.is_aggro = true
 	add_child(duck)
@@ -52,6 +65,40 @@ func test_duck():
 			"attack the player")
 	
 	duck.queue_free()
+
+
+func test_duck_house():
+	player.is_invulnerable = true
+	var house = house_resource.instance()
+	house.is_aggro = true
+	add_child(house)
+	
+	# Test 1: Over the course of 20 seconds, no more than 3 ducks are spawned.
+	Engine.time_scale = 10.0
+	yield(until_timeout(20), YIELD)
+	Engine.time_scale = 1.0
+	var ducks = []
+	for node in get_children():
+		if node is Duck:
+			ducks.append(node)
+	asserts.is_equal(ducks.size(), 3, "spawned exactly 3 ducks")
+	for duck in ducks:
+		duck.queue_free()
+	
+	# Test 2: Player can push Duck into house to destroy it.
+	house.is_aggro = false
+	var sole_duck = duck_resource.instance()
+	add_child(sole_duck)
+	sole_duck.global_position = Vector2(NC / 2.0, 0)
+	Utility.simulate_action("ui_left")
+	yield(until_signal(house, "tree_exited", 3), YIELD)
+	Utility.simulate_action("ui_left", false)
+	asserts.is_false(is_instance_valid(house), "destroyed by pushing")
+	
+	if is_instance_valid(house):
+		house.queue_free()
+	if is_instance_valid(sole_duck):
+		sole_duck.queue_free()
 
 
 func test_gunner():
@@ -77,6 +124,7 @@ func test_gunner():
 	yield(until_signal(block, "damage_taken", 3), YIELD)
 	asserts.is_true(block.hp != block.max_hp, "shot blocked by tetromino")
 	
+	block.queue_free()
 	gunner.queue_free()
 
 
