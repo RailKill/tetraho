@@ -12,9 +12,9 @@ const DIRECTIONS = {
 }
 
 # Current tetromino being controlled.
-var current : Tetromino
+var current: Tetromino
 # The player can hold a tetromino for later use.
-var hold : Tetromino
+var hold: Tetromino
 # Queue to generate tetrominos.
 var queue = TetrominoQueue.new()
 
@@ -32,7 +32,7 @@ func _ready():
 	next_tetromino()
 
 
-func _process(_delta):
+func _physics_process(_delta):
 	if Input.is_action_just_pressed("action_special"):
 		# If hold is empty, store current and call next tetromino.
 		if not hold:
@@ -44,9 +44,7 @@ func _process(_delta):
 			hold = current
 			current = swap
 			hud.update_tetromino(self)
-
-
-func _physics_process(_delta):
+	
 	if not is_dead() and not is_locked():
 		var move_vector = Vector2.ZERO
 		for vector in DIRECTIONS:
@@ -65,7 +63,7 @@ func _physics_process(_delta):
 			# Push other actors to prevent getting stuck.
 			if collision:
 				var body = collision.get_collider()
-				if body.is_in_group("enemy") and not body.is_locked():
+				if body.is_in_group("pushable") and not body.is_locked():
 					var push = body.move_and_collide(move)
 					body.check_collision(push)
 
@@ -76,7 +74,7 @@ func heal(amount):
 
 
 # Checks if the player is currently controlling the given tetromino.
-func is_current(tetromino : Tetromino):
+func is_current(tetromino: Tetromino):
 	return current == tetromino
 
 
@@ -109,10 +107,19 @@ func oof(damage, bypass_lock=false, attacker=null, message=""):
 	hud.update_hp(self)
 	
 	if is_dead() and camera.get_parent() == self:
+		# Reparent camera.
 		remove_child(camera)
 		get_parent().add_child(camera)
 		camera.set_global_position(get_global_position())
+		
+		# Reparent canvas.
 		remove_child(canvas)
 		get_parent().add_child(canvas)
+		
+		# Destroy current and hold tetrominos.
+		current.queue_free()
+		if is_instance_valid(hold):
+			hold.queue_free()
+		
 	elif get_hp() <= 0.2 * get_maximum_hp():
 		sound_low_hp.play()

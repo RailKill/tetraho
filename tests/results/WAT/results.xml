@@ -1,33 +1,33 @@
 <?xml version="1.0" ?>
-<testsuites failures="0" name="TestXML" tests="2" time="0.868">
+<testsuites failures="0" name="TestXML" tests="2" time="0.859">
 <testsuite failures="0" name="Enemy" tests="4" time="0.002">
-<testcase name=" gunner" time="1.899">
+<testcase name=" blockmancer capable of damaging player" time="1.894">
 </testcase>
-<testcase name=" duck" time="0.666">
+<testcase name=" duck" time="0.665">
 </testcase>
-<testcase name=" blockmancer capable of damaging player" time="2.098">
+<testcase name=" duck house" time="4.815">
 </testcase>
-<testcase name=" duck house" time="4.813">
+<testcase name=" gunner" time="2.134">
 </testcase>
 </testsuite>
 <testsuite failures="0" name="Player" tests="9" time="0.003">
-<testcase name=" hold tetromino swapped correctly" time="0.03">
+<testcase name=" damage updates hud" time="0.006">
+</testcase>
+<testcase name=" dash" time="0.505">
+</testcase>
+<testcase name=" movement right" time="0.1">
 </testcase>
 <testcase name=" movement left" time="0.1">
 </testcase>
-<testcase name=" dash" time="0.516">
-</testcase>
-<testcase name=" hold tetromino when empty" time="0.034">
-</testcase>
 <testcase name=" movement down" time="0.1">
 </testcase>
-<testcase name=" movement up" time="0.1">
+<testcase name=" death handled correctly" time="0.151">
 </testcase>
-<testcase name=" death handled correctly" time="0.15">
+<testcase name=" hold tetromino swapped correctly" time="0.018">
 </testcase>
-<testcase name=" movement right" time="0.083">
+<testcase name=" hold tetromino when empty" time="0.033">
 </testcase>
-<testcase name=" damage updates hud" time="0.017">
+<testcase name=" movement up" time="0.098">
 </testcase>
 </testsuite>
 </testsuites>

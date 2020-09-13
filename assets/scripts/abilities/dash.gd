@@ -18,7 +18,7 @@ func _physics_process(_delta):
 			var body = collision.get_collider()
 			# TODO: The group "enemy" should be renamed
 			# to something more appropriate for a knockback-able group.
-			if body.is_in_group("enemy") and not body.is_locked():
+			if body.is_in_group("pushable") and not body.is_locked():
 				var knockback = Knockback.new()
 				knockback.direction = direction
 				knockback.duration = duration

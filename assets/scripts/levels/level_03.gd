@@ -149,7 +149,7 @@ func _on_DialogCutscene_body_entered(body):
 		
 		for node in level.get_children():
 			if node is Tetromino:
-				if node.can_decay and node.is_summoned:
+				if node.can_decay and node.is_summoned():
 					node.pause_mode = PAUSE_MODE_PROCESS
 		
 		get_tree().set_pause(true)

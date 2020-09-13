@@ -1,23 +1,32 @@
 class_name TetrominoQueue
 extends Node
-# Contains a queue of tetromino blocks, randomized 7-bag.
+# Contains a queue of tetromino blocks using 7-bag randomization.
 
 
-# List of tetrominos available for random generation.
-var generator = [
-	preload("res://assets/objects/tetris/i_block.tscn"),
-	preload("res://assets/objects/tetris/o_block.tscn"),
-	preload("res://assets/objects/tetris/j_block.tscn"),
-	preload("res://assets/objects/tetris/l_block.tscn"),
-	preload("res://assets/objects/tetris/s_block.tscn"),
-	preload("res://assets/objects/tetris/z_block.tscn"),
-	preload("res://assets/objects/tetris/t_block.tscn")
+# Resource path of the tetromino object to be generated.
+var resource = preload("res://assets/objects/tetris/tetromino.tscn")
+
+# List of tetromino configurations available for random generation.
+var configurations = [
+	# I-Block
+	{"top": [1, 1, 1, 1], "bottom": [0, 0, 0, 0], "color": Color.aqua},
+	# J-Block
+	{"top": [0, 0, 1], "bottom": [1, 1, 1], "color": Color.mediumblue},
+	# L-Block
+	{"top": [1, 0, 0], "bottom": [1, 1, 1], "color": Color.orange},
+	# O-Block
+	{"top": [1, 1], "bottom": [1, 1], "color": Color.yellow},
+	# S-Block
+	{"top": [0, 1, 1], "bottom": [1, 1, 0], "color": Color.mediumspringgreen},
+	# T-Block
+	{"top": [0, 1, 0], "bottom": [1, 1, 1], "color": Color.purple},
+	# Z-Block
+	{"top": [1, 1, 0], "bottom": [0, 1, 1], "color": Color.mediumvioletred},
 ]
-
-# List of tetrominos in the current queue.
-var queue : Array
 # Current index of the queue.
-var index : int
+var index: int
+# List of tetrominos in the current queue.
+var queue: Array
 
 
 func _init():
@@ -43,8 +52,11 @@ func peek():
 # Re-generate the queue with a new set of tetrominos in a randomized order.
 func refresh():
 	randomize()
-	generator.shuffle()
+	configurations.shuffle()
 	index = 0
 	queue = []
-	for tetromino in generator:
-		queue.append(tetromino.instance())
+	for config in configurations:
+		var tetromino = resource.instance()
+		tetromino.load_configuration(
+				config["top"], config["bottom"], config["color"])
+		queue.append(tetromino)

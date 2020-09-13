@@ -13,7 +13,8 @@
 extents = Vector2( 5, 6 )
 
 [node name="Gunner" type="KinematicBody2D" groups=[
-"enemy",
+"pushable",
+"trappable",
 ]]
 collision_layer = 4
 collision_mask = 5
