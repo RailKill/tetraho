@@ -106,7 +106,7 @@ func _physics_process(delta):
 # Odd width configurations are centered in a way where it does not adhere to
 # grid snapping. Call this function to correct that offset.
 func _correct_positioning():
-	if width > 1 and width % 2 != 0:
+	if width % 2 != 0:
 		if rotation_degrees == 0 or int(rotation_degrees) % 180 == 0:
 			position.x += Constants.GRID_HALF 
 		else:
@@ -151,7 +151,8 @@ func rotate_piece():
 # Function to calculate grid snapping based on mouse position.
 func snap_to_grid(position):
 	# warning-ignore:integer_division
-	var snap = Constants.GRID_SIZE * (int(position) / Constants.GRID_SIZE)
+	var snap = Constants.GRID_SIZE * \
+			(int(round(position)) / Constants.GRID_SIZE)
 
 	# Uncomment this part for more sensitive snapping.
 	# warning-ignore:integer_division

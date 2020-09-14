@@ -82,6 +82,7 @@ func test_death_handled_correctly():
 			"canvas transferred to parent node")
 	camera.queue_free()
 	canvas.queue_free()
+	get_tree().paused = false
 
 
 func test_hold_tetromino_when_empty():
