@@ -4,66 +4,65 @@ extends Actor
 # moved, or have their own abilities, so it is considered an Actor.
 
 
+# Check if block is marked for solving.
+var marked = false
+
 # Reference to the animated sprite for summon animation.
 onready var summon = $Summon
 # Reference to the animated sprite for unsummon animation.
 onready var unsummon = $Unsummon
-
-# Check if block is marked for solving.
-var marked = false
-# Actors which are trapped in this block.
-var trapped = []
 
 
 func _ready():
 	max_hp = Constants.BLOCK_HP
 	hp = Constants.BLOCK_HP
 	collision_shape.disabled = true
+	
+	#warning-ignore:unused_argument
+	connect("tree_exited", self, "_on_tree_exited")
+	unsummon.connect("animation_finished", self, "_on_unsummon_complete")
+
+
+func _on_unsummon_complete():
+	queue_free()
+
+
+func _on_tree_exited():
+	untrap()
 
 
 # Queue the block for destruction.
 func disable():
 	collision_shape.disabled = true
-	summon.set_visible(false)
-	unsummon.set_visible(true)
+	summon.visible = false
+	unsummon.visible = true
 	unsummon.play()
 
 
 # Summons the block into game existence.
 func enable():
 	collision_shape.disabled = false
-	unsummon.set_visible(false)
-	summon.set_visible(true)
+	unsummon.visible = false
+	summon.visible = true
 	summon.play()
-	GameWorld.add_block(self)
 
 
 # Return the difference vector from collision origin to the given target.
-func get_difference(target : Node2D):
-	return collision_shape.get_global_position() - target.get_global_position()
+func get_difference(target: Node2D):
+	return collision_shape.global_position - target.global_position
 
 
 # Gets the rounded global position of the center of the block.
 func get_global_vector():
-	var vector = collision_shape.get_global_position()
+	var vector = collision_shape.global_position
 	return Vector2(int(round(vector.x)), int(round(vector.y)))
 
 
-# Trap the given actor in this block.
 func trap(actor):
-	trapped.append(actor)
-	actor.locked_by.append(self)
+	if not GameWorld.blocks.has(self):
+		GameWorld.blocks[self] = []
+	GameWorld.blocks[self].append(actor)
 
 
-# Untrap all actors in this block.
 func untrap():
-	for actor in trapped:
-		# If actor is dead, they will no longer exist, so do a null check.
-		if is_instance_valid(actor):
-			actor.locked_by.erase(self)
-
-
-func _on_Unsummon_animation_finished():
-	GameWorld.remove_block(self)
-	untrap()
-	call_deferred("free")
+	GameWorld.blocks.erase(self)

@@ -6,21 +6,12 @@ extends KinematicBody2D
 # Emitted when the actor takes damage.
 signal damage_taken(attacker, verb, victim, amount)
 
-
-# Invulnerable actor.
+export var hp = Constants.PLAYER_HP setget ,get_hp
+export var max_hp = Constants.PLAYER_HP setget ,get_maximum_hp
+export var move_speed = Constants.PLAYER_MOVE_SPEED
 export var is_invulnerable = false
 export(Constants.Team) var team = Constants.Team.MOBS
 
-# Hit points.
-var hp = Constants.PLAYER_HP setget ,get_hp
-# Maximum hit points.
-var max_hp = Constants.PLAYER_HP setget ,get_maximum_hp
-# Speed in which the actor can move.
-var move_speed = Constants.PLAYER_MOVE_SPEED
-# Checks if this actor is being locked by a TetrominoBlock.
-var locked_by = []
-
-# Reference to the collision shape of the actor.
 onready var collision_shape = $CollisionShape2D
 onready var sound_hit = $SoundHit
 onready var sound_death = $SoundDeath
@@ -31,7 +22,7 @@ func _to_string():
 
 
 # Checks a given collision and react accordingly. By default, nothing happens.
-func check_collision(_collision : KinematicCollision2D):
+func check_collision(_collision: KinematicCollision2D):
 	pass
 
 
@@ -51,12 +42,12 @@ func get_maximum_hp():
 
 # Heals the actor by the given amount.
 func heal(amount):
-	hp = clamp(get_hp() + amount, 0, get_maximum_hp())
+	hp = clamp(hp + amount, 0, max_hp)
 
 
 # Checks if actor is being locked.
 func is_locked():
-	return locked_by.size() > 0
+	return GameWorld.is_actor_locked(self)
 
 
 # Damage the actor.
@@ -68,7 +59,7 @@ func oof(damage, bypass_lock=false, attacker=null, message=""):
 		
 		if is_dead():
 			play_death_animation()
-			set_visible(false)
+			visible = false
 			collision_shape.call_deferred("set_disabled", true)
 		else:
 			sound_hit.play()
@@ -107,12 +98,12 @@ func unstuck():
 	
 	while still_stuck:
 		for i in range(0, directions.size()):
-			var point = get_global_position() + directions[i]
+			var point = global_position + directions[i]
 			checker.reposition(point, true)
 			yield(get_tree().create_timer(0.05), "timeout")
 			if not checker.collided:
 				still_stuck = false
-				set_global_position(point)
+				global_position = point
 				break
 			directions[i] *= 2
 	

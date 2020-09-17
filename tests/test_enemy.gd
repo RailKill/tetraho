@@ -48,7 +48,10 @@ func test_blockmancer_capable_of_damaging_player():
 	yield(until_signal(player, "damage_taken", 3), YIELD)
 	asserts.is_true(player.hp != player.max_hp)
 	bmancer.queue_free()
-	$Deadmino.queue_free()
+	
+	var deadmino = $Deadmino
+	if is_instance_valid(deadmino):
+		$Deadmino.queue_free()
 
 
 func test_duck():

@@ -80,12 +80,11 @@ func _physics_process(delta):
 					if body.is_in_group("trappable"):
 						solid.get_child(i).trap(body)
 						sound_trap.play()
-				
 				solid.get_child(i).enable()
 			
 			is_summoning = false
 			reticle.queue_free()
-			solid.set_visible(true)
+			solid.visible = true
 			GameWorld.solve()
 	
 	# If the solid blocks are visible, that means they are active.
@@ -97,7 +96,6 @@ func _physics_process(delta):
 				is_decaying = true
 				for block in solid.get_children():
 					block.disable()
-					GameWorld.remove_block(block)
 			
 			if solid.get_child_count() == 0:
 				queue_free()
@@ -153,12 +151,6 @@ func snap_to_grid(position):
 	# warning-ignore:integer_division
 	var snap = Constants.GRID_SIZE * \
 			(int(round(position)) / Constants.GRID_SIZE)
-
-	# Uncomment this part for more sensitive snapping.
-	# warning-ignore:integer_division
-	# if int(position) % Constants.GRID_SIZE > Constants.GRID_HALF:
-	#	snap += Constants.GRID_SIZE
-
 	return snap
 
 
@@ -173,9 +165,9 @@ func snap_to_mouse():
 	_correct_positioning()
 	
 	if is_valid_placement():
-		reticle.set_modulate(Color.white)
+		reticle.modulate = Color.white
 	else:
-		reticle.set_modulate(Color(0.8, 0.1, 0.1, 1))
+		reticle.modulate = Color(0.8, 0.1, 0.1, 1)
 
 
 # Summons the tetromino into play.
