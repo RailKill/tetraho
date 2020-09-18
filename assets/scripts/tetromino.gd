@@ -75,12 +75,12 @@ func _physics_process(delta):
 		if summon_time <= 0:
 			# For each target reticle, get the actors who are in there.
 			for i in range(reticle.get_child_count()):
+				solid.get_child(i).enable()
 				for body in reticle.get_child(i).get_overlapping_bodies():
 					# Perform a lock for trappable bodies.
 					if body.is_in_group("trappable"):
 						solid.get_child(i).trap(body)
 						sound_trap.play()
-				solid.get_child(i).enable()
 			
 			is_summoning = false
 			reticle.queue_free()

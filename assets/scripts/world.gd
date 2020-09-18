@@ -2,10 +2,8 @@ extends Node
 # Global world of the game. Auto-loaded on every level.
 
 
-# Dictionary of all blocks as keys, and list of actors trapped as values.
-var blocks = {}
 # List of vector offsets to check for horizontal 2x3 blocks.
-var solver_horizontal = [
+const SOLVER_HORIZONTAL = [
 	Vector2(Constants.GRID_SIZE, 0),
 	Vector2(Constants.GRID_DOUBLE, 0),
 	Vector2(0, Constants.GRID_SIZE),
@@ -13,7 +11,7 @@ var solver_horizontal = [
 	Vector2(Constants.GRID_DOUBLE, Constants.GRID_SIZE),
 ]
 # List of vector offsets to check for vertical 2x3 blocks.
-var solver_vertical = [
+const SOLVER_VERTICAL = [
 	Vector2(Constants.GRID_SIZE, 0),
 	Vector2(0, Constants.GRID_SIZE),
 	Vector2(Constants.GRID_SIZE, Constants.GRID_SIZE),
@@ -21,9 +19,13 @@ var solver_vertical = [
 	Vector2(Constants.GRID_SIZE, Constants.GRID_DOUBLE),
 ]
 
+# Dictionary of all blocks as keys, and list of actors trapped as values.
+var blocks = {}
+
 onready var sound_solve = $SoundSolve
 
 
+# Checks the blocks record if a given actor is trapped.
 func is_actor_locked(actor):
 	for trapped_actors in blocks.values():
 		if trapped_actors.has(actor):
@@ -34,8 +36,8 @@ func is_actor_locked(actor):
 # Whenever a Tetromino is summoned, attempt to solve.
 func solve():
 	for block in blocks.keys():
-		search(block, solver_horizontal)
-		search(block, solver_vertical)
+		search(block, SOLVER_HORIZONTAL)
+		search(block, SOLVER_VERTICAL)
 	
 	var has_marked = false
 	for block in blocks.keys():
