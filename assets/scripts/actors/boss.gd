@@ -183,8 +183,3 @@ func teleport(index=-1):
 		set_global_position(teleport_points[selected])
 		teleport_animation.play()
 		sound_teleport.play()
-		
-
-func play_casted_animation(ability):
-	if ability is Shoot:
-		sound_shoot.play()

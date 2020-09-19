@@ -70,15 +70,12 @@ func update_hp(player):
 		crown.visible = false
 
 
-# Updates the HUD of the given player's dash cooldown.
-func update_dash(dash : Dash):
-	var not_ready = dash.is_on_cooldown
+# Updates the HUD of the given player's ability cooldown.
+func update_ability(ability: Ability):
+	var not_ready = ability.is_on_cooldown
 	mana_flask.frame = int(not_ready)
 	dash_ready.visible = !not_ready
 	recharging.visible = not_ready
-	
-	if not not_ready:
-		sound_ready.play()
 
 
 func update_tetromino(player):

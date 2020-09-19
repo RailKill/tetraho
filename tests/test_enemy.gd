@@ -8,8 +8,9 @@ const NC = Constants.GRID_SIZE * 5
 var block_resource = preload("res://assets/objects/tetris/tetromino_block.tscn")
 var bmancer_resource = preload("res://assets/objects/actors/blockmancer.tscn")
 var duck_resource = preload("res://assets/objects/actors/duck.tscn")
-var house_resource = preload("res://assets/objects/actors/duck_house.tscn")
+var gate_resource = preload("res://assets/objects/gate.tscn")
 var gunner_resource = preload("res://assets/objects/actors/gunner.tscn")
+var house_resource = preload("res://assets/objects/actors/duck_house.tscn")
 var player_resource = preload("res://assets/objects/actors/player.tscn")
 var player: PlayerCharacter
 var navigation: Navigation2D
@@ -79,16 +80,30 @@ func test_duck_house():
 	# Test 1: Over the course of 20 seconds, no more than 3 ducks are spawned.
 	Engine.time_scale = 10.0
 	yield(until_timeout(20), YIELD)
-	Engine.time_scale = 1.0
-	var ducks = []
-	for node in get_children():
-		if node is Duck:
-			ducks.append(node)
-	asserts.is_equal(ducks.size(), 3, "spawned exactly 3 ducks")
+	var ducks = get_ducks()
+	asserts.is_equal(ducks.size(), 3, "spawned exactly 3 ducks over 20 seconds")
+	
+	# Test 2: Remove 1 duck, and check if it spawns 1 more, replenishing to 3.
+	ducks[1].queue_free()
+	yield(until_timeout(10), YIELD)
+	ducks = get_ducks()
+	asserts.is_equal(ducks.size(), 3, "after removing 1 duck, replenish to 3")
 	for duck in ducks:
 		duck.queue_free()
 	
-	# Test 2: Player can push Duck into house to destroy it.
+	# Test 3: No duck spawned if blocked by obstacle.
+	var gate = gate_resource.instance()
+	add_child(gate)
+	gate.global_position = Vector2(Constants.GRID_ONE_HALF, -Constants.GRID_HALF)
+	yield(until_timeout(10), YIELD)
+	ducks = get_ducks()
+	asserts.is_equal(ducks.size(), 0, "no duck spawned if blocked by obstacle")
+	gate.queue_free()
+	for duck in ducks:
+		duck.queue_free()
+	
+	# Test 4: Player can push Duck into house to destroy it.
+	Engine.time_scale = 1.0
 	house.is_aggro = false
 	var sole_duck = duck_resource.instance()
 	add_child(sole_duck)
@@ -139,3 +154,11 @@ func post():
 
 func end():
 	navigation.queue_free()
+
+
+func get_ducks():
+	var ducks = []
+	for node in get_children():
+		if node is Duck:
+			ducks.append(node)
+	return ducks

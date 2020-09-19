@@ -1,26 +1,34 @@
 class_name Ability
-extends Node
+extends Node2D
 # Reusable generic ability. Does not do anything by default. Must be a child
 # of an Actor.
 
 
 # Cooldown of this ability.
-export var cooldown : float
-# Delay in seconds before ability can be used again.
-var delay : float
+export(float) var cooldown = 3
 # Duration of ability in seconds.
-export var duration : float
+export(float) var duration = 0
+
+# Delay in seconds before ability can be used again.
+var delay: float
 # Countdown since active.
-var countdown : float
+var countdown: float
 # Checks if ability is being used.
-var is_active : bool
+var is_active: bool
 # Checks if ability is on cooldown.
-var is_on_cooldown : bool
-# Owner of this ability.
-onready var caster : Actor = get_parent()
+var is_on_cooldown: bool
+
+var sound_cast = AudioStreamPlayer2D.new()
+var sound_complete = AudioStreamPlayer2D.new()
+var sound_ready = AudioStreamPlayer2D.new()
+
+onready var caster: Actor = get_parent()
 
 
 func _ready():
+	add_child(sound_cast)
+	add_child(sound_complete)
+	add_child(sound_ready)
 	reset()
 
 
@@ -38,9 +46,10 @@ func _physics_process(delta):
 
 # Cast the ability.
 func cast():
-	if not is_on_cooldown:
+	if not is_on_cooldown and not is_active:
 		is_active = true
 		caster.play_casting_animation(self)
+		sound_cast.play()
 
 
 # Complete the cast and start the cooldown timer.
@@ -48,6 +57,8 @@ func complete():
 	is_active = false
 	is_on_cooldown = true
 	caster.play_casted_animation(self)
+	sound_complete.play()
+	update()
 
 
 # Reset ability cooldown.
@@ -56,3 +67,11 @@ func reset():
 	is_on_cooldown = false
 	delay = cooldown
 	countdown = duration
+	sound_ready.play()
+	update()
+
+
+func update():
+	var hud = caster.get_hud()
+	if hud:
+		hud.update_ability(self)

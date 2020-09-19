@@ -1,6 +1,6 @@
 class_name DeadBlock
 extends TetrominoBlock
-# Dead blocks do not trap actors, they push them away.
+# Dead blocks do not trap actors, they damage and push actors away.
 
 
 func trap(actor):

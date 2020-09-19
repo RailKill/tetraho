@@ -5,6 +5,6 @@ extends Ability
 
 
 # Direction of trajectory.
-export var direction : Vector2
+export(Vector2) var direction = Vector2.ZERO
 # Speed of travel.
-export var speed = 4
+export(float) var speed = 4

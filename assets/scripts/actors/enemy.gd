@@ -3,10 +3,11 @@ extends Actor
 # Enemy in the game whose purpose is to defeat the PlayerCharacter.
 
 
+# Enemies can be aggro-ed, which activates hostile behavior towards player.
+export(bool) var is_aggro = false
+
 # Enemies need to keep track of the player.
 onready var player = get_parent().get_node("Player")
-# Enemies can be aggro-ed, which activates hostile behavior towards player.
-export var is_aggro = false
 
 
 # Returns the difference vector from this enemy to the player.

@@ -12,6 +12,8 @@ export var move_speed = Constants.PLAYER_MOVE_SPEED
 export var is_invulnerable = false
 export(Constants.Team) var team = Constants.Team.MOBS
 
+var checker_resource = load("res://assets/objects/areas/area_checker.tscn")
+
 onready var collision_shape = $CollisionShape2D
 onready var sound_hit = $SoundHit
 onready var sound_death = $SoundDeath
@@ -34,6 +36,11 @@ func is_dead():
 # Get the current hit points of this actor.
 func get_hp():
 	return hp
+
+
+func get_hud():
+	return null
+
 
 # Get the maximum hit points for this actor.
 func get_maximum_hp():
@@ -90,8 +97,8 @@ func play_fail_animation(_ability):
 
 # Unstuck this actor by checking for an empty space in adjacent grid cells.
 func unstuck():
-	var checker = preload("res://assets/objects/areas/area_checker.tscn").instance()
-	get_parent().add_child(checker)
+	var checker = checker_resource.instance()
+	checker.is_snapped = true
 	
 	var still_stuck = true
 	var directions = Constants.DIRECTIONALS.duplicate()
@@ -99,13 +106,12 @@ func unstuck():
 	while still_stuck:
 		for i in range(0, directions.size()):
 			var point = global_position + directions[i]
-			checker.reposition(point, true)
-			yield(get_tree().create_timer(0.05), "timeout")
-			if not checker.collided:
+			checker.global_position = point
+			get_parent().add_child(checker)
+			var collided = yield(checker, "lifetime_expired")
+			if not collided:
 				still_stuck = false
 				global_position = point
 				break
 			directions[i] *= 2
-	
-	checker.queue_free()
 

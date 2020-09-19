@@ -152,14 +152,14 @@ position = Vector2( 98, 0 )
 scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 5 )
 
-[node name="Shoot" type="Node" parent="."]
+[node name="Shoot" type="Node2D" parent="."]
 script = ExtResource( 3 )
 cooldown = 0.5
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 
-[node name="Spawn" type="Node" parent="."]
+[node name="Spawn" type="Node2D" parent="."]
 script = ExtResource( 9 )
 cooldown = 5.0
 duration = 2.0

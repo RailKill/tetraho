@@ -83,7 +83,6 @@ func commence_attack(direction : Vector2):
 	scratch.creator = self
 	scratch.translate(direction * 16)
 	add_child(scratch)
-	scratch.animation.play()
 	$exclamation_popup.set_visible(false)
 
 

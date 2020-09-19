@@ -19,7 +19,7 @@ var hold: Tetromino
 var queue = TetrominoQueue.new()
 
 onready var canvas = $CanvasLayer
-onready var hud = $CanvasLayer/PlayerHUD
+onready var hud = $CanvasLayer/PlayerHUD setget ,get_hud
 onready var menu = $CanvasLayer/IngameMenu
 onready var camera = $Camera2D
 onready var dash = $Dash
@@ -68,6 +68,10 @@ func _physics_process(_delta):
 					body.check_collision(push)
 
 
+func get_hud():
+	return hud
+
+
 func heal(amount):
 	.heal(amount)
 	hud.update_hp(self)
@@ -85,11 +89,6 @@ func next_tetromino():
 	get_parent().call_deferred("add_child", current)
 	yield(current, "ready")
 	hud.update_tetromino(self)
-
-
-func play_casting_animation(ability):
-	if ability is Dash:
-		sound_dash.play()
 
 
 func play_death_animation():

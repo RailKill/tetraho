@@ -1,26 +1,25 @@
 class_name Shoot
-extends Ability
+extends Trajectory
 # This ability fires a bullet which follows its trajectory.
 
 
 # The bullet resource to shoot.
-export var bullet : PackedScene = preload("res://assets/objects/bullet.tscn")
-# Direction of aim.
-var aim : Vector2
+export(PackedScene) var bullet = preload("res://assets/objects/bullet.tscn")
 # Position to spawn the bullet from.
-var point : Vector2
+export(Vector2) var spawn_point
+
+
+func _ready():
+	speed = Constants.BULLET_SPEED
+	sound_cast.stream = load("res://assets/sounds/gunner_shoot.wav")
 
 
 func cast():
+	.cast()
 	if not is_on_cooldown:
-		var trajectory = Trajectory.new()
-		trajectory.caster = caster
-		trajectory.direction = aim
-		trajectory.speed = Constants.BULLET_SPEED
-		
 		var shot = bullet.instance()
-		shot.trajectory = trajectory
+		shot.trajectory = self
 		
 		caster.get_parent().add_child(shot)
-		shot.set_global_position(point)
+		shot.global_position = spawn_point
 		complete()

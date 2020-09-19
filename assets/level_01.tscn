@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://assets/tilesets/walls.tres" type="TileSet" id=1]
 [ext_resource path="res://assets/objects/actors/player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://assets/tilesets/ground.tres" type="TileSet" id=4]
 [ext_resource path="res://assets/objects/tetris/lock_block.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/objects/actors/duck.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/scripts/abilities/link.gd" type="Script" id=7]
 [ext_resource path="res://assets/objects/actors/gunner.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/objects/actors/duck_house.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/objects/gate.tscn" type="PackedScene" id=10]
@@ -220,7 +221,10 @@ position = Vector2( 588, 406 )
 
 [node name="DuckHouse" parent="." instance=ExtResource( 9 )]
 position = Vector2( 581.136, 476.764 )
-linked = [ NodePath("../Gate"), NodePath("../Gate2"), NodePath("../Gate3") ]
+
+[node name="Link" type="Node" parent="DuckHouse"]
+script = ExtResource( 7 )
+linked = [ NodePath("../../Gate"), NodePath("../../Gate2"), NodePath("../../Gate3") ]
 
 [node name="Heart" parent="." instance=ExtResource( 15 )]
 position = Vector2( 280, 476 )
@@ -239,4 +243,3 @@ full_length = 126
 [connection signal="body_entered" from="Events/DialogFlamethrower" to="Events" method="_on_DialogFlamethrower_body_entered"]
 [connection signal="body_entered" from="Events/DialogBlockmancer" to="Events" method="_on_DialogBlockmancer_body_entered"]
 [connection signal="body_entered" from="Events/DialogHouse" to="Events" method="_on_DialogHouse_body_entered"]
-[connection signal="tree_exiting" from="DuckHouse" to="DuckHouse" method="_on_DuckHouse_tree_exiting"]

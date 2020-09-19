@@ -57,4 +57,3 @@ bus = "SFX"
 [node name="SoundDeath" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 5 )
 bus = "SFX"
-[connection signal="animation_finished" from="Unsummon" to="." method="_on_Unsummon_animation_finished"]

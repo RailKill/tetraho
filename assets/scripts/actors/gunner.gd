@@ -36,12 +36,6 @@ func _physics_process(_delta):
 		
 		# Fire weapon if there's an actor, don't care who, trigger happy dudes.
 		if result and result.collider is Actor:
-			shoot.aim = to_player_vector().normalized()
-			shoot.point = muzzle.get_global_position()
+			shoot.direction = to_player_vector().normalized()
+			shoot.spawn_point = muzzle.get_global_position()
 			shoot.cast()
-
-
-func play_casted_animation(ability):
-	if ability is Shoot:
-		sound_shoot.play()
-

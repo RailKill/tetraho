@@ -28,5 +28,3 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 speed_scale = 1.5
-[connection signal="body_entered" from="." to="." method="_on_AreaDamage_body_entered"]
-[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]

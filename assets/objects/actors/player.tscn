@@ -43,11 +43,9 @@ zoom = Vector2( 0.3, 0.3 )
 [node name="AreaAggro" parent="." instance=ExtResource( 3 )]
 visible = false
 
-[node name="Dash" type="Node" parent="."]
+[node name="Dash" type="Node2D" parent="."]
 script = ExtResource( 4 )
-cooldown = 3.0
 duration = 0.3
-cooldown_bonus = 2.0
 
 [node name="SoundHit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 5 )
