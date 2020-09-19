@@ -1,7 +1,7 @@
 extends WAT.Test
 
 
-var block_resource = preload("res://assets/objects/tetris/tetromino_block.tscn")
+var block_resource = preload("res://assets/scenes/tetris/tetromino_block.tscn")
 var test_blocks: Array
 
 

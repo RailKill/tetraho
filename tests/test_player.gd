@@ -3,7 +3,7 @@ extends WAT.Test
 
 
 # Resource path of the player object.
-var resource = preload("res://assets/objects/actors/player.tscn")
+var resource = preload("res://assets/scenes/actors/player.tscn")
 # Reference to Player node.
 var player: PlayerCharacter
 

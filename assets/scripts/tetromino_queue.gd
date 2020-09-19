@@ -4,7 +4,7 @@ extends Node
 
 
 # Resource path of the tetromino object to be generated.
-var resource = preload("res://assets/objects/tetris/tetromino.tscn")
+var resource = preload("res://assets/scenes/tetris/tetromino.tscn")
 
 # List of tetromino configurations available for random generation.
 var configurations = [

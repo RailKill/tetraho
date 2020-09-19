@@ -5,13 +5,13 @@ extends WAT.Test
 # Navmesh coverage which acts as the radius of the navmesh rectangle.
 const NC = Constants.GRID_SIZE * 5
 
-var block_resource = preload("res://assets/objects/tetris/tetromino_block.tscn")
-var bmancer_resource = preload("res://assets/objects/actors/blockmancer.tscn")
-var duck_resource = preload("res://assets/objects/actors/duck.tscn")
-var gate_resource = preload("res://assets/objects/gate.tscn")
-var gunner_resource = preload("res://assets/objects/actors/gunner.tscn")
-var house_resource = preload("res://assets/objects/actors/duck_house.tscn")
-var player_resource = preload("res://assets/objects/actors/player.tscn")
+var block_resource = preload("res://assets/scenes/tetris/tetromino_block.tscn")
+var bmancer_resource = preload("res://assets/scenes/actors/blockmancer.tscn")
+var duck_resource = preload("res://assets/scenes/actors/duck.tscn")
+var gate_resource = preload("res://assets/scenes/gate.tscn")
+var gunner_resource = preload("res://assets/scenes/actors/gunner.tscn")
+var house_resource = preload("res://assets/scenes/actors/duck_house.tscn")
+var player_resource = preload("res://assets/scenes/actors/player.tscn")
 var player: PlayerCharacter
 var navigation: Navigation2D
 var navmesh: NavigationPolygonInstance

@@ -13,8 +13,9 @@
 [ext_resource path="res://assets/sounds/main_menu.ogg" type="AudioStream" id=11]
 [ext_resource path="res://assets/sprites/ui/menu/arrow_left.png" type="Texture" id=12]
 [ext_resource path="res://assets/sprites/ui/menu/arrow_right.png" type="Texture" id=13]
-[ext_resource path="res://assets/objects/ui/focus_button.tscn" type="PackedScene" id=14]
+[ext_resource path="res://assets/scenes/ui/focus_button.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/scripts/ui/main_menu.gd" type="Script" id=15]
+
 
 [sub_resource type="TileSet" id=1]
 0/name = "tile601.png 0"

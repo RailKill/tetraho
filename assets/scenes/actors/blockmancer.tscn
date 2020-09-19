@@ -1,0 +1,56 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://assets/scripts/abilities/spawn.gd" type="Script" id=1]
+[ext_resource path="res://assets/scripts/actors/blockmancer.gd" type="Script" id=2]
+[ext_resource path="res://assets/sprites/actors/blockmancer/blockmancer_2.png" type="Texture" id=3]
+[ext_resource path="res://assets/sounds/blockmancer_summon.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/sounds/blockmancer_death.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/sprites/actors/blockmancer/blockmancer_1.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/actors/blockmancer/blockmancer.png" type="Texture" id=7]
+[ext_resource path="res://assets/scenes/areas/area_checker.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/scenes/tetris/deadmino.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/sounds/hit.wav" type="AudioStream" id=10]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 7 ), ExtResource( 6 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 8.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 6, 7 )
+
+[node name="Blockmancer" type="KinematicBody2D" groups=[
+"pushable",
+"trappable",
+]]
+collision_layer = 4
+collision_mask = 5
+script = ExtResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="Spawn" type="Node2D" parent="."]
+script = ExtResource( 1 )
+duration = 1.0
+spawn_resource = ExtResource( 9 )
+checker_resource = ExtResource( 8 )
+maximum_spawnable = 12
+
+[node name="SoundHit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 10 )
+bus = "SFX"
+
+[node name="SoundDeath" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+bus = "SFX"
+
+[node name="SoundSummon" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+bus = "SFX"

@@ -4,7 +4,7 @@ extends Trajectory
 
 
 # The bullet resource to shoot.
-export(PackedScene) var bullet = preload("res://assets/objects/bullet.tscn")
+export(PackedScene) var bullet = preload("res://assets/scenes/bullet.tscn")
 # Position to spawn the bullet from.
 export(Vector2) var spawn_point
 

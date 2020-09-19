@@ -28,7 +28,7 @@ onready var hold = $Status/Offset/Hold
 onready var next = $Status/Offset/Next
 
 # Speech resource.
-onready var talk = preload("res://assets/objects/ui/speech_bubble.tscn")
+onready var talk = preload("res://assets/scenes/ui/speech_bubble.tscn")
 
 
 # Make the HUD say something with the speech bubble at a given canvas position.

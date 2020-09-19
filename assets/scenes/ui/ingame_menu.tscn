@@ -1,23 +1,23 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://assets/tilesets/ui_brick.tres" type="TileSet" id=1]
-[ext_resource path="res://assets/tetra_theme.tres" type="Theme" id=2]
-[ext_resource path="res://assets/scripts/ui/ingame_menu.gd" type="Script" id=3]
-[ext_resource path="res://assets/sprites/ui/menu/arrow_left.png" type="Texture" id=4]
-[ext_resource path="res://assets/sprites/ui/menu/arrow_right.png" type="Texture" id=5]
-[ext_resource path="res://assets/objects/ui/focus_button.tscn" type="PackedScene" id=6]
-[ext_resource path="res://assets/minimal5x7.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://assets/scripts/ui/ingame_menu.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/ui/menu/arrow_right.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/ui/menu/arrow_left.png" type="Texture" id=3]
+[ext_resource path="res://assets/minimal5x7.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://assets/scenes/ui/focus_button.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/tetra_theme.tres" type="Theme" id=6]
+[ext_resource path="res://assets/tilesets/ui_brick.tres" type="TileSet" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
-font_data = ExtResource( 7 )
+font_data = ExtResource( 4 )
 
 [node name="IngameMenu" type="Control"]
 pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 2 )
-script = ExtResource( 3 )
+theme = ExtResource( 6 )
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -64,7 +64,7 @@ __meta__ = {
 }
 
 [node name="Border" type="TileMap" parent="Modal"]
-tile_set = ExtResource( 1 )
+tile_set = ExtResource( 7 )
 cell_size = Vector2( 16, 16 )
 cell_quadrant_size = 4
 cell_custom_transform = Transform2D( 16, 0, 0, 16, 0, 0 )
@@ -102,25 +102,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ButtonResume" parent="VBoxContainer" instance=ExtResource( 6 )]
+[node name="ButtonResume" parent="VBoxContainer" instance=ExtResource( 5 )]
 focus_next = NodePath("../ButtonRestart")
 focus_path = NodePath("../../Focus")
 
-[node name="ButtonRestart" parent="VBoxContainer" instance=ExtResource( 6 )]
+[node name="ButtonRestart" parent="VBoxContainer" instance=ExtResource( 5 )]
 margin_top = 35.0
 margin_bottom = 66.0
 focus_next = NodePath("../ButtonMainMenu")
 text = "Restart"
 focus_path = NodePath("../../Focus")
 
-[node name="ButtonMainMenu" parent="VBoxContainer" instance=ExtResource( 6 )]
+[node name="ButtonMainMenu" parent="VBoxContainer" instance=ExtResource( 5 )]
 margin_top = 70.0
 margin_bottom = 101.0
 focus_next = NodePath("../ButtonQuit")
 text = "Main Menu"
 focus_path = NodePath("../../Focus")
 
-[node name="ButtonQuit" parent="VBoxContainer" instance=ExtResource( 6 )]
+[node name="ButtonQuit" parent="VBoxContainer" instance=ExtResource( 5 )]
 margin_top = 105.0
 margin_bottom = 136.0
 text = "Quit Game"
@@ -140,12 +140,12 @@ __meta__ = {
 [node name="arrow_left" type="Sprite" parent="Focus"]
 position = Vector2( 96, 0 )
 scale = Vector2( 1.5, 1.5 )
-texture = ExtResource( 4 )
+texture = ExtResource( 3 )
 
 [node name="arrow_right" type="Sprite" parent="Focus"]
 position = Vector2( -96, 0 )
 scale = Vector2( 1.5, 1.5 )
-texture = ExtResource( 5 )
+texture = ExtResource( 2 )
 [connection signal="visibility_changed" from="." to="." method="_on_IngameMenu_visibility_changed"]
 [connection signal="pressed" from="VBoxContainer/ButtonResume" to="." method="_on_ButtonResume_pressed"]
 [connection signal="pressed" from="VBoxContainer/ButtonRestart" to="." method="_on_ButtonRestart_pressed"]

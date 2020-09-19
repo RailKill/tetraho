@@ -4,7 +4,7 @@ extends Enemy
 # TODO: Running out of time for #mizjam1, refactor next time.
 
 
-onready var crown = preload("res://assets/objects/loot/crown.tscn")
+onready var crown = preload("res://assets/scenes/loot/crown.tscn")
 onready var teleport_animation = $AnimatedSprite
 onready var sound_teleport = $SoundTeleport
 var teleport_points : Array
@@ -15,7 +15,7 @@ var is_casting = false
 # DUCK VARIABLES
 # ===============
 onready var navigation = get_parent().get_node("Navigation2D")
-onready var area_damage = preload("res://assets/objects/areas/area_damage.tscn")
+onready var area_damage = preload("res://assets/scenes/areas/area_damage.tscn")
 onready var sprite = $Sprite
 var paths : PoolVector2Array = []
 var path_index = 0

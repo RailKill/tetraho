@@ -16,13 +16,13 @@ var is_cutscene_talking2 = false
 var is_cutscene_talking3 = false
 
 # Gunner spawn event.
-onready var gunner = preload("res://assets/objects/actors/gunner.tscn")
+onready var gunner = preload("res://assets/scenes/actors/gunner.tscn")
 var spawn_points = []
 var is_spawn_time = false
 var has_spawned = false
 
 # Flame wheel event.
-onready var flame_wheel = preload("res://assets/objects/flame_wheel.tscn")
+onready var flame_wheel = preload("res://assets/scenes/flame_wheel.tscn")
 var is_flame_starting = false
 var has_flamed = false
 var flame_countdown = 3

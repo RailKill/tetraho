@@ -2,7 +2,7 @@ extends WAT.Test
 # Test the functionalities and abilities of tetromino summoning.
 
 
-var resource = preload("res://assets/objects/tetris/tetromino.tscn")
+var resource = preload("res://assets/scenes/tetris/tetromino.tscn")
 var tetromino: Tetromino
 var mock_player: MockPlayer
 

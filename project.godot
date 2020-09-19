@@ -249,12 +249,12 @@ Display=8
 [application]
 
 config/name="Tetraho"
-run/main_scene="res://assets/objects/ui/main_menu.tscn"
+run/main_scene="res://assets/scenes/ui/main_menu.tscn"
 config/icon="res://assets/sprites/blocks/tetromino_block.png"
 
 [autoload]
 
-GameWorld="*res://assets/objects/world.tscn"
+GameWorld="*res://assets/scenes/world.tscn"
 
 [display]
 

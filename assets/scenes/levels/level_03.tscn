@@ -1,20 +1,21 @@
 [gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://assets/scripts/levels/level_03.gd" type="Script" id=2]
-[ext_resource path="res://assets/objects/actors/player.tscn" type="PackedScene" id=5]
-[ext_resource path="res://assets/objects/tetris/tetromino.tscn" type="PackedScene" id=6]
-[ext_resource path="res://assets/objects/actors/boss.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/scenes/actors/player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/scenes/tetris/tetromino.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/scenes/actors/boss.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/sprites/blocks/tetromino_confirm_3.png" type="Texture" id=8]
 [ext_resource path="res://assets/tilesets/walls.tres" type="TileSet" id=9]
 [ext_resource path="res://assets/sprites/blocks/tetromino_confirm_2.png" type="Texture" id=10]
 [ext_resource path="res://assets/sprites/blocks/tetromino_confirm_1.png" type="Texture" id=11]
 [ext_resource path="res://assets/sprites/blocks/tetromino_confirm_4.png" type="Texture" id=12]
-[ext_resource path="res://assets/objects/loot/heart.tscn" type="PackedScene" id=13]
-[ext_resource path="res://assets/objects/gate.tscn" type="PackedScene" id=14]
-[ext_resource path="res://assets/objects/areas/exit.tscn" type="PackedScene" id=15]
-[ext_resource path="res://assets/objects/loot/hat.tscn" type="PackedScene" id=16]
+[ext_resource path="res://assets/scenes/loot/heart.tscn" type="PackedScene" id=13]
+[ext_resource path="res://assets/scenes/gate.tscn" type="PackedScene" id=14]
+[ext_resource path="res://assets/scenes/areas/exit.tscn" type="PackedScene" id=15]
+[ext_resource path="res://assets/scenes/loot/hat.tscn" type="PackedScene" id=16]
 [ext_resource path="res://assets/sounds/level_03.ogg" type="AudioStream" id=18]
 [ext_resource path="res://assets/sounds/warning.wav" type="AudioStream" id=19]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 22.1486, 18.1283 )

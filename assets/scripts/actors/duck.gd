@@ -5,7 +5,7 @@ extends Enemy
 # Get navigation.
 onready var navigation = get_parent().get_node("Navigation2D")
 # Reference to the area damage resource.
-onready var area_damage = preload("res://assets/objects/areas/area_damage.tscn")
+onready var area_damage = preload("res://assets/scenes/areas/area_damage.tscn")
 # Duck sprite.
 onready var sprite = $Sprite
 onready var sound_warning = $SoundWarning

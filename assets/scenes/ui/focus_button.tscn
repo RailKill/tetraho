@@ -3,7 +3,6 @@
 [ext_resource path="res://assets/scripts/ui/focus_button.gd" type="Script" id=1]
 [ext_resource path="res://assets/sounds/menu_tick.wav" type="AudioStream" id=2]
 
-
 [node name="FocusButton" type="Button"]
 margin_right = 104.0
 margin_bottom = 31.0

@@ -21,10 +21,10 @@ export(Color) var color = Color.white
 export(PoolVector2Array) var configuration = [Vector2.ZERO]
 # Resource path to the type of block that will be spawned.
 export(PackedScene) var block_res = \
-		preload("res://assets/objects/tetris/tetromino_block.tscn")
+		preload("res://assets/scenes/tetris/tetromino_block.tscn")
 # Resource path to the type of target reticle for the tetromino.
 export(PackedScene) var target_res = \
-		preload("res://assets/objects/tetris/tetromino_target.tscn")
+		preload("res://assets/scenes/tetris/tetromino_target.tscn")
 
 # If the tetromino is in the process of being summoned, this will be true.
 var is_summoning = false

@@ -12,7 +12,7 @@ export var move_speed = Constants.PLAYER_MOVE_SPEED
 export var is_invulnerable = false
 export(Constants.Team) var team = Constants.Team.MOBS
 
-var checker_resource = load("res://assets/objects/areas/area_checker.tscn")
+var checker_resource = load("res://assets/scenes/areas/area_checker.tscn")
 
 onready var collision_shape = $CollisionShape2D
 onready var sound_hit = $SoundHit
