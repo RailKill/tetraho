@@ -104,21 +104,22 @@ func play_fail_animation(_ability):
 
 # Unstuck this actor by checking for an empty space in adjacent grid cells.
 func unstuck():
-	var checker = checker_resource.instance()
-	checker.is_snapped = true
-	
 	var still_stuck = true
+	var distance = Constants.GRID_SIZE
 	var directions = Constants.DIRECTIONALS.duplicate()
 	
 	while still_stuck:
 		for i in range(0, directions.size()):
-			var point = global_position + directions[i]
+			var point = global_position + directions[i] * distance
+			var checker = checker_resource.instance()
+			checker.is_snapped = true
 			checker.global_position = point
 			get_parent().add_child(checker)
+			print(checker.global_position)
 			var collided = yield(checker, "lifetime_expired")
 			if not collided:
 				still_stuck = false
-				global_position = point
+				global_position = checker.collision_shape.global_position
 				break
-			directions[i] *= 2
+		distance += Constants.GRID_SIZE
 

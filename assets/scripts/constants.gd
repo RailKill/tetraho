@@ -23,14 +23,14 @@ const GRID_ONE_HALF = GRID_SIZE + GRID_HALF
 
 # Adjacent cell offset positions in 8 directions.
 const DIRECTIONALS = [
-	Vector2.RIGHT * GRID_SIZE,
-	(Vector2.RIGHT + Vector2.DOWN) * GRID_SIZE,
-	Vector2.DOWN * GRID_SIZE,
-	(Vector2.DOWN + Vector2.LEFT)  * GRID_SIZE,
-	Vector2.LEFT * GRID_SIZE,
-	(Vector2.LEFT + Vector2.UP) * GRID_SIZE,
-	Vector2.UP * GRID_SIZE,
-	(Vector2.UP + Vector2.RIGHT) * GRID_SIZE,
+	Vector2.RIGHT,
+	Vector2.RIGHT + Vector2.DOWN,
+	Vector2.DOWN,
+	Vector2.DOWN + Vector2.LEFT * 2,
+	Vector2.LEFT * 2,
+	(Vector2.LEFT + Vector2.UP) * 2,
+	Vector2.UP * 2,
+	Vector2.UP * 2 + Vector2.RIGHT,
 ]
 
 # Player settings.
@@ -57,7 +57,7 @@ const BLOCK_HP = 30
 const BULLET_DAMAGE = 10
 const BULLET_LIFETIME = 3
 const BULLET_SPEED = 5
-const CHECKER_LIFETIME = 0.2
+const CHECKER_LIFETIME = 0.05
 const DEAD_BLOCK_DAMAGE = 40
 const FLAMETHROWER_DAMAGE = 20
 const FLAMETHROWER_DURATION = 0.5

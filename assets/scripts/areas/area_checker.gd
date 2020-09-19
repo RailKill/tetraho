@@ -11,6 +11,8 @@ export(bool) var is_snapped = false
 var collided: Node2D
 var is_expiring = false
 
+onready var collision_shape = $CollisionShape2D
+
 
 func _ready():
 	reposition()
@@ -38,4 +40,4 @@ func reposition():
 				stepify(global_position.x, Constants.GRID_SIZE), 
 				stepify(global_position.y, Constants.GRID_SIZE))
 	else:
-		global_position -= $CollisionShape2D.position
+		global_position -= collision_shape.position

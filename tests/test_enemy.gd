@@ -146,6 +146,42 @@ func test_gunner():
 	gunner.queue_free()
 
 
+func test_unstuck():
+	var blocks = []
+	var block_positions = [
+		Vector2(NC - Constants.GRID_SIZE, -Constants.GRID_SIZE),
+		Vector2(NC, -Constants.GRID_SIZE),
+		Vector2(NC + Constants.GRID_SIZE, -Constants.GRID_SIZE),
+		Vector2(NC - Constants.GRID_SIZE, 0),
+		Vector2(NC, 0),
+		Vector2(NC + Constants.GRID_SIZE, 0),
+		Vector2(NC - Constants.GRID_SIZE, Constants.GRID_SIZE),
+		Vector2(NC, Constants.GRID_SIZE),
+		Vector2(NC + Constants.GRID_SIZE, Constants.GRID_SIZE),
+		
+		Vector2(NC + Constants.GRID_DOUBLE, -Constants.GRID_SIZE),
+		Vector2(NC + Constants.GRID_DOUBLE, 0),
+		Vector2(NC + Constants.GRID_DOUBLE, Constants.GRID_SIZE),
+		Vector2(NC - Constants.GRID_DOUBLE, Constants.GRID_SIZE),
+		Vector2(NC - Constants.GRID_DOUBLE, -Constants.GRID_SIZE),
+	]
+	for position in block_positions:
+		var block = block_resource.instance()
+		add_child(block)
+		block.global_position = position
+		block.enable()
+		blocks.append(block)
+	
+	yield(until_timeout(0.5), YIELD)
+	player.unstuck()
+	yield(until_timeout(0.5), YIELD)
+	asserts.is_equal(player.global_position, 
+			Vector2(NC - Constants.GRID_ONE_HALF, Constants.GRID_HALF))
+	
+	for block in blocks:
+		block.queue_free()
+
+
 func post():
 	player.current.queue_free()
 	player.queue_free()
