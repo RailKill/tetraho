@@ -40,16 +40,20 @@ func solve():
 		search(block, SOLVER_VERTICAL)
 	
 	var has_marked = false
+	var actors = []
 	for block in blocks.keys():
 		# Solve all marked blocks.
 		if block.marked:
 			for actor in blocks[block]:
-				actor.oof(Constants.TETROMINO_DAMAGE, true)
+				if not actors.has(actor):
+					actors.append(actor)
 			block.disable()
 			has_marked = true
 	
 	if has_marked:
 		sound_solve.play()
+		for actor in actors:
+			actor.oof(Constants.TETROMINO_DAMAGE, true)
 
 
 # Search for block combinations in a given solver (area to search) and mark

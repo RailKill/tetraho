@@ -94,6 +94,19 @@ func test_search():
 		asserts.is_true(block.marked, "after search, %s is marked" % block)
 
 
+func test_solve_damages_only_once():
+	create_blocks()
+	var dummy = Actor.new()
+	dummy.sound_death = AudioStreamPlayer2D.new()
+	dummy.collision_shape = Node2D.new()
+	
+	GameWorld.blocks[test_blocks[0]] = [dummy]
+	GameWorld.blocks[test_blocks[1]] = [dummy]
+	GameWorld.solve()
+	asserts.is_equal(dummy.hp, dummy.max_hp - Constants.TETROMINO_DAMAGE)
+	dummy.queue_free()
+
+
 func test_trap():
 	var dummy = Actor.new()
 	var block = block_resource.instance()
