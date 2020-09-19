@@ -4,5 +4,5 @@ extends TetrominoBlock
 
 
 func trap(actor):
-	actor.unstuck()
+	actor.unstuck(self)
 	actor.oof(Constants.DEAD_BLOCK_DAMAGE)

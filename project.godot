@@ -69,6 +69,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/scripts/actors/dead_block.gd"
 }, {
+"base": "Status",
+"class": "Deadend",
+"language": "GDScript",
+"path": "res://assets/scripts/abilities/statuses/deadend.gd"
+}, {
 "base": "Enemy",
 "class": "Duck",
 "language": "GDScript",
@@ -222,6 +227,7 @@ _global_script_class_icons={
 "Constants": "",
 "Dash": "",
 "DeadBlock": "",
+"Deadend": "",
 "Duck": "",
 "DuckHouse": "",
 "Enemy": "",

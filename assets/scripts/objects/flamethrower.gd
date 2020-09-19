@@ -40,18 +40,22 @@ func _physics_process(delta):
 	)
 	
 	if result:
-		var body = result.collider
-		if body.has_method("add_child_unique"):
-			var burn = Burn.new()
-			burn.name = "Flamethrower Burn"
-			burn.duration = Constants.FLAMETHROWER_DURATION
-			body.add_child_unique(burn)
-		
+		burn(result.collider)
 		length = clamp((result.position - global_position).length(), 1, 1000)
 	else:
 		length = full_length
 	
 	update_particles()
+
+
+# Adds a Burn status effect to the given target.
+func burn(target):
+	if target.has_method("add_child_unique"):
+		var burn = Burn.new()
+		burn.caster = self
+		burn.duration = Constants.FLAMETHROWER_DURATION
+		burn.name = "Flamethrower Burn"
+		target.add_child_unique(burn)
 
 
 # Update the velocity of the particles, which affect how far the fire goes.

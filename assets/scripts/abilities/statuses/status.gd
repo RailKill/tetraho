@@ -12,8 +12,11 @@ export(float, 0, 3600) var duration = 1
 # Perform a tick every X seconds. If 0, tick does not happen.
 export(float, 0, 3600) var interval = 0
 
-var caster: Actor
+# The node who gave/caused this status effect.
+var caster: Node2D
+# Elapsed time since last tick.
 var elapsed_time_since_tick = 0
+# If true, it means this status is in the process of wearing off.
 var is_expiring = false
 
 
