@@ -10,11 +10,12 @@
 [ext_resource path="res://assets/sprites/blocks/tetromino_confirm_1.png" type="Texture" id=11]
 [ext_resource path="res://assets/sprites/blocks/tetromino_confirm_4.png" type="Texture" id=12]
 [ext_resource path="res://assets/scenes/loot/heart.tscn" type="PackedScene" id=13]
-[ext_resource path="res://assets/scenes/gate.tscn" type="PackedScene" id=14]
+[ext_resource path="res://assets/scenes/objects/gate.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/scenes/areas/exit.tscn" type="PackedScene" id=15]
 [ext_resource path="res://assets/scenes/loot/hat.tscn" type="PackedScene" id=16]
 [ext_resource path="res://assets/sounds/level_03.ogg" type="AudioStream" id=18]
 [ext_resource path="res://assets/sounds/warning.wav" type="AudioStream" id=19]
+
 
 
 [sub_resource type="RectangleShape2D" id=1]

@@ -35,7 +35,8 @@ func _on_Exit_body_entered(body):
 		if not player.hud.hat.visible:
 			player.hud.say(["I need to find my hat first."])
 		else:
-			var _win = get_tree().change_scene("res://assets/level_03.tscn")
+			# warning-ignore:return_value_discarded
+			get_tree().change_scene("res://assets/scenes/levels/level_03.tscn")
 
 
 func _on_NarrowHelper_body_entered(body):

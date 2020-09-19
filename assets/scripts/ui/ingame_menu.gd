@@ -45,6 +45,6 @@ func _on_IngameMenu_visibility_changed():
 
 
 func _on_ButtonMainMenu_pressed():
-	get_tree().set_pause(false)
-	var _ignore = get_tree().change_scene(
-		"res://assets/scenes/ui/main_menu.tscn")
+	get_tree().set_pause(false)	
+	# warning-ignore:return_value_discarded
+	get_tree().change_scene("res://assets/scenes/ui/main_menu.tscn")

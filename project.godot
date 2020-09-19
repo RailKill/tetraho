@@ -47,7 +47,7 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "Bullet",
 "language": "GDScript",
-"path": "res://assets/scripts/bullet.gd"
+"path": "res://assets/scripts/objects/bullet.gd"
 }, {
 "base": "Node",
 "class": "Constants",
@@ -82,7 +82,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "Flamethrower",
 "language": "GDScript",
-"path": "res://assets/scripts/flamethrower.gd"
+"path": "res://assets/scripts/objects/flamethrower.gd"
 }, {
 "base": "Button",
 "class": "FocusButton",
@@ -157,7 +157,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "Tetromino",
 "language": "GDScript",
-"path": "res://assets/scripts/tetromino.gd"
+"path": "res://assets/scripts/tetris/tetromino.gd"
 }, {
 "base": "Actor",
 "class": "TetrominoBlock",
@@ -167,12 +167,12 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "TetrominoQueue",
 "language": "GDScript",
-"path": "res://assets/scripts/tetromino_queue.gd"
+"path": "res://assets/scripts/tetris/tetromino_queue.gd"
 }, {
 "base": "Area2D",
 "class": "TetrominoTarget",
 "language": "GDScript",
-"path": "res://assets/scripts/tetromino_target.gd"
+"path": "res://assets/scripts/tetris/tetromino_target.gd"
 }, {
 "base": "Ability",
 "class": "Trajectory",

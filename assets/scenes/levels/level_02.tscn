@@ -7,12 +7,13 @@
 [ext_resource path="res://assets/scenes/actors/player.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/scripts/levels/level_02.gd" type="Script" id=8]
 [ext_resource path="res://assets/tilesets/walls.tres" type="TileSet" id=10]
-[ext_resource path="res://assets/scenes/flamethrower.tscn" type="PackedScene" id=11]
+[ext_resource path="res://assets/scenes/objects/flamethrower.tscn" type="PackedScene" id=11]
 [ext_resource path="res://assets/scenes/actors/duck_house.tscn" type="PackedScene" id=12]
 [ext_resource path="res://assets/scenes/actors/blockmancer.tscn" type="PackedScene" id=13]
 [ext_resource path="res://assets/scenes/tetris/lock_block.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/scenes/loot/heart.tscn" type="PackedScene" id=15]
 [ext_resource path="res://assets/sounds/level_02.ogg" type="AudioStream" id=17]
+
 
 
 [sub_resource type="RectangleShape2D" id=1]

@@ -7,11 +7,12 @@
 [ext_resource path="res://assets/sprites/actors/gunner/circle.png" type="Texture" id=5]
 [ext_resource path="res://assets/sprites/actors/queen/beam2.png" type="Texture" id=6]
 [ext_resource path="res://assets/sprites/actors/queen/beam1.png" type="Texture" id=7]
-[ext_resource path="res://assets/scenes/flamethrower.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/scenes/objects/flamethrower.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/scripts/abilities/spawn.gd" type="Script" id=9]
 [ext_resource path="res://assets/sounds/hit.wav" type="AudioStream" id=10]
 [ext_resource path="res://assets/sounds/boss_teleport.wav" type="AudioStream" id=11]
 [ext_resource path="res://assets/sounds/gunner_shoot.wav" type="AudioStream" id=12]
+
 
 
 [sub_resource type="RectangleShape2D" id=1]

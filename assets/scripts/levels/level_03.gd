@@ -22,7 +22,8 @@ var is_spawn_time = false
 var has_spawned = false
 
 # Flame wheel event.
-onready var flame_wheel = preload("res://assets/scenes/flame_wheel.tscn")
+onready var flame_wheel = \
+		preload("res://assets/scenes/objects/flame_wheel.tscn")
 var is_flame_starting = false
 var has_flamed = false
 var flame_countdown = 3

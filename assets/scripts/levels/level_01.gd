@@ -38,7 +38,8 @@ func _on_DialogDuck_body_entered(body):
 
 func _on_Exit_body_entered(body):
 	if body == player:
-		var _win = get_tree().change_scene("res://assets/level_02.tscn")
+		# warning-ignore:return_value_discarded
+		get_tree().change_scene("res://assets/scenes/levels/level_02.tscn")
 
 
 func _on_DialogGunner_body_entered(body):
