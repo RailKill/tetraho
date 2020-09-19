@@ -23,6 +23,13 @@ func _to_string():
 	return name
 
 
+# Add given node as a child of this Actor if the string representation of the
+# give node does not already exist.
+func add_child_unique(node: Node2D):
+	if not get_node_or_null(str(node)):
+		add_child(node)
+
+
 # Checks a given collision and react accordingly. By default, nothing happens.
 func check_collision(_collision: KinematicCollision2D):
 	pass

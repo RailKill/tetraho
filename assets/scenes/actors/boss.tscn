@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/sprites/actors/queen/queen.png" type="Texture" id=1]
 [ext_resource path="res://assets/scripts/actors/boss.gd" type="Script" id=2]
@@ -7,13 +7,10 @@
 [ext_resource path="res://assets/sprites/actors/gunner/circle.png" type="Texture" id=5]
 [ext_resource path="res://assets/sprites/actors/queen/beam2.png" type="Texture" id=6]
 [ext_resource path="res://assets/sprites/actors/queen/beam1.png" type="Texture" id=7]
-[ext_resource path="res://assets/scenes/objects/flamethrower.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/scripts/abilities/spawn.gd" type="Script" id=9]
 [ext_resource path="res://assets/sounds/hit.wav" type="AudioStream" id=10]
 [ext_resource path="res://assets/sounds/boss_teleport.wav" type="AudioStream" id=11]
 [ext_resource path="res://assets/sounds/gunner_shoot.wav" type="AudioStream" id=12]
-
-
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 7 )
@@ -165,7 +162,6 @@ frames = SubResource( 2 )
 script = ExtResource( 9 )
 cooldown = 5.0
 duration = 2.0
-resource = ExtResource( 8 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 4.0

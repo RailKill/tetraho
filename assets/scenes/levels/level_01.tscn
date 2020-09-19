@@ -6,7 +6,7 @@
 [ext_resource path="res://assets/tilesets/ground.tres" type="TileSet" id=4]
 [ext_resource path="res://assets/scenes/tetris/lock_block.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/scenes/actors/duck.tscn" type="PackedScene" id=6]
-[ext_resource path="res://assets/scripts/abilities/link.gd" type="Script" id=7]
+[ext_resource path="res://assets/scripts/abilities/statuses/link.gd" type="Script" id=7]
 [ext_resource path="res://assets/scenes/actors/gunner.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/scenes/actors/duck_house.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/scenes/objects/gate.tscn" type="PackedScene" id=10]
@@ -184,7 +184,7 @@ position = Vector2( 588, 546 )
 position = Vector2( 602, 546 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 30, 84 )
+position = Vector2( 32.913, 80.4589 )
 
 [node name="Duck" parent="." instance=ExtResource( 6 )]
 position = Vector2( 284.623, 52.4745 )
@@ -222,7 +222,7 @@ position = Vector2( 588, 406 )
 [node name="DuckHouse" parent="." instance=ExtResource( 9 )]
 position = Vector2( 581.136, 476.764 )
 
-[node name="Link" type="Node" parent="DuckHouse"]
+[node name="Link" type="Node2D" parent="DuckHouse"]
 script = ExtResource( 7 )
 linked = [ NodePath("../../Gate"), NodePath("../../Gate2"), NodePath("../../Gate3") ]
 
@@ -233,9 +233,9 @@ position = Vector2( 280, 476 )
 position = Vector2( 308, 476 )
 
 [node name="Flamethrower" parent="." instance=ExtResource( 16 )]
-position = Vector2( 226.081, 532 )
+position = Vector2( 225.706, 539.117 )
 rotation = 1.5708
-full_length = 126
+full_length = 128
 [connection signal="body_entered" from="Events/DialogLock" to="Events" method="_on_DialogLock_body_entered"]
 [connection signal="body_entered" from="Events/DialogDuck" to="Events" method="_on_DialogDuck_body_entered"]
 [connection signal="body_entered" from="Events/Exit" to="Events" method="_on_Exit_body_entered"]

@@ -35,6 +35,12 @@ func _on_tree_exiting():
 	untrap()
 
 
+# TetrominoBlocks are immune to status effects.
+func add_child_unique(node):
+	if not node is Status:
+		.add_child_unique(node)
+
+
 # Queue the block for destruction. Used during a solve.
 func disable():
 	collision_shape.disabled = true

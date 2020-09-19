@@ -63,6 +63,12 @@ func _physics_process(delta):
 			do_gunner_logic()
 
 
+# Immune to Burn.
+func add_status(effect: Status):
+	if not effect is Burn:
+		.add_status(effect)
+
+
 # After attack_delay Spawns an AreaDamage at the direction.
 func commence_attack(direction : Vector2):
 	is_attacking = false
@@ -134,8 +140,8 @@ func do_gunner_logic():
 	
 	# Fire weapon if there's an actor, don't care who, trigger happy dudes.
 	if result and result.collider is Actor:
-		shoot.aim = to_player_vector().normalized()
-		shoot.point = muzzle.get_global_position()
+		shoot.direction = to_player_vector().normalized()
+		shoot.spawn_point = muzzle.get_global_position()
 		shoot.cast()
 
 

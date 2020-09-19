@@ -29,6 +29,7 @@ animations = [ {
 "block",
 ]]
 script = ExtResource( 1 )
+is_invulnerable = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 7, 7 )

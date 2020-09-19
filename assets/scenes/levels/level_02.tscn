@@ -14,8 +14,6 @@
 [ext_resource path="res://assets/scenes/loot/heart.tscn" type="PackedScene" id=15]
 [ext_resource path="res://assets/sounds/level_02.ogg" type="AudioStream" id=17]
 
-
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 167, 49 )
 
@@ -229,12 +227,12 @@ position = Vector2( 490, 140 )
 position = Vector2( 504, 140 )
 
 [node name="Flamethrower" parent="." instance=ExtResource( 11 )]
-position = Vector2( 1036, -54 )
+position = Vector2( 1029, -53.25 )
 rotation = 3.14159
 full_length = 96
 
 [node name="Flamethrower2" parent="." instance=ExtResource( 11 )]
-position = Vector2( 1190, -40 )
+position = Vector2( 1183, -38.5 )
 rotation = 3.14159
 
 [node name="Gunner" parent="." instance=ExtResource( 1 )]

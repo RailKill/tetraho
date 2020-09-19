@@ -5,23 +5,22 @@ extends Node2D
 # TetrominoBlock is blocking it.
 
 
-# Full length of this flamethrower.
-export var full_length = 70
 # If true, this flamethrower will destroy itself after a set duration.
-export var one_off = false
+export(bool) var one_off = false
 # Duration in seconds this flames will last if one_off is true.
-export var duration = 3
-# Reference node to the origin of the flames.
-onready var origin = $Origin
-# Reference node to the particle emitter of the flames.
-onready var particles = $Particles2D
+export(float, 0, 60) var duration = 3
+# Full length of this flamethrower.
+export(int, 1, 1000) var full_length = 70
 
 # Current length of the flamethrower, as it may be blocked.
 var length = full_length
 
+# Reference node to the particle emitter of the flames.
+onready var particles = $Particles2D
+
 
 func _ready():
-	particles.set_process_material(particles.get_process_material().duplicate())
+	particles.process_material = particles.process_material.duplicate()
 
 
 func _physics_process(delta):
@@ -32,20 +31,23 @@ func _physics_process(delta):
 			queue_free()
 	
 	var space_state = get_world_2d().direct_space_state
-	var point = origin.get_global_position()
-	var towards = (particles.get_global_position() - point).normalized()
+	var towards = (particles.global_position - global_position).normalized()
 	
-	var result = space_state.intersect_ray(point, point + towards * length, [], 
-		Constants.Layer.ENVIRONMENT + Constants.Layer.ACTOR +
-		Constants.Layer.BLOCK)
+	var result = space_state.intersect_ray(
+			global_position, global_position + towards * length, [], 
+			Constants.Layer.ENVIRONMENT + Constants.Layer.ACTOR +
+			Constants.Layer.BLOCK
+	)
 	
 	if result:
 		var body = result.collider
-		if body is Actor and not body is TetrominoBlock and not body is Boss:
-			body.oof(Constants.FLAMETHROWER_DAMAGE)
-			return
+		if body.has_method("add_child_unique"):
+			var burn = Burn.new()
+			burn.name = "Flamethrower Burn"
+			burn.duration = Constants.FLAMETHROWER_DURATION
+			body.add_child_unique(burn)
 		
-		length = (result.position - point).length()
+		length = clamp((result.position - global_position).length(), 1, 1000)
 	else:
 		length = full_length
 	
@@ -54,4 +56,4 @@ func _physics_process(delta):
 
 # Update the velocity of the particles, which affect how far the fire goes.
 func update_particles():
-	particles.get_process_material().set("initial_velocity", length)
+	particles.process_material.set("initial_velocity", length)

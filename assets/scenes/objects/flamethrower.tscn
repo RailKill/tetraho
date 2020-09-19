@@ -4,7 +4,6 @@
 [ext_resource path="res://assets/sprites/map/fire.png" type="Texture" id=2]
 [ext_resource path="res://assets/sounds/fire_loop.wav" type="AudioStream" id=3]
 
-
 [sub_resource type="ParticlesMaterial" id=1]
 flag_disable_z = true
 direction = Vector3( 0, -1, 0 )
@@ -21,13 +20,10 @@ scale_random = 1.0
 script = ExtResource( 1 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
-position = Vector2( 7, -7 )
+position = Vector2( 0, -7 )
 amount = 12
 process_material = SubResource( 1 )
 texture = ExtResource( 2 )
-
-[node name="Origin" type="Node2D" parent="."]
-position = Vector2( 7, 0 )
 
 [node name="SoundIdle" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )

@@ -49,6 +49,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/scripts/objects/bullet.gd"
 }, {
+"base": "Status",
+"class": "Burn",
+"language": "GDScript",
+"path": "res://assets/scripts/abilities/statuses/burn.gd"
+}, {
 "base": "Node",
 "class": "Constants",
 "language": "GDScript",
@@ -109,6 +114,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/scripts/abilities/knockback.gd"
 }, {
+"base": "Status",
+"class": "Link",
+"language": "GDScript",
+"path": "res://assets/scripts/abilities/statuses/link.gd"
+}, {
 "base": "TetrominoBlock",
 "class": "LockBlock",
 "language": "GDScript",
@@ -153,6 +163,11 @@ _global_script_classes=[ {
 "class": "SpeechBubble",
 "language": "GDScript",
 "path": "res://assets/scripts/ui/speech_bubble.gd"
+}, {
+"base": "Node2D",
+"class": "Status",
+"language": "GDScript",
+"path": "res://assets/scripts/abilities/statuses/status.gd"
 }, {
 "base": "Node2D",
 "class": "Tetromino",
@@ -203,6 +218,7 @@ _global_script_class_icons={
 "Blockmancer": "",
 "Boss": "",
 "Bullet": "",
+"Burn": "",
 "Constants": "",
 "Dash": "",
 "DeadBlock": "",
@@ -215,6 +231,7 @@ _global_script_class_icons={
 "Gunner": "",
 "IngameMenu": "",
 "Knockback": "",
+"Link": "",
 "LockBlock": "",
 "MainMenu": "",
 "PickupCosmetic": "",
@@ -224,6 +241,7 @@ _global_script_class_icons={
 "Shoot": "",
 "Spawn": "",
 "SpeechBubble": "",
+"Status": "",
 "Tetromino": "",
 "TetrominoBlock": "",
 "TetrominoQueue": "",

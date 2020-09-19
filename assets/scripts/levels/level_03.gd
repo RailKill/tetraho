@@ -168,4 +168,4 @@ func _on_Exit_body_entered(body):
 		else:
 			# win game
 			var _win = get_tree().change_scene(
-				"res://assets/objects/ui/end_menu.tscn")
+				"res://assets/scenes/ui/end_menu.tscn")
