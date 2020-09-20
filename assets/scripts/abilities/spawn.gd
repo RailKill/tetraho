@@ -8,7 +8,7 @@ export(PackedScene) var spawn_resource
 export(PackedScene) var checker_resource = \
 		preload("res://assets/scenes/areas/area_checker.tscn")
 # Spawn point global position.
-export(Vector2) var point
+export(Vector2) var spawn_point setget set_spawn_point
 # If true, spawn point checker will be snapped to the grid.
 export(bool) var is_snapped = true
 # Rotation angle in degrees to set the newly spawned object.
@@ -27,26 +27,40 @@ func cast():
 
 func complete():
 	.complete()
-	var level = caster.get_parent()
-	var checker = checker_resource.instance()
-	checker.global_position = point
-	checker.is_snapped = is_snapped
-	level.add_child(checker)
 	
+	# Skip check and spawn right away if checker is not set.
+	if not checker_resource:
+		create(spawn_point)
+		return
+	
+	var checker = checker_resource.instance()
+	checker.global_position = spawn_point
+	checker.is_snapped = is_snapped
+	caster.get_parent().add_child(checker)
 	var collided = yield(checker, "lifetime_expired")
 	if not collided:
-		var spawn = spawn_resource.instance()
-		level.add_child(spawn)
-		level.move_child(spawn, 0)
-		spawn.global_position = point
-		spawn.rotation_degrees = angle
-		spawn.connect("tree_exiting", self, "erase", [spawn])
-		spawned.append(spawn)
+		create(checker.global_position if is_snapped else spawn_point)
 	else:
 		caster.play_fail_animation(self)
 		countdown = Constants.ABILITY_FAILURE_RECOVERY_TIME
 
 
+func create(point: Vector2):
+	var spawn = spawn_resource.instance()
+	caster.get_parent().add_child(spawn)
+	spawn.global_position = point
+	spawn.rotation_degrees = angle
+	spawn.connect("tree_exiting", self, "erase", [spawn])
+	spawned.append(spawn)
+	
+	if "creator" in spawn:
+		spawn.creator = caster
+
+
 # Clear given spawned object that no longer exist.
 func erase(entity):
 	spawned.erase(entity)
+
+
+func set_spawn_point(point: Vector2):
+	spawn_point = point

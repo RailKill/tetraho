@@ -4,31 +4,9 @@ extends Enemy
 # does not go away until solved.
 
 
-# Spawn ability.
-onready var spawner = $Spawn
-# Sprite for animation.
-onready var sprite = $AnimatedSprite
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	move_speed = Constants.BLOCKMANCER_MOVE_SPEED
-	max_hp = Constants.BLOCKMANCER_HP
-	hp = Constants.BLOCKMANCER_HP
-	spawner.sound_complete.stream = \
-			load("res://assets/sounds/blockmancer_summon.wav")
-
-
-func _physics_process(_delta):
-	# Blockmancer behavior is to summon blocks.
-	if is_instance_valid(player) and is_aggro and not is_locked():
-		# Behavior #1: Summon block on player's position.
-		var pos = player.get_global_position()
-		var snap = Vector2(stepify(pos.x, Constants.GRID_SIZE), 
-			stepify(pos.y, Constants.GRID_SIZE))
-		
-		spawner.point = snap
-		spawner.cast()
+	behaviors.append(UseAbility.new(self, player, $Spawn))
 
 
 func play_casting_animation(_ability):

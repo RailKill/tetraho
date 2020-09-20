@@ -3,7 +3,7 @@ extends Status
 # Status effect which destroys all linked nodes if this node is destroyed.
 
 
-export(Array, NodePath) var linked
+export(Array, NodePath) var linked = []
 
 
 # Called when the node enters the scene tree for the first time.

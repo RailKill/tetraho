@@ -43,14 +43,23 @@ func pre():
 
 
 func test_blockmancer_capable_of_damaging_player():
+	player.translate(Vector2.UP * 2)
 	var bmancer = bmancer_resource.instance()
 	bmancer.is_aggro = true
 	add_child(bmancer)
-	yield(until_signal(player, "damage_taken", 3), YIELD)
-	asserts.is_true(player.hp != player.max_hp)
+	var args = yield(until_signal(player, "damage_taken", 3), YIELD)
+	asserts.is_true(player.hp != player.max_hp, 
+			"%s %s for %d damage" % args.slice(1, 3) if args[0] else 
+			"attack the player")
 	bmancer.queue_free()
 	
 	var deadmino = $Deadmino
+	var position = deadmino.global_position
+	asserts.is_true(
+			int(round(position.x)) % Constants.GRID_SIZE == 0 and \
+			int(round(position.y)) % Constants.GRID_SIZE == 0,
+			"the spawned dead block is snapped to grid"
+	)
 	if is_instance_valid(deadmino):
 		$Deadmino.queue_free()
 
@@ -77,13 +86,17 @@ func test_duck_house():
 	house.is_aggro = true
 	add_child(house)
 	
-	# Test 1: Over the course of 20 seconds, no more than 3 ducks are spawned.
 	Engine.time_scale = 10.0
+	# Test 1: Duck house is invulnerable by default.
+	house.oof(5)
+	asserts.is_equal(house.hp, house.max_hp, "is invulnerable by default")
+	
+	# Test 2: Over the course of 20 seconds, no more than 3 ducks are spawned.
 	yield(until_timeout(20), YIELD)
 	var ducks = get_ducks()
 	asserts.is_equal(ducks.size(), 3, "spawned exactly 3 ducks over 20 seconds")
 	
-	# Test 2: Remove 1 duck, and check if it spawns 1 more, replenishing to 3.
+	# Test 3: Remove 1 duck, and check if it spawns 1 more, replenishing to 3.
 	ducks[1].queue_free()
 	yield(until_timeout(10), YIELD)
 	ducks = get_ducks()
@@ -91,7 +104,7 @@ func test_duck_house():
 	for duck in ducks:
 		duck.queue_free()
 	
-	# Test 3: No duck spawned if blocked by obstacle.
+	# Test 4: No duck spawned if blocked by obstacle.
 	var gate = gate_resource.instance()
 	add_child(gate)
 	gate.global_position = Vector2(Constants.GRID_ONE_HALF, -Constants.GRID_HALF)
@@ -99,12 +112,12 @@ func test_duck_house():
 	ducks = get_ducks()
 	asserts.is_equal(ducks.size(), 0, "no duck spawned if blocked by obstacle")
 	gate.queue_free()
+	house.is_aggro = false
 	for duck in ducks:
 		duck.queue_free()
 	
-	# Test 4: Player can push Duck into house to destroy it.
+	# Test 5: Player can push Duck into house to destroy it.
 	Engine.time_scale = 1.0
-	house.is_aggro = false
 	var sole_duck = duck_resource.instance()
 	add_child(sole_duck)
 	sole_duck.global_position = Vector2(NC / 2.0, 0)

@@ -4,7 +4,7 @@ extends Status
 # there if it is empty.
 
 
-var checker_resource = load("res://assets/scenes/areas/area_checker.tscn")
+var checker_resource = preload("res://assets/scenes/areas/area_checker.tscn")
 var distance = Constants.GRID_SIZE
 var directions = Constants.DIRECTIONALS
 var index = 0

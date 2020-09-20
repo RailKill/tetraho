@@ -9,6 +9,10 @@ export(float) var cooldown = 3
 # Duration of ability in seconds.
 export(float) var duration = 0
 
+export(AudioStream) var cast_audio
+export(AudioStream) var complete_audio
+export(AudioStream) var ready_audio
+
 # Delay in seconds before ability can be used again.
 var delay: float
 # Countdown since active.
@@ -26,8 +30,14 @@ onready var caster: Actor = get_parent()
 
 
 func _ready():
+	sound_cast.stream = cast_audio
+	sound_cast.bus = AudioServer.get_bus_name(1)
 	add_child(sound_cast)
+	sound_complete.stream = complete_audio
+	sound_complete.bus = AudioServer.get_bus_name(1)
 	add_child(sound_complete)
+	sound_ready.stream = ready_audio
+	sound_ready.bus = AudioServer.get_bus_name(1)
 	add_child(sound_ready)
 	reset()
 

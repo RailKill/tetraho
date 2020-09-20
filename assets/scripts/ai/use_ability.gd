@@ -1,0 +1,25 @@
+class_name UseAbility
+extends Target
+# AI Behavior which uses a given ability on a target to the extent of the given
+# distance.
+
+
+# Ability to use.
+var ability: Ability
+# Range of the ability.
+var reach: float
+
+func _init(actor, goal, skill, length=0, extent=0).(actor, goal, extent):
+	ability = skill
+	reach = length
+
+
+func execute(_delta) -> bool:
+	if is_close_enough() and is_instance_valid(target):
+		if ability.has_method("set_spawn_point"):
+			ability.set_spawn_point(executor.global_position + \
+					to_target_vector().normalized() * reach \
+					if reach else target.global_position)
+		ability.cast()
+		return false
+	return true

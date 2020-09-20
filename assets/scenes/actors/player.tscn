@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/scripts/actors/player.gd" type="Script" id=1]
 [ext_resource path="res://assets/scripts/abilities/dash.gd" type="Script" id=2]
@@ -11,7 +11,15 @@
 [ext_resource path="res://assets/scenes/ui/player_hud.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/sounds/hit.wav" type="AudioStream" id=10]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 4, 6 )
 
 [node name="Player" type="KinematicBody2D" groups=[
@@ -30,11 +38,11 @@ layer = 2
 [node name="IngameMenu" parent="CanvasLayer" instance=ExtResource( 8 )]
 visible = false
 
-[node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 6 )
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true

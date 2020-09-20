@@ -12,11 +12,9 @@ export(String) var verb = "scratched"
 # Actor who created this damage area, possible to be null.
 var creator: Actor
 
-# Reference to the AnimatedSprite node.
-onready var animation = $AnimatedSprite
-
 
 func _ready():
+	var animation = $AnimatedSprite
 	# warning-ignore:return_value_discarded
 	animation.connect("animation_finished", self, "_on_animation_finished")
 	# warning-ignore:return_value_discarded

@@ -71,6 +71,10 @@ func get_global_vector():
 	return Vector2(int(round(vector.x)), int(round(vector.y)))
 
 
+func get_sprite():
+	return summon
+
+
 # Traps a given actor by adding a record to the GameWorld.
 func trap(actor):
 	GameWorld.blocks[self].append(actor)

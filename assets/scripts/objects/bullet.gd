@@ -3,7 +3,7 @@ extends KinematicBody2D
 
 
 # Trajectory that marks the direction and speed of the bullet.
-var trajectory : Trajectory
+var trajectory: Trajectory
 # The amount of time in seconds that this bullet has lived.
 var lifetime = 0
 # Checks if the bullet is being queued for destruction.

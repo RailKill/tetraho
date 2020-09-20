@@ -8,7 +8,7 @@ signal damage_taken(attacker, verb, victim, amount)
 
 export var hp = Constants.PLAYER_HP setget ,get_hp
 export var max_hp = Constants.PLAYER_HP setget ,get_maximum_hp
-export var move_speed = Constants.PLAYER_MOVE_SPEED
+export(float, 0, 5) var move_speed = Constants.PLAYER_MOVE_SPEED
 export var is_invulnerable = false
 export(Constants.Team) var team = Constants.Team.MOBS
 
@@ -17,6 +17,7 @@ var checker_resource = load("res://assets/scenes/areas/area_checker.tscn")
 onready var collision_shape = $CollisionShape2D
 onready var sound_hit = $SoundHit
 onready var sound_death = $SoundDeath
+onready var sprite = get_node_or_null("AnimatedSprite") setget ,get_sprite
 
 
 func _to_string():
@@ -40,7 +41,6 @@ func is_dead():
 	return hp <= 0
 
 
-# Get the current hit points of this actor.
 func get_hp():
 	return hp
 
@@ -49,9 +49,12 @@ func get_hud():
 	return null
 
 
-# Get the maximum hit points for this actor.
 func get_maximum_hp():
 	return max_hp
+
+
+func get_sprite():
+	return sprite
 
 
 # Heals the actor by the given amount.

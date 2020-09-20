@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/scripts/abilities/spawn.gd" type="Script" id=1]
 [ext_resource path="res://assets/scripts/actors/blockmancer.gd" type="Script" id=2]
 [ext_resource path="res://assets/sprites/actors/blockmancer/blockmancer_2.png" type="Texture" id=3]
+[ext_resource path="res://assets/sounds/blockmancer_summon.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/sounds/blockmancer_death.wav" type="AudioStream" id=5]
 [ext_resource path="res://assets/sprites/actors/blockmancer/blockmancer_1.png" type="Texture" id=6]
 [ext_resource path="res://assets/sprites/actors/blockmancer/blockmancer.png" type="Texture" id=7]
@@ -27,6 +28,9 @@ extents = Vector2( 6, 7 )
 collision_layer = 4
 collision_mask = 5
 script = ExtResource( 2 )
+hp = 10
+max_hp = 10
+move_speed = 1.5
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
@@ -37,6 +41,7 @@ shape = SubResource( 2 )
 [node name="Spawn" type="Node2D" parent="."]
 script = ExtResource( 1 )
 duration = 1.0
+complete_audio = ExtResource( 4 )
 spawn_resource = ExtResource( 9 )
 maximum_spawnable = 12
 

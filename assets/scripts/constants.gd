@@ -20,7 +20,6 @@ const GRID_DOUBLE = GRID_SIZE * 2
 const GRID_HALF = GRID_SIZE / 2
 const GRID_ONE_HALF = GRID_SIZE + GRID_HALF
 
-
 # Adjacent cell offset positions in 8 directions.
 const DIRECTIONALS = [
 	Vector2.RIGHT,
@@ -42,14 +41,6 @@ const HEART_HEAL = 20
 
 # AI settings.
 const AI_PATHING_COOLDOWN = 0.25
-const BLOCKMANCER_HP = 10
-const BLOCKMANCER_MOVE_SPEED = 2
-const BOSS_HP = 500
-const BOSS_MOVE_SPEED = 2
-const DUCK_HP = 20
-const DUCK_MOVE_SPEED = 0.5
-const GUNNER_HP = 20
-const GUNNER_MOVE_SPEED = 1
 
 # Others.
 const ABILITY_FAILURE_RECOVERY_TIME = 0.5
@@ -61,6 +52,6 @@ const CHECKER_LIFETIME = 0.05
 const DEAD_BLOCK_DAMAGE = 40
 const FLAMETHROWER_DAMAGE = 20
 const FLAMETHROWER_DURATION = 0.5
-const TETROMINO_DECAY_TIME = 4
 const TETROMINO_DAMAGE = 100
+const TETROMINO_DECAY_TIME = 4
 const TETROMINO_SUMMON_TIME = 0.5

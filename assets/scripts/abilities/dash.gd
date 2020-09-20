@@ -10,6 +10,7 @@ var sound_collide = AudioStreamPlayer2D.new()
 
 
 func _ready():
+	sound_collide.bus = AudioServer.get_bus_name(1)
 	sound_cast.stream = load("res://assets/sounds/dash_start.wav")
 	sound_collide.stream = load("res://assets/sounds/dash_collide.wav")
 	sound_ready.stream = load("res://assets/sounds/dash_ready.wav")
