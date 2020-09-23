@@ -18,27 +18,31 @@ func test_basic_solve_3x3():
 
 
 func test_is_actor_locked_check():
-	var dummy = Actor.new()
-	GameWorld.blocks["test"] = [dummy]
-	asserts.is_true(GameWorld.is_actor_locked(dummy))
-	dummy.queue_free()
+	var fake = Actor.new()
+	GameWorld.blocks["test"] = [fake]
+	asserts.is_true(GameWorld.is_actor_locked(fake))
+	fake.queue_free()
 
 
 func test_kill_trapped_actors_with_solve():
 	create_blocks()
-	var dummy = Actor.new()
-	dummy.sound_death = AudioStreamPlayer2D.new()
-	dummy.collision_shape = Node2D.new()
-	var dummy2 = Actor.new()
-	dummy2.sound_death = AudioStreamPlayer2D.new()
-	dummy2.collision_shape = Node2D.new()
+	var death = AudioStreamPlayer2D.new()
+	var shape = Node2D.new()
+	var fake = Actor.new()
+	fake.sound_death = death
+	fake.collision_shape = shape
+	var fake2 = Actor.new()
+	fake2.sound_death = death
+	fake2.collision_shape = shape
 	
-	GameWorld.blocks[test_blocks[0]] = [dummy]
-	GameWorld.blocks[test_blocks[1]] = [dummy2]
+	GameWorld.blocks[test_blocks[0]] = [fake]
+	GameWorld.blocks[test_blocks[1]] = [fake2]
 	GameWorld.solve()
-	asserts.is_true(dummy.is_dead() and dummy2.is_dead())
-	dummy.queue_free()
-	dummy2.queue_free()
+	asserts.is_true(fake.is_dead() and fake2.is_dead())
+	death.queue_free()
+	shape.queue_free()
+	fake.queue_free()
+	fake2.queue_free()
 
 
 func test_rotated_solve():
@@ -96,38 +100,39 @@ func test_search():
 
 func test_solve_damages_only_once():
 	create_blocks()
-	var dummy = Actor.new()
-	dummy.sound_death = AudioStreamPlayer2D.new()
-	dummy.collision_shape = Node2D.new()
-	
-	GameWorld.blocks[test_blocks[0]] = [dummy]
-	GameWorld.blocks[test_blocks[1]] = [dummy]
+	var fake = Actor.new()
+	fake.sound_death = AudioStreamPlayer2D.new()
+	fake.collision_shape = Node2D.new()
+	GameWorld.blocks[test_blocks[0]] = [fake]
+	GameWorld.blocks[test_blocks[1]] = [fake]
 	GameWorld.solve()
-	asserts.is_equal(dummy.hp, dummy.max_hp - Constants.TETROMINO_DAMAGE)
-	dummy.queue_free()
+	asserts.is_equal(fake.hp, fake.max_hp - Constants.TETROMINO_DAMAGE)
+	fake.sound_death.queue_free()
+	fake.collision_shape.queue_free()
+	fake.queue_free()
 
 
 func test_trap():
-	var dummy = Actor.new()
+	var fake = Actor.new()
 	var block = block_resource.instance()
 	add_child(block)
 	GameWorld.blocks[block] = []
-	block.trap(dummy)
-	asserts.is_true(dummy.is_locked(), "actor locked by block")
+	block.trap(fake)
+	asserts.is_true(fake.is_locked(), "actor locked by block")
 	block.queue_free()
 	yield(until_signal(block, "tree_exited", 0.5), YIELD)
-	asserts.is_false(dummy.is_locked(), "actor freed when block is destroyed")
-	dummy.queue_free()
+	asserts.is_false(fake.is_locked(), "actor freed when block is destroyed")
+	fake.queue_free()
 
 
 func test_untrap():
-	var dummy = Actor.new()
+	var fake = Actor.new()
 	var block = block_resource.instance()
-	GameWorld.blocks[block] = [dummy]
+	GameWorld.blocks[block] = [fake]
 	block.untrap()
 	asserts.is_true(GameWorld.blocks.empty())
 	block.queue_free()
-	dummy.queue_free()
+	fake.queue_free()
 
 
 func post():

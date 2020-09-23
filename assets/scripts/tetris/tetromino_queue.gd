@@ -25,8 +25,6 @@ var configurations = [
 ]
 # Current index of the queue.
 var index: int
-# List of tetrominos in the current queue.
-var queue: Array
 
 
 func _init():
@@ -35,18 +33,20 @@ func _init():
 
 # Serve and return the next tetromino in queue.
 func fetch():
-	var tetromino = queue[index]
+	var tetromino = peek()
 	index += 1
-	
-	if index >= queue.size():
+	if index >= configurations.size():
 		refresh()
-	
 	return tetromino
 
 
 # Returns the most current tetromino in queue.
 func peek():
-	return queue[index]
+	var config = configurations[index]
+	var tetromino = resource.instance()
+	tetromino.load_configuration(
+			config["top"], config["bottom"], config["color"])
+	return tetromino
 
 
 # Re-generate the queue with a new set of tetrominos in a randomized order.
@@ -54,9 +54,3 @@ func refresh():
 	randomize()
 	configurations.shuffle()
 	index = 0
-	queue = []
-	for config in configurations:
-		var tetromino = resource.instance()
-		tetromino.load_configuration(
-				config["top"], config["bottom"], config["color"])
-		queue.append(tetromino)

@@ -99,7 +99,7 @@ func update_tetromino(player):
 	for extra in range(2, next.get_child_count()):
 		next.get_child(extra).queue_free()
 	
-	var netromino = player.queue.peek().duplicate()
+	var netromino = player.queue.peek()
 	next.add_child(netromino)
 	netromino.position = Vector2.ZERO
 	netromino.toggle_blocks(true)

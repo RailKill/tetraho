@@ -26,10 +26,13 @@ func _to_string():
 
 
 # Add given node as a child of this Actor if the string representation of the
-# give node does not already exist.
+# give node does not already exist. If this operation is unsuccessful, the node
+# will not have a parent so it MUST be freed to prevent a leak.
 func add_child_unique(node: Node2D):
 	if not get_node_or_null(str(node)):
 		add_child(node)
+	else:
+		node.queue_free()
 
 
 # Adds a speech bubble to the queue for this actor to speak.

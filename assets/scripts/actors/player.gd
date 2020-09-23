@@ -31,6 +31,7 @@ onready var sound_low_hp = $SoundLowHP
 
 
 func _ready():
+	add_child(queue)
 	next_tetromino()
 
 

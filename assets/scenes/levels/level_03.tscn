@@ -26,10 +26,10 @@ extents = Vector2( 22.1486, 18.1283 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 23.2841, 12.6423 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 88.5969, 4.23798 )
 
-[sub_resource type="SpriteFrames" id=3]
+[sub_resource type="SpriteFrames" id=4]
 animations = [ {
 "frames": [ ExtResource( 11 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 10 ), ExtResource( 8 ), ExtResource( 12 ) ],
 "loop": true,
@@ -86,7 +86,7 @@ script = ExtResource( 1 )
 triggered_by = [ NodePath("../../Player") ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Events/DialogBoss"]
-shape = SubResource( 6 )
+shape = SubResource( 3 )
 
 [node name="BossGreeting" type="Node" parent="Events/DialogBoss"]
 script = ExtResource( 4 )
@@ -145,7 +145,8 @@ position = Vector2( 63, 623 )
 
 [node name="Summoning" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine"]
 position = Vector2( 7, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -153,7 +154,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning2" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine"]
 position = Vector2( 21, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -161,7 +163,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning3" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine"]
 position = Vector2( 35, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -169,7 +172,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning4" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine"]
 position = Vector2( 49, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -177,7 +181,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning5" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine"]
 position = Vector2( 63, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -185,7 +190,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning6" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine"]
 position = Vector2( 77, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -193,7 +199,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning7" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine"]
 position = Vector2( 91, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -201,7 +208,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning8" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine"]
 position = Vector2( 105, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -209,7 +217,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning9" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine"]
 position = Vector2( 119, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -217,7 +226,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning10" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine"]
 position = Vector2( 133, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -225,7 +235,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning11" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine"]
 position = Vector2( 147, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -233,7 +244,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning12" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine"]
 position = Vector2( 161, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -241,7 +253,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning13" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine"]
 position = Vector2( 175, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -249,7 +262,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning14" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine"]
 position = Vector2( 189, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -260,7 +274,8 @@ rotation = 1.5708
 
 [node name="Summoning" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine2"]
 position = Vector2( 7, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -268,7 +283,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning2" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine2"]
 position = Vector2( 21, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -276,7 +292,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning3" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine2"]
 position = Vector2( 35, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -284,7 +301,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning4" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine2"]
 position = Vector2( 49, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -292,7 +310,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning5" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine2"]
 position = Vector2( 63, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -300,7 +319,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning6" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine2"]
 position = Vector2( 77, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -308,7 +328,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning7" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine2"]
 position = Vector2( 91, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -316,7 +337,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning8" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine2"]
 position = Vector2( 105, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -324,7 +346,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning9" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine2"]
 position = Vector2( 119, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -332,7 +355,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning10" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine2"]
 position = Vector2( 133, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -340,7 +364,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning11" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine2"]
 position = Vector2( 147, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -348,7 +373,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning12" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine2"]
 position = Vector2( 161, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -356,7 +382,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning13" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine2"]
 position = Vector2( 175, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -364,7 +391,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning14" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine2"]
 position = Vector2( 189, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -375,7 +403,8 @@ rotation = 3.14159
 
 [node name="Summoning" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine3"]
 position = Vector2( 7, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -383,7 +412,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning2" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine3"]
 position = Vector2( 21, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -391,7 +421,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning3" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine3"]
 position = Vector2( 35, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -399,7 +430,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning4" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine3"]
 position = Vector2( 49, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -407,7 +439,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning5" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine3"]
 position = Vector2( 63, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -415,7 +448,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning6" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine3"]
 position = Vector2( 77, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -423,7 +457,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning7" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine3"]
 position = Vector2( 91, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -431,7 +466,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning8" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine3"]
 position = Vector2( 105, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -439,7 +475,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning9" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine3"]
 position = Vector2( 119, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -447,7 +484,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning10" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine3"]
 position = Vector2( 133, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -455,7 +493,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning11" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine3"]
 position = Vector2( 147, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -463,7 +502,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning12" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine3"]
 position = Vector2( 161, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -471,7 +511,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning13" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine3"]
 position = Vector2( 175, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -479,7 +520,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning14" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine3"]
 position = Vector2( 189, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -490,7 +532,8 @@ rotation = 4.71239
 
 [node name="Summoning" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine4"]
 position = Vector2( 7, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -498,7 +541,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning2" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine4"]
 position = Vector2( 21, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -506,7 +550,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning3" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine4"]
 position = Vector2( 35, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -514,7 +559,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning4" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine4"]
 position = Vector2( 49, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -522,7 +568,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning5" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine4"]
 position = Vector2( 63, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -530,7 +577,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning6" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine4"]
 position = Vector2( 77, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -538,7 +586,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning7" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine4"]
 position = Vector2( 91, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -546,7 +595,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning8" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine4"]
 position = Vector2( 105, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -554,7 +604,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning9" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine4"]
 position = Vector2( 119, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -562,7 +613,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning10" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine4"]
 position = Vector2( 133, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -570,7 +622,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning11" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine4"]
 position = Vector2( 147, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -578,7 +631,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning12" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine4"]
 position = Vector2( 161, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -586,7 +640,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning13" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine4"]
 position = Vector2( 175, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false
@@ -594,7 +649,8 @@ offset = Vector2( -1, -1 )
 
 [node name="Summoning14" type="AnimatedSprite" parent="Events/FlameIncoming/FlameLine4"]
 position = Vector2( 189, -7 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
+frame = 3
 speed_scale = 2.0
 playing = true
 centered = false

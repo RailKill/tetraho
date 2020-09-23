@@ -26,7 +26,7 @@ var sound_cast = AudioStreamPlayer2D.new()
 var sound_complete = AudioStreamPlayer2D.new()
 var sound_ready = AudioStreamPlayer2D.new()
 
-onready var caster: Actor = get_parent()
+onready var caster: Node2D = get_parent()
 
 
 func _ready():
@@ -82,6 +82,5 @@ func reset():
 
 
 func update():
-	var hud = caster.get_hud()
-	if hud:
-		hud.update_ability(self)
+	if caster.has_method("get_hud") and caster.get_hud():
+		caster.get_hud().update_ability(self)

@@ -340,6 +340,10 @@ config/icon="res://assets/sprites/blocks/tetromino_block.png"
 
 GameWorld="*res://assets/scenes/world.tscn"
 
+[debug]
+
+settings/stdout/verbose_stdout=true
+
 [display]
 
 window/size/width=1280

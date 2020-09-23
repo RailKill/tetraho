@@ -20,6 +20,8 @@ func _ready():
 func add_child_unique(node):
 	if not node is Burn:
 		.add_child_unique(node)
+	else:
+		node.queue_free()
 
 
 func oof(damage, bypass_lock=false, attacker=null, message=""):

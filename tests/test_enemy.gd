@@ -81,6 +81,7 @@ func test_boss():
 			"%s %s for %d damage" % args.slice(1, 3) if args[0] else 
 			"shoot the player")
 	boss.queue_free()
+	yield(until_timeout(0.5), YIELD)
 
 
 func test_duck():
