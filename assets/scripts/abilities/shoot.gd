@@ -14,7 +14,7 @@ func cast():
 		speed = gun.velocity
 		
 		var shot = gun.bullet.instance()
-		shot.trajectory = self
+		shot.trajectory = self.duplicate()
 		
 		caster.get_parent().add_child(shot)
 		shot.global_position = gun.get_muzzle_position()

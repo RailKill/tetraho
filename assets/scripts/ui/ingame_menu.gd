@@ -2,11 +2,13 @@ class_name IngameMenu
 extends Control
 
 
+# If true, then this menu cannot be closed.
+var cannot_close = false
+
 # Title heading node of this in-game menu panel.
 onready var title = $Label
 # Resume button, a.k.a the first button to grab focus when menu is visible.
 onready var button_resume = $VBoxContainer/ButtonResume
-var cannot_close = false
 
 
 func _ready():
@@ -22,13 +24,9 @@ func _input(_event):
 			show()
 
 
-func show():
-	.show()
-	button_resume.grab_focus()
-
-
 func _on_ButtonResume_pressed():
 	hide()
+	get_tree().paused = false
 
 
 func _on_ButtonQuit_pressed():
@@ -36,15 +34,18 @@ func _on_ButtonQuit_pressed():
 
 
 func _on_ButtonRestart_pressed():
-	_on_ButtonResume_pressed()
-	var _ignore = get_tree().reload_current_scene()
-
-
-func _on_IngameMenu_visibility_changed():
-	get_tree().set_pause(visible)
+	get_tree().paused = false
+	# warning-ignore:return_value_discarded
+	get_tree().reload_current_scene()
 
 
 func _on_ButtonMainMenu_pressed():
-	get_tree().set_pause(false)	
+	get_tree().paused = false
 	# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://assets/scenes/ui/main_menu.tscn")
+
+
+func show():
+	.show()
+	button_resume.grab_focus()
+	get_tree().paused = true

@@ -32,15 +32,16 @@ onready var talk = preload("res://assets/scenes/ui/speech_bubble.tscn")
 
 
 # Make the HUD say something with the speech bubble at a given canvas position.
-func say(speech : PoolStringArray, 
-	position=head.get_global_position() + Vector2(0, -120)):
-#		if not is_instance_valid(bubble):
-			bubble = talk.instance()
-			bubble.speech += speech
-			head.add_child(bubble)
-			bubble.global_position = position
-#		else:
-#			bubble.speech += speech
+func say(speech: PoolStringArray, 
+		position=head.get_global_position() + Vector2(0, -100)):
+	if not is_instance_valid(bubble):
+		bubble = talk.instance()
+		bubble.speech += speech
+		head.add_child(bubble)
+		bubble.graphics.scale = Vector2(1, 1)
+		bubble.global_position = position
+	else:
+		bubble.speech += speech
 
 
 # Updates the HUD based on the given player's HP.

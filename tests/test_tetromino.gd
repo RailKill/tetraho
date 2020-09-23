@@ -133,6 +133,7 @@ func end():
 # Just a dummy node that acts as the player but doesn't do anything.
 class MockPlayer extends Node2D:
 	var current: Tetromino
+	var is_controllable = true
 	
 	func is_current(tetromino):
 		return current == tetromino

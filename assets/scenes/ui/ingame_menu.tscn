@@ -146,7 +146,6 @@ texture = ExtResource( 3 )
 position = Vector2( -96, 0 )
 scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 2 )
-[connection signal="visibility_changed" from="." to="." method="_on_IngameMenu_visibility_changed"]
 [connection signal="pressed" from="VBoxContainer/ButtonResume" to="." method="_on_ButtonResume_pressed"]
 [connection signal="pressed" from="VBoxContainer/ButtonRestart" to="." method="_on_ButtonRestart_pressed"]
 [connection signal="pressed" from="VBoxContainer/ButtonMainMenu" to="." method="_on_ButtonMainMenu_pressed"]

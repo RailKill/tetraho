@@ -17,9 +17,9 @@ func _ready():
 
 
 # Immune to Burn status effect.
-func add_status(effect: Status):
-	if not effect is Burn:
-		.add_status(effect)
+func add_child_unique(node):
+	if not node is Burn:
+		.add_child_unique(node)
 
 
 func oof(damage, bypass_lock=false, attacker=null, message=""):
@@ -33,16 +33,13 @@ func oof(damage, bypass_lock=false, attacker=null, message=""):
 		teleport()
 
 
-func teleport(index=-1):
-	if teleport_points:
-		var selected
-		if index != -1:
-			selected = index
-		else:
-			randomize()
-			selected = randi() % teleport_points.size()
-		
-		telesprite.instance()
-		telesprite.global_position = global_position
-		get_parent().add_child(telesprite)
-		global_position = teleport_points[selected]
+func teleport(point=null):
+	if point == null:
+		randomize()
+		point = teleport_points[randi() % teleport_points.size()]
+
+	var effect = telesprite.instance()
+	effect.global_position = point
+	get_parent().add_child(effect)
+	global_position = point
+

@@ -17,6 +17,8 @@ var current: Tetromino
 var hold: Tetromino
 # Queue to generate tetrominos.
 var queue = TetrominoQueue.new()
+# Checks if the player is controllable or not.
+var is_controllable = true
 
 onready var canvas = $CanvasLayer
 onready var hud = $CanvasLayer/PlayerHUD setget ,get_hud
@@ -33,6 +35,9 @@ func _ready():
 
 
 func _physics_process(_delta):
+	if not is_controllable:
+		return
+	
 	if Input.is_action_just_pressed("action_special"):
 		# If hold is empty, store current and call next tetromino.
 		if not hold:

@@ -1,68 +1,76 @@
 class_name SpeechBubble
 extends Node2D
-# A speech bubble box that contains a label.
+# An animated, skippable speech bubble box that contains a label.
 
+
+const OPEN = "DialogOpen"
+const CLOSE = "DialogClose"
+
+
+# Current index of the speech to deliver.
+var index = 0
+# Elapsed time sinced last skip.
+var elapsed_time = 0
+# Speech object for this bubble to display.
+var speech
 
 # Reference to the AnimationPlayer node.
 onready var animation = $AnimationPlayer
+# Reference to the Graphics node.
+onready var graphics = $Graphics
 # Reference to the Label node showing the text.
-onready var label = $Label
+onready var label = $Graphics/Label
+# Reference to the AudioStreamPlayer2D which plays the bubble pop sound.
 onready var sound_pop = $SoundPop
-# List of strings to say.
-export var speech : PoolStringArray = []
-# Current index of the speech to deliver.
-var index = 0
-# This will be set to true if the speech bubble is closing.
-var is_closing = false
 
 
 func _ready():
-	if speech.empty():
-		queue_free()
-	else:
-		start()
+	animation.connect("animation_finished", self, "next")
+	start()
+
+
+func _process(delta):
+	if speech.duration > 0:
+		elapsed_time += delta
+		if elapsed_time >= speech.duration:
+			skip()
+			elapsed_time = 0
 
 
 func _input(_event):
-	if Input.is_action_just_pressed("action_interact"):
+	if Input.is_action_just_pressed("action_interact") and \
+			not animation.current_animation == CLOSE:
 		skip()
-
-
-# Go to next line of speech.
-func next():
-	end()
-	is_closing = true
-	yield(animation, "animation_finished")
-	is_closing = false
-	
-	index += 1
-	if index < speech.size():
-		start()
-	else:
-		queue_free()
-
-
-# Skip to the end of the dialog animation.
-func skip():
-	if not is_closing:
-		var length = animation.get_animation("Dialog").length
-		if animation.get_current_animation_position() != length:
-			animation.seek(length)
-		else:
-			next()
 
 
 # Start speech bubble animation.
 func start():
-	label.set_text(speech[index])
-	animation.set_speed_scale(2)
-	animation.play("Dialog")
+	label.set_text(speech.lines[index])
+	animation.play(OPEN)
 	sound_pop.play()
+
+
+# Skip to the end of the open animation, or close dialog if already at the end.
+func skip():
+	if animation.current_animation == OPEN:
+		var length = animation.get_animation(OPEN).length
+		if animation.current_animation_position > 0.5 and \
+				animation.current_animation_position < length:
+			animation.seek(length)
+	else:
+		end()
+
+
+# Go to next line of speech if the close animation is completed.
+func next(animation_name=CLOSE):
+	if animation_name == CLOSE:
+		index += 1
+		if index < speech.lines.size():
+			start()
+		else:
+			queue_free()
 
 
 # End speech bubble animation.
 func end():
-	animation.set_speed_scale(4)
-	animation.play_backwards("Dialog")
-	
-
+	animation.play(CLOSE)

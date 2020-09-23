@@ -62,7 +62,7 @@ func _ready():
 
 func _physics_process(delta):
 	# Handle controls.
-	if summoner and summoner.is_current(self):
+	if summoner and summoner.is_current(self) and summoner.is_controllable:
 		if Input.is_action_just_pressed("action_primary"):
 			summon_piece()
 		elif Input.is_action_just_pressed("action_secondary"):

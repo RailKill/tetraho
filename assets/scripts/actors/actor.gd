@@ -13,6 +13,7 @@ export var is_invulnerable = false
 export(Constants.Team) var team = Constants.Team.MOBS
 
 var checker_resource = load("res://assets/scenes/areas/area_checker.tscn")
+var speech_queue = []
 
 onready var collision_shape = $CollisionShape2D
 onready var sound_hit = $SoundHit
@@ -29,6 +30,15 @@ func _to_string():
 func add_child_unique(node: Node2D):
 	if not get_node_or_null(str(node)):
 		add_child(node)
+
+
+# Adds a speech bubble to the queue for this actor to speak.
+func add_speech(bubble: SpeechBubble):
+	speech_queue.append(bubble)
+	# warning-ignore:return_value_discarded
+	bubble.connect("tree_exited", self, "next_speech")
+	if speech_queue.size() == 1:
+		call_deferred("add_child", bubble)
 
 
 # Checks a given collision and react accordingly. By default, nothing happens.
@@ -65,6 +75,13 @@ func heal(amount):
 # Checks if actor is being locked.
 func is_locked():
 	return GameWorld.is_actor_locked(self)
+
+
+# Process the next speech bubble down the speech_queue.
+func next_speech():
+	speech_queue.pop_front()
+	if not speech_queue.empty():
+		call_deferred("add_child", speech_queue[0])
 
 
 # Damage the actor.

@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/scripts/areas/area_damage.gd"
 }, {
+"base": "Area2D",
+"class": "AreaDialog",
+"language": "GDScript",
+"path": "res://assets/scripts/areas/area_dialog.gd"
+}, {
 "base": "Reference",
 "class": "Behavior",
 "language": "GDScript",
@@ -103,6 +108,11 @@ _global_script_classes=[ {
 "class": "Enemy",
 "language": "GDScript",
 "path": "res://assets/scripts/actors/enemy.gd"
+}, {
+"base": "AreaDialog",
+"class": "Exit",
+"language": "GDScript",
+"path": "res://assets/scripts/areas/exit.gd"
 }, {
 "base": "Node2D",
 "class": "Flamethrower",
@@ -189,6 +199,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/scripts/abilities/spawn.gd"
 }, {
+"base": "Node",
+"class": "Speech",
+"language": "GDScript",
+"path": "res://assets/scripts/ui/speech.gd"
+}, {
 "base": "Node2D",
 "class": "SpeechBubble",
 "language": "GDScript",
@@ -256,6 +271,7 @@ _global_script_class_icons={
 "AreaAggro": "",
 "AreaChecker": "",
 "AreaDamage": "",
+"AreaDialog": "",
 "Behavior": "",
 "Blockmancer": "",
 "Boss": "",
@@ -269,6 +285,7 @@ _global_script_class_icons={
 "DuckHouse": "",
 "Effect": "",
 "Enemy": "",
+"Exit": "",
 "Flamethrower": "",
 "FocusButton": "",
 "Follow": "",
@@ -286,6 +303,7 @@ _global_script_class_icons={
 "PlayerHUD": "",
 "Shoot": "",
 "Spawn": "",
+"Speech": "",
 "SpeechBubble": "",
 "Status": "",
 "Target": "",

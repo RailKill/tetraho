@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/scripts/ui/speech_bubble.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/actors/duck/exclamation_popup.png" type="Texture" id=2]
@@ -6,8 +6,23 @@
 [ext_resource path="res://assets/tetra_theme.tres" type="Theme" id=4]
 
 [sub_resource type="Animation" id=1]
-resource_name = "Dialog"
-length = 2.0
+resource_name = "DialogClose"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1e-05, 1e-05 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+length = 1.5
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:scale")
 tracks/0/interp = 2
@@ -21,26 +36,32 @@ tracks/0/keys = {
 "values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1, 1 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Label:percent_visible")
+tracks/1/path = NodePath("Graphics/Label:percent_visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.5, 2 ),
+"times": PoolRealArray( 0, 0.5, 1.5 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ 0.0, 0.0, 1.0 ]
 }
 
 [node name="SpeechBubble" type="Node2D"]
+scale = Vector2( 1e-05, 1e-05 )
+z_index = 10
 script = ExtResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Graphics" type="Node2D" parent="."]
+position = Vector2( 0, -28 )
+scale = Vector2( 0.3, 0.3 )
+
+[node name="Sprite" type="Sprite" parent="Graphics"]
 scale = Vector2( 35, 9 )
 texture = ExtResource( 2 )
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="Graphics"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -54,7 +75,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="Graphics"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -70,12 +91,15 @@ align = 1
 valign = 1
 autowrap = true
 clip_text = true
+percent_visible = 0.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Dialog = SubResource( 1 )
+playback_speed = 1.5
+anims/DialogClose = SubResource( 1 )
+anims/DialogOpen = SubResource( 2 )
 
 [node name="SoundPop" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
