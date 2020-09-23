@@ -1,9 +1,12 @@
 extends WAT.Test
 
 
+var boss_resource = preload("res://assets/scenes/actors/boss.tscn")
+var dummy_resource = preload("res://assets/scenes/actors/dummy.tscn")
 var gate_resource = preload("res://assets/scenes/objects/gate.tscn")
 var flame_resource = preload("res://assets/scenes/objects/flamethrower.tscn")
 var player_resource = preload("res://assets/scenes/actors/player.tscn")
+var wheel_resource = preload("res://assets/scenes/objects/flame_wheel.tscn")
 
 var flames: Flamethrower
 var player: PlayerCharacter
@@ -15,6 +18,57 @@ func pre():
 	
 	player = player_resource.instance()
 	player.global_position = Vector2(0, -flames.length)
+	player.get_node("AreaAggro").queue_free()
+
+
+func test_boss_immune_to_flames():
+	add_child(player)
+	var navigation = Navigation2D.new()
+	navigation.name = "Navigation2D"
+	add_child(navigation)
+	var boss = boss_resource.instance()
+	boss.global_position = Vector2(0, -flames.length / 2)
+	add_child(boss)
+	yield(until_signal(boss, "damage_taken", 1), YIELD)
+	asserts.is_equal(boss.hp, boss.max_hp)
+	boss.queue_free()
+	navigation.queue_free()
+
+
+func test_flamewheel_unhindered_at_center():
+	flames.queue_free()
+	add_child(player)
+	var seven_axes = [
+		Vector2.UP + Vector2.LEFT,
+		Vector2.LEFT,
+		Vector2.LEFT + Vector2.DOWN,
+		Vector2.DOWN,
+		Vector2.DOWN + Vector2.RIGHT,
+		Vector2.UP + Vector2.RIGHT,
+		Vector2.RIGHT,
+	]
+	var dummies = []
+	for axis in seven_axes:
+		var dummy = dummy_resource.instance()
+		dummy.global_position = axis * 100
+		add_child(dummy)
+		dummies.append(dummy)
+	
+	var navigation = Navigation2D.new()
+	navigation.name = "Navigation2D"
+	add_child(navigation)
+	var boss = boss_resource.instance()
+	add_child(boss)
+	var flame_wheel = wheel_resource.instance()
+	add_child(flame_wheel)
+	yield(until_timeout(3), YIELD)
+	for dummy in dummies:
+		asserts.is_less_than(dummy.hp, dummy.max_hp, 
+				"damaged %s (HP: %d)" % [dummy.name, dummy.hp])
+		dummy.queue_free()
+	flame_wheel.queue_free()
+	boss.queue_free()
+	navigation.queue_free()
 
 
 func test_severity_of_damage():
@@ -80,6 +134,8 @@ func test_shielded_at_point_blank():
 
 
 func post():
-	flames.queue_free()
+	if is_instance_valid(flames):
+		flames.queue_free()
 	if is_instance_valid(player):
 		player.queue_free()
+		yield(until_signal(player, "tree_exited", 0.5), YIELD)

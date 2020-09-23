@@ -7,11 +7,13 @@ const NC = Constants.GRID_SIZE * 5
 
 var block_resource = preload("res://assets/scenes/tetris/tetromino_block.tscn")
 var bmancer_resource = preload("res://assets/scenes/actors/blockmancer.tscn")
+var boss_resource = preload("res://assets/scenes/actors/boss.tscn")
 var duck_resource = preload("res://assets/scenes/actors/duck.tscn")
 var gate_resource = preload("res://assets/scenes/objects/gate.tscn")
 var gunner_resource = preload("res://assets/scenes/actors/gunner.tscn")
 var house_resource = preload("res://assets/scenes/actors/duck_house.tscn")
 var player_resource = preload("res://assets/scenes/actors/player.tscn")
+
 var player: PlayerCharacter
 var navigation: Navigation2D
 var navmesh: NavigationPolygonInstance
@@ -45,7 +47,6 @@ func pre():
 func test_blockmancer_capable_of_damaging_player():
 	player.translate(Vector2.UP * 2)
 	var bmancer = bmancer_resource.instance()
-	bmancer.is_aggro = true
 	add_child(bmancer)
 	var args = yield(until_signal(player, "damage_taken", 3), YIELD)
 	asserts.is_true(player.hp != player.max_hp, 
@@ -64,10 +65,27 @@ func test_blockmancer_capable_of_damaging_player():
 		$Deadmino.queue_free()
 
 
+func test_boss():
+	var boss = boss_resource.instance()
+	add_child(boss)
+	yield(until_timeout(0.5), YIELD)
+	asserts.is_greater_than(boss.global_position, Vector2.ZERO, "chased player")
+	var args = yield(until_signal(player, "damage_taken", 3), YIELD)
+	asserts.is_less_than(player.hp, player.max_hp, 
+			"%s %s for %d damage" % args.slice(1, 3) if args[0] else 
+			"melee the player")
+	player.global_position = Vector2(-NC * 2, 0)
+	var current_hp = player.hp
+	args = yield(until_signal(player, "damage_taken", 3), YIELD)
+	asserts.is_less_than(player.hp, current_hp, 
+			"%s %s for %d damage" % args.slice(1, 3) if args[0] else 
+			"shoot the player")
+	boss.queue_free()
+
+
 func test_duck():
 	player.global_position = Vector2(NC / 2.0, 0)
 	var duck = duck_resource.instance()
-	duck.is_aggro = true
 	add_child(duck)
 	
 	yield(until_timeout(0.5), YIELD)
@@ -83,7 +101,6 @@ func test_duck():
 func test_duck_house():
 	player.is_invulnerable = true
 	var house = house_resource.instance()
-	house.is_aggro = true
 	add_child(house)
 	
 	Engine.time_scale = 10.0
@@ -134,7 +151,6 @@ func test_duck_house():
 
 func test_gunner():
 	var gunner = gunner_resource.instance()
-	gunner.is_aggro = true
 	add_child(gunner)
 	var args = yield(until_signal(player, "damage_taken", 3), YIELD)
 	asserts.is_true(player.hp != player.max_hp, 
