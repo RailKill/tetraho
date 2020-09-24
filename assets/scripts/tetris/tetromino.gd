@@ -67,7 +67,8 @@ func _physics_process(delta):
 			summon_piece()
 		elif Input.is_action_just_pressed("action_secondary"):
 			rotate_piece()
-		snap_to_mouse()
+		else:
+			snap_to_mouse()
 	
 	# If the tetromino is summoning, start countdown.
 	if is_summoning:
@@ -144,6 +145,7 @@ func load_configuration(top: PoolIntArray, bottom: PoolIntArray, hue: Color):
 # Rotates the tetromino clockwise by 90 degrees.
 func rotate_piece():
 	rotation_degrees += 90
+	snap_to_mouse()
 
 
 # Function to calculate grid snapping based on mouse position.
