@@ -39,6 +39,8 @@ func _on_tree_exiting():
 func add_child_unique(node):
 	if not node is Status:
 		.add_child_unique(node)
+	else:
+		node.queue_free()
 
 
 # Queue the block for destruction. Used during a solve.

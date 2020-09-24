@@ -219,6 +219,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/scripts/ai/target.gd"
 }, {
+"base": "Ability",
+"class": "Teleport",
+"language": "GDScript",
+"path": "res://assets/scripts/abilities/teleport.gd"
+}, {
 "base": "Node2D",
 "class": "Tetromino",
 "language": "GDScript",
@@ -243,6 +248,11 @@ _global_script_classes=[ {
 "class": "Trajectory",
 "language": "GDScript",
 "path": "res://assets/scripts/abilities/trajectory.gd"
+}, {
+"base": "Status",
+"class": "Treasure",
+"language": "GDScript",
+"path": "res://assets/scripts/abilities/statuses/treasure.gd"
 }, {
 "base": "Target",
 "class": "UseAbility",
@@ -307,11 +317,13 @@ _global_script_class_icons={
 "SpeechBubble": "",
 "Status": "",
 "Target": "",
+"Teleport": "",
 "Tetromino": "",
 "TetrominoBlock": "",
 "TetrominoQueue": "",
 "TetrominoTarget": "",
 "Trajectory": "",
+"Treasure": "",
 "UseAbility": "",
 "Utility": "",
 "WAT": "",
@@ -339,6 +351,10 @@ config/icon="res://assets/sprites/blocks/tetromino_block.png"
 [autoload]
 
 GameWorld="*res://assets/scenes/world.tscn"
+
+[debug]
+
+settings/stdout/verbose_stdout=true
 
 [display]
 

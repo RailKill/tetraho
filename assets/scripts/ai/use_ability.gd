@@ -16,8 +16,8 @@ func _init(actor, goal, skill, length=0, extent=0).(actor, goal, extent):
 
 func execute(_delta) -> bool:
 	if is_close_enough() and is_instance_valid(target):
-		if ability.has_method("set_spawn_point"):
-			ability.set_spawn_point(executor.global_position + \
+		if ability.has_method("set_point"):
+			ability.set_point(executor.global_position + \
 					to_target_vector().normalized() * reach \
 					if reach else target.global_position)
 		ability.cast()
