@@ -26,7 +26,7 @@ onready var sound_pop = $SoundPop
 
 func _ready():
 	animation.connect("animation_finished", self, "next")
-	start()
+	visible = false
 
 
 func _process(delta):
@@ -38,13 +38,14 @@ func _process(delta):
 
 
 func _input(_event):
-	if Input.is_action_just_pressed("action_interact") and \
+	if visible and Input.is_action_just_pressed("action_interact") and \
 			not animation.current_animation == CLOSE:
 		skip()
 
 
 # Start speech bubble animation.
 func start():
+	visible = true
 	label.set_text(speech.lines[index])
 	animation.play(OPEN)
 	sound_pop.play()

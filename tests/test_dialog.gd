@@ -64,6 +64,20 @@ func test_exit_dialog_advance():
 	exit.queue_free()
 
 
+func test_same_actor_queue_multiple_speeches():
+	speech.lines = ["howdy"]
+	var bubble = speech.deliver()
+	var bubble2 = speech.deliver()
+	yield(until_signal(bubble, "ready", 0.5), YIELD)
+	asserts.is_equal(speaker.speech_queue[0], bubble, "deliver 1st speech")
+	asserts.is_true(bubble.visible, "first speech visible")
+	bubble.queue_free()
+	yield(until_signal(get_tree(), "idle_frame", 0.5), YIELD)
+	asserts.is_equal(speaker.speech_queue[0], bubble2, "deliver 2nd speech")
+	asserts.is_true(bubble2.visible, "second speech visible")
+	bubble2.queue_free()
+
+
 func test_speech_bubble_advance():
 	speech.lines = ["hi there", "i'm a big boye"]
 	var bubble = speech.deliver()

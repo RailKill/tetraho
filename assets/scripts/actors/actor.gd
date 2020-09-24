@@ -38,10 +38,12 @@ func add_child_unique(node: Node2D):
 # Adds a speech bubble to the queue for this actor to speak.
 func add_speech(bubble: SpeechBubble):
 	speech_queue.append(bubble)
+	call_deferred("add_child", bubble)
 	# warning-ignore:return_value_discarded
 	bubble.connect("tree_exited", self, "next_speech")
 	if speech_queue.size() == 1:
-		call_deferred("add_child", bubble)
+		# warning-ignore:return_value_discarded
+		bubble.connect("ready", bubble, "start")
 
 
 # Checks a given collision and react accordingly. By default, nothing happens.
@@ -84,7 +86,7 @@ func is_locked():
 func next_speech():
 	speech_queue.pop_front()
 	if not speech_queue.empty():
-		call_deferred("add_child", speech_queue[0])
+		speech_queue[0].start()
 
 
 # Damage the actor.
