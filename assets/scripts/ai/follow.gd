@@ -35,11 +35,13 @@ func execute(delta) -> bool:
 				executor.get_sprite().flip_h = \
 						int(to_target_vector().normalized().x <= 0)
 			
-			# warning-ignore:return_value_discarded
-			executor.move_and_collide(
-					executor.move_speed * to_path.normalized())
 			# If target is close enough, continue to next behavior process.
-			result = to_target_vector().length() < Constants.GRID_ONE_HALF
+			if to_target_vector().length() < Constants.GRID_ONE_HALF:
+				result = true
+			else:
+				# warning-ignore:return_value_discarded
+				executor.move_and_slide(
+					executor.move_speed * to_path.normalized())
 	
 	return result
 

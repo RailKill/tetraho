@@ -54,6 +54,7 @@ visible = false
 [node name="Dash" type="Node2D" parent="."]
 script = ExtResource( 2 )
 duration = 0.3
+speed = 300.0
 
 [node name="SoundHit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 10 )

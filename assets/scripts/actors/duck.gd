@@ -17,7 +17,7 @@ func _ready():
 # If the given collider is a DuckHouse, kill both.
 func check_collision(collision: KinematicCollision2D):
 	if collision:
-		var collider = collision.get_collider()
+		var collider = collision.collider
 		if collider is DuckHouse:
 			collider.is_invulnerable = false
 			collider.oof(collider.max_hp)

@@ -56,7 +56,7 @@ func test_dash():
 	Utility.simulate_action("ui_right", false)
 	Utility.simulate_action("action_dash", false)
 	asserts.is_greater_than(player.global_position.x, 
-			player.move_speed * time * 100, "moved a significant distance")
+			player.move_speed * 1.4, "moved a significant distance")
 	
 	# After dash, HUD should show that dash is on cooldown and recharging.
 	asserts.is_true(player.hud.recharging.visible and not \

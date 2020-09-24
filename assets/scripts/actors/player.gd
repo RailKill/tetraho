@@ -35,7 +35,7 @@ func _ready():
 	next_tetromino()
 
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	if not is_controllable:
 		return
 	
@@ -62,16 +62,10 @@ func _physics_process(_delta):
 			dash.direction = move_vector
 			dash.cast()
 		
+		# If not dashing, move normally.
 		if not dash.is_active:
-			# If not dashing, move normally.
-			var move = move_vector * move_speed
-			var collision = move_and_collide(move)
-			# Push other actors to prevent getting stuck.
-			if collision:
-				var body = collision.get_collider()
-				if body.is_in_group("pushable") and not body.is_locked():
-					var push = body.move_and_collide(move)
-					body.check_collision(push)
+			# warning-ignore:return_value_discarded
+			move(move_vector * move_speed, delta)
 
 
 func get_hud():

@@ -17,18 +17,18 @@ func _ready():
 	add_child(sound_collide)
 
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	if is_active:
 		# Move towards dash direction until dash duration is gone.
-		var collision = caster.move_and_collide(direction * speed)
+		var colliders = caster.move(direction * speed, delta)
 		# If collided with an enemy, knock it back and reset dash.
-		if collision:
-			var body = collision.get_collider()
-			if body.is_in_group("pushable") and not body.is_locked():
+		for collider in colliders:
+			if collider.is_in_group("pushable") and not collider.is_locked():
 				var knockback = Knockback.new()
 				knockback.direction = direction
 				knockback.duration = duration
-				body.add_child(knockback)
+				knockback.speed = speed
+				collider.add_child(knockback)
 				knockback.cast()
 				sound_collide.play()
 				complete()

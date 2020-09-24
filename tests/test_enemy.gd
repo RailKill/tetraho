@@ -145,11 +145,24 @@ func test_duck_house():
 	yield(until_signal(house, "tree_exited", 3), YIELD)
 	Utility.simulate_action("ui_left", false)
 	asserts.is_false(is_instance_valid(house), "destroyed by pushing")
-	
+	asserts.is_false(is_instance_valid(sole_duck), "duck died along")
 	if is_instance_valid(house):
 		house.queue_free()
 	if is_instance_valid(sole_duck):
 		sole_duck.queue_free()
+	
+	# Test 6: Player can dash Duck into house and destroy it.
+	player.global_position = Vector2(NC, 0)
+	player.dash.direction = Vector2.LEFT
+	house = house_resource.instance()
+	add_child(house)
+	house.is_aggro = false
+	player.dash.cast()
+	yield(until_signal(house, "tree_exited", 3), YIELD)
+	asserts.is_false(is_instance_valid(house), "destroyed by dash knockback")
+	asserts.is_true(get_ducks().empty(), "no ducks present")
+	if is_instance_valid(house):
+		house.queue_free()
 
 
 func test_gunner():

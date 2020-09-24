@@ -17,4 +17,4 @@ func _on_tree_exiting():
 		var instance = loot.instance()
 		var victim = get_parent()
 		instance.global_position = victim.global_position
-		victim.get_parent().add_child(instance)
+		victim.get_parent().call_deferred("add_child", instance)

@@ -34,7 +34,7 @@ const DIRECTIONALS = [
 
 # Player settings.
 const PLAYER_HP = 100
-const PLAYER_MOVE_SPEED = 1
+const PLAYER_MOVE_SPEED = 70
 
 # Loot settings.
 const HEART_HEAL = 20
@@ -47,7 +47,7 @@ const ABILITY_FAILURE_RECOVERY_TIME = 0.5
 const BLOCK_HP = 30
 const BULLET_DAMAGE = 10
 const BULLET_LIFETIME = 3
-const BULLET_SPEED = 5
+const BULLET_SPEED = 350
 const CHECKER_LIFETIME = 0.05
 const DEAD_BLOCK_DAMAGE = 40
 const FLAMETHROWER_DAMAGE = 20

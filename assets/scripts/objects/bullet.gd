@@ -23,7 +23,7 @@ func _physics_process(delta):
 		else:
 			# If bullet collides with something, damage it, then destroy self.
 			var collision = move_and_collide(
-					trajectory.direction * trajectory.speed)
+					trajectory.direction * trajectory.speed * delta)
 			if collision:
 				var body = collision.get_collider()
 				if body is Actor:

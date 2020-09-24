@@ -8,7 +8,7 @@ signal damage_taken(attacker, verb, victim, amount)
 
 export var hp = Constants.PLAYER_HP setget ,get_hp
 export var max_hp = Constants.PLAYER_HP setget ,get_maximum_hp
-export(float, 0, 5) var move_speed = Constants.PLAYER_MOVE_SPEED
+export(float, 0, 1000) var move_speed = Constants.PLAYER_MOVE_SPEED
 export var is_invulnerable = false
 export(Constants.Team) var team = Constants.Team.MOBS
 
@@ -80,6 +80,37 @@ func heal(amount):
 # Checks if actor is being locked.
 func is_locked():
 	return GameWorld.is_actor_locked(self)
+
+
+# Moves the actor to the given linear velocity over delta time. Handles push.
+# Returns a list of collider bodies resulting from this Actor's move_and_slide.
+func move(velocity: Vector2, delta: float) -> Array:
+	# warning-ignore:return_value_discarded
+	move_and_slide(velocity)
+	
+	var colliders = []
+	for i in range(get_slide_count()):
+		var collision = get_slide_collision(i)
+		colliders.append(collision.collider)
+		check_collision(collision)
+		
+		# Keep track of all colliding bodies that were pushed in this move.
+		# This is to prevent circular pushes that will result in infinite loop.
+		var pushed = []
+		# Loop and push all colldiing actors to prevent getting stuck.
+		while collision != null and not pushed.has(collision.collider):
+			var body = collision.collider
+			if body.is_in_group("pushable") and not body.is_locked():
+				# push can be null here, so it can break the loop if
+				# there are no more pushable bodies to push.
+				var push = body.move_and_collide(velocity * delta)
+				body.check_collision(push)
+				pushed.append(body)
+				collision = push
+			else:
+				# If the colliding body is not pushable, break the loop.
+				collision = null
+	return colliders
 
 
 # Process the next speech bubble down the speech_queue.

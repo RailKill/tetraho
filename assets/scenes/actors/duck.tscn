@@ -80,7 +80,7 @@ collision_mask = 5
 script = ExtResource( 1 )
 hp = 20
 max_hp = 20
-move_speed = 0.5
+move_speed = 35.0
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )

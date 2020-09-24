@@ -34,7 +34,7 @@ func _ready():
 
 func _physics_process(_delta):
 	if is_cutscene_walking:
-		player.move_and_collide(Vector2.DOWN * player.move_speed)
+		player.move_and_slide(Vector2.DOWN * player.move_speed)
 
 
 func _on_boss_damaged(_attacker, _verb, _victim, _amount):
