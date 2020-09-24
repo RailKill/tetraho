@@ -28,9 +28,9 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 1, 4, 5 ), PoolIntArray( 
 outlines = [ PoolVector2Array( 20, 20, 239, 20, 239, 50, 20, 50 ), PoolVector2Array( 230, -8, 720, -8, 720, -22, 834, -22, 834, 20, 904, 20, 904, 50, 834, 50, 834, 92, 720, 92, 720, 78, 230, 78 ), PoolVector2Array( 425, -216, 398, -216, 398, -386, 454, -386, 454, -470, 484, -470, 484, -386, 540, -386, 540, -216, 512, -216, 512, 0, 426, 0, 426, -216 ), PoolVector2Array( 426, 70, 512, 70, 512, 286, 540, 286, 540, 456, 484, 456, 484, 540, 454, 540, 454, 456, 398, 456, 398, 286, 426, 286 ) ]
 
 [node name="Level" type="Node2D"]
+script = ExtResource( 8 )
 
 [node name="Events" type="Node" parent="."]
-script = ExtResource( 8 )
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="Events"]
 stream = ExtResource( 17 )
@@ -323,5 +323,5 @@ position = Vector2( 581, 147 )
 
 [node name="Blockmancer4" parent="." instance=ExtResource( 13 )]
 position = Vector2( 357, 147 )
-[connection signal="body_entered" from="Events/NarrowHelper" to="Events" method="_on_NarrowHelper_body_entered"]
-[connection signal="body_exited" from="Events/NarrowHelper" to="Events" method="_on_NarrowHelper_body_exited"]
+[connection signal="body_entered" from="Events/NarrowHelper" to="." method="_on_NarrowHelper_body_entered"]
+[connection signal="body_exited" from="Events/NarrowHelper" to="." method="_on_NarrowHelper_body_exited"]

@@ -1,10 +1,10 @@
-extends Node
+extends Node2D
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	yield(get_tree(), "idle_frame")
-	randomize_spawn([$Exit, $Hat])
+	randomize_spawn([$Events/Exit, $Events/Hat])
 
 
 func _on_NarrowHelper_body_entered(body):
@@ -19,7 +19,7 @@ func _on_NarrowHelper_body_exited(body):
 
 # Randomize the objective spawns.
 func randomize_spawn(objectives):
-	var goals = $Goals.get_children()
+	var goals = $Events/Goals.get_children()
 	for objective in objectives:
 		randomize()
 		var selected = goals[randi() % goals.size()]

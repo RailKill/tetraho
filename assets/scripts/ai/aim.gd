@@ -1,5 +1,6 @@
 class_name Aim
 extends Target
+# Behavior which aims a weapon at a target.
 
 
 # Weapon to aim.

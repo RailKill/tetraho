@@ -1,5 +1,6 @@
 class_name Target
 extends Behavior
+# An AI Behavior that keeps track of a target over a given distance.
 
 
 # Target of the behavior.

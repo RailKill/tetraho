@@ -1,9 +1,14 @@
 class_name FocusButton
 extends Button
 
+
 # Path to the focus control.
-export var focus_path : NodePath
-var focus : Control
+export var focus_path: NodePath
+
+# Focus control (arrows) showing that this button has focus.
+var focus: Control
+
+# Sound to play when focus is grabbed.
 onready var sound_snap = $SoundSnap
 
 

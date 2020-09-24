@@ -1,5 +1,6 @@
 class_name Gunner
 extends Enemy
+# Gunner who will just stand still and shoot the player.
 
 
 # Handgun node.

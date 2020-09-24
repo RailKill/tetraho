@@ -1,5 +1,6 @@
 class_name Duck
 extends Enemy
+# Duck chases the player at slow speeds but will attack when close enough.
 
 
 onready var animation = $AnimationPlayer

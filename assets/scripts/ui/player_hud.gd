@@ -103,5 +103,3 @@ func update_tetromino(player):
 	next.add_child(netromino)
 	netromino.position = Vector2.ZERO
 	netromino.toggle_blocks(true)
-	
-	

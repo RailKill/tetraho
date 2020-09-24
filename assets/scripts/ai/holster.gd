@@ -3,7 +3,9 @@ extends Behavior
 # Behavior which hides or shows a weapon.
 
 
+# The type of holstering behavior. If true, shows weapon. Otherwise, hide.
 var show: bool
+# Weapon to holster.
 var weapon: Handgun
 
 

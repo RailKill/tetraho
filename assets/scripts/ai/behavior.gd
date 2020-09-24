@@ -1,4 +1,5 @@
 class_name Behavior
+# An AI Behavior that dictates what they should do.
 
 
 # The actor who will execute this behavior.

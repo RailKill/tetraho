@@ -18,13 +18,3 @@ func _physics_process(delta):
 		for behavior in behaviors:
 			if not behavior.execute(delta):
 				return
-
-
-# Returns the difference vector from this enemy to the player.
-func to_player_vector():
-	return player.get_global_position() - get_global_position()
-
-
-# Returns the difference vector from player to self.
-func to_self_vector():
-	return -to_player_vector()

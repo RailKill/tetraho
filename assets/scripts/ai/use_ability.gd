@@ -1,13 +1,13 @@
 class_name UseAbility
 extends Target
-# AI Behavior which uses a given ability on a target to the extent of the given
-# distance.
+# AI Behavior which uses a given ability on a target.
 
 
 # Ability to use.
 var ability: Ability
 # Range of the ability.
 var reach: float
+
 
 func _init(actor, goal, skill, length=0, extent=0).(actor, goal, extent):
 	ability = skill

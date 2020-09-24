@@ -72,7 +72,7 @@ func test_same_actor_queue_multiple_speeches():
 	asserts.is_equal(speaker.speech_queue[0], bubble, "deliver 1st speech")
 	asserts.is_true(bubble.visible, "first speech visible")
 	bubble.queue_free()
-	yield(until_signal(get_tree(), "idle_frame", 0.5), YIELD)
+	yield(until_signal(bubble2.animation, "animation_finished", 0.5), YIELD)
 	asserts.is_equal(speaker.speech_queue[0], bubble2, "deliver 2nd speech")
 	asserts.is_true(bubble2.visible, "second speech visible")
 	bubble2.queue_free()

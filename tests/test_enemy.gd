@@ -42,6 +42,7 @@ func pre():
 	player = player_resource.instance()
 	add_child(player)
 	player.global_position = Vector2(NC, 0)
+	player.current.queue_free()
 
 
 func test_blockmancer_capable_of_damaging_player():
@@ -115,7 +116,8 @@ func test_duck_house():
 	asserts.is_equal(ducks.size(), 3, "spawned exactly 3 ducks over 20 seconds")
 	
 	# Test 3: Remove 1 duck, and check if it spawns 1 more, replenishing to 3.
-	ducks[1].queue_free()
+	if not ducks.empty():
+		ducks[0].queue_free()
 	yield(until_timeout(10), YIELD)
 	ducks = get_ducks()
 	asserts.is_equal(ducks.size(), 3, "after removing 1 duck, replenish to 3")
@@ -213,7 +215,6 @@ func test_unstuck():
 
 
 func post():
-	player.current.queue_free()
 	player.queue_free()
 	yield(until_signal(player, "tree_exited", 0.5), YIELD)
 

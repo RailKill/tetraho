@@ -3,6 +3,7 @@ extends Area2D
 # Checks a small area, around the size of Constants.GRID_SIZE for any colliding
 # areas or bodies. Automatically expires and emits signal based on lifetime.
 
+
 signal lifetime_expired(collided)
 
 export(float) var lifetime = Constants.CHECKER_LIFETIME
@@ -34,6 +35,7 @@ func _on_collide(target):
 	collided = target
 
 
+# Centers the area correctly based on its collision shape and grid snapping.
 func reposition():
 	if is_snapped:
 		global_position = Vector2(

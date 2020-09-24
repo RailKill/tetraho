@@ -6,7 +6,6 @@ extends Node2D
 const OPEN = "DialogOpen"
 const CLOSE = "DialogClose"
 
-
 # Current index of the speech to deliver.
 var index = 0
 # Elapsed time sinced last skip.

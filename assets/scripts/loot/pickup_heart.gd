@@ -3,7 +3,7 @@ extends Area2D
 # A heart pickup that will restore an actor's HP.
 
 
-var sound_pickup : AudioStreamPlayer2D
+var sound_pickup: AudioStreamPlayer2D
 
 
 func _ready():
