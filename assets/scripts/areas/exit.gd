@@ -14,7 +14,10 @@ func _on_body_entered(body):
 	# TODO: Think of a better way to do this instead of evaluating script.
 	for condition in conditionals:
 		var script = GDScript.new()
-		script.set_source_code("func evaluate(body):\n\treturn " + condition)
+		script.set_source_code(
+				"# warning-ignore:unused_argument\n" + \
+				"func evaluate(body):\n\treturn " + condition
+		)
 		script.reload()
 		var obj = Reference.new()
 		obj.set_script(script)

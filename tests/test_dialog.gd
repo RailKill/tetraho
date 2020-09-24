@@ -23,8 +23,9 @@ func test_exit_dialog_advance():
 	var another_speech = Speech.new()
 	another_speech.lines = ["no u"]
 	var another_dude = dummy_resource.instance()
+	another_dude.name = "Dummy2"
 	another_dude.global_position = Vector2(100, 0)
-	add_child(another_dude, true)
+	add_child(another_dude)
 	
 	var exit = exit_resource.instance()
 	exit.add_child(speech)
@@ -33,6 +34,7 @@ func test_exit_dialog_advance():
 	another_speech.speaker = "../../Dummy2"
 	exit.conditionals = ["false"]
 	add_child(exit)
+	yield(until_signal(exit, "ready", 0.5), YIELD)
 	
 	# Test 1st speech by first speaker.
 	yield(until_signal(get_tree(), "idle_frame", 0.5), YIELD)
@@ -41,9 +43,9 @@ func test_exit_dialog_advance():
 	if bubble1 != null:
 		asserts.is_equal(bubble1.label.text, speech.lines[0], 
 				"successfully delivered first speech")
+		bubble1.queue_free()
 	
 	# Test 2nd speech by second speaker.
-	bubble1.queue_free()
 	yield(until_signal(bubble1, "tree_exited", 0.5), YIELD)
 	yield(until_signal(get_tree(), "idle_frame", 0.5), YIELD)
 	var bubble2 = another_dude.get_node_or_null("SpeechBubble")
@@ -51,9 +53,9 @@ func test_exit_dialog_advance():
 	if bubble2 != null:
 		asserts.is_equal(bubble2.label.text, another_speech.lines[0], 
 				"successfully delivered second speech")
+		bubble2.queue_free()
 	
 	# Test to make sure exit is still there after dialog is complete.
-	bubble2.queue_free()
 	yield(until_signal(bubble2, "tree_exited", 0.5), YIELD)
 	yield(until_signal(get_tree(), "idle_frame", 0.5), YIELD)
 	asserts.is_true(is_instance_valid(exit), "exit persists after dialog")
@@ -107,5 +109,8 @@ func test_speech_bubble_autoskip():
 
 
 func post():
-	speech.queue_free()
-	speaker.queue_free()
+	if is_instance_valid(speech):
+		speech.queue_free()
+	if is_instance_valid(speaker):
+		speaker.queue_free()
+		yield(until_signal(speaker, "tree_exited", 0.5), YIELD)
