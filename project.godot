@@ -144,6 +144,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/scripts/weapons/handgun.gd"
 }, {
+"base": "Behavior",
+"class": "Holster",
+"language": "GDScript",
+"path": "res://assets/scripts/ai/holster.gd"
+}, {
 "base": "Control",
 "class": "IngameMenu",
 "language": "GDScript",
@@ -302,6 +307,7 @@ _global_script_class_icons={
 "GitAPI": "",
 "Gunner": "",
 "Handgun": "",
+"Holster": "",
 "IngameMenu": "",
 "Knockback": "",
 "Link": "",

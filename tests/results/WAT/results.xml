@@ -1,93 +1,93 @@
 <?xml version="1.0" ?>
-<testsuites failures="0" name="TestXML" tests="6" time="1.267">
+<testsuites failures="0" name="TestXML" tests="6" time="1.223">
 <testsuite failures="0" name="Dialog" tests="4" time="0.002">
-<testcase name=" exit dialog advance" time="0.309">
+<testcase name=" speech bubble advance" time="2.102">
 </testcase>
 <testcase name=" same actor queue multiple speeches" time="0.017">
 </testcase>
-<testcase name=" speech bubble advance" time="2.35">
-</testcase>
 <testcase name=" speech bubble autoskip" time="3.233">
 </testcase>
+<testcase name=" exit dialog advance" time="0.533">
+</testcase>
 </testsuite>
-<testsuite failures="0" name="Enemy" tests="6" time="0.002">
-<testcase name=" duck house" time="6.832">
+<testsuite failures="0" name="Enemy" tests="6" time="0.003">
+<testcase name=" boss" time="2.297">
 </testcase>
-<testcase name=" unstuck" time="0.998">
+<testcase name=" blockmancer capable of damaging player" time="2.067">
 </testcase>
-<testcase name=" blockmancer capable of damaging player" time="2.066">
+<testcase name=" unstuck" time="0.981">
 </testcase>
-<testcase name=" gunner" time="2.132">
+<testcase name=" gunner" time="2.134">
 </testcase>
-<testcase name=" duck" time="1.282">
+<testcase name=" duck house" time="6.815">
 </testcase>
-<testcase name=" boss" time="2.282">
+<testcase name=" duck" time="1.299">
 </testcase>
 </testsuite>
 <testsuite failures="0" name="Flames" tests="6" time="0.002">
-<testcase name=" shielded even when rotated" time="0.997">
+<testcase name=" severity of damage" time="2.214">
 </testcase>
-<testcase name=" severity of damage" time="2.217">
-</testcase>
-<testcase name=" flamewheel unhindered at center" time="2.983">
+<testcase name=" shielded even when rotated" time="0.983">
 </testcase>
 <testcase name=" shielded at point blank" time="0.999">
 </testcase>
 <testcase name=" shielded by obstacle" time="1">
 </testcase>
-<testcase name=" boss immune to flames" time="1">
+<testcase name=" flamewheel unhindered at center" time="3.001">
+</testcase>
+<testcase name=" boss immune to flames" time="0.998">
 </testcase>
 </testsuite>
-<testsuite failures="0" name="Player" tests="9" time="0.002">
-<testcase name=" movement right" time="0.097">
-</testcase>
-<testcase name=" hold tetromino swapped correctly" time="0.034">
-</testcase>
-<testcase name=" movement up" time="0.099">
-</testcase>
-<testcase name=" death handled correctly" time="0.134">
-</testcase>
-<testcase name=" damage updates hud" time="0.016">
+<testsuite failures="0" name="Player" tests="9" time="0.003">
+<testcase name=" movement right" time="0.096">
 </testcase>
 <testcase name=" movement left" time="0.1">
 </testcase>
-<testcase name=" hold tetromino when empty" time="0.033">
+<testcase name=" dash" time="0.517">
 </testcase>
-<testcase name=" dash" time="0.5">
+<testcase name=" death handled correctly" time="0.133">
+</testcase>
+<testcase name=" damage updates hud" time="0.017">
 </testcase>
 <testcase name=" movement down" time="0.1">
 </testcase>
+<testcase name=" movement up" time="0.1">
+</testcase>
+<testcase name=" hold tetromino swapped correctly" time="0.035">
+</testcase>
+<testcase name=" hold tetromino when empty" time="0.031">
+</testcase>
 </testsuite>
 <testsuite failures="0" name="Solve" tests="8" time="0.001">
-<testcase name=" solve damages only once" time="0.003">
+<testcase name=" trap" time="0.002">
 </testcase>
 <testcase name=" untrap" time="0">
 </testcase>
-<testcase name=" is actor locked check" time="0">
-</testcase>
 <testcase name=" basic solve 3x3" time="0.002">
 </testcase>
-<testcase name=" kill trapped actors with solve" time="0.002">
-</testcase>
-<testcase name=" trap" time="0.002">
+<testcase name=" solve damages only once" time="0.002">
 </testcase>
 <testcase name=" rotated solve" time="0.001">
 </testcase>
-<testcase name=" search" time="0.001">
+<testcase name=" kill trapped actors with solve" time="0.003">
+</testcase>
+<testcase name=" is actor locked check" time="0">
+</testcase>
+<testcase name=" search" time="0">
 </testcase>
 </testsuite>
-<testsuite failures="0" name="Tetromino" tests="12" time="0.001">
-<testcase name=" mouse snapping" time="0.486">
+<testsuite failures="0" name="Tetromino" tests="12" time="0.002">
+<testcase name=" toggle block visibility" time="0">
 </testcase>
-<testcase name=" rotation input" time="0.117">
+<testcase name=" rotation input" time="0.099">
+</testcase>
+<testcase name=" mouse snapping" time="0.5">
 </testcase>
 <testcase name=" summoning" time="0.517">
 </testcase>
-<testcase name=" toggle block visibility" time="0">
+<testcase name=" block configuration" time="0.016">
 </testcase>
-<testcase name=" decaying" time="0.45">
-</testcase>
-<testcase name="grid snapping with rotation: 1 block wide" time="0.067">
+<testcase name="grid snapping with rotation: 1 block wide" time="0.066">
 </testcase>
 <testcase name="grid snapping with rotation: 2 block wide" time="0.067">
 </testcase>
@@ -99,7 +99,7 @@
 </testcase>
 <testcase name="grid snapping with rotation: 6 block wide" time="0.066">
 </testcase>
-<testcase name=" block configuration" time="0.016">
+<testcase name=" decaying" time="0.466">
 </testcase>
 </testsuite>
 </testsuites>

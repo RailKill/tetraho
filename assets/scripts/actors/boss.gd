@@ -8,6 +8,7 @@ func _ready():
 			self, player, $Spawn, Constants.GRID_SIZE + 2, melee_range))
 	behaviors.push_front(Follow.new(
 			self, player, get_parent().get_node("Navigation2D"), melee_range))
+	behaviors.push_front(Holster.new(self, handgun))
 
 
 # Immune to Burn status effect.
