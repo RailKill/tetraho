@@ -3,8 +3,8 @@ extends Trajectory
 # One-off effect.
 
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	if is_active:
-		caster.check_collision(caster.move_and_collide(direction * speed))
+		caster.move(direction * speed, delta)
 	else:
 		queue_free()

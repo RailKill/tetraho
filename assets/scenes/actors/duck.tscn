@@ -1,0 +1,116 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://assets/scripts/actors/duck.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/actors/duck/exclamation_popup.png" type="Texture" id=2]
+[ext_resource path="res://assets/sounds/duck_death.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/sounds/warning.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/sprites/actors/duck/duck.png" type="Texture" id=5]
+[ext_resource path="res://assets/sounds/hit.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/scripts/abilities/spawn.gd" type="Script" id=7]
+[ext_resource path="res://assets/scenes/areas/area_damage.tscn" type="PackedScene" id=8]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 6.50298, 6 )
+
+[sub_resource type="Animation" id=3]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("ExclamationPopup:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ExclamationPopup:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -10 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("ExclamationPopup:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0.5, 0.5 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("ExclamationPopup:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[node name="Duck" type="KinematicBody2D" groups=[
+"pushable",
+"trappable",
+]]
+collision_layer = 4
+collision_mask = 5
+script = ExtResource( 1 )
+hp = 20
+max_hp = 20
+move_speed = 35.0
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0.491077, 0 )
+shape = SubResource( 2 )
+
+[node name="Spawn" type="Node2D" parent="."]
+script = ExtResource( 7 )
+cooldown = 2.0
+duration = 0.5
+cast_audio = ExtResource( 4 )
+spawn_resource = ExtResource( 8 )
+is_snapped = false
+as_child = true
+maximum_spawnable = 1
+
+[node name="SoundHit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 6 )
+bus = "SFX"
+
+[node name="SoundDeath" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+bus = "SFX"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Attack = SubResource( 3 )
+
+[node name="ExclamationPopup" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+scale = Vector2( 1e-05, 1e-05 )
+texture = ExtResource( 2 )

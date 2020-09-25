@@ -1,25 +1,28 @@
 class_name Shoot
-extends Ability
-# This ability fires a bullet which follows its trajectory.
+extends Trajectory
+# This ability fires a bullet from a gun which follows its trajectory.
 
 
-# The bullet resource to shoot.
-export var bullet : PackedScene = preload("res://assets/objects/bullet.tscn")
-# Direction of aim.
-var aim : Vector2
-# Position to spawn the bullet from.
-var point : Vector2
+# Currently equipped gun to shoot.
+var gun: Handgun
 
 
 func cast():
+	.cast()
 	if not is_on_cooldown:
-		var trajectory = Trajectory.new()
-		trajectory.direction = aim
-		trajectory.speed = Constants.BULLET_SPEED
+		direction = Vector2.RIGHT.rotated(gun.rotation)
+		speed = gun.velocity
 		
-		var shot = bullet.instance()
-		shot.trajectory = trajectory
+		var shot = gun.bullet.instance()
+		# This copy is needed because if the caster dies, this shoot ability
+		# node will be freed and the bullet will no longer have reference to
+		# its trajectory. It needs to be duplicated, then added as a child
+		# of that bullet to maintain trajectory.
+		var copy = self.duplicate()
+		copy.caster = caster
+		shot.trajectory = copy
+		shot.add_child(copy)
 		
-		get_tree().get_root().get_child(0).add_child(shot)
-		shot.set_global_position(point)
+		caster.get_parent().add_child(shot)
+		shot.global_position = gun.get_muzzle_position()
 		complete()

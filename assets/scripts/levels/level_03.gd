@@ -1,184 +1,128 @@
-extends Node
+extends Node2D
 # This is where scripting events in Level 03 will happen.
-# TODO: Rushed for #mizjam1, please refactor in future. It's ugly.
 
-
-export (NodePath) var world_path
-export (NodePath) var player_path
-export (NodePath) var boss_path
-export (NodePath) var ingame_menu_path
-var game_world
-var player
-var boss
-var ingame_menu
-onready var sound_incoming = $SoundIncoming
 
 # Cutscene event.
-var walking_time = 2
-var is_cutscene_walking = false
-var is_cutscene_talking1 = false
-var is_cutscene_talking2 = false
-var is_cutscene_talking3 = false
+var is_cutscene_walking = false setget set_cutscene_walking
 
 # Gunner spawn event.
-onready var gunner = preload("res://assets/objects/gunner.tscn")
-var spawn_points = []
-var is_spawn_time = false
-var has_spawned = false
+var gunner = preload("res://assets/scenes/actors/gunner.tscn")
+var gunner_points = []
+var gunners_spawned = false
 
 # Flame wheel event.
-onready var flame_wheel = preload("res://assets/objects/flame_wheel.tscn")
-var is_flame_starting = false
-var has_flamed = false
-var flame_countdown = 3
+var flame_wheel = preload("res://assets/scenes/objects/flame_wheel.tscn")
+var flames_spawned = false
+var warning_count = 3
 
-var is_boss_hp_low = false
-
+onready var boss = $Boss
+onready var teleport = $Boss/Teleport
+onready var dialog_boss = $Events/DialogBoss
+onready var gates = $Events/Gates
+onready var middle = $Events/Middle
+onready var flame_incoming = $Events/FlameIncoming
+onready var sound_incoming = $Events/SoundIncoming
+onready var player = $Player
 
 
 func _ready():
-	game_world = get_node(world_path)
-	player = get_node(player_path)
-	boss = get_node(boss_path)
-	ingame_menu = get_node(ingame_menu_path)
+	for node in $Events/Spawns.get_children():
+		gunner_points.append(node.global_position)
+	set_gates(false)
+	player.get_node("AreaAggro").queue_free()
+
+
+func _physics_process(_delta):
+	if is_cutscene_walking:
+		player.move_and_slide(Vector2.DOWN * player.move_speed)
+
+
+func _on_boss_damaged(_attacker, _verb, _victim, _amount):
+	teleport.point = get_random_point(true)
 	
-	for node in $SpawnPoints.get_children():
-		spawn_points.append(node.get_global_position())
-	boss.teleport_points = spawn_points + [$MidPoint.get_global_position()]
-
-	toggle_gates(false)
+	# Spawn gunners at 60% HP to make the fight harder.
+	if not gunners_spawned and boss.hp <= 0.6 * boss.max_hp:
+		for _i in range(0, 4):
+			var gunman = gunner.instance()
+			add_child(gunman)
+			gunman.global_position = get_random_point()
+			gunman.is_aggro = true
+		gunners_spawned = true
+	# Spawn flame wheel at 40% HP for a change of pace.
+	elif not flames_spawned and boss.hp <= 0.4 * boss.max_hp:
+		# Teleport to midpoint.
+		boss.is_aggro = false
+		boss.is_invulnerable = true
+		boss.get_node("AnimationPlayer").play("Casting")
+		teleport.point = middle.global_position
+		flame_incoming.visible = true
+		$Events/Timer.start()
+		sound_incoming.connect("finished", self, "play_warning_sound")
+		play_warning_sound()
 	
-	# testing
-#	yield(boss, "ready")
-#	boss.hp = 200
+	if not boss.is_dead():
+		teleport.cast()
 
 
-func _physics_process(delta):
-	if is_instance_valid(boss):
-		# TODO: Create a signal for Boss when damaged so don't have to poll
-		is_spawn_time = boss.get_hp() <= 0.6 * boss.get_maximum_hp()
-		is_boss_hp_low = boss.get_hp() <= 0.4 * boss.get_maximum_hp()
+func _on_cutscene_start(body):
+	if body == player:
+		# Clear previous speech.
+		if not player.speech_queue.empty():
+			player.speech_queue[0].end()
+		player.is_controllable = false
 		
-		# it's yandev time baby
-		if is_cutscene_walking:
-			player.move_and_collide(Vector2.DOWN * player.move_speed)
-			
-			if player.get_global_position().y >= boss.get_global_position().y:
-				is_cutscene_walking = false
-				is_cutscene_talking1 = true
-				player.hud.say([
-					"You've got a lot of nerve crashing into my room.",
-					"What is this, you want to be the queen of this house?"
-				], boss.get_global_transform_with_canvas().origin + Vector2(0, -90))
-		
-		elif is_cutscene_talking1 and not is_instance_valid(player.hud.bubble):
-			is_cutscene_talking1 = false
-			is_cutscene_talking2 = true
-			player.hud.say([
-				"You're wearing my crown. I just want it back."
-			])
-		
-		elif is_cutscene_talking2 and not is_instance_valid(player.hud.bubble):
-			is_cutscene_talking2 = false
-			is_cutscene_talking3 = true
-			player.hud.say([
-				"The crown is mine! I was the one who established this house",
-				"for our new generation! Nobody invited you, irrelevant buffoon!",
-				"Your insolence ends here!"
-			], boss.get_global_transform_with_canvas().origin + Vector2(0, -90))
-		
-		elif is_cutscene_talking3 and not is_instance_valid(player.hud.bubble):
-			is_cutscene_talking3 = false
-			get_tree().set_pause(false)
-			ingame_menu.pause_mode = PAUSE_MODE_PROCESS
-			$AnimationCutscene.play_backwards("Border")
-			$MusicPlayer.play()
-			
-			# Raise gates.
-			toggle_gates(true)
-		
-		elif is_spawn_time and not has_spawned:
-			# Spawn gunners to make the fight harder.
-			for _i in range(0, 4):
-				randomize()
-				var gunman = gunner.instance()
-				game_world.add_child(gunman)
-				gunman.set_global_position(
-					spawn_points[randi() % spawn_points.size()])
-				gunman.is_aggro = true
-			has_spawned = true
-		
-		elif is_boss_hp_low and not has_flamed:
-			if not is_flame_starting:
-				# Teleport to midpoint.
-				boss.is_casting = true
-				boss.is_invulnerable = true
-				boss.get_node("AnimationPlayer").play("Casting")
-				boss.teleport(8)
-				$FlameIncoming.set_visible(true)
-				is_flame_starting = true
-				
-				# TODO: please change this, I have no time so I had to do this
-				sound_incoming.play()
-				yield(sound_incoming, "finished")
-				sound_incoming.play()
-				yield(sound_incoming, "finished")
-				sound_incoming.play()
-			else:
-				flame_countdown -= delta
-				if flame_countdown <= 0:
-					# Begin flamewheel!
-					boss.is_casting = false
-					boss.is_invulnerable = false
-					boss.get_node("AnimationPlayer").stop()
-					var flames = flame_wheel.instance()
-					game_world.add_child(flames)
-					flames.set_global_position($MidPoint.get_global_position())
-					$FlameIncoming.set_visible(false)
-					is_flame_starting = false
-					has_flamed = true
-	else:
-		toggle_gates(false)
+		set_cutscene_walking(true)
+		# warning-ignore:return_value_discarded
+		dialog_boss.connect("dialog_begins", self, 
+				"set_cutscene_walking", [false])
+		# warning-ignore:return_value_discarded
+		dialog_boss.connect("dialog_completed", self, "_on_cutscene_end")
+		$Events/Cutscene.queue_free()
 
 
-func toggle_gates(boolean : bool):
-	$Gates.set_visible(boolean)
-	for gate in $Gates.get_children():
-		gate.get_node("CollisionShape2D").set_disabled(!boolean)
+func _on_cutscene_end():
+	$Events/MusicPlayer.play()
+	set_gates(true)
+	boss.is_aggro = true
+	player.is_controllable = true
+
+
+func _on_timer_end():
+	boss.is_aggro = true
+	boss.is_invulnerable = false
+	boss.get_node("AnimationPlayer").stop()
+	boss.modulate = Color.white
 	
+	# Begin flamewheel!
+	var flames = flame_wheel.instance()
+	add_child(flames)
+	flames.global_position = middle.global_position
+	flame_incoming.visible = false
+	flames_spawned = true
 
 
-func _on_DialogHallway_body_entered(body):
-	if body == player:
-		player.hud.say([
-			"A quiet hallway? Smells like a boss fight.",
-		])
-		$DialogHallway.queue_free()
+# Returns a random designated point.
+func get_random_point(for_boss: bool=false):
+	randomize()
+	var random_points = gunner_points + \
+			([middle.global_position] if for_boss else [])
+	
+	return random_points[randi() % random_points.size()]
 
 
-func _on_DialogCutscene_body_entered(body):
-	if body == player:
-		if player.hud.bubble:
-			player.hud.bubble.queue_free()
-		
-		for node in game_world.get_children():
-			if node is Tetromino:
-				if node.can_decay and node.is_summoned:
-					node.pause_mode = PAUSE_MODE_PROCESS
-		
-		get_tree().set_pause(true)
-		is_cutscene_walking = true
-		$AnimationCutscene.play("Border")
-		ingame_menu.pause_mode = PAUSE_MODE_STOP
-		$DialogCutscene.queue_free()
+# Play the flame wheel incoming warning sound.
+func play_warning_sound():
+	sound_incoming.play()
+	warning_count -= 1
+	if warning_count <= 0:
+		sound_incoming.disconnect("finished", self, "play_warning_sound")
 
 
-func _on_Exit_body_entered(body):
-	if body == player:
-		player.hud.bubble = null
-		if not player.hud.crown.visible:
-			player.hud.say(["I don't feel like winning without my crown."])
-		else:
-			# win game
-			var _win = get_tree().change_scene(
-				"res://assets/objects/ui/end_menu.tscn")
+func set_cutscene_walking(walk: bool):
+	is_cutscene_walking = walk
+
+
+func set_gates(raise: bool):
+	gates.visible = raise
+	for gate in gates.get_children():
+		gate.get_node("CollisionShape2D").disabled = !raise
