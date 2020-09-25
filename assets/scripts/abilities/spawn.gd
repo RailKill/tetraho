@@ -22,6 +22,14 @@ export(int, 0, 50) var maximum_spawnable = 3
 var spawned: Array = []
 
 
+func _on_checker_return(collided, checker):
+	if not collided:
+		create(checker.global_position if is_snapped else point)
+	else:
+		caster.play_fail_animation(self)
+		delay = Constants.ABILITY_FAILURE_RECOVERY_TIME
+
+
 func cast():
 	if spawned.size() < maximum_spawnable:
 		.cast()
@@ -39,12 +47,7 @@ func complete():
 	checker.global_position = point
 	checker.is_snapped = is_snapped
 	caster.get_parent().add_child(checker)
-	var collided = yield(checker, "lifetime_expired")
-	if not collided:
-		create(checker.global_position if is_snapped else point)
-	else:
-		caster.play_fail_animation(self)
-		countdown = Constants.ABILITY_FAILURE_RECOVERY_TIME
+	checker.connect("lifetime_expired", self, "_on_checker_return", [checker])
 
 
 func create(destination: Vector2):
