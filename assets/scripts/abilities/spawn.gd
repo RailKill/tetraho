@@ -11,6 +11,8 @@ export(PackedScene) var checker_resource = \
 export(Vector2) var point setget set_point
 # If true, spawn point checker will be snapped to the grid.
 export(bool) var is_snapped = true
+# If true, spawned resource will be created as a child of the caster.
+export(bool) var as_child = false
 # Rotation angle in degrees to set the newly spawned object.
 export(float) var angle = 0
 # Maximum objects spawnable.
@@ -47,8 +49,12 @@ func complete():
 
 func create(destination: Vector2):
 	var spawn = spawn_resource.instance()
-	caster.get_parent().add_child(spawn)
-	spawn.global_position = destination
+	if as_child:
+		caster.add_child(spawn)
+		spawn.position = destination
+	else:
+		caster.get_parent().add_child(spawn)
+		spawn.global_position = destination
 	spawn.rotation_degrees = angle
 	spawn.connect("tree_exiting", self, "erase", [spawn])
 	spawned.append(spawn)
@@ -63,4 +69,4 @@ func erase(entity):
 
 
 func set_point(destination: Vector2):
-	point = destination
+	point = destination - global_position if as_child else destination

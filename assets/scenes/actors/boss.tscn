@@ -67,6 +67,9 @@ cooldown = 1.0
 duration = 0.5
 cast_audio = ExtResource( 6 )
 spawn_resource = ExtResource( 5 )
+checker_resource = null
+is_snapped = false
+as_child = true
 maximum_spawnable = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

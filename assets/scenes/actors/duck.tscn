@@ -96,6 +96,7 @@ duration = 0.5
 cast_audio = ExtResource( 4 )
 spawn_resource = ExtResource( 8 )
 is_snapped = false
+as_child = true
 maximum_spawnable = 1
 
 [node name="SoundHit" type="AudioStreamPlayer2D" parent="."]
