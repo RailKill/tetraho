@@ -151,21 +151,16 @@ func rotate_piece():
 
 
 # Function to calculate grid snapping based on mouse position.
-func snap_to_grid(position):
+func snap_to_grid(pos):
 	# warning-ignore:integer_division
-	var snap = Constants.GRID_SIZE * \
-			(int(round(position)) / Constants.GRID_SIZE)
-	return snap
+	return Constants.GRID_SIZE * (int(round(pos)) / Constants.GRID_SIZE)
 
 
 # Snap tetromino to mouse.
-func snap_to_mouse():
-	# Get mouse position relative to the canvas.
-	var mouse_position = get_global_mouse_position()
-	
+func snap_to_mouse(mouse_position = get_global_mouse_position()):
 	# Only move tetromino in increments of GRID_SNAP.
-	position.x = snap_to_grid(mouse_position.x)
-	position.y = snap_to_grid(mouse_position.y)
+	global_position.x = snap_to_grid(mouse_position.x)
+	global_position.y = snap_to_grid(mouse_position.y)
 	_correct_positioning()
 	
 	if is_valid_placement():

@@ -40,16 +40,7 @@ func _physics_process(delta):
 		return
 	
 	if Input.is_action_just_pressed("action_special"):
-		# If hold is empty, store current and call next tetromino.
-		if not hold:
-			hold = current
-			next_tetromino()
-		# Otherwise, swap hold with current.
-		else:
-			var swap = hold
-			hold = current
-			current = swap
-			hud.update_tetromino(self)
+		hold_tetromino()
 	
 	if not is_dead() and not is_locked():
 		var move_vector = Vector2.ZERO
@@ -75,6 +66,20 @@ func get_hud():
 func heal(amount):
 	.heal(amount)
 	hud.update_hp(self)
+
+
+# Activate hold tetromino functionality.
+func hold_tetromino():
+	# If hold is empty, store current and call next tetromino.
+	if not hold:
+		hold = current
+		next_tetromino()
+	# Otherwise, swap hold with current.
+	else:
+		var swap = hold
+		hold = current
+		current = swap
+		hud.update_tetromino(self)
 
 
 # Checks if the player is currently controlling the given tetromino.

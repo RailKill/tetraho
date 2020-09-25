@@ -70,6 +70,8 @@ func test_grid_snapping():
 						[block.position, block.global_position]
 				break
 		tetromino.rotation_degrees += 90
+		# Manual call to snap required for devices without mouse.
+		tetromino.snap_to_mouse(Vector2(200, 200))
 		yield(until_signal(get_tree(), "idle_frame", 0.5), YIELD)
 	
 	describe("grid snapping with rotation: %d block wide" % tetromino.width)
@@ -77,8 +79,9 @@ func test_grid_snapping():
 
 
 func test_mouse_snapping():
+	tetromino.summoner = null
 	add_child(tetromino)
-	Input.warp_mouse_position(Vector2(200, 200))
+	tetromino.snap_to_mouse(Vector2(200, 200))
 	yield(until_timeout(0.5), YIELD)
 	# warning-ignore:integer_division
 	var x = Constants.GRID_SIZE * (200 / Constants.GRID_SIZE)
@@ -87,25 +90,19 @@ func test_mouse_snapping():
 	asserts.is_equal(tetromino.global_position, Vector2(x, y))
 
 
-func test_rotation_input():
+func test_rotate_piece():
 	add_child(tetromino)
-	yield(until_signal(get_tree(), "idle_frame", 0.5), YIELD)
-	Utility.simulate_action("action_secondary")
-	yield(until_signal(get_tree(), "idle_frame", 0.5), YIELD)
-	Utility.simulate_action("action_secondary", false)
+	tetromino.rotate_piece()
 	yield(until_timeout(0.1), YIELD)
 	asserts.is_equal(tetromino.rotation_degrees, 90)
 
 
 func test_summoning():
 	add_child(tetromino)
-	yield(until_signal(get_tree(), "idle_frame", 0.5), YIELD)
-	Utility.simulate_action("action_primary")
-	yield(until_signal(get_tree(), "idle_frame", 0.5), YIELD)
-	Utility.simulate_action("action_primary", false)
+	tetromino.summon_piece()
 	asserts.is_true(tetromino.is_summoning, "summoning state entered")
 	mock_player.current = null
-	yield(until_timeout(Constants.TETROMINO_SUMMON_TIME), YIELD)
+	yield(until_timeout(Constants.TETROMINO_SUMMON_TIME + 0.5), YIELD)
 	asserts.is_false(is_instance_valid(tetromino.reticle), "reticle removed")
 	asserts.is_true(tetromino.solid.visible, "solid blocks are visible")
 

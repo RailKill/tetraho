@@ -87,12 +87,7 @@ func test_death_handled_correctly():
 
 func test_hold_tetromino_when_empty():
 	var current = player.current
-	
-	Utility.simulate_action("action_special")
-	yield(until_signal(get_tree(), "idle_frame", 0.5), YIELD)
-	Utility.simulate_action("action_special", false)
-	yield(until_signal(get_tree(), "idle_frame", 0.5), YIELD)
-	
+	player.hold_tetromino()
 	asserts.is_equal(player.hold, current)
 	if is_instance_valid(player.hold):
 		player.hold.queue_free()
@@ -102,14 +97,8 @@ func test_hold_tetromino_swapped_correctly():
 	var current = player.current
 	var fake = Tetromino.new()
 	player.hold = fake
-	
-	Utility.simulate_action("action_special", false)
-	yield(until_signal(get_tree(), "idle_frame", 0.5), YIELD)
-	Utility.simulate_action("action_special")
-	yield(until_signal(get_tree(), "idle_frame", 0.5), YIELD)
-	Utility.simulate_action("action_special", false)
+	player.hold_tetromino()
 	yield(until_timeout(0.01), YIELD)
-	
 	asserts.is_equal(player.current, fake)
 	asserts.is_equal(player.hold, current)
 	player.hold.queue_free()

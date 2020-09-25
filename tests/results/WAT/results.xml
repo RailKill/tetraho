@@ -1,117 +1,117 @@
 <?xml version="1.0" ?>
-<testsuites failures="0" name="TestXML" tests="7" time="0.824">
+<testsuites failures="0" name="TestXML" tests="7" time="0.839">
 <testsuite failures="0" name="Area Damage" tests="3" time="0.002">
-<testcase name=" cannot damage the same actor twice" time="0.002">
+<testcase name=" cannot damage teammates" time="0.001">
 </testcase>
-<testcase name=" cannot damage teammates" time="0.017">
+<testcase name=" disappears after 2 seconds" time="0.069">
 </testcase>
-<testcase name=" disappears after 2 seconds" time="0.196">
+<testcase name=" cannot damage the same actor twice" time="0.016">
 </testcase>
 </testsuite>
-<testsuite failures="0" name="Dialog" tests="5" time="0.003">
-<testcase name=" same actor queue multiple speeches" time="0.497">
-</testcase>
-<testcase name=" speech bubble advance" time="2.367">
+<testsuite failures="0" name="Dialog" tests="5" time="0.001">
+<testcase name=" same actor queue multiple speeches" time="0.482">
 </testcase>
 <testcase name=" exit dialog advance" time="0.55">
+</testcase>
+<testcase name=" speech bubble advance" time="2.366">
 </testcase>
 <testcase name=" speech bubble autoskip" time="3.233">
 </testcase>
 <testcase name=" exit conditions" time="0.002">
 </testcase>
 </testsuite>
-<testsuite failures="0" name="Enemy" tests="7" time="0.004">
-<testcase name=" boss" time="2.177">
+<testsuite failures="0" name="Enemy" tests="7" time="0.003">
+<testcase name=" unstuck" time="0.995">
 </testcase>
-<testcase name=" blockmancer race condition damages player only once" time="2.999">
+<testcase name=" duck house" time="8.932">
 </testcase>
-<testcase name=" duck house" time="8.783">
+<testcase name=" gunner" time="2.118">
 </testcase>
-<testcase name=" unstuck" time="0.999">
+<testcase name=" blockmancer race condition damages player only once" time="2.981">
 </testcase>
-<testcase name=" gunner" time="2.117">
+<testcase name=" duck" time="1.25">
 </testcase>
-<testcase name=" duck" time="1.232">
+<testcase name=" blockmancer capable of damaging player" time="2.05">
 </testcase>
-<testcase name=" blockmancer capable of damaging player" time="2.049">
+<testcase name=" boss" time="2.165">
 </testcase>
 </testsuite>
 <testsuite failures="0" name="Flames" tests="6" time="0.002">
-<testcase name=" boss immune to flames" time="0.979">
+<testcase name=" shielded at point blank" time="0.997">
 </testcase>
-<testcase name=" shielded at point blank" time="0.999">
+<testcase name=" flamewheel unhindered at center" time="3.018">
 </testcase>
-<testcase name=" shielded by obstacle" time="1">
+<testcase name=" shielded even when rotated" time="0.996">
 </testcase>
-<testcase name=" shielded even when rotated" time="0.999">
+<testcase name=" severity of damage" time="2.233">
 </testcase>
-<testcase name=" severity of damage" time="2.217">
+<testcase name=" shielded by obstacle" time="0.966">
 </testcase>
-<testcase name=" flamewheel unhindered at center" time="2.966">
+<testcase name=" boss immune to flames" time="0.999">
 </testcase>
 </testsuite>
 <testsuite failures="0" name="Player" tests="9" time="0.002">
-<testcase name=" movement right" time="0.096">
+<testcase name=" hold tetromino when empty" time="0.003">
 </testcase>
-<testcase name=" hold tetromino swapped correctly" time="0.034">
-</testcase>
-<testcase name=" movement left" time="0.099">
-</testcase>
-<testcase name=" movement down" time="0.1">
-</testcase>
-<testcase name=" hold tetromino when empty" time="0.034">
-</testcase>
-<testcase name=" movement up" time="0.083">
+<testcase name=" movement left" time="0.093">
 </testcase>
 <testcase name=" death handled correctly" time="0.134">
 </testcase>
+<testcase name=" movement down" time="0.1">
+</testcase>
+<testcase name=" movement up" time="0.1">
+</testcase>
 <testcase name=" dash" time="0.516">
+</testcase>
+<testcase name=" hold tetromino swapped correctly" time="0.017">
 </testcase>
 <testcase name=" damage updates hud" time="0.017">
 </testcase>
+<testcase name=" movement right" time="0.1">
+</testcase>
 </testsuite>
 <testsuite failures="0" name="Solve" tests="8" time="0.002">
-<testcase name=" kill trapped actors with solve" time="0.004">
-</testcase>
-<testcase name=" is actor locked check" time="0.001">
-</testcase>
-<testcase name=" basic solve 3x3" time="0.001">
-</testcase>
-<testcase name=" solve damages only once" time="0.002">
-</testcase>
-<testcase name=" trap" time="0.002">
-</testcase>
 <testcase name=" untrap" time="0">
 </testcase>
-<testcase name=" search" time="0.001">
+<testcase name=" solve damages only once" time="0.003">
+</testcase>
+<testcase name=" basic solve 3x3" time="0.002">
 </testcase>
 <testcase name=" rotated solve" time="0.001">
 </testcase>
+<testcase name=" search" time="0">
+</testcase>
+<testcase name=" is actor locked check" time="0">
+</testcase>
+<testcase name=" kill trapped actors with solve" time="0.003">
+</testcase>
+<testcase name=" trap" time="0.003">
+</testcase>
 </testsuite>
-<testsuite failures="0" name="Tetromino" tests="12" time="0.001">
-<testcase name=" summoning" time="0.502">
-</testcase>
-<testcase name=" rotation input" time="0.116">
-</testcase>
-<testcase name=" mouse snapping" time="0.5">
-</testcase>
+<testsuite failures="0" name="Tetromino" tests="12" time="0.002">
 <testcase name=" toggle block visibility" time="0">
 </testcase>
-<testcase name=" block configuration" time="0.001">
+<testcase name=" rotate piece" time="0.083">
 </testcase>
-<testcase name=" decaying" time="0.464">
+<testcase name=" mouse snapping" time="0.499">
 </testcase>
-<testcase name="grid snapping with rotation: 1 block wide" time="0.067">
+<testcase name="grid snapping with rotation: 1 block wide" time="0.066">
 </testcase>
 <testcase name="grid snapping with rotation: 2 block wide" time="0.067">
 </testcase>
-<testcase name="grid snapping with rotation: 3 block wide" time="0.066">
+<testcase name="grid snapping with rotation: 3 block wide" time="0.067">
 </testcase>
 <testcase name="grid snapping with rotation: 4 block wide" time="0.066">
 </testcase>
-<testcase name="grid snapping with rotation: 5 block wide" time="0.067">
+<testcase name="grid snapping with rotation: 5 block wide" time="0.066">
 </testcase>
 <testcase name="grid snapping with rotation: 6 block wide" time="0.066">
+</testcase>
+<testcase name=" decaying" time="0.466">
+</testcase>
+<testcase name=" summoning" time="1">
+</testcase>
+<testcase name=" block configuration" time="0.017">
 </testcase>
 </testsuite>
 </testsuites>
