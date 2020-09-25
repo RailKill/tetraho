@@ -11,6 +11,8 @@ export(String) var verb = "scratched"
 
 # Actor who created this damage area, possible to be null.
 var creator: Actor
+# List of entities who have been damaged by this area before.
+var damaged = []
 
 
 func _ready():
@@ -27,5 +29,7 @@ func _on_animation_finished():
 
 
 func _on_body_entered(body):
-	if body.has_method("oof") and (not creator or creator.team != body.team):
+	if body.has_method("oof") and not damaged.has(body) and \
+			(not creator or creator.team != body.team):
 		body.call_deferred("oof", damage, false, creator, verb)
+		damaged.append(body)

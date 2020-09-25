@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=11 format=2]
+[gd_resource type="Resource" load_steps=12 format=2]
 
 [ext_resource path="res://addons/WAT/ui/metadata/index.gd" type="Script" id=1]
 [ext_resource path="res://tests/test_player.gd" type="Script" id=2]
@@ -10,8 +10,9 @@
 [ext_resource path="res://tests/test_flames.gd" type="Script" id=8]
 [ext_resource path="res://tests/test_dialog.gd" type="Script" id=9]
 [ext_resource path="res://assets/scripts/abilities/teleport.gd" type="Script" id=10]
+[ext_resource path="res://tests/test_area_damage.gd" type="Script" id=11]
 
 [resource]
 script = ExtResource( 1 )
-scripts = [ ExtResource( 2 ), null, null, ExtResource( 4 ), ExtResource( 3 ), ExtResource( 5 ), null, ExtResource( 6 ), null, null, ExtResource( 8 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 10 ) ]
-tags = [ [  ], [  ], [  ], [  ], [  ], [  ], [  ], [  ], [  ], [  ], [  ], [  ], [  ], [  ] ]
+scripts = [ ExtResource( 2 ), null, null, ExtResource( 4 ), ExtResource( 3 ), ExtResource( 5 ), null, ExtResource( 6 ), null, null, ExtResource( 8 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 10 ), null, null, null, ExtResource( 11 ) ]
+tags = [ [  ], [  ], [  ], [  ], [  ], [  ], [  ], [  ], [  ], [  ], [  ], [  ], [  ], [  ], [  ], [  ], [  ], [  ] ]

@@ -17,6 +17,28 @@ func pre():
 	speech.speaker = speech.get_path_to(speaker)
 
 
+func test_exit_conditions():
+	speaker.move_local_x(50)
+	var exit = exit_resource.instance()
+	exit.conditionals = ["body.hp == body.max_hp"]
+	add_child(exit)
+	exit.triggered_by = [exit.get_path_to(speaker)]
+	
+	asserts.is_equal(exit._on_body_entered(speaker, true), OK,
+			"fulfilled conditionals lead to successful exit")
+	speaker.oof(10)
+	asserts.is_equal(exit._on_body_entered(speaker, true), FAILED,
+			"unfulfilled conditionals prevent exit")
+	
+	var dummy2 = dummy_resource.instance()
+	dummy2.move_local_x(-50)
+	add_child(dummy2)
+	asserts.is_equal(exit._on_body_entered(dummy2, true), FAILED,
+			"irrelevant triggerer prevents exit")
+	dummy2.queue_free()
+	exit.queue_free()
+
+
 func test_exit_dialog_advance():
 	speech.lines = ["ur mom gay"]
 	remove_child(speech)

@@ -30,7 +30,7 @@ func _ready():
 
 
 func _on_body_entered(body):
-	if triggered_by.empty() or triggered_by.has(get_path_to(body)):
+	if is_triggerer(body):
 		# warning-ignore:unused_argument
 		disconnect("body_entered", self, "_on_body_entered")
 		emit_signal("dialog_begins")
@@ -48,3 +48,8 @@ func advance_dialog():
 			_ready()
 		else:
 			queue_free()
+
+
+# Check if the given body is a designated triggerer of this area.
+func is_triggerer(body):
+	return triggered_by.empty() or triggered_by.has(get_path_to(body))
