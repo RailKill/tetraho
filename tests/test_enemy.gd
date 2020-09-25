@@ -66,6 +66,33 @@ func test_blockmancer_capable_of_damaging_player():
 		$Deadmino.queue_free()
 
 
+func test_blockmancer_race_condition_damages_player_only_once():
+	player.global_position = Vector2.ZERO
+	var bmancers = []
+	var positions = [Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.RIGHT]
+	for position in positions:
+		var bmancer = bmancer_resource.instance()
+		bmancer.global_position = position * 50
+		add_child(bmancer)
+		bmancers.append(bmancer)
+	
+	yield(until_signal(bmancers[0].get_node("Spawn"), 
+			"finished_casting", 2), YIELD)
+	yield(until_timeout(2), YIELD)
+	var deadminos = []
+	for node in get_children():
+		if node.name.find_last("Deadmino") != -1:
+			deadminos.append(node)
+	asserts.is_equal(deadminos.size(), 1, "only one dead block was spawned")
+	asserts.is_equal(player.hp, player.max_hp - Constants.DEAD_BLOCK_DAMAGE, 
+			"player took only one instance of damage")
+	
+	for bmancer in bmancers:
+		bmancer.queue_free()
+	for deadmino in deadminos:
+		deadmino.queue_free()
+
+
 func test_boss():
 	var boss = boss_resource.instance()
 	add_child(boss)

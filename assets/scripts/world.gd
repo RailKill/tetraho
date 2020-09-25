@@ -33,6 +33,15 @@ func is_actor_locked(actor):
 	return false
 
 
+# Checks if given block is overlapping with an existing one and removes it.
+func is_overlapping_block(block):
+	for key in blocks.keys():
+		if key.global_position == block.global_position:
+			block.queue_free()
+			return true
+	return false
+
+
 # Whenever a Tetromino is summoned, attempt to solve.
 func solve():
 	for block in blocks.keys():

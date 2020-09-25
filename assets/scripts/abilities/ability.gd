@@ -4,6 +4,10 @@ extends Node2D
 # of an Actor.
 
 
+signal started_casting
+signal finished_casting
+signal cooldown_ready
+
 # Cooldown of this ability.
 export(float) var cooldown = 3
 # Duration of ability in seconds.
@@ -47,11 +51,13 @@ func _physics_process(delta):
 		countdown -= delta
 		if countdown <= 0:
 			complete()
+			emit_signal("finished_casting")
 		
 	if is_on_cooldown:
 		delay -= delta
 		if delay <= 0:
 			reset()
+			emit_signal("cooldown_ready")
 
 
 # Cast the ability.
@@ -60,6 +66,7 @@ func cast():
 		is_active = true
 		caster.play_casting_animation(self)
 		sound_cast.play()
+		emit_signal("started_casting")
 
 
 # Complete the cast and start the cooldown timer.
@@ -69,6 +76,7 @@ func complete():
 	caster.play_casted_animation(self)
 	sound_complete.play()
 	update()
+	
 
 
 # Reset ability cooldown.
