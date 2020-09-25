@@ -27,7 +27,7 @@ func test_is_actor_locked_check():
 func test_kill_trapped_actors_with_solve():
 	create_blocks()
 	var death = AudioStreamPlayer2D.new()
-	var shape = Node2D.new()
+	var shape = CollisionShape2D.new()
 	var fake = Actor.new()
 	fake.sound_death = death
 	fake.collision_shape = shape
@@ -102,7 +102,7 @@ func test_solve_damages_only_once():
 	create_blocks()
 	var fake = Actor.new()
 	fake.sound_death = AudioStreamPlayer2D.new()
-	fake.collision_shape = Node2D.new()
+	fake.collision_shape = CollisionShape2D.new()
 	GameWorld.blocks[test_blocks[0]] = [fake]
 	GameWorld.blocks[test_blocks[1]] = [fake]
 	GameWorld.solve()
