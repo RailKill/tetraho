@@ -1,0 +1,64 @@
+name: "godot-ci export"
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events
+on: pull_request
+
+# A map of envirnoment variables that are available to all jobs in the workflow
+env:
+  GODOT_VERSION: 3.2.3
+  EXPORT_NAME: tetraho
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # Windows build job.
+  export-windows:
+    name: Windows Export
+    runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:3.2.3
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup
+        run: |
+          mkdir -v -p ~/.local/share/godot/templates
+          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+      - name: Windows Build
+        run: |
+          mkdir -v -p build/windows
+          godot -v --export "Windows Desktop" build/windows/${EXPORT_NAME}_${GITHUB_RUN_NUMBER}.exe
+      - name: Run Automated Tests
+        run: |
+          godot addons/WAT/cli.tscn -run_all
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.EXPORT_NAME }}-${{ github.run_number }}-windows
+          path: build/windows
+  
+  # Web build job.
+  export-web:
+    name: Web Export
+    runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:3.2.3
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup
+        run: |
+          mkdir -v -p ~/.local/share/godot/templates
+          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+      - name: Web Build
+        run: |
+          mkdir -v -p build/web
+          godot -v --export "HTML5" build/web/index.html
+      - name: Run Automated Tests
+        run: |
+          godot addons/WAT/cli.tscn -run_all
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.EXPORT_NAME }}-${{ github.run_number }}-web
+          path: build/web
