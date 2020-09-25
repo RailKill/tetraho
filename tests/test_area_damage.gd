@@ -19,7 +19,7 @@ func test_cannot_damage_the_same_actor_twice():
 	add_child(area_damage)
 	area_damage._on_body_entered(dummy)
 	area_damage._on_body_entered(dummy)
-	yield(until_signal(get_tree(), "idle_frame", 0.1), YIELD)
+	yield(until_signal(get_tree(), "idle_frame", 0.5), YIELD)
 	asserts.is_equal(dummy.hp, dummy.max_hp - area_damage.damage)
 
 
@@ -28,7 +28,7 @@ func test_cannot_damage_teammates():
 	area_damage.creator = dummy
 	add_child(area_damage)
 	area_damage._on_body_entered(dummy)
-	yield(until_signal(get_tree(), "idle_frame", 0.1), YIELD)
+	yield(until_signal(get_tree(), "idle_frame", 0.5), YIELD)
 	asserts.is_equal(dummy.hp, dummy.max_hp)
 
 

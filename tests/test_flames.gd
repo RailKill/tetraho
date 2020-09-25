@@ -92,7 +92,7 @@ func test_shielded_by_obstacle():
 	add_child(gate)
 	gate.global_position = Vector2(0, -flames.length / 2.0)
 	
-	yield(until_signal(get_tree(), "idle_frame", 0.1), YIELD)
+	yield(until_signal(get_tree(), "idle_frame", 0.5), YIELD)
 	add_child(player)
 	yield(until_timeout(Constants.FLAMETHROWER_DURATION * 2), YIELD)
 	asserts.is_less_than(flames.length, abs(gate.global_position.y), 
@@ -111,7 +111,7 @@ func test_shielded_even_when_rotated():
 	gate.global_position = \
 			(bottom_left - flames.global_position).normalized() * half_length
 	
-	yield(until_signal(get_tree(), "idle_frame", 0.1), YIELD)
+	yield(until_signal(get_tree(), "idle_frame", 0.5), YIELD)
 	add_child(player)
 	player.global_position = bottom_left
 	yield(until_timeout(Constants.FLAMETHROWER_DURATION * 2), YIELD)
@@ -125,7 +125,7 @@ func test_shielded_at_point_blank():
 	add_child(gate)
 	gate.global_position = flames.global_position - Vector2(7, 7)
 	
-	yield(until_signal(get_tree(), "idle_frame", 0.1), YIELD)
+	yield(until_signal(get_tree(), "idle_frame", 0.5), YIELD)
 	add_child(player)
 	yield(until_timeout(Constants.FLAMETHROWER_DURATION * 2), YIELD)
 	asserts.is_equal_or_less_than(flames.length, 1, "flame at minimum length")
