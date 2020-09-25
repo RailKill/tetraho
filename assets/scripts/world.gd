@@ -36,7 +36,7 @@ func is_actor_locked(actor):
 # Checks if given block is overlapping with an existing one and removes it.
 func is_overlapping_block(block):
 	for key in blocks.keys():
-		if key.global_position == block.global_position:
+		if key.get_global_vector() == block.get_global_vector():
 			block.queue_free()
 			return true
 	return false
