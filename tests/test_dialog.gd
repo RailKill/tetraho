@@ -59,7 +59,7 @@ func test_exit_dialog_advance():
 	yield(until_signal(exit, "ready", 0.5), YIELD)
 	
 	# Test 1st speech by first speaker.
-	yield(until_signal(get_tree(), "idle_frame", 0.5), YIELD)
+	yield(until_signal(get_tree(), "idle_frame", 0.1), YIELD)
 	var bubble1 = speaker.get_node_or_null("SpeechBubble")
 	asserts.is_not_null(bubble1, "first speaker spoke")
 	if bubble1 != null:
@@ -69,7 +69,7 @@ func test_exit_dialog_advance():
 	
 	# Test 2nd speech by second speaker.
 	yield(until_signal(bubble1, "tree_exited", 0.5), YIELD)
-	yield(until_signal(get_tree(), "idle_frame", 0.5), YIELD)
+	yield(until_signal(get_tree(), "idle_frame", 0.1), YIELD)
 	var bubble2 = another_dude.get_node_or_null("SpeechBubble")
 	asserts.is_not_null(bubble2, "second speaker spoke")
 	if bubble2 != null:
@@ -79,7 +79,7 @@ func test_exit_dialog_advance():
 	
 	# Test to make sure exit is still there after dialog is complete.
 	yield(until_signal(bubble2, "tree_exited", 0.5), YIELD)
-	yield(until_signal(get_tree(), "idle_frame", 0.5), YIELD)
+	yield(until_signal(get_tree(), "idle_frame", 0.1), YIELD)
 	asserts.is_true(is_instance_valid(exit), "exit persists after dialog")
 	
 	another_dude.queue_free()
@@ -111,7 +111,7 @@ func test_speech_bubble_advance():
 			"text automatically fully visible after 2 seconds")
 	
 	Utility.simulate_action("action_interact")
-	yield(until_signal(get_tree(), "idle_frame", 0.5), YIELD)
+	yield(until_signal(get_tree(), "idle_frame", 0.1), YIELD)
 	Utility.simulate_action("action_interact", false)
 	asserts.is_equal(bubble.animation.current_animation, bubble.CLOSE,
 			"first line's bubble is closing")
@@ -123,7 +123,7 @@ func test_speech_bubble_advance():
 	yield(until_timeout(1), YIELD)
 	asserts.is_equal(bubble.index, 1, "advanced to next line")
 	Utility.simulate_action("action_interact")
-	yield(until_signal(get_tree(), "idle_frame", 0.5), YIELD)
+	yield(until_signal(get_tree(), "idle_frame", 0.1), YIELD)
 	Utility.simulate_action("action_interact", false)
 	asserts.is_true(bubble.label.percent_visible == 1, 
 			"skipped second line to the end")

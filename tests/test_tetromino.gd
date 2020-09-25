@@ -21,7 +21,7 @@ func pre():
 func test_block_configuration():
 	tetromino.load_configuration([1, 0, 1], [1, 1, 1], Color.white)
 	add_child(tetromino)
-	yield(until_signal(get_tree(), "idle_frame", 0.5), YIELD)
+	yield(until_signal(get_tree(), "idle_frame", 0.1), YIELD)
 	var expected = [
 		Vector2(-Constants.GRID_ONE_HALF, -Constants.GRID_SIZE),
 		Vector2(-Constants.GRID_ONE_HALF, 0),
@@ -35,7 +35,7 @@ func test_block_configuration():
 func test_decaying():
 	mock_player.current = null
 	add_child(tetromino)
-	yield(until_signal(get_tree(), "idle_frame", 0.5), YIELD)
+	yield(until_signal(get_tree(), "idle_frame", 0.1), YIELD)
 	tetromino.reticle.queue_free()
 	Engine.time_scale = 10
 	yield(until_timeout(Constants.TETROMINO_DECAY_TIME + 0.5), YIELD)
@@ -70,7 +70,7 @@ func test_grid_snapping():
 						[block.position, block.global_position]
 				break
 		tetromino.rotation_degrees += 90
-		yield(until_signal(get_tree(), "idle_frame", 0.5), YIELD)
+		yield(until_signal(get_tree(), "idle_frame", 0.1), YIELD)
 	
 	describe("grid snapping with rotation: %d block wide" % tetromino.width)
 	asserts.is_true(violation.empty(), violation)
@@ -89,9 +89,9 @@ func test_mouse_snapping():
 
 func test_rotation_input():
 	add_child(tetromino)
-	yield(until_signal(get_tree(), "idle_frame", 0.5), YIELD)
+	yield(until_signal(get_tree(), "idle_frame", 0.1), YIELD)
 	Utility.simulate_action("action_secondary")
-	yield(until_signal(get_tree(), "idle_frame", 0.5), YIELD)
+	yield(until_signal(get_tree(), "idle_frame", 0.1), YIELD)
 	Utility.simulate_action("action_secondary", false)
 	yield(until_timeout(0.1), YIELD)
 	asserts.is_equal(tetromino.rotation_degrees, 90)
@@ -99,9 +99,9 @@ func test_rotation_input():
 
 func test_summoning():
 	add_child(tetromino)
-	yield(until_signal(get_tree(), "idle_frame", 0.5), YIELD)
+	yield(until_signal(get_tree(), "idle_frame", 0.1), YIELD)
 	Utility.simulate_action("action_primary")
-	yield(until_signal(get_tree(), "idle_frame", 0.5), YIELD)
+	yield(until_signal(get_tree(), "idle_frame", 0.1), YIELD)
 	Utility.simulate_action("action_primary", false)
 	asserts.is_true(tetromino.is_summoning, "summoning state entered")
 	mock_player.current = null
