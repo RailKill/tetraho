@@ -353,7 +353,7 @@ Display=8
 config/name="tetraho"
 config/description="A game of block wizardry."
 run/main_scene="res://assets/scenes/ui/main_menu.tscn"
-config/icon="res://assets/sprites/blocks/tetromino_block.png"
+config/icon="res://icon.png"
 
 [autoload]
 
