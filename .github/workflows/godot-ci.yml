@@ -45,7 +45,10 @@ jobs:
       image: barichello/godot-ci:3.2.3
     steps:
       - name: Update Git Version
-        run: apt-get update && apt-get install -y git
+        run: |
+          add-apt-repository ppa:git-core/ppa -y
+          apt-get update
+          apt-get install -y git
       - name: Checkout
         uses: actions/checkout@v2
         with:
