@@ -22,6 +22,7 @@ const SOLVER_VERTICAL = [
 # Dictionary of all blocks as keys, and list of actors trapped as values.
 var blocks = {}
 
+# Reference to the AudioStreamPlayer2D node which plays the solve sound.
 onready var sound_solve = $SoundSolve
 
 

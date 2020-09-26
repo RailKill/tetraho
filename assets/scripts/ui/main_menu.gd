@@ -3,9 +3,8 @@ extends Control
 
 
 func _ready():
-	$VBoxContainer/ButtonStart.grab_focus()
 	if OS.get_name() == "HTML5":
-		$VBoxContainer/ButtonQuit.set_disabled(true)
+		$VBoxContainer/ButtonQuit.disabled = true
 
 
 func _on_ButtonStart_pressed():
@@ -27,5 +26,12 @@ func _on_ButtonQuit_pressed():
 	get_tree().quit()
 
 
-func _on_ButtonFullscreen_pressed():
-	OS.window_fullscreen = !OS.window_fullscreen
+func _on_ButtonOptions_pressed():
+	$VBoxContainer.hide()
+	var options = load("res://assets/scenes/ui/options_menu.tscn").instance()
+	add_child(options)
+	options.connect("tree_exiting", $VBoxContainer, "show")
+
+
+func _on_VBoxContainer_visibility_changed():
+	$VBoxContainer/ButtonStart.grab_focus()

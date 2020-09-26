@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/tetra_theme.tres" type="Theme" id=1]
+[ext_resource path="res://assets/scripts/ui/slider_control.gd" type="Script" id=2]
+
+[node name="SliderControl" type="Control"]
+margin_bottom = 25.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 400.0
+margin_top = 2.0
+margin_right = 448.0
+margin_bottom = 27.0
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slider" type="HSlider" parent="."]
+margin_top = -2.0
+margin_right = 200.0
+margin_bottom = 14.0
+rect_scale = Vector2( 2, 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="value_changed" from="Slider" to="." method="_on_slider_value_changed"]
