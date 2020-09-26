@@ -44,23 +44,15 @@ jobs:
     container:
       image: barichello/godot-ci:3.2.3
     steps:
-      - name: Update Git Version
-        run: |
-          apt-get install python-software-properties
-          apt-get install software-properties-common
-          add-apt-repository ppa:git-core/ppa -y
-          apt-get update
-          apt-get install -y git
       - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          persist-credentials: false
+        uses: actions/checkout@v1
       - name: Setup
         run: |
           mkdir -v -p ~/.local/share/godot/templates
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
       - name: Web Build
         run: |
+          cd $EXPORT_NAME
           mkdir -v -p build/web
           godot -v --export "HTML5" build/web/index.html
       # - name: Run Automated Tests
