@@ -12,30 +12,30 @@ env:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # Windows build job.
-  export-windows:
-    name: Windows Export
-    runs-on: ubuntu-latest
-    container:
-      image: barichello/godot-ci:3.2.3
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup
-        run: |
-          mkdir -v -p ~/.local/share/godot/templates
-          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
-      - name: Windows Build
-        run: |
-          mkdir -v -p build/windows
-          godot -v --export "Windows Desktop" build/windows/${EXPORT_NAME}.exe
-      - name: Run Automated Tests
-        run: |
-          godot addons/WAT/cli.tscn -run_all
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: ${{ env.EXPORT_NAME }}-ci_${{ github.run_number }}-windows
-          path: build/windows
+  # export-windows:
+  #   name: Windows Export
+  #   runs-on: ubuntu-latest
+  #   container:
+  #     image: barichello/godot-ci:3.2.3
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+  #     - name: Setup
+  #       run: |
+  #         mkdir -v -p ~/.local/share/godot/templates
+  #         mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+  #     - name: Windows Build
+  #       run: |
+  #         mkdir -v -p build/windows
+  #         godot -v --export "Windows Desktop" build/windows/${EXPORT_NAME}.exe
+  #     - name: Run Automated Tests
+  #       run: |
+  #         godot addons/WAT/cli.tscn -run_all
+  #     - name: Upload Artifact
+  #       uses: actions/upload-artifact@v2
+  #       with:
+  #         name: ${{ env.EXPORT_NAME }}-ci_${{ github.run_number }}-windows
+  #         path: build/windows
   
   # Web build job.
   export-web:
@@ -56,9 +56,9 @@ jobs:
         run: |
           mkdir -v -p build/web
           godot -v --export "HTML5" build/web/index.html
-      - name: Run Automated Tests
-        run: |
-          godot addons/WAT/cli.tscn -run_all
+      # - name: Run Automated Tests
+      #   run: |
+      #     godot addons/WAT/cli.tscn -run_all
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
@@ -68,7 +68,9 @@ jobs:
       - name: Install rsync 📚
         run: |
           apt-get update && apt-get install -y rsync
+          cd ../
           pwd
+          ls
       - name: Deploy CI build to GitHub Pages 🚀
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
