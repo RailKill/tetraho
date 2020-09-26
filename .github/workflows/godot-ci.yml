@@ -68,9 +68,10 @@ jobs:
       - name: Install rsync 📚
         run: |
           apt-get update && apt-get install -y rsync
-          cd ../
           pwd
           ls
+          git remote
+          usr/bin/git remote
       - name: Deploy CI build to GitHub Pages 🚀
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
