@@ -15,6 +15,7 @@ func _ready():
 	$VBoxContainer/ButtonClose.grab_focus()
 	# Load and apply configurations.
 	apply(Configuration.retrieve())
+	_on_fullscreen_toggled(fullscreen_checkbox.pressed)
 
 
 func _input(_event):
@@ -40,10 +41,10 @@ func _on_fullscreen_focus_exited():
 
 func _on_fullscreen_toggled(button_pressed):
 	OS.window_fullscreen = button_pressed
-	$GridContainer/LabelWindowSize.modulate = \
-			Color.dimgray if button_pressed else Color.white
-	width_edit.editable = !button_pressed
-	height_edit.editable = !button_pressed
+	$GridContainer/LabelWindowSize.modulate = Color.dimgray \
+			if button_pressed or OS.get_name() == "HTML5" else Color.white
+	width_edit.editable = !button_pressed and OS.get_name() != "HTML5"
+	height_edit.editable = !button_pressed and OS.get_name() != "HTML5"
 
 
 func _on_master_volume_changed(value):
