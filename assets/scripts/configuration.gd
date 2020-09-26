@@ -16,9 +16,9 @@ const FILEPATH = "user://settings.cfg"
 # On ready, load and apply game configuration.
 func _ready():
 	var config = retrieve()
-	OS.window_size = Vector2(
+	set_window_size(Vector2(
 			config.get_value("display", "width", DEFAULT_WIDTH),
-			config.get_value("display", "height", DEFAULT_HEIGHT))
+			config.get_value("display", "height", DEFAULT_HEIGHT)))
 	OS.window_fullscreen = \
 			config.get_value("display", "fullscreen", DEFAULT_FULLSCREEN)
 	adjust_volume(0, config.get_value("sound", "master_volume", 
@@ -60,3 +60,9 @@ func reset():
 
 	config.save(FILEPATH)
 	return config
+
+
+# Sets the window size if the game is running on PC.
+func set_window_size(size: Vector2):
+	if OS.has_feature("pc"):
+		OS.window_size = size

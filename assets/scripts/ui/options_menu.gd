@@ -15,7 +15,16 @@ func _ready():
 	$VBoxContainer/ButtonClose.grab_focus()
 	# Load and apply configurations.
 	apply(Configuration.retrieve())
-	_on_fullscreen_toggled(fullscreen_checkbox.pressed)
+	
+	# Disable window size controls if game host is not desktop/laptop.
+	if not OS.has_feature("pc"):
+		$GridContainer/LabelWindowSize.modulate = Color.dimgray
+		width_edit.editable = false
+		height_edit.editable = false
+
+
+func _process(_delta):
+	fullscreen_checkbox.pressed = OS.window_fullscreen
 
 
 func _input(_event):
@@ -42,9 +51,9 @@ func _on_fullscreen_focus_exited():
 func _on_fullscreen_toggled(button_pressed):
 	OS.window_fullscreen = button_pressed
 	$GridContainer/LabelWindowSize.modulate = Color.dimgray \
-			if button_pressed or OS.get_name() == "HTML5" else Color.white
-	width_edit.editable = !button_pressed and OS.get_name() != "HTML5"
-	height_edit.editable = !button_pressed and OS.get_name() != "HTML5"
+			if button_pressed or not OS.has_feature("pc") else Color.white
+	width_edit.editable = !button_pressed and OS.has_feature("pc")
+	height_edit.editable = !button_pressed and OS.has_feature("pc")
 
 
 func _on_master_volume_changed(value):
@@ -66,8 +75,9 @@ func _on_sfx_volume_changed(value):
 # Apply the given configuration to the user interface.
 func apply(config: ConfigFile):
 	# Update display settings.
-	fullscreen_checkbox.pressed = config.get_value("display", "fullscreen", 
-			Configuration.DEFAULT_FULLSCREEN)
+	fullscreen_checkbox.pressed = OS.window_fullscreen \
+			if OS.has_feature("web") else config.get_value(
+			"display", "fullscreen", Configuration.DEFAULT_FULLSCREEN)
 	width_edit.text = str(config.get_value("display", "width", 
 			Configuration.DEFAULT_WIDTH))
 	height_edit.text = str(config.get_value("display", "height", 
@@ -89,7 +99,7 @@ func save_and_exit():
 			if width_edit.text.is_valid_integer() else int(OS.window_size.x)
 	var height = int(height_edit.text) \
 			if height_edit.text.is_valid_integer() else int(OS.window_size.y)
-	OS.window_size = Vector2(width, height)
+	Configuration.set_window_size(Vector2(width, height))
 	
 	# Get display settings.
 	config.set_value("display", "fullscreen", fullscreen_checkbox.pressed)

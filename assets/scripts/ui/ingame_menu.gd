@@ -14,8 +14,8 @@ onready var button_resume = $VBoxContainer/ButtonResume
 
 
 func _ready():
-	if OS.get_name() == "HTML5":
-		$VBoxContainer/ButtonQuit.set_disabled(true)
+	if OS.has_feature("web"):
+		$VBoxContainer/ButtonQuit.disabled = true
 
 
 func _input(_event):

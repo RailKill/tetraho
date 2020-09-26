@@ -3,7 +3,7 @@ extends Control
 
 
 func _ready():
-	if OS.get_name() == "HTML5":
+	if OS.has_feature("web"):
 		$VBoxContainer/ButtonQuit.disabled = true
 
 
