@@ -6,33 +6,27 @@ extends Area2D
 
 signal lifetime_expired(collided)
 
-export(float) var lifetime = Constants.CHECKER_LIFETIME
+# If true, the checker will automatically snap to grid on ready.
 export(bool) var is_snapped = false
 
+# The last colliding area or body.
 var collided: Node2D
-var is_expiring = false
 
 onready var collision_shape = $CollisionShape2D
+onready var lifetime = $Lifetime
 
 
 func _ready():
 	reposition()
-	# warning-ignore:return_value_discarded
-	connect("area_entered", self, "_on_collide")
-	# warning-ignore:return_value_discarded
-	connect("body_entered", self, "_on_collide")
-
-
-func _physics_process(delta):
-	lifetime -= delta
-	if lifetime <= 0 and not is_expiring:
-		is_expiring = true
-		emit_signal("lifetime_expired", collided)
-		queue_free()
 
 
 func _on_collide(target):
 	collided = target
+
+
+func _on_lifetime_expired():
+	emit_signal("lifetime_expired", collided)
+	queue_free()
 
 
 # Centers the area correctly based on its collision shape and grid snapping.

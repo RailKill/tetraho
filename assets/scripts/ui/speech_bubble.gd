@@ -8,8 +8,6 @@ const CLOSE = "DialogClose"
 
 # Current index of the speech to deliver.
 var index = 0
-# Elapsed time sinced last skip.
-var elapsed_time = 0
 # Speech object for this bubble to display.
 var speech
 
@@ -26,14 +24,10 @@ onready var sound_pop = $SoundPop
 func _ready():
 	animation.connect("animation_finished", self, "next")
 	visible = false
-
-
-func _process(delta):
 	if speech.duration > 0:
-		elapsed_time += delta
-		if elapsed_time >= speech.duration:
-			skip()
-			elapsed_time = 0
+		var timer = $Timer
+		timer.wait_time = speech.duration
+		timer.start()
 
 
 func _input(_event):

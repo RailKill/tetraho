@@ -5,35 +5,34 @@ extends Node2D
 
 # Description of what this status effect does.
 export(String) var description = ""
-# If true, this status effect will never wear off.
-export(bool) var lasts_forever = false
-# Duration this effect lasts in seconds.
-export(float, 0, 3600) var duration = 1
+# Duration this effect lasts in seconds. If 0, lasts forever.
+export(float, 0, 3600) var duration = 0
 # Perform a tick every X seconds. If 0, tick does not happen.
 export(float, 0, 3600) var interval = 0
 
 # The node who gave/caused this status effect.
 var caster: Node2D
-# Elapsed time since last tick.
-var elapsed_time_since_tick = 0
-# If true, it means this status is in the process of wearing off.
-var is_expiring = false
+# Timer which will destroy self.
+var timer_lifetime = Timer.new()
+# Timer which fires at every interval.
+var timer_tick = Timer.new()
 
 
-func _physics_process(delta):
-	# Process tick effects.
-	if interval > 0:
-		elapsed_time_since_tick += delta
-		if elapsed_time_since_tick >= interval:
-			tick()
-			elapsed_time_since_tick = 0
+func _ready():
+	if duration > 0:
+		timer_lifetime.wait_time = duration
+		timer_lifetime.autostart = true
+		timer_lifetime.connect("timeout", self, "expire")
+	timer_lifetime.one_shot = true
+	timer_lifetime.process_mode = Timer.TIMER_PROCESS_PHYSICS
+	add_child(timer_lifetime)
 	
-	# Check lifetime.
-	if not lasts_forever:
-		duration -= delta
-		if duration <= 0 and not is_expiring:
-			is_expiring = true
-			expire()
+	if interval > 0:
+		timer_tick.wait_time = interval
+		timer_tick.autostart = true
+		timer_tick.connect("timeout", self, "tick")
+	timer_tick.process_mode = Timer.TIMER_PROCESS_PHYSICS
+	add_child(timer_tick)
 
 
 func _to_string():

@@ -36,9 +36,10 @@ func test_decaying():
 	mock_player.current = null
 	add_child(tetromino)
 	yield(until_signal(get_tree(), "idle_frame", 0.5), YIELD)
-	tetromino.reticle.queue_free()
+	tetromino.reticle = null
+	tetromino.timer_decay.start()
 	Engine.time_scale = 10
-	yield(until_timeout(Constants.TETROMINO_DECAY_TIME + 0.5), YIELD)
+	yield(until_timeout(4.5), YIELD)
 	Engine.time_scale = 1
 	asserts.is_false(is_instance_valid(tetromino))
 
@@ -90,6 +91,32 @@ func test_mouse_snapping():
 	asserts.is_equal(tetromino.global_position, Vector2(x, y))
 
 
+func test_no_slowdown_with_100_summoned_tetrominos():
+	add_child(tetromino)
+	var tetrominos = [tetromino]
+	var spread_x = Constants.GRID_SIZE
+	var spread_y = Constants.GRID_SIZE
+	for _i in range(100):
+		var more = resource.instance()
+		spread_x += Constants.GRID_SIZE * 3
+		if spread_x > 1250:
+			spread_x = Constants.GRID_SIZE
+			spread_y += Constants.GRID_SIZE * 3
+		more.global_position = Vector2(spread_x, spread_y)
+		more.load_configuration([1, 1], [1, 1], Color.yellow)
+		add_child(more)
+		tetrominos.append(more)
+
+	for piece in tetrominos:
+		piece.summon_piece()
+	
+	var time_before = OS.get_ticks_msec()
+	yield(until_timeout(1), YIELD)
+	asserts.is_equal_or_less_than(OS.get_ticks_msec() - time_before, 1000)
+	for piece in tetrominos:
+		piece.queue_free()
+
+
 func test_rotate_piece():
 	add_child(tetromino)
 	tetromino.rotate_piece()
@@ -100,9 +127,8 @@ func test_rotate_piece():
 func test_summoning():
 	add_child(tetromino)
 	tetromino.summon_piece()
-	asserts.is_true(tetromino.is_summoning, "summoning state entered")
 	mock_player.current = null
-	yield(until_timeout(Constants.TETROMINO_SUMMON_TIME + 0.5), YIELD)
+	yield(until_timeout(1), YIELD)
 	asserts.is_false(is_instance_valid(tetromino.reticle), "reticle removed")
 	asserts.is_true(tetromino.solid.visible, "solid blocks are visible")
 
@@ -110,11 +136,13 @@ func test_summoning():
 func test_toggle_block_visibility():
 	add_child(tetromino)
 	tetromino.toggle_blocks(true)
-	asserts.is_true(not tetromino.is_summoning and tetromino.solid.visible \
-			and not tetromino.reticle.visible, "blocks shown without summoning")
+	asserts.is_true(is_instance_valid(tetromino.reticle) and \
+			tetromino.solid.visible and not tetromino.reticle.visible, 
+			"blocks shown without summoning")
 	tetromino.toggle_blocks(false)
-	asserts.is_true(not tetromino.is_summoning and tetromino.reticle.visible \
-			and not tetromino.solid.visible, "reticle shown without summoning")
+	asserts.is_true(is_instance_valid(tetromino.reticle) and \
+			tetromino.reticle.visible and not tetromino.solid.visible, 
+			"reticle shown without summoning")
 
 
 func post():

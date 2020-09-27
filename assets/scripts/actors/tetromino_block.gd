@@ -4,8 +4,8 @@ extends Actor
 # moved, or have their own abilities, so it is considered an Actor.
 
 
-# Check if block is marked for solving.
-var marked = false
+# True position in which this block was summoned. Null if haven't summoned.
+var summoned_position
 
 # Reference to the animated sprite for summon animation.
 onready var summon = $Summon
@@ -58,7 +58,8 @@ func enable():
 	unsummon.visible = false
 	summon.visible = true
 	summon.play()
-	GameWorld.blocks[self] = []
+	summoned_position = get_global_vector()
+	GameWorld.add_block(self)
 
 
 # Return the difference vector from collision origin to the given target.
@@ -84,4 +85,4 @@ func trap(actor):
 
 # Frees all trapped actors associated with this block from the GameWorld.
 func untrap():
-	GameWorld.blocks.erase(self)
+	GameWorld.remove_block(self)

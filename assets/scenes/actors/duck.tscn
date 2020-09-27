@@ -95,6 +95,7 @@ cooldown = 2.0
 duration = 0.5
 cast_audio = ExtResource( 4 )
 spawn_resource = ExtResource( 8 )
+checker_resource = null
 is_snapped = false
 as_child = true
 maximum_spawnable = 1

@@ -104,3 +104,6 @@ anims/DialogOpen = SubResource( 2 )
 [node name="SoundPop" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 bus = "SFX"
+
+[node name="Timer" type="Timer" parent="."]
+[connection signal="timeout" from="Timer" to="." method="skip"]

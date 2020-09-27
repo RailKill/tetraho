@@ -8,27 +8,26 @@ script = ExtResource( 1 )
 
 [node name="Flamethrower" parent="." instance=ExtResource( 2 )]
 position = Vector2( 0, -14 )
-one_off = true
-duration = 8.0
 full_length = 256
+
+[node name="Lifetime" parent="Flamethrower" index="2"]
+wait_time = 8.0
+autostart = true
 
 [node name="Flamethrower2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 14, 0 )
 rotation = 1.5708
-one_off = true
-duration = 8.0
 full_length = 256
 
 [node name="Flamethrower3" parent="." instance=ExtResource( 2 )]
 position = Vector2( 0, 14 )
 rotation = 3.14159
-one_off = true
-duration = 8.0
 full_length = 256
 
 [node name="Flamethrower4" parent="." instance=ExtResource( 2 )]
 position = Vector2( -14, 0 )
 rotation = 4.71239
-one_off = true
-duration = 8.0
 full_length = 256
+[connection signal="timeout" from="Flamethrower/Lifetime" to="." method="queue_free"]
+
+[editable path="Flamethrower"]

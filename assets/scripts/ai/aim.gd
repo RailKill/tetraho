@@ -11,7 +11,7 @@ func _init(actor, goal, gun, extent=0).(actor, goal, extent):
 	weapon = gun
 
 
-func execute(_delta) -> bool:
+func execute() -> bool:
 	if is_close_enough():
 		weapon.visible = true
 		weapon.aim(target.global_position)

@@ -90,12 +90,14 @@ func test_search():
 	asserts.is_false(GameWorld.search(test_blocks[0], faker), \
 			"no solution when wrong pattern is used")
 	for block in test_blocks:
-		asserts.is_false(block.marked, "before search, %s is unmarked" % block)
+		asserts.is_null(GameWorld.marked.get(block), 
+				"before search, %s is unmarked" % block)
 	
 	asserts.is_true(GameWorld.search(test_blocks[0], solver), \
-			"solution found when correct pattern is used")	
+			"solution found when correct pattern is used")
 	for block in test_blocks:
-		asserts.is_true(block.marked, "after search, %s is marked" % block)
+		asserts.is_true(GameWorld.marked[block],
+				"after search, %s is marked" % block)
 
 
 func test_solve_damages_only_once():

@@ -13,5 +13,5 @@ func _init(actor: Actor):
 # Processes the behavior. Behaviors are executed every physics frame by their
 # executor. Actors go through a list of behaviors, and returning false here
 # prevents continuation and will stop processing after this behavior is done.
-func execute(_delta: float) -> bool:
+func execute() -> bool:
 	return false

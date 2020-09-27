@@ -3,7 +3,6 @@
 [ext_resource path="res://assets/scripts/objects/bullet.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/actors/duck/scratch_1.png" type="Texture" id=2]
 
-
 [node name="Bullet" type="KinematicBody2D"]
 modulate = Color( 1, 0.701961, 0, 1 )
 scale = Vector2( 0.5, 0.5 )
@@ -17,3 +16,10 @@ texture = ExtResource( 2 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PoolVector2Array( -7, 0, -2, -1, 2, -1, 7, 0, 2, 1, -2, 1 )
+
+[node name="Lifetime" type="Timer" parent="."]
+process_mode = 0
+wait_time = 3.0
+one_shot = true
+autostart = true
+[connection signal="timeout" from="Lifetime" to="." method="queue_free"]

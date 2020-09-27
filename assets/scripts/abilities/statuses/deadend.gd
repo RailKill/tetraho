@@ -13,7 +13,6 @@ onready var checkpoint = global_position
 
 
 func _init():
-	lasts_forever = true
 	name = "Unstuck"
 
 

@@ -14,7 +14,7 @@ func _init(actor, goal, skill, length=0, extent=0).(actor, goal, extent):
 	reach = length
 
 
-func execute(_delta) -> bool:
+func execute() -> bool:
 	if is_close_enough() and is_instance_valid(target):
 		if ability.has_method("set_point"):
 			ability.set_point(executor.global_position + \

@@ -32,3 +32,8 @@ autoplay = true
 max_distance = 200.0
 attenuation = 3.0
 bus = "SFX"
+
+[node name="Lifetime" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+[connection signal="timeout" from="Lifetime" to="." method="queue_free"]
