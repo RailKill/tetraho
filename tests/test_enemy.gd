@@ -172,10 +172,10 @@ func test_duck_house():
 	yield(until_signal(house, "tree_exited", 3), YIELD)
 	Utility.simulate_action("ui_left", false)
 	asserts.is_false(is_instance_valid(house), "destroyed by pushing")
-	asserts.is_false(is_instance_valid(sole_duck), "duck died along")
 	if is_instance_valid(house):
 		house.queue_free()
 	if is_instance_valid(sole_duck):
+		asserts.is_true(sole_duck.is_dead(), "duck died along")
 		sole_duck.queue_free()
 	
 	# Test 6: Player can dash Duck into house and destroy it.

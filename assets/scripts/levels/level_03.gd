@@ -4,6 +4,7 @@ extends Node2D
 
 # Cutscene event.
 var is_cutscene_walking = false setget set_cutscene_walking
+var boss_points = []
 
 # Gunner spawn event.
 var gunner = preload("res://assets/scenes/actors/gunner.tscn")
@@ -26,8 +27,10 @@ onready var player = $Player
 
 
 func _ready():
-	for node in $Events/Spawns.get_children():
+	for node in $Events/GunnerSpawns.get_children():
 		gunner_points.append(node.global_position)
+	for node in $Events/BossPoints.get_children():
+		boss_points.append(node.global_position)
 	set_gates(false)
 	player.get_node("AreaAggro").queue_free()
 
@@ -38,14 +41,14 @@ func _physics_process(_delta):
 
 
 func _on_boss_damaged(_attacker, _verb, _victim, _amount):
-	teleport.point = get_random_point(true)
+	teleport.point = get_random_point(boss_points)
 	
 	# Spawn gunners at 60% HP to make the fight harder.
 	if not gunners_spawned and boss.hp <= 0.6 * boss.max_hp:
 		for _i in range(0, 4):
 			var gunman = gunner.instance()
 			add_child(gunman)
-			gunman.global_position = get_random_point()
+			gunman.global_position = get_random_point(gunner_points)
 			gunman.is_aggro = true
 		gunners_spawned = true
 	# Spawn flame wheel at 40% HP for a change of pace.
@@ -101,13 +104,10 @@ func _on_timer_end():
 	flames_spawned = true
 
 
-# Returns a random designated point.
-func get_random_point(for_boss: bool=false):
+# Returns a random designated point from the given array.
+func get_random_point(points: Array):
 	randomize()
-	var random_points = gunner_points + \
-			([middle.global_position] if for_boss else [])
-	
-	return random_points[randi() % random_points.size()]
+	return points[randi() % points.size()]
 
 
 # Play the flame wheel incoming warning sound.

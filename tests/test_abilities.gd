@@ -1,6 +1,7 @@
 extends WAT.Test
 
 
+var heart_resource = preload("res://assets/scenes/loot/heart.tscn")
 var dummy_resource = preload("res://assets/scenes/actors/dummy.tscn")
 var dummy
 
@@ -37,7 +38,7 @@ func test_dash_cooldown_bonus():
 	dash.duration = 2
 	dash.speed = 400
 	dummy.add_child(dash)
-	yield(until_signal(get_tree(), "idle_frame", 0.5), YIELD)
+	yield(until_timeout(0.5), YIELD)
 	dash.direction = Vector2.RIGHT
 	dash.cast()
 	yield(until_signal(dash, "finished_casting", 1), YIELD)
@@ -103,19 +104,21 @@ func test_status_expire():
 
 
 func test_treasure():
-	var dummy_id = dummy.get_rid().get_id()
 	var treasure = Treasure.new()
-	treasure.drops = [dummy_resource]
+	treasure.drops = [heart_resource, heart_resource]
 	dummy.add_child(treasure)
 	dummy.queue_free()
-	yield(until_signal(get_tree(), "idle_frame", 0.5), YIELD)
-	var loot = get_node_or_null("Dummy")
-	asserts.is_not_null(loot, "loot dropped")
-	if loot:
-		asserts.is_not_equal(loot.get_rid().get_id(), dummy_id, "different id")
-	loot.queue_free()
+	yield(until_timeout(0.5), YIELD)
+	var hearts = []
+	for node in get_children():
+		if node is PickupHeart:
+			hearts.append(node)
+	asserts.is_equal(hearts.size(), 2)
+	for heart in hearts:
+		heart.queue_free()
 
 
 func post():
 	if is_instance_valid(dummy):
 		dummy.queue_free()
+		yield(until_signal(dummy, "tree_exited", 0.5), YIELD)
