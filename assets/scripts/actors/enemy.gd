@@ -13,8 +13,8 @@ var behaviors = []
 onready var player = get_parent().get_node("Player")
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if not is_dead() and is_aggro and not is_locked():
 		for behavior in behaviors:
-			if not behavior.execute(delta):
+			if not behavior.execute():
 				return

@@ -14,6 +14,6 @@ func _init(actor, gun, out=false).(actor):
 	show = out
 
 
-func execute(_delta) -> bool:
+func execute() -> bool:
 	weapon.visible = show
 	return true

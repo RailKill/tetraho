@@ -5,24 +5,25 @@ extends Target
 
 var navigation: Navigation2D
 var paths: PoolVector2Array = []
-var pathing_cooldown = Constants.AI_PATHING_COOLDOWN
+var pathing_timer = Timer.new()
 var path_index = 0
 
 
 func _init(actor, goal, nav, extent=0).(actor, goal, extent):
 	navigation = nav
+	pathing_timer.autostart = true
+	pathing_timer.wait_time = Constants.AI_PATHING_COOLDOWN
+	pathing_timer.connect("timeout", self, "reset_pathing")
+	executor.add_child(pathing_timer)
 
 
-func execute(delta) -> bool:
+func execute() -> bool:
 	var result = true
 	# If the distance is too far to follow, just continue to next behavior.
 	if is_close_enough():
 		# Result is set to false here once the target is actually within range.
 		# This will prevent execution of next behavior and focus only on follow.
 		result = false
-		pathing_cooldown -= delta
-		if pathing_cooldown <= 0:
-			reset_pathing()
 		
 		# Move executor towards target.
 		if path_index < paths.size():
@@ -51,5 +52,4 @@ func reset_pathing():
 	var to_target = target.global_position + \
 		to_self_vector().normalized() * Constants.GRID_SIZE
 	paths = navigation.get_simple_path(executor.global_position, to_target)
-	pathing_cooldown = Constants.AI_PATHING_COOLDOWN
 	path_index = 0

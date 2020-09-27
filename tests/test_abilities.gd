@@ -37,8 +37,9 @@ func test_dash_cooldown_bonus():
 	dash.duration = 2
 	dash.speed = 400
 	dummy.add_child(dash)
+	yield(until_signal(get_tree(), "idle_frame", 0.5), YIELD)
 	dash.direction = Vector2.RIGHT
-	dash.is_active = true
+	dash.cast()
 	yield(until_signal(dash, "finished_casting", 1), YIELD)
 	asserts.signal_was_emitted(dash, "finished_casting", "dash ended early")
 	asserts.is_equal(dash.timer_cooldown.time_left, 
