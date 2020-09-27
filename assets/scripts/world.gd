@@ -21,9 +21,25 @@ const SOLVER_VERTICAL = [
 
 # Dictionary of all blocks as keys, and list of actors trapped as values.
 var blocks = {}
+# Dictionary of last marked blocks for destruction, with empty values.
+var marked = {}
+# Dictionary of global vectors to blocks for fast position-based lookup.
+var vectors = {}
 
 # Reference to the AudioStreamPlayer2D node which plays the solve sound.
 onready var sound_solve = $SoundSolve
+
+
+# Keep track of a block for solving.
+func add_block(block):
+	blocks[block] = []
+	vectors[block.summoned_position] = block
+
+
+# Remove a block from the world record.
+func remove_block(block):
+	blocks.erase(block)
+	vectors.erase(block.summoned_position)
 
 
 # Checks the blocks record if a given actor is trapped.
@@ -36,34 +52,31 @@ func is_actor_locked(actor):
 
 # Checks if given block is overlapping with an existing one and removes it.
 func is_overlapping_block(block):
-	for key in blocks.keys():
-		if key.get_global_vector() == block.get_global_vector():
-			block.queue_free()
-			return true
+	if vectors.get(block.get_global_vector()):
+		block.queue_free()
+		return true
 	return false
 
 
 # Whenever a Tetromino is summoned, attempt to solve.
 func solve():
+	marked = {}
 	for block in blocks.keys():
 		search(block, SOLVER_HORIZONTAL)
 		search(block, SOLVER_VERTICAL)
 	
-	var has_marked = false
-	var actors = []
-	for block in blocks.keys():
-		# Solve all marked blocks.
-		if block.marked:
-			for actor in blocks[block]:
-				if not actors.has(actor):
-					actors.append(actor)
-			block.disable()
-			has_marked = true
+	var actors = {}
+	# Solve all marked blocks.
+	for block in marked.keys():
+		for actor in blocks[block]:
+			actors[actor] = null
+		block.disable()
 	
-	if has_marked:
+	if not marked.empty():
 		sound_solve.play()
-		for actor in actors:
-			actor.oof(Constants.TETROMINO_DAMAGE, true)
+	
+	for actor in actors.keys():
+		actor.oof(Constants.TETROMINO_DAMAGE, true)
 
 
 # Search for block combinations in a given solver (area to search) and mark
@@ -71,12 +84,12 @@ func solve():
 func search(anchor, solver):
 	var satisfied = [anchor]
 	for vector in solver:
-		for block in blocks.keys():
-			if block.get_global_vector() == anchor.get_global_vector() + vector:
-				satisfied.append(block)
+		var lookup = vectors.get(anchor.summoned_position + vector)
+		if lookup:
+			satisfied.append(lookup)
+		else:
+			return false
 	
-	if satisfied.size() == solver.size() + 1:
-		for solved in satisfied:
-			solved.marked = true
-		return true
-	return false
+	for solved in satisfied:
+		marked[solved] = true
+	return true

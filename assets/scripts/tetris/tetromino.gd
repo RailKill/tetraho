@@ -11,10 +11,6 @@ extends Node2D
 export(bool) var can_decay = true
 # If this is true, automatically summon it when ready.
 export(bool) var is_auto = false
-# Time in seconds for this tetromino to disappear after being summoned.
-export(float) var decay_time = Constants.TETROMINO_DECAY_TIME
-# Time in seconds for this tetromino to appear after being summoned.
-export(float) var summon_time = Constants.TETROMINO_SUMMON_TIME
 # Color of the tetromino blocks.
 export(Color) var color = Color.white
 # List of Vector2 positions to spawn the blocks.
@@ -26,10 +22,6 @@ export(PackedScene) var block_res = \
 export(PackedScene) var target_res = \
 		preload("res://assets/scenes/tetris/tetromino_target.tscn")
 
-# If the tetromino is in the process of being summoned, this will be true.
-var is_summoning = false
-# If the tetromino already passed decay_time and is dying, this will be true.
-var is_decaying = false
 # The PlayerCharacter who summons this tetromino.
 var summoner
 # Number of blocks that made up the width of this tetromino.
@@ -40,9 +32,16 @@ onready var solid = $Solid
 onready var sound_invalid = $SoundInvalid
 onready var sound_confirm = $SoundConfirm
 onready var sound_trap = $SoundTrap
+onready var timer_summon = $TimerSummon
+onready var timer_decay = $TimerDecay
 
 
 func _ready():
+	# Connect timer signals.
+	timer_summon.connect("timeout", self, "_on_summon_completed")
+	timer_decay.connect("timeout", self, "_on_decay_completed")
+	
+	# Create blocks based on configuration.
 	for vector in configuration:
 		var target = target_res.instance()
 		target.position = vector
@@ -54,13 +53,13 @@ func _ready():
 		solid.add_child(block)
 	
 	toggle_blocks(false)
-	if summoner and summoner.is_current(self):
+	if summoner and summoner.is_current(self) and summoner.is_controllable:
 		snap_to_mouse()
 	if is_auto:
 		summon_piece()
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	# Handle controls.
 	if summoner and summoner.is_current(self) and summoner.is_controllable:
 		if Input.is_action_just_pressed("action_primary"):
@@ -69,38 +68,7 @@ func _physics_process(delta):
 			rotate_piece()
 		else:
 			snap_to_mouse()
-	
-	# If the tetromino is summoning, start countdown.
-	if is_summoning:
-		summon_time -= delta
-		if summon_time <= 0:
-			# For each target reticle, get the actors who are in there.
-			for i in range(reticle.get_child_count()):
-				var block = solid.get_child(i)
-				if not GameWorld.is_overlapping_block(block):
-					block.enable()
-					for body in reticle.get_child(i).get_overlapping_bodies():
-						# Perform a lock for trappable bodies.
-						if body.is_in_group("trappable"):
-							block.trap(body)
-							sound_trap.play()
-			
-			is_summoning = false
-			reticle.queue_free()
-			solid.visible = true
-			GameWorld.solve()
-	
-	# If the solid blocks are visible, that means they are active.
-	# Start decaying to be removed from the game.
-	elif can_decay and is_summoned():
-		decay_time -= delta
-		if decay_time <= 0:
-			if not is_decaying:
-				is_decaying = true
-				for block in solid.get_children():
-					block.disable()
-			
-	if solid.get_child_count() == 0:
+	elif not reticle and solid.get_child_count() == 0:
 		queue_free()
 
 
@@ -114,8 +82,31 @@ func _correct_positioning():
 			position.y += Constants.GRID_HALF
 
 
-func is_summoned():
-	return not is_instance_valid(reticle)
+# Executes when decay timer is completed. Destroys all blocks.
+func _on_decay_completed():
+	for block in solid.get_children():
+		block.disable()
+
+
+# Executes when sumon timer is completed. Creates solid blocks.
+func _on_summon_completed():
+	# For each target reticle, get the actors who are in there.
+	for i in range(reticle.get_child_count()):
+		var block = solid.get_child(i)
+		if not GameWorld.is_overlapping_block(block):
+			block.enable()
+			for body in reticle.get_child(i).get_overlapping_bodies():
+				# Perform a lock for trappable bodies.
+				if body.is_in_group("trappable"):
+					block.trap(body)
+					sound_trap.play()
+	
+	if can_decay:
+		timer_decay.start()
+	reticle.queue_free()
+	reticle = null
+	solid.visible = true
+	GameWorld.solve()
 
 
 # Checks if the target placement is valid or not.
@@ -172,13 +163,16 @@ func snap_to_mouse(mouse_position = get_global_mouse_position()):
 # Summons the tetromino into play.
 func summon_piece():
 	if is_valid_placement():
-		is_summoning = true
 		# Play summoning animation on all target reticles.
 		for target in reticle.get_children():
 			target.animate()
+		
+		# Tell summoner to move on to next tetromino.
 		if summoner:
 			summoner.next_tetromino()
+		summoner = null
 		
+		timer_summon.start()
 		sound_confirm.play()
 	else:
 		# Show an error feedback to the player. Invalid placement.
