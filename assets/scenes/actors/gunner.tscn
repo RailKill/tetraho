@@ -1,0 +1,52 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://assets/scripts/abilities/shoot.gd" type="Script" id=1]
+[ext_resource path="res://assets/scripts/actors/gunner.gd" type="Script" id=2]
+[ext_resource path="res://assets/sounds/gunner_shoot.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/sprites/actors/gunner/gunner.png" type="Texture" id=4]
+[ext_resource path="res://assets/sounds/gunner_death.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/scenes/weapons/handgun.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/sounds/hit.wav" type="AudioStream" id=8]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 5, 6 )
+
+[node name="Gunner" type="KinematicBody2D" groups=[
+"pushable",
+"trappable",
+]]
+z_index = 10
+collision_layer = 4
+collision_mask = 5
+script = ExtResource( 2 )
+hp = 20
+max_hp = 20
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+
+[node name="Handgun" parent="." instance=ExtResource( 6 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="Shoot" type="Node2D" parent="."]
+script = ExtResource( 1 )
+cooldown = 1.0
+complete_audio = ExtResource( 3 )
+
+[node name="SoundHit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 8 )
+bus = "SFX"
+
+[node name="SoundDeath" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+bus = "SFX"

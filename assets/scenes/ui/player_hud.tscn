@@ -1,0 +1,207 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://assets/scripts/ui/player_hud.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/actors/wizard/heart_empty.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/actors/wizard/flask_full.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/actors/wizard/flask_empty.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/actors/wizard/girl_face.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/actors/wizard/heart_half.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/actors/wizard/hat.png" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/actors/wizard/heart_full.png" type="Texture" id=8]
+[ext_resource path="res://assets/tilesets/font.tres" type="TileSet" id=9]
+[ext_resource path="res://assets/sprites/actors/wizard/crown.png" type="Texture" id=10]
+[ext_resource path="res://assets/sprites/blocks/tetromino_flash.png" type="Texture" id=11]
+[ext_resource path="res://assets/sprites/actors/wizard/skull.png" type="Texture" id=12]
+[ext_resource path="res://assets/sounds/dash_ready.wav" type="AudioStream" id=13]
+[ext_resource path="res://assets/sprites/ui/frame.png" type="Texture" id=14]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 5 ), ExtResource( 12 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 8 ), ExtResource( 6 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="PlayerHUD" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Status" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Offset" type="Control" parent="Status"]
+margin_top = -42.0
+margin_bottom = -42.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Rectangle" type="Sprite" parent="Status/Offset"]
+modulate = Color( 0, 0, 0, 0.501961 )
+scale = Vector2( 27.1, 7.3 )
+texture = ExtResource( 11 )
+
+[node name="Head" type="Control" parent="Status/Offset"]
+margin_left = -88.8374
+margin_top = 2.76135
+margin_right = -88.8374
+margin_bottom = 2.76135
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Face" type="AnimatedSprite" parent="Status/Offset/Head"]
+scale = Vector2( 5, 5 )
+frames = SubResource( 1 )
+
+[node name="Hat" type="Sprite" parent="Status/Offset/Head"]
+visible = false
+position = Vector2( 0, -28 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 7 )
+
+[node name="Crown" type="Sprite" parent="Status/Offset/Head"]
+visible = false
+position = Vector2( 23.1159, -38.8643 )
+rotation = 0.434491
+scale = Vector2( 3, 3 )
+texture = ExtResource( 10 )
+
+[node name="Health" type="Control" parent="Status/Offset"]
+margin_left = -21.0655
+margin_top = -17.4742
+margin_right = -21.0655
+margin_bottom = -17.4742
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Heart" type="AnimatedSprite" parent="Status/Offset/Health"]
+scale = Vector2( 2, 2 )
+frames = SubResource( 2 )
+
+[node name="Heart2" type="AnimatedSprite" parent="Status/Offset/Health"]
+position = Vector2( 32, 0 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 2 )
+
+[node name="Heart3" type="AnimatedSprite" parent="Status/Offset/Health"]
+position = Vector2( 64, 0 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 2 )
+
+[node name="Heart4" type="AnimatedSprite" parent="Status/Offset/Health"]
+position = Vector2( 96, 0 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 2 )
+
+[node name="Heart5" type="AnimatedSprite" parent="Status/Offset/Health"]
+position = Vector2( 128, 0 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 2 )
+
+[node name="Mana" type="Control" parent="Status/Offset"]
+margin_left = -14.5236
+margin_top = 8.64509
+margin_right = -14.5236
+margin_bottom = 8.64509
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Flask" type="AnimatedSprite" parent="Status/Offset/Mana"]
+position = Vector2( 0, 1 )
+rotation = 0.645284
+scale = Vector2( 1.5, 1.5 )
+frames = SubResource( 3 )
+
+[node name="DashReady" type="TileMap" parent="Status/Offset/Mana"]
+modulate = Color( 0.282353, 0.796078, 1, 1 )
+position = Vector2( 20.8079, -3.67928 )
+tile_set = ExtResource( 9 )
+cell_size = Vector2( 10, 12 )
+format = 1
+tile_data = PoolIntArray( 0, 1, 0, 1, 0, 0, 2, 5, 0, 3, 3, 0, 5, 4, 0, 6, 2, 0, 7, 0, 0, 8, 1, 0, 9, 6, 0 )
+
+[node name="Recharging" type="TileMap" parent="Status/Offset/Mana"]
+visible = false
+position = Vector2( 20.8079, -3.67928 )
+tile_set = ExtResource( 9 )
+cell_size = Vector2( 10, 12 )
+format = 1
+tile_data = PoolIntArray( 0, 4, 0, 1, 2, 0, 2, 7, 0, 3, 3, 0, 4, 0, 0, 5, 4, 0, 6, 8, 0, 7, 9, 0, 8, 10, 0, 9, 8, 0 )
+
+[node name="Hold" type="Control" parent="Status/Offset"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -178.0
+margin_right = -178.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="Sprite" parent="Status/Offset/Hold"]
+scale = Vector2( 5, 5 )
+texture = ExtResource( 14 )
+
+[node name="Title" type="TileMap" parent="Status/Offset/Hold"]
+position = Vector2( -24.0903, -51.5479 )
+scale = Vector2( 1.25, 1.25 )
+tile_set = ExtResource( 9 )
+cell_size = Vector2( 10, 12 )
+cell_quadrant_size = 4
+format = 1
+tile_data = PoolIntArray( 0, 3, 0, 1, 12, 0, 2, 11, 0, 3, 1, 0 )
+
+[node name="Next" type="Control" parent="Status/Offset"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = 178.0
+margin_right = 178.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="Sprite" parent="Status/Offset/Next"]
+scale = Vector2( 5, 5 )
+texture = ExtResource( 14 )
+
+[node name="Title" type="TileMap" parent="Status/Offset/Next"]
+position = Vector2( -24.0903, -51.5479 )
+scale = Vector2( 1.25, 1.25 )
+tile_set = ExtResource( 9 )
+cell_size = Vector2( 10, 12 )
+cell_quadrant_size = 4
+format = 1
+tile_data = PoolIntArray( 0, 10, 0, 1, 2, 0, 2, 14, 0, 3, 13, 0 )
+
+[node name="SoundReady" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+bus = "SFX"

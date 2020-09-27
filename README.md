@@ -1,7 +1,14 @@
 # tetraho
+[![License: CC0-1.0](https://img.shields.io/badge/License-CC0%201.0-lightgrey.svg)](http://creativecommons.org/publicdomain/zero/1.0/)
+![godot-ci export](https://github.com/RailKill/tetraho/workflows/godot-ci%20export/badge.svg)
+
 Game for [#mizjam1](https://itch.io/jam/miz-jam-1), a 48-hour gamedev challenge spread across 10 days. You play as a block wizard who can dash around, summon tetrominos to solve puzzles and disintegrate your foes. This game project in its entirety, including its source code and all of the assets used are under CC0 public domain license; anyone can use this project and its components for any purpose without permission. Nevertheless, the original authors for the assets are credited as follows.
 
 **Total Development Time for Miz Jam 1 Submission:** 48:00:44
+
+**Latest Web Build:** https://railkill.github.io/tetraho
+
+**itch.io Release Page:** https://railkill.itch.io/tetraho
 
 
 ## Art

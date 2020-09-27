@@ -1,0 +1,47 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/scripts/abilities/spawn.gd" type="Script" id=1]
+[ext_resource path="res://assets/scripts/actors/duck_house.gd" type="Script" id=2]
+[ext_resource path="res://assets/sounds/house_explode.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/sprites/actors/duck/house.png" type="Texture" id=4]
+[ext_resource path="res://assets/scenes/actors/duck.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/scenes/areas/area_checker.tscn" type="PackedScene" id=6]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 7, 7 )
+
+[node name="DuckHouse" type="KinematicBody2D"]
+z_index = 8
+collision_layer = 5
+collision_mask = 5
+script = ExtResource( 2 )
+move_speed = 0.0
+is_invulnerable = true
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="Spawn" type="Node2D" parent="."]
+script = ExtResource( 1 )
+cooldown = 5.0
+spawn_resource = ExtResource( 5 )
+checker_resource = ExtResource( 6 )
+is_snapped = false
+
+[node name="SoundHit" type="AudioStreamPlayer2D" parent="."]
+bus = "SFX"
+
+[node name="SoundDeath" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+bus = "SFX"

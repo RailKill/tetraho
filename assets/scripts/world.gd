@@ -1,74 +1,95 @@
-class_name GameWorld
-extends Node2D
-# Root node of the level. Every level must have a GameWorld as the root node.
+extends Node
+# Global world of the game. Auto-loaded on every level.
 
 
-onready var sound_solve = $SoundSolve
-
-# Array of all TetrominoBlocks global position present in the game world.
-var blocks = []
 # List of vector offsets to check for horizontal 2x3 blocks.
-var solver_horizontal = [
-	Vector2(14, 0), Vector2(28, 0),
-	Vector2(0, 14), Vector2(14, 14), Vector2(28, 14)
+const SOLVER_HORIZONTAL = [
+	Vector2(Constants.GRID_SIZE, 0),
+	Vector2(Constants.GRID_DOUBLE, 0),
+	Vector2(0, Constants.GRID_SIZE),
+	Vector2(Constants.GRID_SIZE, Constants.GRID_SIZE),
+	Vector2(Constants.GRID_DOUBLE, Constants.GRID_SIZE),
 ]
 # List of vector offsets to check for vertical 2x3 blocks.
-var solver_vertical = [
-	Vector2(14, 0),
-	Vector2(0, 14), Vector2(14, 14),
-	Vector2(0, 28), Vector2(14, 28)
+const SOLVER_VERTICAL = [
+	Vector2(Constants.GRID_SIZE, 0),
+	Vector2(0, Constants.GRID_SIZE),
+	Vector2(Constants.GRID_SIZE, Constants.GRID_SIZE),
+	Vector2(0, Constants.GRID_DOUBLE),
+	Vector2(Constants.GRID_SIZE, Constants.GRID_DOUBLE),
 ]
 
+# Dictionary of all blocks as keys, and list of actors trapped as values.
+var blocks = {}
+# Dictionary of last marked blocks for destruction, with empty values.
+var marked = {}
+# Dictionary of global vectors to blocks for fast position-based lookup.
+var vectors = {}
 
-# Whenever a TetrominoBlock is created, it should be added and tracked.
+# Reference to the AudioStreamPlayer2D node which plays the solve sound.
+onready var sound_solve = $SoundSolve
+
+
+# Keep track of a block for solving.
 func add_block(block):
-	blocks.append(block)
+	blocks[block] = []
+	vectors[block.summoned_position] = block
 
 
-# Remove the given Tetromino block from the list.
+# Remove a block from the world record.
 func remove_block(block):
 	blocks.erase(block)
+	vectors.erase(block.summoned_position)
+
+
+# Checks the blocks record if a given actor is trapped.
+func is_actor_locked(actor):
+	for trapped_actors in blocks.values():
+		if trapped_actors.has(actor):
+			return true
+	return false
+
+
+# Checks if given block is overlapping with an existing one and removes it.
+func is_overlapping_block(block):
+	if vectors.get(block.get_global_vector()):
+		block.queue_free()
+		return true
+	return false
 
 
 # Whenever a Tetromino is summoned, attempt to solve.
 func solve():
-	for block in blocks:
-		search(block, solver_horizontal)
-		search(block, solver_vertical)
+	marked = {}
+	for block in blocks.keys():
+		search(block, SOLVER_HORIZONTAL)
+		search(block, SOLVER_VERTICAL)
 	
-	var has_marked = false
-	var actors = []
-	for block in blocks:
-		# Solve all marked blocks.
-		if is_instance_valid(block) and block.marked:
-			for actor in block.trapped:
-				if not actors.has(actor):
-					actors.append(actor)
-			block.disable()
-			has_marked = true
+	var actors = {}
+	# Solve all marked blocks.
+	for block in marked.keys():
+		for actor in blocks[block]:
+			actors[actor] = null
+		block.disable()
 	
-	if has_marked:
+	if not marked.empty():
 		sound_solve.play()
-		
-	# All solved actors take damage.
-	for actor in actors:
-		if is_instance_valid(actor):
-			actor.oof(100, true)
+	
+	for actor in actors.keys():
+		actor.oof(Constants.TETROMINO_DAMAGE, true)
 
 
 # Search for block combinations in a given solver (area to search) and mark
-# all satisfied blocks for destruction.
+# all satisfied blocks for destruction. Returns true if a solution is found.
 func search(anchor, solver):
-	if is_instance_valid(anchor):
-		var satisfied = [anchor]
-		for vector in solver:
-			for search in blocks:
-				if is_instance_valid(search) and search.get_global_vector() == \
-					anchor.get_global_vector() + vector:
-						satisfied.append(search)
-		
-		if satisfied.size() == solver.size() + 1:
-			for solved in satisfied:
-				solved.marked = true
-			return true
-		return false
+	var satisfied = [anchor]
+	for vector in solver:
+		var lookup = vectors.get(anchor.summoned_position + vector)
+		if lookup:
+			satisfied.append(lookup)
+		else:
+			return false
+	
+	for solved in satisfied:
+		marked[solved] = true
+	return true

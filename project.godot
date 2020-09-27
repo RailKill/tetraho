@@ -9,7 +9,7 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Node",
+"base": "Node2D",
 "class": "Ability",
 "language": "GDScript",
 "path": "res://assets/scripts/abilities/ability.gd"
@@ -17,37 +17,57 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "Actor",
 "language": "GDScript",
-"path": "res://assets/scripts/actor.gd"
+"path": "res://assets/scripts/actors/actor.gd"
+}, {
+"base": "Target",
+"class": "Aim",
+"language": "GDScript",
+"path": "res://assets/scripts/ai/aim.gd"
 }, {
 "base": "Area2D",
 "class": "AreaAggro",
 "language": "GDScript",
-"path": "res://assets/scripts/area_aggro.gd"
+"path": "res://assets/scripts/areas/area_aggro.gd"
 }, {
 "base": "Area2D",
 "class": "AreaChecker",
 "language": "GDScript",
-"path": "res://assets/scripts/area_checker.gd"
+"path": "res://assets/scripts/areas/area_checker.gd"
 }, {
 "base": "Area2D",
 "class": "AreaDamage",
 "language": "GDScript",
-"path": "res://assets/scripts/area_damage.gd"
+"path": "res://assets/scripts/areas/area_damage.gd"
+}, {
+"base": "Area2D",
+"class": "AreaDialog",
+"language": "GDScript",
+"path": "res://assets/scripts/areas/area_dialog.gd"
+}, {
+"base": "Reference",
+"class": "Behavior",
+"language": "GDScript",
+"path": "res://assets/scripts/ai/behavior.gd"
 }, {
 "base": "Enemy",
 "class": "Blockmancer",
 "language": "GDScript",
-"path": "res://assets/scripts/blockmancer.gd"
+"path": "res://assets/scripts/actors/blockmancer.gd"
 }, {
-"base": "Enemy",
+"base": "Gunner",
 "class": "Boss",
 "language": "GDScript",
-"path": "res://assets/scripts/boss.gd"
+"path": "res://assets/scripts/actors/boss.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Bullet",
 "language": "GDScript",
-"path": "res://assets/scripts/bullet.gd"
+"path": "res://assets/scripts/objects/bullet.gd"
+}, {
+"base": "Status",
+"class": "Burn",
+"language": "GDScript",
+"path": "res://assets/scripts/abilities/statuses/burn.gd"
 }, {
 "base": "Node",
 "class": "Constants",
@@ -62,37 +82,52 @@ _global_script_classes=[ {
 "base": "TetrominoBlock",
 "class": "DeadBlock",
 "language": "GDScript",
-"path": "res://assets/scripts/dead_block.gd"
+"path": "res://assets/scripts/actors/dead_block.gd"
+}, {
+"base": "Status",
+"class": "Deadend",
+"language": "GDScript",
+"path": "res://assets/scripts/abilities/statuses/deadend.gd"
 }, {
 "base": "Enemy",
 "class": "Duck",
 "language": "GDScript",
-"path": "res://assets/scripts/duck.gd"
+"path": "res://assets/scripts/actors/duck.gd"
 }, {
 "base": "Enemy",
 "class": "DuckHouse",
 "language": "GDScript",
-"path": "res://assets/scripts/duck_house.gd"
+"path": "res://assets/scripts/actors/duck_house.gd"
+}, {
+"base": "AnimatedSprite",
+"class": "Effect",
+"language": "GDScript",
+"path": "res://assets/scripts/effects/effect.gd"
 }, {
 "base": "Actor",
 "class": "Enemy",
 "language": "GDScript",
-"path": "res://assets/scripts/enemy.gd"
+"path": "res://assets/scripts/actors/enemy.gd"
+}, {
+"base": "AreaDialog",
+"class": "Exit",
+"language": "GDScript",
+"path": "res://assets/scripts/areas/exit.gd"
 }, {
 "base": "Node2D",
 "class": "Flamethrower",
 "language": "GDScript",
-"path": "res://assets/scripts/flamethrower.gd"
+"path": "res://assets/scripts/objects/flamethrower.gd"
 }, {
 "base": "Button",
 "class": "FocusButton",
 "language": "GDScript",
-"path": "res://assets/scripts/focus_button.gd"
+"path": "res://assets/scripts/ui/focus_button.gd"
 }, {
-"base": "Node2D",
-"class": "GameWorld",
+"base": "Target",
+"class": "Follow",
 "language": "GDScript",
-"path": "res://assets/scripts/world.gd"
+"path": "res://assets/scripts/ai/follow.gd"
 }, {
 "base": "",
 "class": "GitAPI",
@@ -102,49 +137,64 @@ _global_script_classes=[ {
 "base": "Enemy",
 "class": "Gunner",
 "language": "GDScript",
-"path": "res://assets/scripts/gunner.gd"
+"path": "res://assets/scripts/actors/gunner.gd"
+}, {
+"base": "Node2D",
+"class": "Handgun",
+"language": "GDScript",
+"path": "res://assets/scripts/weapons/handgun.gd"
+}, {
+"base": "Behavior",
+"class": "Holster",
+"language": "GDScript",
+"path": "res://assets/scripts/ai/holster.gd"
 }, {
 "base": "Control",
 "class": "IngameMenu",
 "language": "GDScript",
-"path": "res://assets/scripts/ingame_menu.gd"
+"path": "res://assets/scripts/ui/ingame_menu.gd"
 }, {
 "base": "Trajectory",
 "class": "Knockback",
 "language": "GDScript",
 "path": "res://assets/scripts/abilities/knockback.gd"
 }, {
+"base": "Status",
+"class": "Link",
+"language": "GDScript",
+"path": "res://assets/scripts/abilities/statuses/link.gd"
+}, {
 "base": "TetrominoBlock",
 "class": "LockBlock",
 "language": "GDScript",
-"path": "res://assets/scripts/lock_block.gd"
+"path": "res://assets/scripts/actors/lock_block.gd"
 }, {
 "base": "Control",
 "class": "MainMenu",
 "language": "GDScript",
-"path": "res://assets/scripts/main_menu.gd"
+"path": "res://assets/scripts/ui/main_menu.gd"
 }, {
 "base": "Area2D",
 "class": "PickupCosmetic",
 "language": "GDScript",
-"path": "res://assets/scripts/pickup_cosmetic.gd"
+"path": "res://assets/scripts/loot/pickup_cosmetic.gd"
 }, {
 "base": "Area2D",
 "class": "PickupHeart",
 "language": "GDScript",
-"path": "res://assets/scripts/pickup_heart.gd"
+"path": "res://assets/scripts/loot/pickup_heart.gd"
 }, {
 "base": "Actor",
 "class": "PlayerCharacter",
 "language": "GDScript",
-"path": "res://assets/scripts/player.gd"
+"path": "res://assets/scripts/actors/player.gd"
 }, {
 "base": "Control",
 "class": "PlayerHUD",
 "language": "GDScript",
-"path": "res://assets/scripts/player_hud.gd"
+"path": "res://assets/scripts/ui/player_hud.gd"
 }, {
-"base": "Ability",
+"base": "Trajectory",
 "class": "Shoot",
 "language": "GDScript",
 "path": "res://assets/scripts/abilities/shoot.gd"
@@ -154,58 +204,113 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/scripts/abilities/spawn.gd"
 }, {
+"base": "Node",
+"class": "Speech",
+"language": "GDScript",
+"path": "res://assets/scripts/ui/speech.gd"
+}, {
 "base": "Node2D",
 "class": "SpeechBubble",
 "language": "GDScript",
-"path": "res://assets/scripts/speech_bubble.gd"
+"path": "res://assets/scripts/ui/speech_bubble.gd"
+}, {
+"base": "Node2D",
+"class": "Status",
+"language": "GDScript",
+"path": "res://assets/scripts/abilities/statuses/status.gd"
+}, {
+"base": "Behavior",
+"class": "Target",
+"language": "GDScript",
+"path": "res://assets/scripts/ai/target.gd"
+}, {
+"base": "Ability",
+"class": "Teleport",
+"language": "GDScript",
+"path": "res://assets/scripts/abilities/teleport.gd"
 }, {
 "base": "Node2D",
 "class": "Tetromino",
 "language": "GDScript",
-"path": "res://assets/scripts/tetromino.gd"
+"path": "res://assets/scripts/tetris/tetromino.gd"
 }, {
 "base": "Actor",
 "class": "TetrominoBlock",
 "language": "GDScript",
-"path": "res://assets/scripts/tetromino_block.gd"
+"path": "res://assets/scripts/actors/tetromino_block.gd"
 }, {
 "base": "Node",
 "class": "TetrominoQueue",
 "language": "GDScript",
-"path": "res://assets/scripts/tetromino_queue.gd"
+"path": "res://assets/scripts/tetris/tetromino_queue.gd"
 }, {
 "base": "Area2D",
 "class": "TetrominoTarget",
 "language": "GDScript",
-"path": "res://assets/scripts/tetromino_target.gd"
+"path": "res://assets/scripts/tetris/tetromino_target.gd"
 }, {
 "base": "Ability",
 "class": "Trajectory",
 "language": "GDScript",
 "path": "res://assets/scripts/abilities/trajectory.gd"
+}, {
+"base": "Status",
+"class": "Treasure",
+"language": "GDScript",
+"path": "res://assets/scripts/abilities/statuses/treasure.gd"
+}, {
+"base": "Target",
+"class": "UseAbility",
+"language": "GDScript",
+"path": "res://assets/scripts/ai/use_ability.gd"
+}, {
+"base": "Reference",
+"class": "Utility",
+"language": "GDScript",
+"path": "res://tests/utility.gd"
+}, {
+"base": "Reference",
+"class": "WAT",
+"language": "GDScript",
+"path": "res://addons/WAT/namespace.gd"
+}, {
+"base": "",
+"class": "WATTest",
+"language": "GDScript",
+"path": "res://addons/WAT/core/test/test.gd"
 } ]
 _global_script_class_icons={
 "Ability": "",
 "Actor": "",
+"Aim": "",
 "AreaAggro": "",
 "AreaChecker": "",
 "AreaDamage": "",
+"AreaDialog": "",
+"Behavior": "",
 "Blockmancer": "",
 "Boss": "",
 "Bullet": "",
+"Burn": "",
 "Constants": "",
 "Dash": "",
 "DeadBlock": "",
+"Deadend": "",
 "Duck": "",
 "DuckHouse": "",
+"Effect": "",
 "Enemy": "",
+"Exit": "",
 "Flamethrower": "",
 "FocusButton": "",
-"GameWorld": "",
+"Follow": "",
 "GitAPI": "",
 "Gunner": "",
+"Handgun": "",
+"Holster": "",
 "IngameMenu": "",
 "Knockback": "",
+"Link": "",
 "LockBlock": "",
 "MainMenu": "",
 "PickupCosmetic": "",
@@ -214,31 +319,58 @@ _global_script_class_icons={
 "PlayerHUD": "",
 "Shoot": "",
 "Spawn": "",
+"Speech": "",
 "SpeechBubble": "",
+"Status": "",
+"Target": "",
+"Teleport": "",
 "Tetromino": "",
 "TetrominoBlock": "",
 "TetrominoQueue": "",
 "TetrominoTarget": "",
-"Trajectory": ""
+"Trajectory": "",
+"Treasure": "",
+"UseAbility": "",
+"Utility": "",
+"WAT": "",
+"WATTest": ""
 }
+
+[WAT]
+
+Test_Directory="res://tests"
+Results_Directory="res://tests/results/WAT"
+Minimize_Window_When_Running_Tests=false
+TestStrategy={
+"repeat": 1,
+"strategy": "RunAll"
+}
+Tags=PoolStringArray(  )
+Display=8
 
 [application]
 
-config/name="Tetraho"
-run/main_scene="res://assets/objects/ui/main_menu.tscn"
-config/icon="res://assets/sprites/blocks/tetromino_block.png"
+config/name="tetraho"
+config/description="A game of block wizardry."
+run/main_scene="res://assets/scenes/ui/main_menu.tscn"
+config/icon="res://icon.png"
+
+[autoload]
+
+Configuration="*res://assets/scripts/configuration.gd"
+GameWorld="*res://assets/scenes/world.tscn"
 
 [display]
 
 window/size/width=1280
 window/size/height=720
-mouse_cursor/custom_image="res://assets/sprites/cursor.png"
+mouse_cursor/custom_image="res://assets/sprites/ui/menu/cursor.png"
 window/stretch/mode="2d"
 window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PoolStringArray(  )
+enabled=PoolStringArray( "WAT" )
 
 [gdnative]
 
@@ -246,6 +378,13 @@ singletons=[ "res://git_api.gdnlib" ]
 
 [input]
 
+ui_cancel={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777217,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":1,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":96,"unicode":0,"echo":false,"script":null)
+ ]
+}
 ui_left={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777231,"unicode":0,"echo":false,"script":null)
