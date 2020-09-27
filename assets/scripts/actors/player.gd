@@ -91,18 +91,14 @@ func is_current(tetromino: Tetromino):
 func next_tetromino():
 	current = queue.fetch()
 	current.summoner = self
+	# warning-ignore:return_value_discarded
+	current.connect("ready", hud, "update_tetromino", [self])
 	get_parent().call_deferred("add_child", current)
-	yield(current, "ready")
-	hud.update_tetromino(self)
 
 
 func play_death_animation():
-	.play_death_animation()
-	yield(self, "tree_exited")
-	menu.button_resume.set_disabled(true)
-	menu.title.set_text("You Died")
-	menu.cannot_close = true
-	menu.show()
+	sound_death.play()
+	$TimerDeath.start()
 
 
 # In addition to taking damage, update the PlayerHUD.
@@ -127,3 +123,10 @@ func oof(damage, bypass_lock=false, attacker=null, message=""):
 		
 	elif get_hp() <= 0.2 * get_maximum_hp():
 		sound_low_hp.play()
+
+
+func show_death_screen():
+	menu.button_resume.set_disabled(true)
+	menu.title.set_text("You Died")
+	menu.cannot_close = true
+	menu.show()

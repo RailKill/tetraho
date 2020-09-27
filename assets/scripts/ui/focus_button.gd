@@ -13,11 +13,12 @@ onready var sound_snap = $SoundSnap
 
 
 func _ready():
-	focus = get_node(focus_path)
+	focus = get_node_or_null(focus_path)
 
 
 func _on_FocusButton_focus_entered():
-	focus.set_global_position(get_global_position() + get_rect().size / 2)
+	if focus:
+		focus.set_global_position(get_global_position() + get_rect().size / 2)
 	sound_snap.play()
 
 

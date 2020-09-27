@@ -1,5 +1,3 @@
-*.sav
-
 # Godot-specific ignores
 .import/
 
@@ -18,3 +16,6 @@ mono_crash.*.json
 # Godot Git Plugin
 bin/
 build/
+
+# WAT Test Results
+tests/results/

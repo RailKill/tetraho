@@ -231,11 +231,11 @@ margin_bottom = 101.0
 text = "Play Third Level"
 focus_path = NodePath("../../Focus")
 
-[node name="ButtonFullscreen" parent="VBoxContainer" instance=ExtResource( 14 )]
+[node name="ButtonOptions" parent="VBoxContainer" instance=ExtResource( 14 )]
 margin_top = 105.0
 margin_right = 184.0
 margin_bottom = 136.0
-text = "Toggle Fullscreen"
+text = "Options"
 focus_path = NodePath("../../Focus")
 
 [node name="ButtonQuit" parent="VBoxContainer" instance=ExtResource( 14 )]
@@ -244,8 +244,9 @@ margin_right = 184.0
 margin_bottom = 171.0
 text = "Quit"
 focus_path = NodePath("../../Focus")
+[connection signal="visibility_changed" from="VBoxContainer" to="." method="_on_VBoxContainer_visibility_changed"]
 [connection signal="pressed" from="VBoxContainer/ButtonStart" to="." method="_on_ButtonStart_pressed"]
 [connection signal="pressed" from="VBoxContainer/ButtonSecond" to="." method="_on_ButtonSecond_pressed"]
 [connection signal="pressed" from="VBoxContainer/ButtonThird" to="." method="_on_ButtonThird_pressed"]
-[connection signal="pressed" from="VBoxContainer/ButtonFullscreen" to="." method="_on_ButtonFullscreen_pressed"]
+[connection signal="pressed" from="VBoxContainer/ButtonOptions" to="." method="_on_ButtonOptions_pressed"]
 [connection signal="pressed" from="VBoxContainer/ButtonQuit" to="." method="_on_ButtonQuit_pressed"]

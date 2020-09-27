@@ -8,7 +8,7 @@
 [ext_resource path="res://assets/tetra_theme.tres" type="Theme" id=6]
 [ext_resource path="res://assets/tilesets/ui_brick.tres" type="TileSet" id=7]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=2]
 size = 48
 font_data = ExtResource( 4 )
 
@@ -43,8 +43,6 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_top = 8.0
-margin_bottom = 8.0
 rect_scale = Vector2( 3, 3 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -58,7 +56,7 @@ anchor_bottom = 0.5
 margin_left = -80.0
 margin_top = -48.0
 margin_right = 80.0
-margin_bottom = 48.0
+margin_bottom = 64.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -69,7 +67,7 @@ cell_size = Vector2( 16, 16 )
 cell_quadrant_size = 4
 cell_custom_transform = Transform2D( 16, 0, 0, 16, 0, 0 )
 format = 1
-tile_data = PoolIntArray( -131077, 6, 0, -131076, 5, 0, -131075, 5, 0, -131074, 5, 0, -131073, 5, 0, -196608, 5, 0, -196607, 5, 0, -196606, 5, 0, -196605, 5, 0, -196604, 7, 0, -65541, 3, 0, -131068, 4, 0, -5, 3, 0, -65532, 4, 0, 65531, 3, 0, 4, 4, 0, 131067, 3, 0, 65540, 4, 0, 196603, 0, 0, 196604, 1, 0, 196605, 1, 0, 196606, 1, 0, 196607, 1, 0, 131072, 1, 0, 131073, 1, 0, 131074, 1, 0, 131075, 1, 0, 131076, 2, 0 )
+tile_data = PoolIntArray( -131077, 6, 0, -131076, 5, 0, -131075, 5, 0, -131074, 5, 0, -131073, 5, 0, -196608, 5, 0, -196607, 5, 0, -196606, 5, 0, -196605, 5, 0, -196604, 7, 0, -65541, 3, 0, -131068, 4, 0, -5, 3, 0, -65532, 4, 0, 65531, 3, 0, 4, 4, 0, 131067, 3, 0, 65540, 4, 0, 196603, 3, 0, 131076, 4, 0, 262139, 0, 0, 262140, 1, 0, 262141, 1, 0, 262142, 1, 0, 262143, 1, 0, 196608, 1, 0, 196609, 1, 0, 196610, 1, 0, 196611, 1, 0, 196612, 2, 0 )
 
 [node name="Label" type="Label" parent="."]
 anchor_left = 0.5
@@ -80,7 +78,7 @@ margin_left = -93.0
 margin_top = -76.472
 margin_right = 93.0
 margin_bottom = -46.472
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Game Paused"
 align = 1
 valign = 1
@@ -116,13 +114,20 @@ focus_path = NodePath("../../Focus")
 [node name="ButtonMainMenu" parent="VBoxContainer" instance=ExtResource( 5 )]
 margin_top = 70.0
 margin_bottom = 101.0
-focus_next = NodePath("../ButtonQuit")
+focus_next = NodePath("../ButtonOptions")
 text = "Main Menu"
 focus_path = NodePath("../../Focus")
 
-[node name="ButtonQuit" parent="VBoxContainer" instance=ExtResource( 5 )]
+[node name="ButtonOptions" parent="VBoxContainer" instance=ExtResource( 5 )]
 margin_top = 105.0
 margin_bottom = 136.0
+focus_next = NodePath("../ButtonQuit")
+text = "Options"
+focus_path = NodePath("../../Focus")
+
+[node name="ButtonQuit" parent="VBoxContainer" instance=ExtResource( 5 )]
+margin_top = 140.0
+margin_bottom = 171.0
 text = "Quit Game"
 focus_path = NodePath("../../Focus")
 
@@ -146,7 +151,9 @@ texture = ExtResource( 3 )
 position = Vector2( -96, 0 )
 scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 2 )
+[connection signal="visibility_changed" from="VBoxContainer" to="." method="_on_VBoxContainer_visibility_changed"]
 [connection signal="pressed" from="VBoxContainer/ButtonResume" to="." method="_on_ButtonResume_pressed"]
 [connection signal="pressed" from="VBoxContainer/ButtonRestart" to="." method="_on_ButtonRestart_pressed"]
 [connection signal="pressed" from="VBoxContainer/ButtonMainMenu" to="." method="_on_ButtonMainMenu_pressed"]
+[connection signal="pressed" from="VBoxContainer/ButtonOptions" to="." method="_on_ButtonOptions_pressed"]
 [connection signal="pressed" from="VBoxContainer/ButtonQuit" to="." method="_on_ButtonQuit_pressed"]

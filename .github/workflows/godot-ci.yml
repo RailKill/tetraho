@@ -27,14 +27,13 @@ jobs:
       - name: Windows Build
         run: |
           mkdir -v -p build/windows
-          godot -v --export "Windows Desktop" build/windows/${EXPORT_NAME}_${GITHUB_RUN_NUMBER}.exe
+          godot -v --export "Windows Desktop" build/windows/${EXPORT_NAME}.exe
       - name: Run Automated Tests
-        run: |
-          godot addons/WAT/cli.tscn -run_all
+        run: godot addons/WAT/cli.tscn -run_all
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ env.EXPORT_NAME }}-${{ github.run_number }}-windows
+          name: ${{ env.EXPORT_NAME }}-ci_${{ github.run_number }}-windows
           path: build/windows
   
   # Web build job.
@@ -45,7 +44,7 @@ jobs:
       image: barichello/godot-ci:3.2.3
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v1
       - name: Setup
         run: |
           mkdir -v -p ~/.local/share/godot/templates
@@ -55,10 +54,18 @@ jobs:
           mkdir -v -p build/web
           godot -v --export "HTML5" build/web/index.html
       - name: Run Automated Tests
-        run: |
-          godot addons/WAT/cli.tscn -run_all
+        run: godot addons/WAT/cli.tscn -run_all
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ env.EXPORT_NAME }}-${{ github.run_number }}-web
+          name: ${{ env.EXPORT_NAME }}-ci_${{ github.run_number }}-web
           path: build/web
+      # Installing rsync is needed in order to deploy to GitHub Pages. Without it, the build will fail.
+      - name: Install rsync 📚
+        run: apt-get update && apt-get install -y rsync
+      - name: Deploy CI build to GitHub Pages 🚀
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: build/web/latest # The branch the action should deploy to.
+          FOLDER: build/web # The folder the action should deploy.
