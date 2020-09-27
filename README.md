@@ -6,6 +6,10 @@ Game for [#mizjam1](https://itch.io/jam/miz-jam-1), a 48-hour gamedev challenge 
 
 **Total Development Time for Miz Jam 1 Submission:** 48:00:44
 
+**Latest Web Build:** https://railkill.github.io/tetraho
+
+**itch.io Release Page:** https://railkill.itch.io/tetraho
+
 
 ## Art
 #### 1-Bit Pack by Kenney
