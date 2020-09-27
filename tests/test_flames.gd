@@ -81,7 +81,8 @@ func test_severity_of_damage():
 	
 	yield(until_signal(player, "tree_exiting", 
 			3 - Constants.FLAMETHROWER_DURATION), YIELD)
-	asserts.is_false(is_instance_valid(player), "player died within 3 seconds")
+	asserts.is_true(not is_instance_valid(player) or player.is_dead(), 
+			"player died within 3 seconds")
 	camera.queue_free()
 	canvas.queue_free()
 	get_tree().paused = false

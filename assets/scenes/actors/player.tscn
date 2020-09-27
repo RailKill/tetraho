@@ -75,3 +75,11 @@ bus = "SFX"
 [node name="SoundLowHP" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
 bus = "SFX"
+
+[node name="TimerDeath" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+__meta__ = {
+"_editor_description_": "The time to wait after death before showing the game over screen."
+}
+[connection signal="timeout" from="TimerDeath" to="." method="show_death_screen"]

@@ -123,5 +123,6 @@ func test_movement_right():
 func post():
 	# Player may have died and removed from the game in one of the tests.
 	if is_instance_valid(player):
-		player.current.queue_free()
+		if is_instance_valid(player.current):
+			player.current.queue_free()
 		player.queue_free()
