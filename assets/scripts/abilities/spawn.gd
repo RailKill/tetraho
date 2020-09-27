@@ -27,7 +27,7 @@ func _on_checker_return(collided, checker):
 		create(checker.global_position if is_snapped else point)
 	else:
 		caster.play_fail_animation(self)
-		delay = Constants.ABILITY_FAILURE_RECOVERY_TIME
+		timer_cooldown.start(Constants.ABILITY_FAILURE_RECOVERY_TIME)
 
 
 func cast():

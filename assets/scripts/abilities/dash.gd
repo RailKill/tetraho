@@ -32,7 +32,7 @@ func _physics_process(delta):
 				knockback.cast()
 				sound_collide.play()
 				complete()
-				delay -= cooldown_bonus
+				timer_cooldown.start(timer_cooldown.time_left - cooldown_bonus)
 
 
 func reset():

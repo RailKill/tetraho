@@ -342,10 +342,8 @@ Test_Directory="res://tests"
 Results_Directory="res://tests/results/WAT"
 Minimize_Window_When_Running_Tests=false
 TestStrategy={
-"method": "test_no_slowdown_with_100_summoned_tetrominos",
 "repeat": 1,
-"script": "res://tests/test_tetromino.gd",
-"strategy": "RunMethod"
+"strategy": "RunAll"
 }
 Tags=PoolStringArray(  )
 Display=8
