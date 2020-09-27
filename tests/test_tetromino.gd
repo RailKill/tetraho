@@ -109,10 +109,10 @@ func test_no_slowdown_with_100_summoned_tetrominos():
 
 	for piece in tetrominos:
 		piece.summon_piece()
-		
+	
 	var time_before = OS.get_ticks_msec()
 	yield(until_timeout(1), YIELD)
-	asserts.is_less_than(OS.get_ticks_msec() - time_before, 1000)
+	asserts.is_equal_or_less_than(OS.get_ticks_msec() - time_before, 1000)
 	for piece in tetrominos:
 		piece.queue_free()
 
