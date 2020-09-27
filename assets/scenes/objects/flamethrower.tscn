@@ -17,6 +17,7 @@ scale = 1.5
 scale_random = 1.0
 
 [node name="Flamethrower" type="Node2D"]
+z_index = 15
 script = ExtResource( 1 )
 
 [node name="Particles2D" type="Particles2D" parent="."]

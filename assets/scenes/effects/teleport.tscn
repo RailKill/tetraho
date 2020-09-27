@@ -14,6 +14,7 @@ animations = [ {
 } ]
 
 [node name="Teleport" type="AnimatedSprite"]
+z_index = 25
 frames = SubResource( 1 )
 script = ExtResource( 4 )
 
