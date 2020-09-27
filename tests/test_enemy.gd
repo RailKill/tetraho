@@ -9,6 +9,7 @@ var block_resource = preload("res://assets/scenes/tetris/tetromino_block.tscn")
 var bmancer_resource = preload("res://assets/scenes/actors/blockmancer.tscn")
 var boss_resource = preload("res://assets/scenes/actors/boss.tscn")
 var duck_resource = preload("res://assets/scenes/actors/duck.tscn")
+var exit_resource = preload("res://assets/scenes/areas/exit.tscn")
 var gate_resource = preload("res://assets/scenes/objects/gate.tscn")
 var gunner_resource = preload("res://assets/scenes/actors/gunner.tscn")
 var house_resource = preload("res://assets/scenes/actors/duck_house.tscn")
@@ -190,6 +191,26 @@ func test_duck_house():
 	asserts.is_true(get_ducks().empty(), "no ducks present")
 	if is_instance_valid(house):
 		house.queue_free()
+
+
+func test_exit_z_index():
+	parameters([["actor"],
+		[block_resource], 
+		[bmancer_resource],
+		[boss_resource],
+		[duck_resource],
+		[gunner_resource],
+		[player_resource],
+	])
+	var actor = p.actor.instance()
+	var exit = exit_resource.instance()
+	exit.conditionals = ["false"]
+	add_child(exit)
+	add_child(actor)
+	asserts.is_less_than(exit.z_index, actor.z_index)
+	describe("exit z-index is less than %s" % actor.name)
+	actor.queue_free()
+	exit.queue_free()
 
 
 func test_gunner():

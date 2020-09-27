@@ -360,6 +360,10 @@ config/icon="res://icon.png"
 Configuration="*res://assets/scripts/configuration.gd"
 GameWorld="*res://assets/scenes/world.tscn"
 
+[debug]
+
+settings/stdout/verbose_stdout=true
+
 [display]
 
 window/size/width=1280
