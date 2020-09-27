@@ -5,8 +5,7 @@ extends Ability
 # Scene resource to spawn.
 export(PackedScene) var spawn_resource
 # Checker to use when determining whether the spawn point is clear or not.
-export(PackedScene) var checker_resource = \
-		preload("res://assets/scenes/areas/area_checker.tscn")
+export(PackedScene) var checker_resource
 # Spawn point global position.
 export(Vector2) var point setget set_point
 # If true, spawn point checker will be snapped to the grid.
