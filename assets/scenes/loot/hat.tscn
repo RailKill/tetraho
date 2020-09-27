@@ -4,9 +4,7 @@
 [ext_resource path="res://assets/scripts/loot/pickup_cosmetic.gd" type="Script" id=2]
 [ext_resource path="res://assets/sounds/loot_intrigue.wav" type="AudioStream" id=3]
 
-
-
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5, 4 )
 
 [sub_resource type="Animation" id=2]
@@ -36,7 +34,7 @@ scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="SoundPickup" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
