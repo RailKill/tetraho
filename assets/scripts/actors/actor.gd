@@ -5,6 +5,8 @@ extends KinematicBody2D
 
 # Emitted when the actor takes damage.
 signal damage_taken(attacker, verb, victim, amount)
+# Emitted when the actor is dying.
+signal dying
 
 export var hp = Constants.PLAYER_HP setget ,get_hp
 export var max_hp = Constants.PLAYER_HP setget ,get_maximum_hp
@@ -131,6 +133,7 @@ func oof(damage, bypass_lock=false, attacker=null, message=""):
 			play_death_animation()
 			visible = false
 			collision_shape.call_deferred("set_disabled", true)
+			emit_signal("dying")
 		else:
 			sound_hit.play()
 

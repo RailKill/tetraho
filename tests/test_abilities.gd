@@ -107,8 +107,8 @@ func test_treasure():
 	var treasure = Treasure.new()
 	treasure.drops = [heart_resource, heart_resource]
 	dummy.add_child(treasure)
-	dummy.queue_free()
-	yield(until_timeout(0.5), YIELD)
+	dummy.oof(dummy.max_hp)
+	yield(until_signal(dummy, "tree_exited", 0.5), YIELD)
 	var hearts = []
 	for node in get_children():
 		if node is PickupHeart:
