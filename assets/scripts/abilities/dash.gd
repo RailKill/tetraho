@@ -6,12 +6,13 @@ extends Trajectory
 # Cooldown bonus if an enemy is hit by the dash.
 export(float) var cooldown_bonus = 2
 
-var sound_collide = AudioStreamPlayer2D.new()
+var sound_collide: AudioStreamPlayer2D
 
 
 func _ready():
-	sound_cast.stream = load("res://assets/sounds/dash_start.wav")
+	sound_collide = AudioStreamPlayer2D.new()
 	sound_collide.stream = load("res://assets/sounds/dash_collide.wav")
+	sound_cast.stream = load("res://assets/sounds/dash_start.wav")
 	sound_ready.stream = load("res://assets/sounds/dash_ready.wav")
 	sound_collide.bus = AudioServer.get_bus_name(1)
 	add_child(sound_collide)

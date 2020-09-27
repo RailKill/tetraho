@@ -22,34 +22,41 @@ var is_active: bool
 # Checks if ability is on cooldown.
 var is_on_cooldown: bool
 
-var sound_cast = AudioStreamPlayer2D.new()
-var sound_complete = AudioStreamPlayer2D.new()
-var sound_ready = AudioStreamPlayer2D.new()
-var timer_cooldown = Timer.new()
-var timer_duration = Timer.new()
+var sound_cast: AudioStreamPlayer2D
+var sound_complete: AudioStreamPlayer2D
+var sound_ready: AudioStreamPlayer2D
+var timer_cooldown: Timer
+var timer_duration: Timer
 
 onready var caster: Node2D = get_parent()
 
 
 func _ready():
 	# Setup sounds.
+	sound_cast = AudioStreamPlayer2D.new()
 	sound_cast.stream = cast_audio
 	sound_cast.bus = AudioServer.get_bus_name(1)
 	add_child(sound_cast)
+	sound_complete = AudioStreamPlayer2D.new()
 	sound_complete.stream = complete_audio
 	sound_complete.bus = AudioServer.get_bus_name(1)
 	add_child(sound_complete)
+	sound_ready = AudioStreamPlayer2D.new()
 	sound_ready.stream = ready_audio
 	sound_ready.bus = AudioServer.get_bus_name(1)
 	add_child(sound_ready)
 
 	# Setup timers.
+	timer_cooldown = Timer.new()
 	timer_cooldown.one_shot = true
 	timer_cooldown.process_mode = Timer.TIMER_PROCESS_PHYSICS
+	# warning-ignore:return_value_discarded
 	timer_cooldown.connect("timeout", self, "reset")
 	add_child(timer_cooldown)
+	timer_duration = Timer.new()
 	timer_duration.one_shot = true
 	timer_duration.process_mode = Timer.TIMER_PROCESS_PHYSICS
+	# warning-ignore:return_value_discarded
 	timer_duration.connect("timeout", self, "complete")
 	add_child(timer_duration)
 	reset()

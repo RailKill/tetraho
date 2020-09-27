@@ -5,14 +5,16 @@ extends Target
 
 var navigation: Navigation2D
 var paths: PoolVector2Array = []
-var pathing_timer = Timer.new()
+var pathing_timer: Timer
 var path_index = 0
 
 
 func _init(actor, goal, nav, extent=0).(actor, goal, extent):
 	navigation = nav
+	pathing_timer = Timer.new()
 	pathing_timer.autostart = true
 	pathing_timer.wait_time = Constants.AI_PATHING_COOLDOWN
+	# warning-ignore:return_value_discarded
 	pathing_timer.connect("timeout", self, "reset_pathing")
 	executor.add_child(pathing_timer)
 
