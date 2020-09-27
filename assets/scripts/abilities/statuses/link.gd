@@ -8,7 +8,6 @@ export(Array, NodePath) var linked = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	lasts_forever = true
 	# warning-ignore:return_value_discarded
 	connect("tree_exiting", self, "_on_tree_exiting")
 

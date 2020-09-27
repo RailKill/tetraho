@@ -46,23 +46,13 @@ func _ready():
 	# Setup timers.
 	timer_cooldown.one_shot = true
 	timer_cooldown.process_mode = Timer.TIMER_PROCESS_PHYSICS
-	timer_cooldown.connect("timeout", self, "_on_timer_cooldown_finished")
+	timer_cooldown.connect("timeout", self, "reset")
 	add_child(timer_cooldown)
 	timer_duration.one_shot = true
 	timer_duration.process_mode = Timer.TIMER_PROCESS_PHYSICS
-	timer_duration.connect("timeout", self, "_on_timer_duration_finished")
+	timer_duration.connect("timeout", self, "complete")
 	add_child(timer_duration)
 	reset()
-
-
-func _on_timer_cooldown_finished():
-	reset()
-	emit_signal("cooldown_ready")
-
-
-func _on_timer_duration_finished():
-	complete()
-	emit_signal("finished_casting")
 
 
 # Cast the ability.
@@ -83,6 +73,7 @@ func complete():
 	caster.play_casted_animation(self)
 	sound_complete.play()
 	update()
+	emit_signal("finished_casting")
 
 
 # Reset ability cooldown.
@@ -93,6 +84,7 @@ func reset():
 	timer_duration.wait_time = duration
 	sound_ready.play()
 	update()
+	emit_signal("cooldown_ready")
 
 
 func update():
